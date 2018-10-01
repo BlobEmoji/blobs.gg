@@ -1,0 +1,81 @@
+@import 'colors';
+@import 'global';
+
+main {
+  max-width: 700px;
+  margin: 1rem auto;
+}
+
+a {
+  color: $blurple;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    font-weight: 800;
+  }
+
+  .links {
+    margin-left: auto;
+  }
+
+  .links a {
+    &:not(:last-child) {
+      margin-right: 0.5em;
+    }
+  }
+}
+
+header {
+  margin: 2em 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.sample {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+
+  img,
+  span.more {
+    display: block;
+    height: 25px;
+  }
+
+  span.more {
+    color: lighten($bg, 50%);
+  }
+}
+
+.servers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  padding: 1rem 0;
+
+  .server {
+    display: block;
+    color: $fg;
+    padding: 1em;
+    border: solid 2px lighten($bg, 10%);
+    border-radius: 3px;
+    text-decoration: inherit;
+    transition: border-color 0.25s;
+
+    &:hover {
+      border-color: lighten($bg, 20%);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0 0 1em 0;
+    }
+  }
+}
