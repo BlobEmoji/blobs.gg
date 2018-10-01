@@ -1,0 +1,18 @@
+@media (max-width: 800px) {
+  main {
+    margin: 0 !important;
+    padding: 2rem;
+  }
+
+  header {
+    margin: 1rem 0 !important;
+  }
+
+  .servers {
+    display: block !important;
+
+    .server {
+      margin: 1rem 0;
+    }
+  }
+}
