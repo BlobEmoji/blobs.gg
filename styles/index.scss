@@ -76,7 +76,16 @@ header {
     }
 
     h3 {
+      display: flex;
+      align-items: center;
       margin: 0 0 1em 0;
+
+      img {
+        display: block;
+        margin-right: 0.25em;
+        width: 1em;
+        border-radius: 100%;
+      }
     }
   }
 }
