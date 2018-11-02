@@ -8,7 +8,22 @@ main {
 }
 
 a {
-  color: $blurple;
+  color: $white;
+  text-decoration-line: none;
+
+  &:hover {
+    text-decoration-line: underline;
+  }
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.inline-icon {
+  height: 0.8em;
+  width: auto;
+  margin: 0 0.05em 0 0.05em;
 }
 
 nav {
@@ -17,6 +32,17 @@ nav {
 
   h1 {
     font-weight: 800;
+    font-size: 1.5em;
+
+    display: flex;
+
+    img {
+      display: block;
+      margin-right: 0.5em;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 100%;
+    }
   }
 
   .links {
@@ -44,7 +70,7 @@ header {
   img,
   span.more {
     display: block;
-    height: 25px;
+    height: 1.5rem;
   }
 
   span.more {
@@ -62,8 +88,8 @@ header {
     display: block;
     color: $fg;
     padding: 1em;
-    border: solid 2px lighten($bg, 10%);
-    border-radius: 3px;
+    border: solid .1rem lighten($bg, 10%);
+    border-radius: .2rem;
     text-decoration: inherit;
     transition: border-color 0.25s;
 
