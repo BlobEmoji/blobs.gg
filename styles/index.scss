@@ -88,8 +88,8 @@ header {
     display: block;
     color: $fg;
     padding: 1em;
-    border: solid .1rem lighten($bg, 10%);
-    border-radius: .2rem;
+    border: solid 0.1rem lighten($bg, 10%);
+    border-radius: 0.2rem;
     text-decoration: inherit;
     transition: border-color 0.25s;
 
