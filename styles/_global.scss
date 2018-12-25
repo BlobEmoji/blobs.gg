@@ -19,3 +19,9 @@ h2 {
 section {
   margin: 2rem 0;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
