@@ -1,6 +1,7 @@
 @import 'colors';
 @import 'global';
 @import 'mobile';
+@import 'emoji';
 
 main {
   max-width: 850px;
@@ -129,13 +130,11 @@ header {
   outline: none;
 }
 
-$arrow-size: 5px;
-$tooltip-spacing: 0.25rem;
-$emoji-size: 64px;
+$search-emoji-size: 64px;
 
 #search-results {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 64px);
+  grid-template-columns: repeat(auto-fill, $search-emoji-size);
   grid-gap: 2rem;
   justify-content: center;
 
@@ -143,46 +142,17 @@ $emoji-size: 64px;
     margin: 3rem 0;
   }
 
+  .emoji {
+    height: $search-emoji-size;
+    width: $search-emoji-size;
+  }
+
   .search-result {
-    height: $emoji-size;
-    width: $emoji-size;
     cursor: pointer;
     position: relative;
 
-    &:hover:before {
-      pointer-events: none;
-      content: ' ';
-      position: absolute;
-      top: calc(100% - #{$arrow-size} + #{$tooltip-spacing});
-      left: calc(50% - #{$arrow-size});
-      border: solid $arrow-size transparent;
-      border-bottom: solid $arrow-size black;
-      z-index: 10;
-    }
-
-    &:hover:after {
-      pointer-events: none;
-      color: $white;
-      content: attr(data-tooltip);
-      font-size: 0.75rem;
-      background: black;
-      padding: 0.5em 1em;
-      border-radius: 0.25rem;
-
-      display: inline;
-      position: absolute;
-      top: calc(100% + #{$tooltip-spacing} + #{$arrow-size});
-      left: 0;
-      text-align: center;
-      transform: translateX(calc(-50% + #{$emoji-size} / 2));
-      z-index: 10;
-    }
-
     .emoji {
       display: block;
-      width: $emoji-size;
-      height: $emoji-size;
-      object-fit: contain;
     }
   }
 }

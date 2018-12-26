@@ -1,0 +1,37 @@
+$arrow-size: 5px;
+$tooltip-spacing: 0.25rem;
+
+.emoji {
+  object-fit: contain;
+}
+
+.emoji-container {
+  &:hover:before {
+    content: ' ';
+    pointer-events: none;
+    border: solid $arrow-size transparent;
+    border-bottom: solid $arrow-size black;
+
+    position: absolute;
+    top: calc(100% - #{$arrow-size} + #{$tooltip-spacing});
+    left: calc(50% - #{$arrow-size});
+    z-index: 10;
+  }
+
+  &:hover:after {
+    content: attr(data-tooltip);
+    color: $fg;
+    font-size: 0.75rem;
+    pointer-events: none;
+    background: black;
+    padding: 0.5em 1em;
+    border-radius: 0.25rem;
+
+    position: absolute;
+    top: calc(100% + #{$tooltip-spacing} + #{$arrow-size});
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+}
