@@ -13,17 +13,11 @@ export default class Search extends React.Component {
 
     this.state = {
       query: '',
-      hasTyped: false,
     }
   }
 
   handleQueryChange = (event) => {
     this.setState({ query: event.currentTarget.value })
-
-    // if the query is not empty, the user has typed at least once
-    // this might be better elsewhere
-    if (event.currentTarget.value !== '')
-      this.setState({ hasTyped: true })
   }
 
   allBlobs() {
@@ -63,17 +57,7 @@ export default class Search extends React.Component {
   render() {
     const { query, hasTyped } = this.state
 
-    let results
-    if (query === '') {
-      if (hasTyped)
-        results = this.allBlobs()
-          .filter(({ name }) => name.includes('blobs'))
-          .slice(0, 8 * 5)
-      else  // if the user has not typed yet, don't show any results until they do
-        results = []
-    } else {
-      results = this.filterBlobs()
-    }
+    const results = query === '' ? [] : this.filterBlobs()
 
     return (
       <React.Fragment>
