@@ -134,11 +134,14 @@ $tooltip-spacing: 0.25rem;
 $emoji-size: 64px;
 
 #search-results {
-  margin: 3rem 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 64px);
   grid-gap: 2rem;
   justify-content: center;
+
+  &:not(:empty) {
+    margin: 3rem 0;
+  }
 
   .search-result {
     height: $emoji-size;
@@ -159,6 +162,7 @@ $emoji-size: 64px;
 
     &:hover:after {
       pointer-events: none;
+      color: $white;
       content: attr(data-tooltip);
       font-size: 0.75rem;
       background: black;
