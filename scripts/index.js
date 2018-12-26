@@ -17,7 +17,7 @@ function updatePageState(data) {
 
 function mount(data) {
   const searchNode = document.querySelector('#search')
-  searchNode.style.display = 'block'
+  searchNode.removeAttribute('hidden')
 
   ReactDOM.render(<Search data={data} />, searchNode)
 }
