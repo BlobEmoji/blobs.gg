@@ -114,6 +114,10 @@ header {
       border-color: lighten($bg, 20%);
     }
 
+    &.expanded h3 .expanded-status {
+      transform: rotate(180deg);
+    }
+
     p {
       margin: 0;
     }
@@ -123,7 +127,12 @@ header {
       align-items: center;
       margin: 0 0 1.5rem 0;
 
-      img {
+      .expanded-status {
+        margin-left: auto;
+        width: 1rem;
+      }
+
+      .icon {
         display: block;
         margin-right: 0.5rem;
         width: 1em;

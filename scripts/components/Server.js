@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Emoji from './Emoji'
+import chevron from '../../assets/chevron-down-solid.svg'
 
 const RANDOM_SAMPLE_SIZE = 5
 
@@ -12,7 +13,7 @@ export default class Server extends React.Component {
 
     // When the panel is not expanded, we show a random selection of blobs.
     // Here, we determine at which index we should select random blobs from.
-    const emoji = this.props.server.emoji.filter(
+    const emoji = props.server.emoji.filter(
       ({ name }) => !name.includes('tick')
     )
     this.state = {
@@ -62,12 +63,20 @@ export default class Server extends React.Component {
       >
         <h3>
           <img
+            className="icon"
             alt={`${server.name} icon`}
             src={`https://cdn.discordapp.com/icons/${server.id}/${
               server.icon
             }.png?size=64`}
           />
           {server.name}
+
+          <img
+            className="expanded-status"
+            alt="Show more"
+            title="Click to show more blobs from this server!"
+            src={chevron}
+          />
         </h3>
 
         <div className="sample">
