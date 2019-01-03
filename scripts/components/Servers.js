@@ -6,8 +6,8 @@ import Server from './Server'
 export default function Servers({ data }) {
   const { guilds: servers } = data
 
-  return Object.entries(servers).map(([id, server], index) => (
-    <Server key={id} server={{ id, ...server, index }} />
+  return Object.entries(servers).map(([id, server]) => (
+    <Server key={id} server={{ id, ...server }} />
   ))
 }
 

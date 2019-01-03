@@ -6,6 +6,9 @@ $tooltip-spacing: 0.25rem;
 }
 
 .emoji-container {
+  display: inline-block;
+  position: relative;
+
   &:hover:before {
     content: ' ';
     pointer-events: none;

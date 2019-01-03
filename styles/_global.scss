@@ -11,12 +11,25 @@ body {
   color: $fg;
 }
 
+a {
+  color: $white;
+  text-decoration-line: none;
+
+  &:hover {
+    text-decoration-line: underline;
+  }
+}
+
 h2 {
   margin: 1rem 0;
 }
 
 section {
   margin: 2rem 0;
+}
+
+.strong {
+  font-weight: bold;
 }
 
 *,

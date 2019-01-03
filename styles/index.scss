@@ -8,17 +8,20 @@ main {
   margin: 1rem auto;
 }
 
-a {
-  color: $white;
-  text-decoration-line: none;
-
-  &:hover {
-    text-decoration-line: underline;
-  }
+.join-server {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.65em;
 }
 
-.strong {
-  font-weight: bold;
+.button {
+  background: $green;
+  padding: 0.5em 1em;
+  border-radius: 0.2rem;
+}
+
+a.button:hover {
+  text-decoration: none;
 }
 
 .inline-icon {
@@ -68,6 +71,18 @@ header {
   width: 100%;
   justify-content: space-around;
 
+  .server.expanded & {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 0.5rem;
+    justify-content: center;
+
+    .emoji-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   img,
   span.more {
     display: block;
@@ -88,6 +103,7 @@ header {
   .server {
     display: block;
     color: $fg;
+    cursor: pointer;
     padding: 1em;
     border: solid 0.1rem lighten($bg, 10%);
     border-radius: 0.2rem;
@@ -105,7 +121,7 @@ header {
     h3 {
       display: flex;
       align-items: center;
-      margin: 0 0 1em 0;
+      margin: 0 0 1.5rem 0;
 
       img {
         display: block;
@@ -149,7 +165,10 @@ $search-emoji-size: 64px;
 
   .search-result {
     cursor: pointer;
-    position: relative;
+
+    .emoji-container {
+      display: block;
+    }
 
     .emoji {
       display: block;
