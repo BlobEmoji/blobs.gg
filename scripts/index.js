@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Search from './components/Search'
+import Servers from './components/Servers'
 
 // process.env.NODE_ENV is a magic variable that gets compiled away into the
 // environment that we are in.
@@ -18,8 +19,10 @@ function updatePageState(data) {
 function mount(data) {
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
+  const serversNode = document.querySelector('.servers')
 
   ReactDOM.render(<Search data={data} />, searchNode)
+  ReactDOM.render(<Servers data={data} />, serversNode)
 }
 
 if (window.fetch) {
