@@ -27,6 +27,11 @@ export default class Server extends React.Component {
     this.setState(({ expanded }) => ({ expanded: !expanded }))
   }
 
+  handleJoinClick = (event) => {
+    // Prevent a click of the "Join Server" button from expanding the server.
+    event.stopPropagation()
+  }
+
   renderBlobSample() {
     const {
       server: { emoji },
@@ -74,6 +79,7 @@ export default class Server extends React.Component {
           target="_blank"
           className="button join-server"
           rel="noopener noreferrer"
+          onClick={this.handleJoinClick}
         >
           Join Server
         </a>
