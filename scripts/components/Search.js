@@ -56,7 +56,7 @@ export default class Search extends React.Component {
   }
 
   render() {
-    const { query, hasTyped } = this.state
+    const { query } = this.state
 
     const results = query === '' ? [] : this.filterBlobs()
 
