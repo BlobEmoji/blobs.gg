@@ -13,13 +13,10 @@ export default class Server extends React.Component {
 
     // When the panel is not expanded, we show a random selection of blobs.
     // Here, we determine at which index we should select random blobs from.
-    const emoji = props.server.emoji.filter(
-      ({ name }) => !name.includes('tick')
-    )
     this.state = {
       expanded: false,
       sampleIndex: Math.floor(
-        Math.random() * Math.floor(emoji.length / RANDOM_SAMPLE_SIZE)
+        Math.random() * Math.floor(this.emojis().length / RANDOM_SAMPLE_SIZE)
       ),
     }
   }
@@ -33,10 +30,15 @@ export default class Server extends React.Component {
     event.stopPropagation()
   }
 
-  renderBlobSample() {
+  emojis() {
     const {
       server: { emoji },
     } = this.props
+    return emoji.filter(({ name }) => !name.includes('tick'))
+  }
+
+  renderBlobSample() {
+    const emoji = this.emojis()
     const { expanded, sampleIndex } = this.state
 
     let blobs
