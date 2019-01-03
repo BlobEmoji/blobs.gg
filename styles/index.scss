@@ -1,17 +1,48 @@
-@import 'colors';
-@import 'global';
-@import 'mobile';
-@import 'emoji';
+@import 'colors', 'mobile', 'search', 'servers', 'emoji';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: Roboto, sans-serif;
+
+  background-color: $bg;
+  color: $fg;
+}
+
+a {
+  color: $white;
+  text-decoration-line: none;
+
+  &:hover {
+    text-decoration-line: underline;
+  }
+}
+
+h2 {
+  margin: 1rem 0;
+}
+
+section {
+  margin: 2rem 0;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
 main {
   max-width: 850px;
   margin: 1rem auto;
-}
-
-.join-server {
-  display: inline-block;
-  margin-top: 1.5rem;
-  font-size: 0.65em;
 }
 
 .button {
@@ -64,123 +95,4 @@ header {
   margin: 2em 0;
   text-align: center;
   font-size: 1.5rem;
-}
-
-.sample {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-
-  .server.expanded & {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 0.5rem;
-    justify-content: center;
-
-    .emoji-container {
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  img,
-  span.more {
-    display: block;
-    height: 1.5rem;
-  }
-
-  span.more {
-    color: lighten($bg, 50%);
-  }
-}
-
-.servers {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 2rem;
-  padding: 1rem 0;
-
-  .server {
-    display: block;
-    color: $fg;
-    cursor: pointer;
-    padding: 1em;
-    border: solid 0.1rem lighten($bg, 10%);
-    border-radius: 0.2rem;
-    text-decoration: inherit;
-    transition: border-color 0.25s;
-
-    &:hover {
-      border-color: lighten($bg, 20%);
-    }
-
-    &.expanded h3 .expanded-status {
-      transform: rotate(180deg);
-    }
-
-    p {
-      margin: 0;
-    }
-
-    h3 {
-      display: flex;
-      align-items: center;
-      margin: 0 0 1.5rem 0;
-
-      .expanded-status {
-        margin-left: auto;
-        width: 1rem;
-      }
-
-      .icon {
-        display: block;
-        margin-right: 0.5rem;
-        width: 1em;
-        border-radius: 100%;
-      }
-    }
-  }
-}
-
-#search-field {
-  font-size: 1.5em;
-  display: block;
-  width: 100%;
-  padding: 1em;
-  color: $white;
-  background: lighten($dark, 5%);
-  font: inherit;
-  border: none;
-  border-radius: 0.2rem;
-  outline: none;
-}
-
-$search-emoji-size: 64px;
-
-#search-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, $search-emoji-size);
-  grid-gap: 2rem;
-  justify-content: center;
-
-  &:not(:empty) {
-    margin: 3rem 0;
-  }
-
-  .emoji {
-    height: $search-emoji-size;
-    width: $search-emoji-size;
-  }
-
-  .search-result {
-    cursor: pointer;
-
-    .emoji-container {
-      display: block;
-    }
-
-    .emoji {
-      display: block;
-    }
-  }
 }
