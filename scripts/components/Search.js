@@ -25,12 +25,11 @@ export default class Search extends React.Component {
       data: { guilds },
     } = this.props
 
-    return Object.entries(Object.values(guilds)).reduce(
-      (acc, [index, guild]) => [
-        ...guild.emoji.map((emoji) => ({
-          ...emoji,
-          invite: `https://${parseInt(index) + 1}.blobs.gg`,
-        })),
+    // Inject an `invite` property to all emoji objects, so that they may be
+    // linked to.
+    return Object.values(guilds).reduce(
+      (acc, guild) => [
+        ...guild.emoji.map((emoji) => ({ ...emoji, invite: guild.invite })),
         ...acc,
       ],
       []
@@ -44,6 +43,8 @@ export default class Search extends React.Component {
       .filter((blob) => blob.name.includes(query.toLowerCase()))
       .slice(0, 8 * 5)
       .sort(({ name: a }, { name: b }) => {
+        // Sort alphabetically by name.
+
         if (a < b) {
           return -1
         }
