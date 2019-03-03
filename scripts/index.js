@@ -8,7 +8,7 @@ import Servers from './components/Servers'
 // environment that we are in.
 const BLOBS_ENDPOINT =
   process.env.NODE_ENV === 'development'
-    ? 'https://blobs_testing.snowyluma.com/emoji/blobs'
+    ? 'https://api.mousey.app/emoji/blobs-testing'
     : 'https://api.mousey.app/emoji/blobs'
 
 function updatePageState(data) {
