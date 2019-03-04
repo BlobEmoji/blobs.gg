@@ -83,7 +83,9 @@ export default class Server extends React.Component {
               server.icon
             }.png?size=64`}
           />
-          {server.name}
+          <span className="name" title={server.name}>
+            {server.name}
+          </span>
 
           {!this.empty && (
             <img

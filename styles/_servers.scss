@@ -69,6 +69,13 @@
       align-items: center;
       margin: 0 0 1.5rem 0;
 
+      .name {
+        width: calc(100% - 3rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
       .expanded-status {
         margin-left: auto;
         width: 1rem;
