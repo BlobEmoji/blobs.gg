@@ -13,11 +13,7 @@ const BLOBS_ENDPOINT =
 
 function updatePageState(data) {
   console.log(data);
-  let total = 0;
-  for (const [key, value] of Object.entries(data.guilds)) {
-    total += value["emoji"].length
-  }
-  document.querySelector('#emoji-count').textContent = total
+  document.querySelector('#emoji-count').textContent = data.emoji_count
 }
 
 function mount(data) {
