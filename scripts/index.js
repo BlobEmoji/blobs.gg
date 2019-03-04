@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
+import ViewMoreButton from './components/ViewMore'
 
 // process.env.NODE_ENV is a magic variable that gets compiled away into the
 // environment that we are in.
@@ -12,7 +13,6 @@ const BLOBS_ENDPOINT =
     : 'https://api.mousey.app/emoji/blobs'
 
 function updatePageState(data) {
-  console.log(data)
   document.querySelector('#emoji-count').textContent = data.emoji_count
 }
 
@@ -20,10 +20,12 @@ function mount(data) {
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
   const serversNodes = document.getElementsByClassName('servers')
+  const viewNode = document.querySelector('#view-button')
 
   ReactDOM.render(<Search data={data} />, searchNode)
   ReactDOM.render(<Servers data={data} />, serversNodes[0])
   ReactDOM.render(<CommunityServers data={data} />, serversNodes[1])
+  ReactDOM.render(<ViewMoreButton />, viewNode)
 }
 
 function shuffle() {
@@ -50,23 +52,6 @@ function hide() {
   }
 }
 
-function view_more_button_setup() {
-  let view_mode = document.getElementsByClassName('view-button')[0]
-  view_mode.classList.toggle('hidden')
-  view_mode.addEventListener('click', view_more, false)
-}
-
-function view_more() {
-  let community_servers = document.getElementsByClassName(
-    'community-servers'
-  )[0]
-  for (let server of community_servers.getElementsByClassName('server')) {
-    server.classList.remove('hidden')
-  }
-  let view_mode = document.getElementsByClassName('view-button')[0]
-  view_mode.classList.add('hidden')
-}
-
 if (window.fetch) {
   fetch(BLOBS_ENDPOINT)
     .then((resp) => resp.json())
@@ -75,6 +60,5 @@ if (window.fetch) {
       mount(data)
       shuffle()
       hide()
-      view_more_button_setup()
     })
 }
