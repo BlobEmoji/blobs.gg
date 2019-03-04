@@ -21,6 +21,11 @@ export default class Server extends React.Component {
     }
   }
 
+  get empty() {
+    const { server } = this.props
+    return server.emoji.length === 0
+  }
+
   handleClick = () => {
     this.setState(({ expanded }) => ({ expanded: !expanded }))
   }
@@ -57,9 +62,16 @@ export default class Server extends React.Component {
     const { server } = this.props
     const { expanded } = this.state
 
+    const sample = this.empty ? null : (
+      <React.Fragment>
+        {this.renderBlobSample()}
+        {!expanded ? <span className="more">...</span> : null}
+      </React.Fragment>
+    )
+
     return (
       <div
-        className={classnames('server', { expanded })}
+        className={classnames('server', { expanded, empty: this.empty })}
         onClick={this.handleClick}
         aria-expanded={expanded}
       >
@@ -71,20 +83,21 @@ export default class Server extends React.Component {
               server.icon
             }.png?size=64`}
           />
-          {server.name}
+          <span className="name" title={server.name}>
+            {server.name}
+          </span>
 
-          <img
-            className="expanded-status"
-            alt="Show more"
-            title="Click to show more blobs from this server!"
-            src={chevron}
-          />
+          {!this.empty && (
+            <img
+              className="expanded-status"
+              alt="Show more"
+              title="Click to show more blobs from this server!"
+              src={chevron}
+            />
+          )}
         </h3>
 
-        <div className="sample">
-          {this.renderBlobSample()}
-          {!expanded ? <span className="more">...</span> : null}
-        </div>
+        <div className="sample">{sample}</div>
         <a
           href={server.invite}
           target="_blank"
