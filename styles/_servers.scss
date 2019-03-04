@@ -6,8 +6,16 @@
 
 .view-button {
   display: inline-block;
-  margin-top: 1.5rem;
   font-size: 0.65em;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+}
+
+#view-button {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
 }
 
 .sample {
