@@ -5,11 +5,11 @@ import classnames from 'classnames'
 import Emoji from './Emoji'
 import chevron from '../../assets/chevron-down-solid.svg'
 
-const RANDOM_SAMPLE_SIZE = 5
+const RANDOM_SAMPLE_SIZE = 5;
 
 export default class Server extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     // When the panel is not expanded, we show a random selection of blobs.
     // Here, we determine at which index we should select random blobs from.
@@ -22,26 +22,26 @@ export default class Server extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(({ expanded }) => ({ expanded: !expanded }))
-  }
+    this.setState(({expanded}) => ({expanded: !expanded}))
+  };
 
   handleJoinClick = (event) => {
     // Prevent a click of the "Join Server" button from expanding the server.
     event.stopPropagation()
-  }
+  };
 
   emojis() {
     const {
-      server: { emoji },
-    } = this.props
-    return emoji.filter(({ name }) => !name.includes('tick'))
+      server: {emoji},
+    } = this.props;
+    return emoji.filter(({name}) => !name.includes('tick'))
   }
 
   renderBlobSample() {
-    const emoji = this.emojis()
-    const { expanded, sampleIndex } = this.state
+    const emoji = this.emojis();
+    const {expanded, sampleIndex} = this.state;
 
-    let blobs
+    let blobs;
     if (expanded) {
       // Show all blobs.
       blobs = emoji
@@ -54,12 +54,12 @@ export default class Server extends React.Component {
   }
 
   render() {
-    const { server } = this.props
-    const { expanded } = this.state
+    const {server} = this.props;
+    const {expanded} = this.state;
 
     return (
       <div
-        className={classnames('server', { expanded })}
+        className={classnames('server', {expanded})}
         onClick={this.handleClick}
         aria-expanded={expanded}
       >
@@ -69,7 +69,7 @@ export default class Server extends React.Component {
             alt={`${server.name} icon`}
             src={`https://cdn.discordapp.com/icons/${server.id}/${
               server.icon
-            }.png?size=64`}
+              }.png?size=64`}
           />
           {server.name}
 
@@ -112,4 +112,4 @@ Server.propTypes = {
       })
     ).isRequired,
   }).isRequired,
-}
+};

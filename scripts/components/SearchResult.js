@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import Emoji from './Emoji'
 
-export default function SearchResult({ className, blob, ...rest }) {
+export default function SearchResult({className, blob, ...rest}) {
   return (
     <a
       href={blob.invite}
@@ -10,7 +10,7 @@ export default function SearchResult({ className, blob, ...rest }) {
       data-tooltip={`:${blob.name}:`}
       {...rest}
     >
-      <Emoji id={blob.id} animated={blob.animated} name={blob.name} />
+      <Emoji id={blob.id} animated={blob.animated} name={blob.name} server={blob.server}/>
     </a>
   )
 }
