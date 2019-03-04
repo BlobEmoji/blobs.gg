@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import Emoji from './Emoji'
 
-export default function SearchResult({className, blob, ...rest}) {
+export default function SearchResult({ className, blob, ...rest }) {
   return (
     <a
       href={blob.invite}

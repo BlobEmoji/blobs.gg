@@ -6,10 +6,10 @@ import SearchResult from './SearchResult'
 export default class Search extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       query: '',
@@ -17,16 +17,16 @@ export default class Search extends React.Component {
   }
 
   handleQueryChange = (event) => {
-    this.setState({query: event.currentTarget.value})
-  };
+    this.setState({ query: event.currentTarget.value })
+  }
 
   allBlobs() {
     const {
-      data: {guilds},
-      data: {community}
-    } = this.props;
+      data: { guilds },
+      data: { community }
+    } = this.props
 
-    let guild_data = Object.assign(guilds, community);
+    let guild_data = Object.assign( guilds, community );
 
     // Inject an `invite` property to all emoji objects, so that they may be
     // linked to.
@@ -40,7 +40,7 @@ export default class Search extends React.Component {
   }
 
   filterBlobs() {
-    const {query} = this.state;
+    const {query} = this.state
 
     return this.allBlobs()
       .filter((blob) => blob.name.includes(query.toLowerCase()))
@@ -61,7 +61,7 @@ export default class Search extends React.Component {
   render() {
     const {query} = this.state;
 
-    const results = query === '' ? [] : this.filterBlobs();
+    const results = query === '' ? [] : this.filterBlobs()
 
     return (
       <React.Fragment>
