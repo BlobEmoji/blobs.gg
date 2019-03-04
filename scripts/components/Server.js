@@ -22,7 +22,7 @@ export default class Server extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(({expanded}) => ({expanded: !expanded}))
+    this.setState(({ expanded }) => ({ expanded: !expanded }))
   }
 
   handleJoinClick = (event) => {
@@ -32,14 +32,14 @@ export default class Server extends React.Component {
 
   emojis() {
     const {
-      server: {emoji},
+      server: { emoji },
     } = this.props
-    return emoji.filter(({name}) => !name.includes('tick'))
+    return emoji.filter(({ name }) => !name.includes('tick'))
   }
 
   renderBlobSample() {
     const emoji = this.emojis()
-    const {expanded, sampleIndex} = this.state
+    const { expanded, sampleIndex } = this.state
 
     let blobs
     if (expanded) {
@@ -69,7 +69,7 @@ export default class Server extends React.Component {
             alt={`${server.name} icon`}
             src={`https://cdn.discordapp.com/icons/${server.id}/${
               server.icon
-              }.png?size=64`}
+            }.png?size=64`}
           />
           {server.name}
 
