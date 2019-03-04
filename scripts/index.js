@@ -28,17 +28,6 @@ function mount(data) {
   ReactDOM.render(<ViewMoreButton />, viewNode)
 }
 
-function shuffle() {
-  let community_servers = document.getElementsByClassName(
-    'community-servers'
-  )[0]
-  for (let i = community_servers.children.length; i >= 0; i--) {
-    community_servers.appendChild(
-      community_servers.children[(Math.random() * i) | 0]
-    )
-  }
-}
-
 function hide() {
   let community_servers = document.getElementsByClassName(
     'community-servers'
@@ -58,7 +47,6 @@ if (window.fetch) {
     .then((data) => {
       updatePageState(data)
       mount(data)
-      shuffle()
       hide()
     })
 }
