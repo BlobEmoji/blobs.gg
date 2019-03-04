@@ -39,7 +39,7 @@ export default class Server extends React.Component {
     const {
       server: { emoji },
     } = this.props
-    return emoji.filter(({ name }) => !name.includes('tick'))
+    return emoji
   }
 
   renderBlobSample() {
