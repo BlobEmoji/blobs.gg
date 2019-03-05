@@ -4,22 +4,22 @@
   font-size: 0.65em;
 }
 
-.view-button {
-  display: inline-block;
-  font-size: 0.65em;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.5rem;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-#view-button {
+.view-more {
   display: flex;
   justify-content: center;
-  margin: 1rem 0 2rem 0;
+  margin: 2rem 0;
+
+  button {
+    background: $blurple;
+    display: inline-block;
+    font-size: 1rem;
+    color: white;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .sample {

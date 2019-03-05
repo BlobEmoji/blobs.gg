@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
-import ViewMoreButton from './components/ViewMore'
 
 // process.env.NODE_ENV is a magic variable that gets compiled away into the
 // environment that we are in.
@@ -19,26 +18,17 @@ function updatePageState(data) {
 function mount(data) {
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
-  const serversNodes = document.getElementsByClassName('servers')
-  const viewNode = document.querySelector('#view-button')
+  const servers = document.querySelector('.servers')
+  const communityServersWrapper = document.querySelector(
+    '.community-servers-wrapper'
+  )
 
   ReactDOM.render(<Search data={data} />, searchNode)
-  ReactDOM.render(<Servers data={data} />, serversNodes[0])
-  ReactDOM.render(<CommunityServers data={data} />, serversNodes[1])
-  ReactDOM.render(<ViewMoreButton />, viewNode)
-}
-
-function hide() {
-  let community_servers = document.getElementsByClassName(
-    'community-servers'
-  )[0]
-  let counter = 0
-  for (let server of community_servers.getElementsByClassName('server')) {
-    counter += 1
-    if (counter > 6) {
-      server.classList.add('hidden')
-    }
-  }
+  ReactDOM.render(<Servers servers={data.guilds} />, servers)
+  ReactDOM.render(
+    <CommunityServers servers={data.community} />,
+    communityServersWrapper
+  )
 }
 
 if (window.fetch) {
@@ -47,6 +37,5 @@ if (window.fetch) {
     .then((data) => {
       updatePageState(data)
       mount(data)
-      hide()
     })
 }
