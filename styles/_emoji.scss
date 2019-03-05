@@ -34,7 +34,7 @@ $tooltip-spacing: 0.25rem;
     width: -moz-max-content;
     width: -webkit-max-content;
     width: max-content;
-    max-width: 400%;
+    max-width: 18em;
 
     position: absolute;
     top: calc(100% + #{$tooltip-spacing} + #{$arrow-size});
