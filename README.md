@@ -9,7 +9,7 @@ stylesheets, images, and scripts.
 
 Make sure you have Node.js and `npm` installed before proceeding.
 
-Install depedencies:
+Install dependencies:
 
 ```sh
 $ npm install

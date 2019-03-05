@@ -22,14 +22,19 @@ export default class Search extends React.Component {
 
   allBlobs() {
     const {
-      data: { guilds },
+      data: { guilds, community },
     } = this.props
 
-    // Inject an `invite` property to all emoji objects, so that they may be
-    // linked to.
-    return Object.values(guilds).reduce(
+    const allGuilds = { ...guilds, ...community }
+
+    // Inject `invite` and `server` properties to all emoji objects.
+    return Object.values(allGuilds).reduce(
       (acc, guild) => [
-        ...guild.emoji.map((emoji) => ({ ...emoji, invite: guild.invite })),
+        ...guild.emoji.map((emoji) => ({
+          ...emoji,
+          invite: guild.invite,
+          server: guild.name,
+        })),
         ...acc,
       ],
       []
@@ -41,18 +46,8 @@ export default class Search extends React.Component {
 
     return this.allBlobs()
       .filter((blob) => blob.name.includes(query.toLowerCase()))
+      .sort(({ name: a }, { name: b }) => a.length - b.length)
       .slice(0, 8 * 5)
-      .sort(({ name: a }, { name: b }) => {
-        // Sort alphabetically by name.
-
-        if (a < b) {
-          return -1
-        }
-        if (a > b) {
-          return 1
-        }
-        return 0
-      })
   }
 
   render() {

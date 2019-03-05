@@ -10,7 +10,12 @@ export default function SearchResult({ className, blob, ...rest }) {
       data-tooltip={`:${blob.name}:`}
       {...rest}
     >
-      <Emoji id={blob.id} animated={blob.animated} name={blob.name} />
+      <Emoji
+        id={blob.id}
+        animated={blob.animated}
+        name={blob.name}
+        server={blob.server}
+      />
     </a>
   )
 }
