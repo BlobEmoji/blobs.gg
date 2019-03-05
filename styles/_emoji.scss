@@ -30,6 +30,12 @@ $tooltip-spacing: 0.25rem;
     padding: 0.5em 1em;
     border-radius: 0.25rem;
 
+    width: intrinsic;
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: max-content;
+    max-width: 400%;
+
     position: absolute;
     top: calc(100% + #{$tooltip-spacing} + #{$arrow-size});
     left: 50%;
