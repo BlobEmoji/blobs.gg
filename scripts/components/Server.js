@@ -26,6 +26,11 @@ export default class Server extends React.Component {
     return server.emoji.length === 0
   }
 
+  get expandable() {
+    const { server } = this.props
+    return server.emoji.length > RANDOM_SAMPLE_SIZE
+  }
+
   handleClick = () => {
     this.setState(({ expanded }) => ({ expanded: !expanded }))
   }
@@ -62,16 +67,21 @@ export default class Server extends React.Component {
     const { server } = this.props
     const { expanded } = this.state
 
-    const sample = this.empty ? null : (
+    const sample = (
       <React.Fragment>
-        {this.renderBlobSample()}
-        {!expanded ? <span className="more">...</span> : null}
+        {!this.empty && this.renderBlobSample()}
+        {!expanded && this.expandable ? (
+          <span className="more">...</span>
+        ) : null}
       </React.Fragment>
     )
 
     return (
       <div
-        className={classnames('server', { expanded, empty: this.empty })}
+        className={classnames('server', {
+          expanded,
+          expandable: this.expandable,
+        })}
         onClick={this.handleClick}
         aria-expanded={expanded}
       >
@@ -87,7 +97,7 @@ export default class Server extends React.Component {
             {server.name}
           </span>
 
-          {!this.empty && (
+          {this.expandable && (
             <img
               className="expanded-status"
               alt="Show more"

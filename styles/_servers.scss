@@ -66,16 +66,16 @@
     text-decoration: inherit;
     transition: border-color 0.25s;
 
-    &:not(.empty) {
+    &.expandable {
       cursor: pointer;
+
+      &.expanded h3 .expanded-status {
+        transform: rotate(180deg);
+      }
     }
 
     &:hover {
       border-color: lighten($bg, 20%);
-    }
-
-    &.expanded h3 .expanded-status {
-      transform: rotate(180deg);
     }
 
     p {
