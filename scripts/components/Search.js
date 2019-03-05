@@ -22,15 +22,13 @@ export default class Search extends React.Component {
 
   allBlobs() {
     const {
-      data: { guilds },
-      data: { community },
+      data: { guilds, community },
     } = this.props
 
-    let guild_data = Object.assign(guilds, community)
+    const allGuilds = { ...guilds, ...community }
 
-    // Inject an `invite` property to all emoji objects, so that they may be
-    // linked to.
-    return Object.values(guild_data).reduce(
+    // Inject `invite` and `server` properties to all emoji objects.
+    return Object.values(allGuilds).reduce(
       (acc, guild) => [
         ...guild.emoji.map((emoji) => ({
           ...emoji,
