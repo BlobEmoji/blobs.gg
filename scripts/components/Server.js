@@ -32,6 +32,10 @@ export default class Server extends React.Component {
   }
 
   handleClick = () => {
+    if (!this.expandable) {
+      return
+    }
+
     this.setState(({ expanded }) => ({ expanded: !expanded }))
   }
 
