@@ -46,18 +46,8 @@ export default class Search extends React.Component {
 
     return this.allBlobs()
       .filter((blob) => blob.name.includes(query.toLowerCase()))
+      .sort(({ name: a }, { name: b }) => a.length - b.length)
       .slice(0, 8 * 5)
-      .sort(({ name: a }, { name: b }) => {
-        // Sort alphabetically by name.
-
-        if (a < b) {
-          return -1
-        }
-        if (a > b) {
-          return 1
-        }
-        return 0
-      })
   }
 
   render() {
