@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import Emoji from './Emoji'
 import chevron from '../../assets/chevron-down-solid.svg'
 
-const RANDOM_SAMPLE_SIZE = 5
+const RANDOM_SAMPLE_SIZE = 6
 
 export default class Server extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-@import 'colors', 'mobile', 'search', 'servers', 'emoji';
+@import 'vars', 'mobile', 'search', 'servers', 'emoji';
 
 html,
 body {
@@ -41,7 +41,7 @@ section {
 }
 
 main {
-  max-width: 850px;
+  max-width: ($server-modal-width * $server-modal-count) + 100px;
   margin: 1rem auto;
 }
 
