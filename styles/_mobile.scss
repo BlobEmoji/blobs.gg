@@ -1,4 +1,6 @@
-@media (max-width: 900px) {
+@import 'metavars';
+
+@media (max-width: ($server-modal-width * $server-modal-count) + 150px) {
   main {
     margin: 0 !important;
     padding: 2rem;
