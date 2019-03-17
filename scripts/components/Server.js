@@ -7,6 +7,10 @@ import chevron from '../../assets/chevron-down-solid.svg'
 
 const RANDOM_SAMPLE_SIZE = 6
 
+function shuffleArray(array) {
+  return array.sort(() => 0.5 - Math.random())
+}
+
 export default class Server extends React.Component {
   constructor(props) {
     super(props)
@@ -15,9 +19,6 @@ export default class Server extends React.Component {
     // Here, we determine at which index we should select random blobs from.
     this.state = {
       expanded: false,
-      sampleIndex: Math.floor(
-        Math.random() * Math.floor(this.emojis().length / RANDOM_SAMPLE_SIZE)
-      ),
     }
   }
 
@@ -53,7 +54,7 @@ export default class Server extends React.Component {
 
   renderBlobSample() {
     const emoji = this.emojis()
-    const { expanded, sampleIndex } = this.state
+    const { expanded } = this.state
 
     let blobs
     if (expanded) {
@@ -61,7 +62,7 @@ export default class Server extends React.Component {
       blobs = emoji
     } else {
       // Show a portion of blobs.
-      blobs = emoji.slice(sampleIndex, sampleIndex + RANDOM_SAMPLE_SIZE)
+      blobs = emoji.slice(shuffleArray(this.emojis()), RANDOM_SAMPLE_SIZE)
     }
 
     return blobs.map((blob) => <Emoji key={blob.id} {...blob} />)
