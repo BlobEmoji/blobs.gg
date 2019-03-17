@@ -19,7 +19,7 @@ export default class Server extends React.Component {
     // Here, we determine at which index we should select random blobs from.
     this.state = {
       expanded: false,
-      randomSample: this.emojis().slice(shuffleArray(this.emojis()), RANDOM_SAMPLE_SIZE),
+      randomSample: shuffleArray(this.emojis()).slice(0, RANDOM_SAMPLE_SIZE),
     }
   }
 
