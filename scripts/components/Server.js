@@ -19,6 +19,7 @@ export default class Server extends React.Component {
     // Here, we determine at which index we should select random blobs from.
     this.state = {
       expanded: false,
+      randomSample: this.emojis().slice(shuffleArray(this.emojis()), RANDOM_SAMPLE_SIZE),
     }
   }
 
@@ -54,7 +55,7 @@ export default class Server extends React.Component {
 
   renderBlobSample() {
     const emoji = this.emojis()
-    const { expanded } = this.state
+    const { expanded, randomSample } = this.state
 
     let blobs
     if (expanded) {
@@ -62,7 +63,7 @@ export default class Server extends React.Component {
       blobs = emoji
     } else {
       // Show a portion of blobs.
-      blobs = emoji.slice(shuffleArray(this.emojis()), RANDOM_SAMPLE_SIZE)
+      blobs = randomSample
     }
 
     return blobs.map((blob) => <Emoji key={blob.id} {...blob} />)
