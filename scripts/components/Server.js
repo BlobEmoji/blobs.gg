@@ -6,7 +6,7 @@ import Emoji from './Emoji'
 import chevron from '../../assets/chevron-down-solid.svg'
 import { shuffleArray } from '../utils'
 
-const RANDOM_SAMPLE_SIZE = 5
+const RANDOM_SAMPLE_SIZE = 6
 
 export default class Server extends React.Component {
   constructor(props) {
