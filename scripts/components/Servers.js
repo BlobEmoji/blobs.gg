@@ -2,12 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Server from './Server'
+import { shuffleArray } from '../utils'
 
 const SERVERS_PER_PAGE = 6
-
-function shuffleArray(array) {
-  return array.sort(() => 0.5 - Math.random())
-}
 
 export function Servers({ servers }) {
   return Object.entries(servers).map(([id, server]) => (

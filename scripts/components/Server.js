@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import Emoji from './Emoji'
 import chevron from '../../assets/chevron-down-solid.svg'
+import { shuffleArray } from '../utils'
 
 const RANDOM_SAMPLE_SIZE = 5
 
@@ -15,9 +16,7 @@ export default class Server extends React.Component {
     // Here, we determine at which index we should select random blobs from.
     this.state = {
       expanded: false,
-      sampleIndex: Math.floor(
-        Math.random() * Math.floor(this.emojis().length / RANDOM_SAMPLE_SIZE)
-      ),
+      randomSample: shuffleArray(this.emojis()).slice(0, RANDOM_SAMPLE_SIZE),
     }
   }
 
@@ -53,16 +52,10 @@ export default class Server extends React.Component {
 
   renderBlobSample() {
     const emoji = this.emojis()
-    const { expanded, sampleIndex } = this.state
+    const { expanded, randomSample } = this.state
 
-    let blobs
-    if (expanded) {
-      // Show all blobs.
-      blobs = emoji
-    } else {
-      // Show a portion of blobs.
-      blobs = emoji.slice(sampleIndex, sampleIndex + RANDOM_SAMPLE_SIZE)
-    }
+    // Show all emoji when expanded, or else show a random sample.
+    let blobs = expanded ? emoji : randomSample
 
     return blobs.map((blob) => <Emoji key={blob.id} {...blob} />)
   }
