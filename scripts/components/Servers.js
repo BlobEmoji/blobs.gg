@@ -6,10 +6,14 @@ import { shuffleArray } from '../utils'
 
 const SERVERS_PER_PAGE = 6
 
-export function Servers({ servers }) {
+export function Servers({ servers, ...props }) {
   return Object.entries(servers).map(([id, server]) => (
-    <Server key={id} server={{ id, ...server }} />
+    <Server key={id} server={{ id, ...server }} {...props} />
   ))
+}
+
+Servers.propTypes = {
+  servers: PropTypes.object.isRequired,
 }
 
 export function CommunityServers(props) {
@@ -42,8 +46,4 @@ export function CommunityServers(props) {
       )}
     </React.Fragment>
   )
-}
-
-Servers.propTypes = {
-  servers: PropTypes.object.isRequired,
 }

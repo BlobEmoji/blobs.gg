@@ -58,55 +58,55 @@
   grid-template-columns: repeat(auto-fill, minmax($server-modal-width, 1fr));
   grid-gap: 2rem;
   padding: 1rem 0;
+}
 
-  .server {
-    display: block;
-    color: $fg;
-    padding: 1em;
-    border: solid 0.1rem lighten($bg, 10%);
-    border-radius: 0.2rem;
-    text-decoration: inherit;
-    transition: border-color 0.25s;
+.server {
+  display: block;
+  color: $fg;
+  padding: 1em;
+  border: solid 0.1rem lighten($bg, 10%);
+  border-radius: 0.2rem;
+  text-decoration: inherit;
+  transition: border-color 0.25s;
 
-    &.expandable {
-      cursor: pointer;
+  &.expandable {
+    cursor: pointer;
 
-      &.expanded h3 .expanded-status {
-        transform: rotate(180deg);
-      }
+    &.expanded h3 .expanded-status {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    border-color: lighten($bg, 20%);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+    margin: 0 0 1.5rem 0;
+
+    .name {
+      width: calc(100% - 3rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    &:hover {
-      border-color: lighten($bg, 20%);
+    .expanded-status {
+      margin-left: auto;
+      width: 1rem;
     }
 
-    p {
-      margin: 0;
-    }
-
-    h3 {
-      display: flex;
-      align-items: center;
-      margin: 0 0 1.5rem 0;
-
-      .name {
-        width: calc(100% - 3rem);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .expanded-status {
-        margin-left: auto;
-        width: 1rem;
-      }
-
-      .icon {
-        display: block;
-        margin-right: 0.5rem;
-        width: 1em;
-        border-radius: 100%;
-      }
+    .icon {
+      display: block;
+      margin-right: 0.5rem;
+      width: 1em;
+      border-radius: 100%;
     }
   }
 }
