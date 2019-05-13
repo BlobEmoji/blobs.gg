@@ -11,8 +11,9 @@ const BLOBS_ENDPOINT =
     ? 'https://api.mousey.app/emoji/blobs-testing'
     : 'https://api.mousey.app/emoji/blobs'
 
-function updatePageState(data) {
-  document.querySelector('#emoji-count').textContent = data.emoji_count
+function updatePageState({ emoji_count: emojiCount }) {
+  const formattedCount = new Intl.NumberFormat().format(emojiCount)
+  document.querySelector('#emoji-count').textContent = formattedCount
 }
 
 function mount(data) {
