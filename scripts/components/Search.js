@@ -14,21 +14,11 @@ export default class Search extends React.Component {
     this.state = {
       query: '',
     }
-  }
 
-  handleQueryChange = (event) => {
-    this.setState({ query: event.currentTarget.value })
-  }
-
-  allBlobs() {
-    const {
-      data: { guilds, community },
-    } = this.props
-
-    const allGuilds = { ...guilds, ...community }
+    const allGuilds = { ...props.data.guilds, ...props.data.community }
 
     // Inject `invite` and `server` properties to all emoji objects.
-    return Object.values(allGuilds).reduce(
+    this.allBlobs = Object.values(allGuilds).reduce(
       (acc, guild) => [
         ...guild.emoji.map((emoji) => ({
           ...emoji,
@@ -41,10 +31,12 @@ export default class Search extends React.Component {
     )
   }
 
-  filterBlobs() {
-    const { query } = this.state
+  handleQueryChange = (event) => {
+    this.setState({ query: event.currentTarget.value })
+  }
 
-    return this.allBlobs()
+  filterBlobs(query) {
+    return this.allBlobs
       .filter((blob) => blob.name.includes(query.toLowerCase()))
       .sort(({ name: a }, { name: b }) => a.length - b.length)
       .slice(0, 8 * 5)
@@ -53,7 +45,7 @@ export default class Search extends React.Component {
   render() {
     const { query } = this.state
 
-    const results = query === '' ? [] : this.filterBlobs()
+    const blobs = query === '' ? [] : this.filterBlobs(query)
 
     return (
       <React.Fragment>
@@ -65,9 +57,11 @@ export default class Search extends React.Component {
           onChange={this.handleQueryChange}
         />
         <div id="search-results">
-          {results.map((blob) => (
-            <SearchResult key={blob.id} blob={blob} />
-          ))}
+          <div id="search-results-blobs">
+            {blobs.map((blob) => (
+              <SearchResult key={blob.id} blob={blob} />
+            ))}
+          </div>
         </div>
       </React.Fragment>
     )

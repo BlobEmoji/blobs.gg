@@ -14,29 +14,31 @@
 $search-emoji-size: 64px;
 
 #search-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, $search-emoji-size);
-  grid-gap: 2rem;
-  justify-content: center;
+  &-blobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, $search-emoji-size);
+    grid-gap: 2rem;
+    justify-content: center;
 
-  &:not(:empty) {
-    margin: 3rem 0;
-  }
-
-  .emoji {
-    height: $search-emoji-size;
-    width: $search-emoji-size;
-  }
-
-  .search-result {
-    cursor: pointer;
-
-    .emoji-container {
-      display: block;
+    &:not(:empty) {
+      margin: 3rem 0;
     }
 
     .emoji {
-      display: block;
+      height: $search-emoji-size;
+      width: $search-emoji-size;
+    }
+
+    .search-result {
+      cursor: pointer;
+
+      .emoji-container {
+        display: block;
+      }
+
+      .emoji {
+        display: block;
+      }
     }
   }
 }
