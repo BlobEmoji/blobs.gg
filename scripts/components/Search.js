@@ -74,7 +74,7 @@ export default class Search extends React.Component {
       query !== '' && blobs.length === 0 && Object.keys(servers).length === 0
 
     return (
-      <React.Fragment>
+      <>
         <input
           id="search-field"
           type="text"
@@ -95,7 +95,7 @@ export default class Search extends React.Component {
             ))}
           </div>
         </div>
-      </React.Fragment>
+      </>
     )
   }
 }

@@ -61,12 +61,12 @@ export default class Server extends React.Component {
     const { expanded } = this.state
 
     const sample = (
-      <React.Fragment>
+      <>
         {!this.empty && this.renderBlobSample()}
         {!expanded && this.expandable ? (
           <span className="more">...</span>
         ) : null}
-      </React.Fragment>
+      </>
     )
 
     return (

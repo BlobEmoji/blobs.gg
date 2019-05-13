@@ -31,7 +31,7 @@ export function CommunityServers(props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="servers community-servers">{serverNodes}</div>
       {upTo < servers.length && (
         <div className="view-more">
@@ -44,6 +44,6 @@ export function CommunityServers(props) {
           </button>
         </div>
       )}
-    </React.Fragment>
+    </>
   )
 }
