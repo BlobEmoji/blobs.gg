@@ -13,6 +13,17 @@
 
 $search-emoji-size: 64px;
 
+.no-results {
+  margin: 3rem 0;
+  text-align: center;
+
+  .emoji {
+    margin-left: 0.5em;
+    width: 1.5em;
+    vertical-align: bottom;
+  }
+}
+
 #search-results {
   &-servers {
     display: grid;
