@@ -6,10 +6,11 @@ import { CommunityServers, Servers } from './components/Servers'
 
 // process.env.NODE_ENV is a magic variable that gets compiled away into the
 // environment that we are in.
-const BLOBS_ENDPOINT =
-  process.env.NODE_ENV === 'development'
-    ? 'https://api.mousey.app/emoji/blobs-testing'
-    : 'https://api.mousey.app/emoji/blobs'
+const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
+  ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
+  : process.env.NODE_ENV === 'development'
+  ? 'https://api.mousey.app/emoji/blobs-testing'
+  : 'https://api.mousey.app/emoji/blobs'
 
 function updatePageState({ emoji_count: emojiCount }) {
   const formattedCount = new Intl.NumberFormat().format(emojiCount)
