@@ -1,14 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function Emoji({ id, animated, name, server, ...rest }) {
+function emojiUrl(id, extension, size) {
+  const sizeParam = size == null ? '' : `?size=${size}`
+  return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`
+}
+
+export default function Emoji({
+  id,
+  animated,
+  name,
+  server,
+  baseSize = 64,
+  ...rest
+}) {
   const extension = animated ? 'gif' : 'png'
-  const url = `https://cdn.discordapp.com/emojis/${id}.${extension}`
   const alt = server ? `:${name}: (${server})` : `:${name}:`
+
+  const srcSet = `
+    ${emojiUrl(id, extension, baseSize)},
+    ${emojiUrl(id, extension, baseSize * 2)} 2x
+  `
 
   return (
     <span className="emoji-container" data-tooltip={alt}>
-      <img className="emoji" src={url} alt={alt} {...rest} />
+      <img
+        className="emoji"
+        srcSet={srcSet}
+        src={emojiUrl(id, extension, baseSize)}
+        alt={alt}
+        {...rest}
+      />
     </span>
   )
 }

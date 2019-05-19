@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Emoji from './Emoji'
+import ServerIcon from './ServerIcon'
 import chevron from '../../assets/chevron-down-solid.svg'
 import { shuffleArray } from '../utils'
 
@@ -53,7 +54,7 @@ export default class Server extends React.Component {
     // Show all emoji when expanded, or else show a random sample.
     let blobs = expanded ? this.emoji : randomSample
 
-    return blobs.map((blob) => <Emoji key={blob.id} {...blob} />)
+    return blobs.map((blob) => <Emoji key={blob.id} baseSize={32} {...blob} />)
   }
 
   render() {
@@ -79,13 +80,7 @@ export default class Server extends React.Component {
         aria-expanded={expanded}
       >
         <h3>
-          <img
-            className="icon"
-            alt={`${server.name} icon`}
-            src={`https://cdn.discordapp.com/icons/${server.id}/${
-              server.icon
-            }.png?size=64`}
-          />
+          <ServerIcon server={server} />
           <span className="name" title={server.name}>
             {server.name}
           </span>
