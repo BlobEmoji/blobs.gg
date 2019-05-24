@@ -16,6 +16,11 @@ export default class Search extends React.Component {
 
     this.state = {
       query: '',
+      filters: {
+        format: null,
+        type: null,
+        server: null
+      },
     }
 
     this.allGuilds = { ...props.data.guilds, ...props.data.community }
@@ -23,7 +28,8 @@ export default class Search extends React.Component {
     // Inject `invite` and `server` properties to all emoji objects.
     // TODO: Unify the invite and server properties into one property.
     //       We need the ID, too!
-    this.allBlobs = Object.values(this.allGuilds).reduce(
+
+    this.officialBlobs = Object.values(props.data.guilds).reduce(
       (acc, guild) => [
         ...guild.emoji.map((emoji) => ({
           ...emoji,
@@ -34,6 +40,20 @@ export default class Search extends React.Component {
       ],
       []
     )
+
+    this.communityBlobs = Object.values(props.data.community).reduce(
+      (acc, guild) => [
+        ...guild.emoji.map((emoji) => ({
+          ...emoji,
+          invite: guild.invite,
+          server: guild.name,
+        })),
+        ...acc,
+      ],
+      []
+    )
+
+    this.allBlobs = [...this.officialBlobs, ...this.communityBlobs]
   }
 
   getSadBlob() {
@@ -48,11 +68,48 @@ export default class Search extends React.Component {
     this.setState({ query: event.currentTarget.value })
   }
 
-  filterBlobs(query) {
-    return this.allBlobs
-      .filter((blob) => blob.name.includes(query.toLowerCase()))
-      .sort(({ name: a }, { name: b }) => a.length - b.length)
-      .slice(0, 8 * 5)
+  handleFilter = (event, key) => {
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        [key]: event.currentTarget.value
+      }
+    })
+  }
+
+  filterBlobs(query, { format = 'all', type = 'all', server = 'all' }) {
+    const filterFormat = (blob) => {
+      if (format === 'static')
+        return blob.animated === false
+      else if (format === 'animated')
+        return blob.animated === true
+      else
+        return true
+    }
+    // Function for filtering blobs and non-blobs
+    // const filterType = (blob) => {
+    //   if (type === 'blob')
+    //     return blob.blob === true
+    //   else if (type === 'non-blobs')
+    //     return blob.blob === false
+    //   else
+    //     return true
+    // }
+    if (server === 'official')
+      return this.officialBlobs
+        .filter((blob) => blob.name.includes(query.toLowerCase()) && filterFormat(blob))
+        .sort(({ name: a }, { name: b }) => a.length - b.length)
+        .slice(0, 8 * 5)
+    else if (server === 'community')
+      return this.communityBlobs
+        .filter((blob) => blob.name.includes(query.toLowerCase()) && filterFormat(blob))
+        .sort(({ name: a }, { name: b }) => a.length - b.length)
+        .slice(0, 8 * 5)
+    else
+      return this.allBlobs
+        .filter((blob) => blob.name.includes(query.toLowerCase()) && filterFormat(blob))
+        .sort(({ name: a }, { name: b }) => a.length - b.length)
+        .slice(0, 8 * 5)
   }
 
   filterServers(query) {
@@ -66,9 +123,9 @@ export default class Search extends React.Component {
   }
 
   render() {
-    const { query } = this.state
+    const { query, filters } = this.state
 
-    const blobs = query === '' ? [] : this.filterBlobs(query)
+    const blobs = query === '' ? [] : this.filterBlobs(query, filters)
     const servers = query === '' ? {} : this.filterServers(query)
     const noResults =
       query !== '' && blobs.length === 0 && Object.keys(servers).length === 0
@@ -82,6 +139,25 @@ export default class Search extends React.Component {
           value={query}
           onChange={this.handleQueryChange}
         />
+        {blobs.length ? (
+          <>
+            <select onChange={(e) => this.handleFilter(e, 'format')}>
+              <option value='all' selected={filters.format === 'all'}>Filter all formats</option>
+              <option value='static' selected={filters.format === 'static'}>Filter static emojis</option>
+              <option value='animated' selected={filters.format === 'animated'}>Filter animated emojis</option>
+            </select>
+            {/* <select onChange={(e) => this.handleFilter(e, 'type')} disabled>
+              <option value='all' selected={filters.type === 'all'}>Filter all types</option>
+              <option value='blobs' selected={filters.type === 'blobs'}>Filter blobs</option>
+              <option value='non-blobs' selected={filters.type === 'non-blobs'}>Filter non-blobs</option>
+            </select> */}
+            <select onChange={(e) => this.handleFilter(e, 'server')}>
+              <option value='all' selected={filters.server === 'all'}>Filter all servers</option>
+              <option value='official' selected={filters.server === 'official'}>Filter official servers</option>
+              <option value='community' selected={filters.server === 'community'}>Filter community servers</option>
+            </select>
+          </>
+        ) : null}
         <div id="search-results">
           {noResults ? (
             <div className="no-results">No results. {this.getSadBlob()}</div>
