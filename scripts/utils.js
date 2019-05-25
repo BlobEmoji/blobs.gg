@@ -1,3 +1,12 @@
+export function log(...info) {
+  console.log(
+    '%c[blobs.gg]%c',
+    'color: lightgreen; font-weight: bold',
+    'color: inherit; font-weight: inherit',
+    ...info
+  )
+}
+
 /**
  * Shuffles an array using the Fisher-Yates shuffle algorithm.
  */
