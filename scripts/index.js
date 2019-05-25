@@ -8,8 +8,6 @@ import { CommunityServers, Servers } from './components/Servers'
 // environment that we are in.
 const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
   ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
-  : process.env.NODE_ENV === 'development'
-  ? 'https://api.mousey.app/emoji/blobs-testing'
   : 'https://api.mousey.app/emoji/blobs'
 
 function updatePageState({ emoji_count: emojiCount }) {
