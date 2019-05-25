@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import debounce from 'lodash.debounce'
 
+import { log } from '../utils'
 import Emoji from './Emoji'
 import { Servers } from './Servers'
 import SearchResult from './SearchResult'
@@ -16,6 +18,10 @@ export default class Search extends React.Component {
 
     this.state = {
       query: '',
+
+      isDebouncing: false,
+      blobs: [],
+      servers: {},
     }
 
     this.allGuilds = Object.assign({}, ...Object.values(props.data))
@@ -34,6 +40,8 @@ export default class Search extends React.Component {
       ],
       []
     )
+
+    this.calculateResultsDebounced = debounce(this.calculateResults, 150)
   }
 
   getSadBlob() {
@@ -45,7 +53,32 @@ export default class Search extends React.Component {
   }
 
   handleQueryChange = (event) => {
-    this.setState({ query: event.currentTarget.value })
+    const value = event.currentTarget.value
+
+    this.setState({
+      query: value,
+      isDebouncing: true,
+    })
+
+    if (value.length <= 3) {
+      this.calculateResultsDebounced()
+    } else {
+      this.calculateResults()
+    }
+  }
+
+  calculateResults() {
+    this.setState(({ query }) => {
+      if (query === '') {
+        return { blobs: [], servers: {}, isDebouncing: false }
+      }
+
+      return {
+        blobs: this.filterBlobs(query),
+        servers: this.filterServers(query),
+        isDebouncing: false,
+      }
+    })
   }
 
   filterBlobs(query) {
@@ -66,12 +99,13 @@ export default class Search extends React.Component {
   }
 
   render() {
-    const { query } = this.state
+    const { query, blobs, servers, isDebouncing } = this.state
 
-    const blobs = query === '' ? [] : this.filterBlobs(query)
-    const servers = query === '' ? {} : this.filterServers(query)
-    const noResults =
-      query !== '' && blobs.length === 0 && Object.keys(servers).length === 0
+    const hasResults =
+      blobs != null &&
+      servers != null &&
+      (blobs.length !== 0 || Object.keys(servers).length !== 0)
+    const hideNoResults = query.length === 0 || isDebouncing
 
     return (
       <>
@@ -83,17 +117,22 @@ export default class Search extends React.Component {
           onChange={this.handleQueryChange}
         />
         <div id="search-results">
-          {noResults ? (
-            <div className="no-results">No results. {this.getSadBlob()}</div>
-          ) : null}
-          <div id="search-results-servers">
-            <Servers servers={servers} />
-          </div>
-          <div id="search-results-blobs">
-            {blobs.map((blob) => (
-              <SearchResult key={blob.id} blob={blob} />
-            ))}
-          </div>
+          {!hasResults ? (
+            hideNoResults ? null : (
+              <div className="no-results">No results. {this.getSadBlob()}</div>
+            )
+          ) : (
+            <>
+              <div id="search-results-servers">
+                <Servers servers={servers} />
+              </div>
+              <div id="search-results-blobs">
+                {blobs.map((blob) => (
+                  <SearchResult key={blob.id} blob={blob} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </>
     )
