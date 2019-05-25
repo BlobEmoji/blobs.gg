@@ -18,7 +18,7 @@ export default class Search extends React.Component {
       query: '',
     }
 
-    this.allGuilds = Object.values(props.data)
+    this.allGuilds = Object.assign({}, ...Object.values(props.data))
 
     // Inject `invite` and `server` properties to all emoji objects.
     // TODO: Unify the invite and server properties into one property.
