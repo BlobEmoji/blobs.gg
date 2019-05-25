@@ -5,8 +5,6 @@ import { log } from './utils'
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
 
-// process.env.NODE_ENV is a magic variable that gets compiled away into the
-// environment that we are in.
 const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
   ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
   : 'https://api.mousey.app/emoji/blobs+community-blobs'
