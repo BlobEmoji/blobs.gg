@@ -64,6 +64,8 @@ function mount(data) {
   const recentEmojis = document.querySelector('#recently-changed-emoji')
   const sortedEmoji = sortEmojiNewest(data)
   ReactDOM.render(sortedEmoji.slice(0, 30).map((blob) => <SearchResult key={blob.id} blob={blob} />), recentEmojis)
+  const recentEmojiContainer = document.querySelector('#recently-changed-container')
+  recentEmojiContainer.removeAttribute('hidden')
 }
 
 if (typeof window.fetch !== 'undefined') {
