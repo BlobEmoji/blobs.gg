@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { log } from './utils'
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
+import SearchResult from "./components/SearchResult"
 
 const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
   ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
@@ -21,6 +22,23 @@ function calculateEmojiCount(data) {
   }
 
   return count
+}
+
+function sortEmojiNewest(data) {
+  let blobs = []
+  for (const servers of Object.values(data)) {
+    for (const server of Object.values(servers)) {
+      let se = [...server.emoji]
+      se.map(blob => {
+        blob.server = server.name
+        blob.invite = server.invite
+      })
+      blobs.push(...server.emoji) // get all blobs in a list
+    }
+  }
+  blobs.sort((a, b) => b.id - a.id); // sort blobs, newest first 
+
+  return blobs;
 }
 
 function updatePageState(data) {
@@ -41,6 +59,11 @@ function mount(data) {
   const { blobs, 'community-blobs': community } = data
   ReactDOM.render(<Servers servers={blobs} />, servers)
   ReactDOM.render(<CommunityServers servers={community} />, communityServers)
+
+  log('mounting Recent Emojis')
+  const recentEmojis = document.querySelector('#recently-changed-emoji')
+  const sortedEmoji = sortEmojiNewest(data)
+  ReactDOM.render(sortedEmoji.slice(0, 32).map((blob) => <SearchResult key={blob.id} blob={blob} />), recentEmojis)
 }
 
 if (typeof window.fetch !== 'undefined') {
