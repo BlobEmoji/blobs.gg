@@ -97,3 +97,11 @@ header {
   text-align: center;
   font-size: 1.5rem;
 }
+
+.emoji-list{ 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 64px);
+    grid-gap: 2rem;
+    justify-content: center;
+
+}
