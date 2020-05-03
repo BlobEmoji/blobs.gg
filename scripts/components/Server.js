@@ -26,13 +26,11 @@ export default class Server extends React.Component {
   }
 
   get empty() {
-    const { server } = this.props
-    return server.emoji.length === 0
+    return this.props.server.emoji.length === 0
   }
 
   get expandable() {
-    const { server } = this.props
-    return server.emoji.length > RANDOM_SAMPLE_SIZE
+    return this.props.server.emoji.length > RANDOM_SAMPLE_SIZE
   }
 
   handleClick = () => {

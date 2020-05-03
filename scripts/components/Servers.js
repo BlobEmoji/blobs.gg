@@ -8,13 +8,13 @@ import { useScrollNearEnd } from '../hooks'
 const SERVERS_PER_PAGE = 9
 
 export function Servers({ servers, ...props }) {
-  return Object.entries(servers).map(([id, server]) => (
-    <Server key={id} server={{ id, ...server }} {...props} />
+  return servers.map((server) => (
+    <Server key={server.id} server={server} {...props} />
   ))
 }
 
 Servers.propTypes = {
-  servers: PropTypes.object.isRequired,
+  servers: PropTypes.array.isRequired,
 }
 
 export function CommunityServers(props) {
@@ -34,4 +34,8 @@ export function CommunityServers(props) {
   })
 
   return <div className="servers community-servers">{serverNodes}</div>
+}
+
+CommunityServers.propTypes = {
+  servers: PropTypes.array.isRequired,
 }

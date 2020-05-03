@@ -10,12 +10,16 @@ export default function Emoji({
   id,
   animated,
   name,
-  server,
+  guild,
   baseSize = 64,
   ...rest
 }) {
   const extension = animated ? 'gif' : 'png'
-  const alt = server ? `:${name}: (${server})` : `:${name}:`
+  let alt = `:${name}:`
+
+  if (guild != null) {
+    alt += ` (${guild.name})`
+  }
 
   const srcSet = `
     ${emojiUrl(id, extension, baseSize)},

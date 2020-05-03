@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { log } from './utils'
+import { Emojis } from './emojis'
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
 
@@ -32,17 +33,23 @@ function updatePageState(data) {
 }
 
 function mount(data) {
+  const emojis = new Emojis(data)
+
+  log('Emojis:', emojis)
+
   log('Mounting search...')
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
-  ReactDOM.render(<Search data={data} />, searchNode)
+  ReactDOM.render(<Search emojis={emojis} />, searchNode)
 
   log('Mounting servers...')
   const servers = document.querySelector('.servers')
   const communityServers = document.querySelector('.community-servers-wrapper')
-  const { blobs, 'community-blobs': community } = data
-  ReactDOM.render(<Servers servers={blobs} />, servers)
-  ReactDOM.render(<CommunityServers servers={community} />, communityServers)
+  ReactDOM.render(<Servers servers={emojis.groups.blobs.guilds} />, servers)
+  ReactDOM.render(
+    <CommunityServers servers={emojis.groups['community-blobs'].guilds} />,
+    communityServers
+  )
 }
 
 if (typeof window.fetch !== 'undefined') {
