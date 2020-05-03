@@ -80,7 +80,6 @@ module.exports = {
     'no-use-before-define': WARN,
     'array-bracket-newline': [WARN, 'consistent'],
     'array-bracket-spacing': WARN,
-    'comma-dangle': [WARN, 'always-multiline'],
     'object-curly-spacing': [WARN, 'always'],
     'operator-linebreak': OFF,
     'padding-line-between-statements': OFF,
