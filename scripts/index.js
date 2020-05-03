@@ -5,9 +5,11 @@ import { log } from './utils'
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
 
-const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
-  ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
-  : 'https://api.mousey.app/emoji/blobs+community-blobs'
+const BLOBS_ENDPOINT =
+  window.location.host.endsWith('now.sh') ||
+  process.env.NODE_ENV === 'development'
+    ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
+    : 'https://api.mousey.app/emoji/blobs+community-blobs'
 
 function calculateEmojiCount(data) {
   let count = 0
