@@ -12,12 +12,13 @@ export default function Emoji({
   name,
   guild,
   baseSize = 64,
+  showGuild = false,
   ...rest
 }) {
   const extension = animated ? 'gif' : 'png'
   let alt = `:${name}:`
 
-  if (guild != null) {
+  if (guild != null && showGuild) {
     alt += ` (${guild.name})`
   }
 
@@ -43,4 +44,7 @@ Emoji.propTypes = {
   id: PropTypes.string.isRequired,
   animated: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
+  guild: PropTypes.object.isRequired,
+  baseSize: PropTypes.number,
+  showGuild: PropTypes.bool,
 }

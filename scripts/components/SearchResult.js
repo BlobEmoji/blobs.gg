@@ -15,6 +15,7 @@ export default function SearchResult({ className, blob, ...rest }) {
         animated={blob.animated}
         name={blob.name}
         guild={blob.guild}
+        showGuild
       />
     </a>
   )
