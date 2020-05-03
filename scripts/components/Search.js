@@ -122,17 +122,17 @@ export default class Search extends React.Component {
               <div className="no-results">No results. {this.getSadBlob()}</div>
             )
           ) : (
-            <>
-              <div id="search-results-servers">
-                <Servers servers={servers} />
-              </div>
-              <div id="search-results-blobs">
-                {blobs.map((blob) => (
-                  <SearchResult key={blob.id} blob={blob} />
-                ))}
-              </div>
-            </>
-          )}
+              <>
+                <div id="search-results-servers">
+                  <Servers servers={servers} />
+                </div>
+                <div id="search-results-blobs">
+                  {blobs.map((blob) => (
+                    <SearchResult key={blob.id} blob={blob} />
+                  ))}
+                </div>
+              </>
+            )}
         </div>
       </>
     )
