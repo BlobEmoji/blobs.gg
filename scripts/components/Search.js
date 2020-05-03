@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
 
 import Emoji from './Emoji'
-import { Servers } from './Servers'
+import { Guilds } from './Guilds'
 import SearchResult from './SearchResult'
 
 function insensitiveIncludes(haystack, needle) {
@@ -107,8 +107,8 @@ export default class Search extends React.Component {
             )
           ) : (
             <>
-              <div id="search-results-servers">
-                <Servers servers={filteredGuilds} />
+              <div id="search-results-guilds">
+                <Guilds guilds={filteredGuilds} />
               </div>
               <div id="search-results-blobs">
                 {filteredBlobs.map((blob) => (

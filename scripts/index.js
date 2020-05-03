@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { log } from './utils'
 import { Emojis } from './emojis'
 import Search from './components/Search'
-import { CommunityServers, Servers } from './components/Servers'
+import { CommunityGuilds, Guilds } from './components/Guilds'
 
 const BLOBS_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
@@ -17,9 +17,9 @@ function calculateEmojiCount(data) {
 
   // Using nested `for` loops here instead of `Array.prototype.reduce` for
   // the sake of readability.
-  for (const servers of Object.values(data)) {
-    for (const server of Object.values(servers)) {
-      count += server.emoji.length
+  for (const guilds of Object.values(data)) {
+    for (const guild of Object.values(guilds)) {
+      count += guild.emoji.length
     }
   }
 
@@ -42,13 +42,15 @@ function mount(data) {
   searchNode.removeAttribute('hidden')
   ReactDOM.render(<Search emojis={emojis} />, searchNode)
 
-  log('Mounting servers...')
-  const servers = document.querySelector('.servers')
-  const communityServers = document.querySelector('.community-servers-wrapper')
-  ReactDOM.render(<Servers servers={emojis.groups.blobs.guilds} />, servers)
+  log('Mounting guilds...')
+  const guildsNode = document.querySelector('.guilds')
+  const communityGuildsNode = document.querySelector(
+    '.community-guilds-wrapper'
+  )
+  ReactDOM.render(<Guilds guilds={emojis.groups.blobs.guilds} />, guildsNode)
   ReactDOM.render(
-    <CommunityServers servers={emojis.groups['community-blobs'].guilds} />,
-    communityServers
+    <CommunityGuilds guilds={emojis.groups['community-blobs'].guilds} />,
+    communityGuildsNode
   )
 }
 

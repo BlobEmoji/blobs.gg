@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Emoji from './Emoji'
-import ServerIcon from './ServerIcon'
+import GuildIcon from './GuildIcon'
 import chevron from '../../assets/chevron-down-solid.svg'
 import { shuffleArray } from '../utils'
 
 const RANDOM_SAMPLE_SIZE = 6
 
-export default class Server extends React.Component {
+export default class Guild extends React.Component {
   constructor(props) {
     super(props)
 
@@ -22,15 +22,15 @@ export default class Server extends React.Component {
   }
 
   get emoji() {
-    return this.props.server.emoji
+    return this.props.guild.emoji
   }
 
   get empty() {
-    return this.props.server.emoji.length === 0
+    return this.props.guild.emoji.length === 0
   }
 
   get expandable() {
-    return this.props.server.emoji.length > RANDOM_SAMPLE_SIZE
+    return this.props.guild.emoji.length > RANDOM_SAMPLE_SIZE
   }
 
   handleClick = () => {
@@ -56,7 +56,7 @@ export default class Server extends React.Component {
   }
 
   render() {
-    const { server } = this.props
+    const { guild } = this.props
     const { expanded } = this.state
 
     const sample = (
@@ -70,7 +70,7 @@ export default class Server extends React.Component {
 
     return (
       <div
-        className={classnames('server', {
+        className={classnames('guild', {
           expanded,
           expandable: this.expandable,
         })}
@@ -78,9 +78,9 @@ export default class Server extends React.Component {
         aria-expanded={expanded}
       >
         <h3>
-          <ServerIcon server={server} />
-          <span className="name" title={server.name}>
-            {server.name}
+          <GuildIcon guild={guild} />
+          <span className="name" title={guild.name}>
+            {guild.name}
           </span>
 
           {this.expandable && (
@@ -95,9 +95,9 @@ export default class Server extends React.Component {
 
         <div className="sample">{sample}</div>
         <a
-          href={server.invite}
+          href={guild.invite}
           target="_blank"
-          className="button join-server"
+          className="button join-guild"
           rel="noopener noreferrer"
           onClick={this.handleJoinClick}
         >
@@ -108,11 +108,12 @@ export default class Server extends React.Component {
   }
 }
 
-Server.propTypes = {
-  server: PropTypes.shape({
+Guild.propTypes = {
+  guild: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
+    invite: PropTypes.string.isRequired,
     emoji: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,

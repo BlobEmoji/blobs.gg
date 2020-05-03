@@ -14,7 +14,7 @@ export default function SearchResult({ className, blob, ...rest }) {
         id={blob.id}
         animated={blob.animated}
         name={blob.name}
-        server={blob.server}
+        guild={blob.guild}
       />
     </a>
   )

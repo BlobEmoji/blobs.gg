@@ -1,6 +1,6 @@
 @import 'vars';
 
-@media (max-width: ($server-modal-width * $server-modal-count) + 150px) {
+@media (max-width: ($guild-modal-width * $guild-modal-count) + 150px) {
   main {
     margin: 0 !important;
     padding: 2rem;
@@ -10,7 +10,7 @@
     margin: 1rem 0 !important;
   }
 
-  .servers .server {
+  .guilds .guild {
     margin: 1rem 0;
   }
 }
