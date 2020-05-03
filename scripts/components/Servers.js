@@ -7,13 +7,13 @@ import { shuffleArray } from '../utils'
 const SERVERS_PER_PAGE = 6
 
 export function Servers({ servers, ...props }) {
-  return Object.entries(servers).map(([id, server]) => (
-    <Server key={id} server={{ id, ...server }} {...props} />
+  return servers.map((server) => (
+    <Server key={server.id} server={server} {...props} />
   ))
 }
 
 Servers.propTypes = {
-  servers: PropTypes.object.isRequired,
+  servers: PropTypes.array.isRequired,
 }
 
 export function CommunityServers(props) {
@@ -46,4 +46,8 @@ export function CommunityServers(props) {
       )}
     </>
   )
+}
+
+CommunityServers.propTypes = {
+  servers: PropTypes.array.isRequired,
 }
