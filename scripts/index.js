@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { log } from './utils'
 import Search from './components/Search'
 import { CommunityServers, Servers } from './components/Servers'
-import SearchResult from "./components/SearchResult"
 import RecentEmoji from "./components/RecentEmoji"
 
 const BLOBS_ENDPOINT = window.location.host.endsWith('now.sh')
