@@ -63,7 +63,7 @@ export default class Search extends React.Component {
     const page = event.currentTarget.value
 
     this.setState({
-      currentPage: parseInt(page),
+      currentPage: parseInt(page, 10),
       isDebouncing: true,
     })
 
