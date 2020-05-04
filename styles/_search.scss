@@ -62,4 +62,29 @@ $search-emoji-size: 64px;
       }
     }
   }
+
+  &-pages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 64px);
+    justify-content: center;
+
+    .pages {
+      background: $green;
+      display: inline-block;
+      font-size: 1rem;
+      color: white;
+      border: none;
+      text-align: center;
+      margin: 0.5rem;
+      padding: 1vh;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.selected {
+        background: $blurple;
+      }
+    }
+  }
 }

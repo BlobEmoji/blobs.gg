@@ -5,6 +5,7 @@ import debounce from 'lodash.debounce'
 import Emoji from './Emoji'
 import { Guilds } from './Guilds'
 import SearchResult from './SearchResult'
+import SearchPage from './SearchPage'
 
 function insensitiveIncludes(haystack, needle) {
   return haystack.toLowerCase().includes(needle.toLowerCase())
@@ -20,9 +21,11 @@ export default class Search extends React.Component {
 
     this.state = {
       query: '',
+      currentPage: 1,
       isDebouncing: false,
       filteredBlobs: [],
       filteredGuilds: {},
+      searchPages: [],
     }
 
     // Calculate these values once, as they are fairly large.
@@ -45,6 +48,7 @@ export default class Search extends React.Component {
 
     this.setState({
       query: value,
+      currentPage: 1,
       isDebouncing: true,
     })
 
@@ -55,39 +59,61 @@ export default class Search extends React.Component {
     }
   }
 
+  handlePageChange = (event) => {
+    const page = event.currentTarget.value
+
+    this.setState({
+      currentPage: parseInt(page),
+      isDebouncing: true,
+    })
+
+    this.calculateResults()
+  }
+
   calculateResults() {
-    this.setState(({ query }) => {
+    this.setState(({ query, currentPage }) => {
       if (query === '') {
-        return { filteredBlobs: [], filteredGuilds: {}, isDebouncing: false }
+        return { currentPage: 1, filteredBlobs: [], filteredGuilds: {}, searchPages: [], isDebouncing: false }
       }
 
       return {
-        filteredBlobs: this.filterBlobs(query),
-        filteredGuilds: this.filterGuilds(query),
+        filteredBlobs: this.filterBlobs(query, currentPage),
+        filteredGuilds: this.filterGuilds(query, currentPage),
+        searchPages: this.getPages(query),
         isDebouncing: false,
       }
     })
   }
 
-  filterBlobs(query) {
+  filterBlobs(query, page) {
     return this.allEmoji
       .filter((blob) => insensitiveIncludes(blob.name, query))
       .sort(({ name: a }, { name: b }) => a.length - b.length)
-      .slice(0, 8 * 5)
+      .slice(40 * (page - 1), (8 * 5) * page)
   }
 
-  filterGuilds(query) {
+  filterGuilds(query, page) {
     return this.allGuilds
       .filter((guild) => insensitiveIncludes(guild.name, query))
-      .slice(0, 3)
+      .slice(3 * (page - 1), 3 * page)
+  }
+
+  getPages(query) {
+    let pageArray = [];
+    const totalFilteredBlobs = this.allEmoji.filter((blob) => insensitiveIncludes(blob.name, query));
+    for (let i = 1; i <= Math.ceil(totalFilteredBlobs.length / 40); i++) {
+      pageArray.push(i);
+    }
+    return pageArray;
   }
 
   render() {
-    const { query, filteredBlobs, filteredGuilds, isDebouncing } = this.state
+    const { query, currentPage, filteredBlobs, filteredGuilds, searchPages, isDebouncing } = this.state
 
     const hasResults =
       filteredBlobs != null &&
       filteredGuilds != null &&
+      searchPages != null &&
       (filteredBlobs.length !== 0 || Object.keys(filteredGuilds).length !== 0)
     const hideNoResults = query.length === 0 || isDebouncing
 
@@ -115,6 +141,13 @@ export default class Search extends React.Component {
                   <SearchResult key={blob.id} blob={blob} />
                 ))}
               </div>
+              {searchPages.length > 1 ? (
+                <div id="search-results-pages">                  
+                  {searchPages.map((page) => (
+                    <SearchPage key={page} className={page === currentPage ? 'selected' : null} page={page} value={page} onClick={this.handlePageChange} />
+                  ))}
+                </div>
+              ) : null}
             </>
           )}
         </div>
