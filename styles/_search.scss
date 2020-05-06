@@ -64,26 +64,29 @@ $search-emoji-size: 64px;
   }
 
   &-pages {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 64px);
-    justify-content: center;
+    background: lighten($dark, 5%);
+    display: inline-flex;
+    justify-content: flex-start;
+    max-height: 4rem;
+    overflow: auto;
+    width: 100%;
 
     .pages {
       background: $green;
+      border: none;
+      color: $white;
       display: inline-block;
       font-size: 1rem;
-      color: white;
-      border: none;
-      text-align: center;
       margin: 0.5rem;
-      padding: 1vh;
-
-      &:hover {
-        cursor: pointer;
-      }
+      padding: 0.5rem;
+      text-align: center;
 
       &.selected {
         background: $blurple;
+      }
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }

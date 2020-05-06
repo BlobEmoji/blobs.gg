@@ -67,7 +67,11 @@ export default class Search extends React.Component {
       isDebouncing: true,
     })
 
-    this.calculateResults()
+    if (this.state.query.length <= 3) {
+      this.calculateResultsDebounced()
+    } else {
+      this.calculateResults()
+    }
   }
 
   calculateResults() {
@@ -142,7 +146,7 @@ export default class Search extends React.Component {
                 ))}
               </div>
               {searchPages.length > 1 ? (
-                <div id="search-results-pages">                  
+                <div id="search-results-pages">
                   {searchPages.map((page) => (
                     <SearchPage key={page} className={page === currentPage ? 'selected' : null} page={page} value={page} onClick={this.handlePageChange} />
                   ))}
