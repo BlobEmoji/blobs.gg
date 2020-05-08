@@ -6,6 +6,8 @@ export default function SearchResult({ className, blob, ...rest }) {
   return (
     <a
       href={blob.guild.invite}
+      target="_blank"
+      rel="noopener noreferrer"
       className={classnames('search-result', className)}
       data-tooltip={`:${blob.name}:`}
       {...rest}
