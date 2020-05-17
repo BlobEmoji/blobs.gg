@@ -28,10 +28,3 @@ export function shuffleArray(source) {
 
   return array
 }
-
-/**
- * Converts an array as returned from Object.entries back into an object.
- */
-export function fromEntries(entries) {
-  return entries.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
-}

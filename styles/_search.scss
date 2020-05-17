@@ -25,9 +25,9 @@ $search-emoji-size: 64px;
 }
 
 #search-results {
-  &-servers {
+  &-guilds {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax($server-modal-width, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax($guild-modal-width, 1fr));
     grid-gap: 2rem;
 
     &:not(:empty) {

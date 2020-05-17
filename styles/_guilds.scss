@@ -1,6 +1,6 @@
 @import 'vars';
 
-.join-server {
+.join-guild {
   display: inline-block;
   margin-top: 1.5rem;
   font-size: 0.65em;
@@ -29,7 +29,7 @@
   width: 100%;
   justify-content: space-around;
 
-  .server.expanded & {
+  .guild.expanded & {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 0.5rem;
@@ -53,14 +53,14 @@
   }
 }
 
-.servers {
+.guilds {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax($server-modal-width, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax($guild-modal-width, 1fr));
   grid-gap: 2rem;
   padding: 1rem 0;
 }
 
-.server {
+.guild {
   display: block;
   color: $fg;
   padding: 1em;

@@ -5,7 +5,9 @@ import Emoji from './Emoji'
 export default function SearchResult({ className, blob, ...rest }) {
   return (
     <a
-      href={blob.invite}
+      href={blob.guild.invite}
+      target="_blank"
+      rel="noopener noreferrer"
       className={classnames('search-result', className)}
       data-tooltip={`:${blob.name}:`}
       {...rest}
@@ -14,7 +16,8 @@ export default function SearchResult({ className, blob, ...rest }) {
         id={blob.id}
         animated={blob.animated}
         name={blob.name}
-        server={blob.server}
+        guild={blob.guild}
+        showGuild
       />
     </a>
   )
