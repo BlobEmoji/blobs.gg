@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import SearchResult from "./SearchResult";
+import SearchResult from './SearchResult';
 
 
 export default class RecentEmoji extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
+    count: PropTypes.number
   }
 
   constructor(props) {
@@ -21,14 +22,14 @@ export default class RecentEmoji extends React.Component {
 
   sortEmojiNewest(data) {
     let blobs = []
-    for (const servers of Object.values(data)) {
-      for (const server of Object.values(servers)) {
+    for (const group of Object.values(data)) {
+      for (const server of Object.values(group)) {
         let se = [...server.emoji]
-        se.map(blob => {
-          blob.server = server.name
-          blob.invite = server.invite
+        se.map((blob) => {
+          blob.guild = server
+          return blob
         })
-        blobs.push(...server.emoji) // get all blobs in a list
+        blobs.push(...se) // get all blobs in a list
       }
     }
     blobs.sort((a, b) => b.id - a.id); // sort blobs, newest first 

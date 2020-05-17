@@ -9,8 +9,7 @@ import { CommunityGuilds, Guilds } from './components/Guilds'
 import RecentEmoji from "./components/RecentEmoji"
 
 const BLOBS_ENDPOINT =
-  window.location.host.endsWith('now.sh') ||
-  process.env.NODE_ENV === 'development'
+  window.location.host.endsWith('now.sh')
     ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
     : 'https://api.mousey.app/emoji/blobs+community-blobs'
 
@@ -55,9 +54,8 @@ function mount(data) {
     <CommunityGuilds guilds={emojis.groups['community-blobs'].guilds} />,
     communityGuildsNode
   )
-  
-  
-  
+
+
   log('mounting Recent Emojis')
   const recentEmojis = document.querySelector('#recently-changed-emoji')
   ReactDOM.render(<RecentEmoji data={data} count={30} />, recentEmojis)
