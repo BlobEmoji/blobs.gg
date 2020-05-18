@@ -22,8 +22,8 @@
     "proseWrap": "always"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel index.html changes.html",
+    "build": "parcel build index.html changes.html"
   },
   "dependencies": {
     "classnames": "^2.2.6",
