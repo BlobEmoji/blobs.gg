@@ -30,7 +30,7 @@ export default class RecentChanges extends React.Component {
 
     return (<div className="guild" key={key}>
       <GuildIcon guild={guild} />&nbsp;
-      {guild.name} at {new Date(changeSet[0].changed_at).toString()}
+      {guild.name} at {changeSet[0].changed_at.toString()}
       {blobs}
     </div>)
   }

@@ -17,7 +17,7 @@ class Changes {
 
     for (const change of data) {
       if (['EMOJI_CREATE', 'EMOJI_RENAME', 'EMOJI_UPDATE', 'EMOJI_REMOVE'].includes(change.event)) {
-        const date = new Date(change.changed_at);
+        const date = change.changed_at = new Date(change.changed_at);
         const key = [change.guild.id, date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()];
         this.changes[key] = (this.changes[key] ?? [])
         this.changes[key].push(change);
