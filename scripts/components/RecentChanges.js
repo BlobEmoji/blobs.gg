@@ -7,7 +7,7 @@ import GuildIcon from './GuildIcon'
 
 export default class RecentChanges extends React.Component {
   get changes() {
-    return this.props.changes.changes
+    return this.props.changes
   }
 
 

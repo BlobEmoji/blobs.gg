@@ -34,7 +34,7 @@ function mount_history(data) {
 
   log('changes:', changes)
 
-  ReactDOM.render(<RecentChanges changes={changes} />, document.getElementById('changestarget'))
+  ReactDOM.render(<RecentChanges changes={changes.changes} />, document.getElementById('changestarget'))
 }
 
 
