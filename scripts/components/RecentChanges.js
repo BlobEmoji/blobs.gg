@@ -16,21 +16,21 @@ export default class RecentChanges extends React.Component {
     guild.id = guild.id.toString()
     const blobs = changeSet.map((each) => {
       if (each.event === 'EMOJI_REMOVE') {
-        return (<span key={each.changed_at}>Deleted: <Emoji baseSize={32} guild={guild} {...each.emoji} /></span>)
+        return (<div className="event" key={each.changed_at}>Deleted: <Emoji baseSize={32} guild={guild} {...each.emoji} /></div>)
       } else if (each.event === 'EMOJI_CREATE') {
-        return (<span key={each.changed_at}>created: <Emoji baseSize={32} guild={guild} {...each.emoji} /> </span>)
+        return (<div className="event" key={each.changed_at} > created: <Emoji baseSize={32} guild={guild} {...each.emoji} /> </div >)
       }
       else if (each.event === 'EMOJI_RENAME') {
-        return (<span key={each.changed_at}>renamed: <Emoji baseSize={32} guild={guild} {...each.before} /> to  <Emoji baseSize={32} guild={guild} {...each.after} /> </span>)
+        return (<div className="event" key={each.changed_at}>renamed: <Emoji baseSize={32} guild={guild} {...each.before} /> to <Emoji baseSize={32} guild={guild} {...each.after} /> </div>)
       }
       else if (each.event === 'EMOJI_UPDATE') {
-        return (<span key={each.changed_at}>updated: <Emoji baseSize={32} guild={guild} {...each.before} /> to  <Emoji baseSize={32} guild={guild} {...each.after} /></span>)
+        return (<div className="event" key={each.changed_at}>updated: <Emoji baseSize={32} guild={guild} {...each.before} /> to <Emoji baseSize={32} guild={guild} {...each.after} /></div>)
       }
     })
 
-    return (<div key={key}>
-      <GuildIcon guild={guild} />
-      {guild.name}
+    return (<div className="guild" key={key}>
+      <GuildIcon guild={guild} />&nbsp;
+      {guild.name} at {new Date(changeSet[0].changed_at).toString()}
       {blobs}
     </div>)
   }
