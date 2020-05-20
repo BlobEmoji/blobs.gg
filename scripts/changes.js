@@ -40,9 +40,7 @@ function mount_history(data) {
 
 if (typeof window.fetch !== 'undefined') {
   log('Fetching data...')
-  const headers = new Headers();
-  headers.append('x-no-bigint', 'true') // TODO we wont need this in prod
-  fetch(HISTORY_ENDPOINT, { headers })
+  fetch(HISTORY_ENDPOINT)
     .then((resp) => resp.json())
     .then((history) => {
       mount_history(history)
