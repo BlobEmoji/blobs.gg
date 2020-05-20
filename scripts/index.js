@@ -6,11 +6,7 @@ import { Emojis } from './emojis'
 import Search from './components/Search'
 import { CommunityGuilds, Guilds } from './components/Guilds'
 
-const BLOBS_ENDPOINT =
-  window.location.host.endsWith('now.sh') ||
-  process.env.NODE_ENV === 'development'
-    ? 'https://blobs-gg-test-data.slc.now.sh/data.json'
-    : 'https://api.mousey.app/emoji/blobs+community-blobs'
+const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 
 function calculateEmojiCount(data) {
   let count = 0
