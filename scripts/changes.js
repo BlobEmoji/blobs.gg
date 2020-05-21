@@ -6,9 +6,7 @@ import RecentChanges from './components/RecentChanges';
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
-    process.env.NODE_ENV === 'development' ?
-    'https://api.mousey.app/v3/emoji/test/changes'
-    : 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes';
+    'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes';
 
 class Changes {
   constructor(data) {
