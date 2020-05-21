@@ -28,3 +28,7 @@ export function shuffleArray(source) {
 
   return array
 }
+
+export function titleCase(sourceString) {
+  return sourceString[0].toUpperCase() + sourceString.slice(1).toLowerCase();
+}

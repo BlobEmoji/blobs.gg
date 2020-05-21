@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import Emoji from './Emoji'
 import GuildIcon from './GuildIcon'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid'
+import { titleCase } from '../utils'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
@@ -15,43 +17,38 @@ function RenderChangeSet(props) {
 
   let guild = changeSet[0].guild
   guild.id = guild.id.toString()
-  const blobs = changeSet.map((each) => {
-    if (each.event === 'EMOJI_REMOVE') {
-      return (
-        <div className="event">
-          Deleted:
-          <Emoji baseSize={32} guild={guild} {...each.emoji} />
-        </div>
-      )
-    } else if (each.event === 'EMOJI_CREATE') {
-      return (
-        <div className="event">
-          Created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
-        </div>
-      )
-    } else if (each.event === 'EMOJI_RENAME') {
-      return (
-        <div className="event">
-          Renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
-          to <Emoji baseSize={32} guild={guild} {...each.after} />
-        </div>
-      )
-    } else if (each.event === 'EMOJI_UPDATE') {
-      return (
-        <div className="event">
-          Updated: <Emoji baseSize={32} guild={guild} {...each.before} />
-          to <Emoji baseSize={32} guild={guild} {...each.after} />
-        </div>
-      )
-    }
-    return null
 
+  const blobs = changeSet.map((each) => {
+    let emoji = each.emoji || each.before
+    let action = each.after ? 'to' : ''
+    let afterEmoji = each.after || null
+
+    return (
+      <>
+        <Grid item xs={3}>
+          {`${titleCase(each.event.split('_')[1])}d`}
+        </Grid>
+        <Grid item xs={3}>
+          <Emoji baseSize={32} guild={guild} {...emoji}/>
+        </Grid>
+        <Grid item xs={3}>
+          {action}
+        </Grid>
+        <Grid item xs={3}>
+          {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji}/> : null}
+        </Grid>
+      </>
+    )
   })
 
   return (<div className="guild">
     <GuildIcon guild={guild}/>&nbsp;
     {guild.name} at {changeSet[0].changed_at.toString()}
-    {blobs}
+    <Grid container spacing={3}>
+      <Grid container item xs={6} spacing={3}>
+        {blobs}
+      </Grid>
+    </Grid>
   </div>)
 }
 
