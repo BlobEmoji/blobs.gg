@@ -21,20 +21,20 @@ function RenderChangeSet(props) {
     } else if (each.event === 'EMOJI_CREATE') {
       return (
         <div className="event">
-          created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
+          Created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
         </div>
       )
     } else if (each.event === 'EMOJI_RENAME') {
       return (
         <div className="event">
-          renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
+          Renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
           to <Emoji baseSize={32} guild={guild} {...each.after} />
         </div>
       )
     } else if (each.event === 'EMOJI_UPDATE') {
       return (
         <div className="event">
-          updated: <Emoji baseSize={32} guild={guild} {...each.before} />
+          Updated: <Emoji baseSize={32} guild={guild} {...each.before} />
           to <Emoji baseSize={32} guild={guild} {...each.after} />
         </div>
       )
