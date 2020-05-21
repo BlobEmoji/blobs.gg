@@ -43,9 +43,9 @@ function RenderChangeSet(props) {
           to <Emoji baseSize={32} guild={guild} {...each.after} />
         </div>
       )
-    } else {
-      return null
     }
+    return null
+
   })
 
   return (<div className="guild">
