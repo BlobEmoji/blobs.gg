@@ -5,71 +5,67 @@ import Emoji from './Emoji'
 import GuildIcon from './GuildIcon'
 
 
-export default class RecentChanges extends React.Component {
-  get changes() {
-    return this.props.changes
-  }
+function RenderChangeSet(props) {
+  const { changeSet } = props
 
-
-  renderChangeSet(changeSet, key) {
-    let guild = changeSet[0].guild
-    guild.id = guild.id.toString()
-    const blobs = changeSet.map((each) => {
-      if (each.event === 'EMOJI_REMOVE') {
-        return (
-          <div className="event" key={each.changed_at}>
-            Deleted:
-            <Emoji baseSize={32} guild={guild} {...each.emoji} />
-          </div>
-        )
-      } else if (each.event === 'EMOJI_CREATE') {
-        return (
-          <div className="event" key={each.changed_at}>
-            created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
-          </div >
-        )
-      }
-      else if (each.event === 'EMOJI_RENAME') {
-        return (
-          <div className="event" key={each.changed_at}>
-            renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
-            to <Emoji baseSize={32} guild={guild} {...each.after} />
-          </div>
-        )
-      }
-      else if (each.event === 'EMOJI_UPDATE') {
-        return (
-          <div className="event" key={each.changed_at}>
-            updated: <Emoji baseSize={32} guild={guild} {...each.before} />
-             to <Emoji baseSize={32} guild={guild} {...each.after} />
-          </div>
-        )
-      }
-    })
-
-    return (<div className="guild" key={key}>
-      <GuildIcon guild={guild} />&nbsp;
-      {guild.name} at {changeSet[0].changed_at.toString()}
-      {blobs}
-    </div>)
-  }
-  render() {
-    let changeSets = []
-    for (const key in this.changes) {
-      if (this.changes.hasOwnProperty(key)) {
-        const changeSet = this.changes[key];
-        changeSets.push(this.renderChangeSet(changeSet, key))
-      }
+  let guild = changeSet[0].guild
+  guild.id = guild.id.toString()
+  const blobs = changeSet.map((each) => {
+    if (each.event === 'EMOJI_REMOVE') {
+      return (
+        <div className="event">
+          Deleted:
+          <Emoji baseSize={32} guild={guild} {...each.emoji} />
+        </div>
+      )
+    } else if (each.event === 'EMOJI_CREATE') {
+      return (
+        <div className="event">
+          created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
+        </div>
+      )
+    } else if (each.event === 'EMOJI_RENAME') {
+      return (
+        <div className="event">
+          renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
+          to <Emoji baseSize={32} guild={guild} {...each.after} />
+        </div>
+      )
+    } else if (each.event === 'EMOJI_UPDATE') {
+      return (
+        <div className="event">
+          updated: <Emoji baseSize={32} guild={guild} {...each.before} />
+          to <Emoji baseSize={32} guild={guild} {...each.after} />
+        </div>
+      )
+    } else {
+      return null
     }
+  })
 
+  return (<div className="guild">
+    <GuildIcon guild={guild}/>&nbsp;
+    {guild.name} at {changeSet[0].changed_at.toString()}
+    {blobs}
+  </div>)
+}
 
+RenderChangeSet.propTypes = {
+  changeSet: PropTypes.array.isRequired,
+}
 
-    return (<div>
-      {changeSets}
-    </div>)
-  }
+export default function RecentChanges(props) {
+  return (
+    <div>
+      {Object.keys(props.changes).map((item) => {
+        return (
+          <RenderChangeSet changeSet={props.changes[item]} key={item}/>
+        )
+      })}
+    </div>
+  )
 }
 
 RecentChanges.propTypes = {
-  changes: PropTypes.object.isRequired // TODO 
+  changes: PropTypes.object.isRequired, // TODO
 }
