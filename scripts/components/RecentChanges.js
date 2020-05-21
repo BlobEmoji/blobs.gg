@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Emoji from './Emoji'
@@ -17,6 +17,7 @@ function RenderChangeSet(props) {
 
   let guild = changeSet[0].guild
   guild.id = guild.id.toString()
+  const titleDate = new Date(changeSet[0].changed_at);
 
   const blobs = changeSet.map((each) => {
     let emoji = each.emoji || each.before
@@ -24,7 +25,7 @@ function RenderChangeSet(props) {
     let afterEmoji = each.after || null
 
     return (
-      <>
+      <Fragment key={each.changed_at}>
         <Grid item xs={3}>
           {`${titleCase(each.event.split('_')[1])}d`}
         </Grid>
@@ -37,19 +38,20 @@ function RenderChangeSet(props) {
         <Grid item xs={3}>
           {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji}/> : null}
         </Grid>
-      </>
+      </Fragment>
     )
   })
 
-  return (<div className="guild">
-    <GuildIcon guild={guild}/>&nbsp;
-    {guild.name} at {changeSet[0].changed_at.toString()}
-    <Grid container spacing={3}>
-      <Grid container item xs={6} spacing={3}>
-        {blobs}
+  return (
+    <div className="guild">
+      <GuildIcon guild={guild}/>&nbsp;
+      {guild.name} at {titleDate.toGMTString()}
+      <Grid container spacing={3}>
+        <Grid container item xs={6} spacing={3}>
+          {blobs}
+        </Grid>
       </Grid>
-    </Grid>
-  </div>)
+    </div>)
 }
 
 RenderChangeSet.propTypes = {
@@ -69,7 +71,7 @@ export default class RecentChanges extends Component {
     let changes = {}
     for (const change of historyData) {
       if (['EMOJI_CREATE', 'EMOJI_RENAME', 'EMOJI_UPDATE', 'EMOJI_REMOVE'].includes(change.event)) {
-        const date = change.changed_at = new Date(change.changed_at)
+        const date = new Date(change.changed_at)
         const key = [change.guild.id, date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()]
         changes[key] = (changes[key] ?? [])
         changes[key].push(change)
