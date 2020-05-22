@@ -17,32 +17,60 @@ export default class RecentChanges extends React.Component {
     const blobs = changeSet.map((each) => {
       if (each.event === 'EMOJI_REMOVE') {
         return (
-          <div className="event" key={each.changed_at}>
-            Deleted:
-            <Emoji baseSize={32} guild={guild} {...each.emoji} />
-          </div>
+          <tr className="event" key={each.changed_at}>
+            <td>
+              Deleted:
+            </td>
+            <td>
+              <Emoji baseSize={32} guild={guild} {...each.emoji} />
+            </td>
+          </tr>
         )
       } else if (each.event === 'EMOJI_CREATE') {
         return (
-          <div className="event" key={each.changed_at}>
-            created: <Emoji baseSize={32} guild={guild} {...each.emoji} />
-          </div >
+          <tr className="event" key={each.changed_at}>
+            <td>
+              created:
+            </td>
+            <td>
+              <Emoji baseSize={32} guild={guild} {...each.emoji} />
+            </td>
+          </tr>
         )
       }
       else if (each.event === 'EMOJI_RENAME') {
         return (
-          <div className="event" key={each.changed_at}>
-            renamed: <Emoji baseSize={32} guild={guild} {...each.before} />
-            to <Emoji baseSize={32} guild={guild} {...each.after} />
-          </div>
+          <tr className="event" key={each.changed_at}>
+            <td>
+              renamed:
+            </td>
+            <td>
+              <Emoji baseSize={32} guild={guild} {...each.before} />
+            </td>
+            <td>
+              to
+            </td>
+            <td>
+              <Emoji baseSize={32} guild={guild} {...each.after} />
+            </td>
+          </tr>
         )
       }
       else if (each.event === 'EMOJI_UPDATE') {
         return (
-          <div className="event" key={each.changed_at}>
-            updated: <Emoji baseSize={32} guild={guild} {...each.before} />
-             to <Emoji baseSize={32} guild={guild} {...each.after} />
-          </div>
+          <tr className="event" key={each.changed_at}>
+            <td>
+              updated:
+            </td>
+            <td>
+              <Emoji baseSize={32} guild={guild} {...each.before} />
+            </td>
+            <td>
+              to
+            </td>
+            <td><Emoji baseSize={32} guild={guild} {...each.after} />
+            </td>
+          </tr>
         )
       }
     })
@@ -50,7 +78,9 @@ export default class RecentChanges extends React.Component {
     return (<div className="guild" key={key}>
       <GuildIcon guild={guild} />&nbsp;
       {guild.name} at {changeSet[0].changed_at.toString()}
-      {blobs}
+      <table>
+        {blobs}
+      </table>
     </div>)
   }
   render() {
