@@ -76,10 +76,16 @@ export default class RecentChanges extends React.Component {
     })
 
     return (<div className="guild" key={key}>
-      <GuildIcon guild={guild} />&nbsp;
-      {guild.name} at {changeSet[0].changed_at.toString()}
+      <h3>
+        <GuildIcon guild={guild} />
+        <span className="name" title={guild.name}>
+          {guild.name} at {changeSet[0].changed_at.toString()}
+        </span>
+      </h3>
       <table>
-        {blobs}
+        <tbody>
+          {blobs}
+        </tbody>
       </table>
     </div>)
   }
