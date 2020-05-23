@@ -124,13 +124,17 @@ export default class RecentChanges extends Component {
     }
 
     return (
-      <Grid container spacing={3}>
-        {Object.keys(this.state.changes).map((item) => {
-          return (
-            <RenderChangeSet changeSet={this.state.changes[item]} key={item}/>
-          )
-        })}
-      </Grid>
+      <>
+        <h2>Global Blob Change Log</h2>
+        <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
+        <Grid container spacing={3}>
+          {Object.keys(this.state.changes).map((item) => {
+            return (
+              <RenderChangeSet changeSet={this.state.changes[item]} key={item}/>
+            )
+          })}
+        </Grid>
+      </>
     )
   }
 }
