@@ -12,10 +12,19 @@ import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } f
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
+import ThemeProvider from '@material-ui/styles/ThemeProvider'
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
   'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+})
 
 
 function RenderChangeSet(props) {
@@ -125,7 +134,7 @@ export default class RecentChanges extends Component {
     }
 
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <h2>Global Blob Change Log</h2>
         <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
         <Grid container spacing={3}>
@@ -135,7 +144,7 @@ export default class RecentChanges extends Component {
             )
           })}
         </Grid>
-      </>
+      </ThemeProvider>
     )
   }
 }
