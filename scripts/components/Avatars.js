@@ -6,8 +6,6 @@ import React from 'react'
 export function GuildAvatar(props) {
   const { name, src } = props
   const { id, icon } = src
-  console.log(name)
-  console.log(src)
 
   return (
     <Avatar
@@ -21,7 +19,7 @@ export function GuildAvatar(props) {
 
 GuildAvatar.propTypes = {
   name: PropTypes.string.isRequired,
-  src: PropTypes.object.isRequired,
+  src: PropTypes.object.isRequired
 }
 
 export function RemoveAvatar() {
