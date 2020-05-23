@@ -6,12 +6,16 @@
   vertical-align: bottom;
 }
 
-.event td:nth-child(3) {
+.event td:nth-child(4) {
   // give text in the middle of a set (to, typicly) a bit more s p a c e
   padding-left: .5rem;
   padding-right: .5rem;
 }
-.event td:nth-child(1) {
+.event td:nth-child(2) {
   // allow the first word to have some space on its side too 
   padding-right: 1rem;
+}
+.event-type-icon {
+  height: 32px;
+  width: 32px;
 }

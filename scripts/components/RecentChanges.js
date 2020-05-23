@@ -19,6 +19,9 @@ export default class RecentChanges extends React.Component {
         return (
           <tr className="event" key={each.changed_at}>
             <td>
+              <img className="event-type-icon" src="https://cdn.discordapp.com/emojis/567088349484023818.png?v=1" />
+            </td>
+            <td>
               Deleted:
             </td>
             <td>
@@ -29,6 +32,9 @@ export default class RecentChanges extends React.Component {
       } else if (each.event === 'EMOJI_CREATE') {
         return (
           <tr className="event" key={each.changed_at}>
+            <td>
+              <img className="event-type-icon" src="https://cdn.discordapp.com/emojis/567088336166977536.png?v=1" />
+            </td>
             <td>
               created:
             </td>
@@ -42,16 +48,23 @@ export default class RecentChanges extends React.Component {
         return (
           <tr className="event" key={each.changed_at}>
             <td>
+              <img className="event-type-icon" src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg" />
+            </td>
+            <td>
               renamed:
             </td>
             <td>
-              <Emoji baseSize={32} guild={guild} {...each.before} />
-            </td>
-            <td>
-              to
-            </td>
-            <td>
               <Emoji baseSize={32} guild={guild} {...each.after} />
+            </td>
+            <td>
+              from
+            </td>
+            <td>
+              <span>
+                <pre>
+                  :{each.before.name}:
+                </pre>
+              </span>
             </td>
           </tr>
         )
@@ -60,17 +73,20 @@ export default class RecentChanges extends React.Component {
         return (
           <tr className="event" key={each.changed_at}>
             <td>
+              <img className="event-type-icon" src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg" />
+            </td>
+            <td>
               updated:
             </td>
             <td>
-              <Emoji baseSize={32} guild={guild} {...each.before} />
+              <Emoji baseSize={32} guild={guild} {...each.after} />
             </td>
             <td>
-              to
+              from
             </td>
-            <td><Emoji baseSize={32} guild={guild} {...each.after} />
+            <td><Emoji baseSize={32} guild={guild} {...each.before} />
             </td>
-          </tr>
+          </tr >
         )
       }
     })
