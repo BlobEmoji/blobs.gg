@@ -14,17 +14,11 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
   'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
-
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-})
 
 
 function RenderChangeSet(props) {
@@ -96,7 +90,40 @@ RenderChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
 }
 
-export default class RecentChanges extends Component {
+function RecentChanges(props) {
+  const { changes } = props
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  )
+
+  return (
+    <ThemeProvider theme={theme}>
+      <h2>Global Blob Change Log</h2>
+      <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
+      <Grid container spacing={3}>
+        {Object.keys(changes).map((item) => {
+          return (
+            <RenderChangeSet changeSet={changes[item]} key={item}/>
+          )
+        })}
+      </Grid>
+    </ThemeProvider>
+  )
+}
+
+RecentChanges.propTypes = {
+  changes: PropTypes.object.isRequired,
+}
+
+export default class RecentChangesWrapper extends Component {
   constructor(props) {
     super(props)
 
@@ -127,24 +154,14 @@ export default class RecentChanges extends Component {
   render() {
     const { changes } = this.state
 
-    if (changes.length === 0) {
+    if (Object.keys(changes).length === 0) {
       return (
         <CircularProgress/>
       )
     }
 
     return (
-      <ThemeProvider theme={theme}>
-        <h2>Global Blob Change Log</h2>
-        <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
-        <Grid container spacing={3}>
-          {Object.keys(this.state.changes).map((item) => {
-            return (
-              <RenderChangeSet changeSet={this.state.changes[item]} key={item}/>
-            )
-          })}
-        </Grid>
-      </ThemeProvider>
+      <RecentChanges changes={changes}/>
     )
   }
 }
