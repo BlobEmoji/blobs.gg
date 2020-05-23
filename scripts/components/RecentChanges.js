@@ -6,7 +6,7 @@ import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
-import { titleCase } from '../utils'
+import { DateTimeFormatter, titleCase } from '../utils'
 import Emoji from './Emoji'
 import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from './Avatars'
 import Card from '@material-ui/core/Card'
@@ -68,7 +68,8 @@ function RenderChangeSet(props) {
       <Card>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild}/>}
-          title={`${guild.name} at ${titleDate.toGMTString()}`}
+          title={guild.name}
+          subheader={DateTimeFormatter.format(titleDate)}
         />
         <TableContainer>
           <Table>
