@@ -30,3 +30,12 @@ export function shuffleArray(source) {
 
   return array
 }
+
+
+export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: 'numeric'
+})

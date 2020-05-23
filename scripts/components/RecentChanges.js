@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Emoji from './Emoji'
 import GuildIcon from './GuildIcon'
+import { DateTimeFormatter } from '../utils';
 
 
 export default class RecentChanges extends React.Component {
@@ -95,7 +96,7 @@ export default class RecentChanges extends React.Component {
       <h3>
         <GuildIcon guild={guild} />
         <span className="name" title={guild.name}>
-          {guild.name} at {changeSet[0].changed_at.toString()}
+          {guild.name} on {DateTimeFormatter.format(changeSet[0].changed_at)}
         </span>
       </h3>
       <table>
