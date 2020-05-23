@@ -1,11 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import Emoji from './Emoji'
-import GuildIcon from './GuildIcon'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
+import TableContainer from '@material-ui/core/TableContainer'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
 import { titleCase } from '../utils'
+import Emoji from './Emoji'
+import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from './Avatars'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import Grid from '@material-ui/core/Grid'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
@@ -15,99 +21,65 @@ const HISTORY_ENDPOINT =
 function RenderChangeSet(props) {
   const { changeSet } = props
 
-  renderChangeSet(changeSet, key) {
-    let guild = changeSet[0].guild
-    guild.id = guild.id.toString()
-    const blobs = changeSet.map((each) => {
-      if (each.event === 'EMOJI_REMOVE') {
-        return (
-          <tr className="event" key={each.changed_at}>
-            <td>
-              <img className="event-type-icon" src="https://cdn.discordapp.com/emojis/567088349484023818.png?v=1" />
-            </td>
-            <td>
-              Deleted:
-            </td>
-            <td>
-              <Emoji baseSize={32} guild={guild} {...each.emoji} />
-            </td>
-          </tr>
-        )
-      } else if (each.event === 'EMOJI_CREATE') {
-        return (
-          <tr className="event" key={each.changed_at}>
-            <td>
-              <img className="event-type-icon" src="https://cdn.discordapp.com/emojis/567088336166977536.png?v=1" />
-            </td>
-            <td>
-              created:
-            </td>
-            <td>
-              <Emoji baseSize={32} guild={guild} {...each.emoji} />
-            </td>
-          </tr>
-        )
-      }
-      else if (each.event === 'EMOJI_RENAME') {
-        return (
-          <tr className="event" key={each.changed_at}>
-            <td>
-              <img className="event-type-icon" src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg" />
-            </td>
-            <td>
-              renamed:
-            </td>
-            <td>
-              <Emoji baseSize={32} guild={guild} {...each.after} />
-            </td>
-            <td>
-              from
-            </td>
-            <td>
-              <span>
-                <pre>
-                  :{each.before.name}:
-                </pre>
-              </span>
-            </td>
-          </tr>
-        )
-      }
-      else if (each.event === 'EMOJI_UPDATE') {
-        return (
-          <tr className="event" key={each.changed_at}>
-            <td>
-              <img className="event-type-icon" src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg" />
-            </td>
-            <td>
-              updated:
-            </td>
-            <td>
-              <Emoji baseSize={32} guild={guild} {...each.after} />
-            </td>
-            <td>
-              from
-            </td>
-            <td><Emoji baseSize={32} guild={guild} {...each.before} />
-            </td>
-          </tr >
-        )
-      }
-    })
+  let guild = changeSet[0].guild
+  guild.id = guild.id.toString()
 
-    return (<div className="guild" key={key}>
-      <h3>
-        <GuildIcon guild={guild} />
-        <span className="name" title={guild.name}>
-          {guild.name} at {changeSet[0].changed_at.toString()}
-        </span>
-      </h3>
-      <table>
-        <tbody>
-          {blobs}
-        </tbody>
-      </table>
-    </div>)
+  const titleDate = new Date(changeSet[0].changed_at)
+
+  const blobs = changeSet.map((each) => {
+    let emoji = each.emoji || each.before
+    let action = each.after ? 'to' : ''
+    let afterEmoji = each.after || null
+    let eventIcon
+
+    if (each.event === 'EMOJI_REMOVE') {
+      eventIcon = <RemoveAvatar/>
+    } else if (each.event === 'EMOJI_CREATE') {
+      eventIcon = <CreateAvatar/>
+    } else if (each.event === 'EMOJI_RENAME') {
+      eventIcon = <RenameAvatar/>
+    } else if (each.event === 'EMOJI_UPDATE') {
+      eventIcon = <UpdateAvatar/>
+    }
+
+    return (
+      <TableRow key={each.changed_at}>
+        <TableCell>
+          {eventIcon}
+        </TableCell>
+        <TableCell>
+          {`${titleCase(each.event.split('_')[1])}d`}
+        </TableCell>
+        <TableCell>
+          <Emoji baseSize={32} guild={guild} {...emoji}/>
+        </TableCell>
+        <TableCell>
+          {action}
+        </TableCell>
+        <TableCell>
+          {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji}/> : null}
+        </TableCell>
+      </TableRow>
+    )
+  })
+
+  return (
+    <Grid item xs={12} md={6}>
+      <Card>
+        <CardHeader
+          avatar={<GuildAvatar name={guild.name} src={guild}/>}
+          title={`${guild.name} at ${titleDate.toGMTString()}`}
+        />
+        <TableContainer>
+          <Table>
+            <TableBody>
+              {blobs}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </Grid>
+  )
 }
 
 RenderChangeSet.propTypes = {
@@ -152,13 +124,13 @@ export default class RecentChanges extends Component {
     }
 
     return (
-      <div>
+      <Grid container spacing={3}>
         {Object.keys(this.state.changes).map((item) => {
           return (
             <RenderChangeSet changeSet={this.state.changes[item]} key={item}/>
           )
         })}
-      </div>
+      </Grid>
     )
   }
 }
