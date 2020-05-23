@@ -25,7 +25,7 @@
     "proseWrap": "always"
   },
   "scripts": {
-    "start": "parcel index.html changes.html -p 3001",
+    "start": "parcel index.html changes.html",
     "build": "parcel build index.html changes.html --detailed-report"
   },
   "dependencies": {
