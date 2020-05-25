@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -12,9 +11,7 @@ import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } f
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
-import ThemeProvider from '@material-ui/styles/ThemeProvider'
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
@@ -90,39 +87,6 @@ RenderChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
 }
 
-function RecentChanges(props) {
-  const { changes } = props
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
-        },
-      }),
-    [prefersDarkMode],
-  )
-
-  return (
-    <ThemeProvider theme={theme}>
-      <h2>Global Blob Change Log</h2>
-      <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
-      <Grid container spacing={3}>
-        {Object.keys(changes).map((item) => {
-          return (
-            <RenderChangeSet changeSet={changes[item]} key={item}/>
-          )
-        })}
-      </Grid>
-    </ThemeProvider>
-  )
-}
-
-RecentChanges.propTypes = {
-  changes: PropTypes.object.isRequired,
-}
-
 export default class RecentChangesWrapper extends Component {
   constructor(props) {
     super(props)
@@ -161,7 +125,17 @@ export default class RecentChangesWrapper extends Component {
     }
 
     return (
-      <RecentChanges changes={changes}/>
+      <>
+        <h2>Global Blob Change Log</h2>
+        <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
+        <Grid container spacing={3}>
+          {Object.keys(changes).map((item) => {
+            return (
+              <RenderChangeSet changeSet={changes[item]} key={item}/>
+            )
+          })}
+        </Grid>
+      </>
     )
   }
 }
