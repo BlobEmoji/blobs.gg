@@ -17,7 +17,10 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+const HISTORY_ENDPOINT = window.location.host.endsWith('now.sh') ||
+  process.env.NODE_ENV === 'development'
+  ? 'https://api.mousey.app/v3/emoji/test/changes'
+  : 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
 
 
 function SkeletalLoading() {
