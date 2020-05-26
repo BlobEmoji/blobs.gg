@@ -15,7 +15,8 @@
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
     "@material-ui/core": "^4.9.14",
-    "@material-ui/lab": "^4.0.0-alpha.54"
+    "@material-ui/lab": "^4.0.0-alpha.54",
+    "@material-ui/icons": "^4.9.1"
   },
   "prettier": {
     "semi": false,

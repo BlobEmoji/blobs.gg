@@ -12,6 +12,10 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
 import MaterialEmoji from './MaterialEmoji'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
 
@@ -26,19 +30,19 @@ function SkeletalLoading() {
     return (
       <TableRow key={place}>
         <TableCell>
-          <Skeleton variant="circle" width={40} height={40} />
+          <Skeleton variant="circle" width={40} height={40}/>
         </TableCell>
         <TableCell>
-          <Skeleton height={39} width={80} />
+          <Skeleton height={39} width={80}/>
         </TableCell>
         <TableCell>
-          <Skeleton variant="rect" width={32} height={32} />
+          <Skeleton variant="rect" width={32} height={32}/>
         </TableCell>
         <TableCell>
-          {simple ? <Skeleton height={39} width="100%" /> : null}
+          {simple ? <Skeleton height={39} width="100%"/> : null}
         </TableCell>
         <TableCell>
-          {simple ? <Skeleton variant="circle" width={40} height={40} /> : null}
+          {simple ? <Skeleton variant="circle" width={40} height={40}/> : null}
         </TableCell>
       </TableRow>
     )
@@ -48,9 +52,9 @@ function SkeletalLoading() {
     <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
-          avatar={<Skeleton variant="circle" width={40} height={40} />}
-          title={<Skeleton height={22} width="80%" />}
-          subheader={<Skeleton height={22} width="60%" />}
+          avatar={<Skeleton variant="circle" width={40} height={40}/>}
+          title={<Skeleton height={22} width="80%"/>}
+          subheader={<Skeleton height={22} width="60%"/>}
         />
         <TableContainer>
           <Table>
@@ -65,56 +69,116 @@ function SkeletalLoading() {
 }
 
 
-function RenderChangeSet(props) {
-  const { changeSet } = props
+function eventProcessing(each) {
+  let emoji = each.emoji || each.before
+  let action = each.after ? 'to' : ''
+  let afterEmoji = each.after || null
+  let eventIcon
 
+  if (each.event === 'EMOJI_REMOVE') {
+    eventIcon = <RemoveAvatar/>
+  } else if (each.event === 'EMOJI_CREATE') {
+    eventIcon = <CreateAvatar/>
+  } else if (each.event === 'EMOJI_RENAME') {
+    eventIcon = <RenameAvatar/>
+  } else if (each.event === 'EMOJI_UPDATE') {
+    eventIcon = <UpdateAvatar/>
+  }
+
+  return { emoji, action, afterEmoji, eventIcon }
+}
+
+
+function TableGen(props) {
+  const { eventIcon, eventName, guild, emoji, action, afterEmoji } = props
+
+  return (
+    <TableRow>
+      <TableCell>
+        {eventIcon}
+      </TableCell>
+      <TableCell>
+        {`${titleCase(eventName)}d`}
+      </TableCell>
+      <TableCell>
+        <MaterialEmoji baseSize={32} guild={guild} {...emoji} />
+      </TableCell>
+      <TableCell>
+        {action}
+      </TableCell>
+      <TableCell>
+        {afterEmoji ? <MaterialEmoji baseSize={32} guild={guild} {...afterEmoji} /> : null}
+      </TableCell>
+    </TableRow>
+  )
+}
+
+TableGen.propTypes = {
+  eventIcon: PropTypes.object.isRequired,
+  eventName: PropTypes.string.isRequired,
+  guild: PropTypes.object.isRequired,
+  emoji: PropTypes.object.isRequired,
+  action: PropTypes.string.isRequired,
+  afterEmoji: PropTypes.object,
+}
+
+
+function RenderChangeSet(props) {
+  let { changeSet } = props
+  const titleDate = new Date(changeSet[0].changed_at)
+  let moreChangeSet
+  let moreTest = false
+  let moreBlobs = null
   let guild = changeSet[0].guild
+
   guild.id = guild.id.toString()
 
-  const titleDate = new Date(changeSet[0].changed_at)
+  if (changeSet.length > 5) {
+    moreChangeSet = changeSet.slice(5)
+    changeSet = changeSet.slice(0, 5)
+    moreTest = true
+
+  }
 
   const blobs = changeSet.map((each) => {
-    let emoji = each.emoji || each.before
-    let action = each.after ? 'to' : ''
-    let afterEmoji = each.after || null
-    let eventIcon
-
-    if (each.event === 'EMOJI_REMOVE') {
-      eventIcon = <RemoveAvatar />
-    } else if (each.event === 'EMOJI_CREATE') {
-      eventIcon = <CreateAvatar />
-    } else if (each.event === 'EMOJI_RENAME') {
-      eventIcon = <RenameAvatar />
-    } else if (each.event === 'EMOJI_UPDATE') {
-      eventIcon = <UpdateAvatar />
-    }
+    const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
 
     return (
-      <TableRow key={each.changed_at}>
-        <TableCell>
-          {eventIcon}
-        </TableCell>
-        <TableCell>
-          {`${titleCase(each.event.split('_')[1])}d`}
-        </TableCell>
-        <TableCell>
-          <MaterialEmoji baseSize={32} guild={guild} {...emoji} />
-        </TableCell>
-        <TableCell>
-          {action}
-        </TableCell>
-        <TableCell>
-          {afterEmoji ? <MaterialEmoji baseSize={32} guild={guild} {...afterEmoji} /> : null}
-        </TableCell>
-      </TableRow>
+      <TableGen
+        key={each.changed_at}
+        eventIcon={eventIcon}
+        eventName={each.event.split('_')[1]}
+        guild={guild}
+        emoji={emoji}
+        action={action}
+        afterEmoji={afterEmoji}
+      />
     )
   })
+
+  if (moreTest) {
+    moreBlobs = moreChangeSet.map((each) => {
+      const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
+
+      return (
+        <TableGen
+          key={each.changed_at}
+          eventIcon={eventIcon}
+          eventName={each.event.split('_')[1]}
+          guild={guild}
+          emoji={emoji}
+          action={action}
+          afterEmoji={afterEmoji}
+        />
+      )
+    })
+  }
 
   return (
     <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
-          avatar={<GuildAvatar name={guild.name} src={guild} />}
+          avatar={<GuildAvatar name={guild.name} src={guild}/>}
           title={guild.name}
           subheader={DateTimeFormatter.format(titleDate)}
         />
@@ -124,6 +188,21 @@ function RenderChangeSet(props) {
               {blobs}
             </TableBody>
           </Table>
+          {moreTest &&
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon/>}
+              aria-controls="Panel Controls">
+              {`See ${moreChangeSet.length} more changes`}
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Table>
+                <TableBody>
+                  {moreBlobs}
+                </TableBody>
+              </Table>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>}
         </TableContainer>
       </Card>
     </Grid>
@@ -172,7 +251,7 @@ export default class RecentChangesWrapper extends Component {
         <>
           {Object.keys(randomListAmount).map((item) => {
             return (
-              <SkeletalLoading key={`${item}-skeleton`} />
+              <SkeletalLoading key={`${item}-skeleton`}/>
             )
           })}
         </>
@@ -183,7 +262,7 @@ export default class RecentChangesWrapper extends Component {
       <>
         {Object.keys(changes).map((item) => {
           return (
-            <RenderChangeSet changeSet={changes[item]} key={item} />
+            <RenderChangeSet changeSet={changes[item]} key={item}/>
           )
         })}
       </>
