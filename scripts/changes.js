@@ -1,22 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import RecentChangesWrapper from './components/RecentChanges'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import Grid from '@material-ui/core/Grid'
 
 function App() {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
+          type: 'dark',
         },
       }),
-    [prefersDarkMode]
+    [true]
   )
 
   return (
