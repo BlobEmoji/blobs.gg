@@ -13,9 +13,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
 
-const HISTORY_ENDPOINT =
-  window.location.host.endsWith('now.sh') ||
-  'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
 
 
 function SkeletalLoading() {
@@ -28,19 +26,19 @@ function SkeletalLoading() {
     return (
       <TableRow key={place}>
         <TableCell>
-          <Skeleton variant="circle" width={40} height={40}/>
+          <Skeleton variant="circle" width={40} height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton height={39} width={80}/>
+          <Skeleton height={39} width={80} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="rect" width={32} height={32}/>
+          <Skeleton variant="rect" width={32} height={32} />
         </TableCell>
         <TableCell>
-          {simple ? <Skeleton height={39} width="100%"/> : null}
+          {simple ? <Skeleton height={39} width="100%" /> : null}
         </TableCell>
         <TableCell>
-          {simple ? <Skeleton variant="circle" width={40} height={40}/> : null}
+          {simple ? <Skeleton variant="circle" width={40} height={40} /> : null}
         </TableCell>
       </TableRow>
     )
@@ -50,9 +48,9 @@ function SkeletalLoading() {
     <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
-          avatar={<Skeleton variant="circle" width={40} height={40}/>}
-          title={<Skeleton height={22} width="80%"/>}
-          subheader={<Skeleton height={22} width="60%"/>}
+          avatar={<Skeleton variant="circle" width={40} height={40} />}
+          title={<Skeleton height={22} width="80%" />}
+          subheader={<Skeleton height={22} width="60%" />}
         />
         <TableContainer>
           <Table>
@@ -82,13 +80,13 @@ function RenderChangeSet(props) {
     let eventIcon
 
     if (each.event === 'EMOJI_REMOVE') {
-      eventIcon = <RemoveAvatar/>
+      eventIcon = <RemoveAvatar />
     } else if (each.event === 'EMOJI_CREATE') {
-      eventIcon = <CreateAvatar/>
+      eventIcon = <CreateAvatar />
     } else if (each.event === 'EMOJI_RENAME') {
-      eventIcon = <RenameAvatar/>
+      eventIcon = <RenameAvatar />
     } else if (each.event === 'EMOJI_UPDATE') {
-      eventIcon = <UpdateAvatar/>
+      eventIcon = <UpdateAvatar />
     }
 
     return (
@@ -100,13 +98,13 @@ function RenderChangeSet(props) {
           {`${titleCase(each.event.split('_')[1])}d`}
         </TableCell>
         <TableCell>
-          <Emoji baseSize={32} guild={guild} {...emoji}/>
+          <Emoji baseSize={32} guild={guild} {...emoji} />
         </TableCell>
         <TableCell>
           {action}
         </TableCell>
         <TableCell>
-          {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji}/> : null}
+          {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji} /> : null}
         </TableCell>
       </TableRow>
     )
@@ -116,7 +114,7 @@ function RenderChangeSet(props) {
     <Grid item xs={12} md={6}>
       <Card>
         <CardHeader
-          avatar={<GuildAvatar name={guild.name} src={guild}/>}
+          avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
           subheader={DateTimeFormatter.format(titleDate)}
         />
@@ -174,7 +172,7 @@ export default class RecentChangesWrapper extends Component {
         <>
           {Object.keys(randomListAmount).map((item) => {
             return (
-              <SkeletalLoading key={`${item}-skeleton`}/>
+              <SkeletalLoading key={`${item}-skeleton`} />
             )
           })}
         </>
@@ -185,7 +183,7 @@ export default class RecentChangesWrapper extends Component {
       <>
         {Object.keys(changes).map((item) => {
           return (
-            <RenderChangeSet changeSet={changes[item]} key={item}/>
+            <RenderChangeSet changeSet={changes[item]} key={item} />
           )
         })}
       </>
