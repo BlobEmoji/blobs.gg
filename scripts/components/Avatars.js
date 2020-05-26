@@ -45,7 +45,7 @@ export function RenameAvatar() {
   return (
     <Avatar
       alt="Renamed"
-      src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg"
+      src="https://discordapp.com/assets/b37d783fa2330771124219f7f13f2f31.svg"
       variant="square"
     />
   )
