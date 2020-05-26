@@ -6,12 +6,12 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import { DateTimeFormatter, titleCase } from '../utils'
-import Emoji from './Emoji'
 import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from './Avatars'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 import Skeleton from '@material-ui/lab/Skeleton'
+import MaterialEmoji from './MaterialEmoji'
 
 const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
 
@@ -98,13 +98,13 @@ function RenderChangeSet(props) {
           {`${titleCase(each.event.split('_')[1])}d`}
         </TableCell>
         <TableCell>
-          <Emoji baseSize={32} guild={guild} {...emoji} />
+          <MaterialEmoji baseSize={32} guild={guild} {...emoji} />
         </TableCell>
         <TableCell>
           {action}
         </TableCell>
         <TableCell>
-          {afterEmoji ? <Emoji baseSize={32} guild={guild} {...afterEmoji} /> : null}
+          {afterEmoji ? <MaterialEmoji baseSize={32} guild={guild} {...afterEmoji} /> : null}
         </TableCell>
       </TableRow>
     )
