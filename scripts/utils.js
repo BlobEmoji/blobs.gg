@@ -30,7 +30,7 @@ export function shuffleArray(source) {
 }
 
 export function titleCase(sourceString) {
-  return sourceString[0].toUpperCase() + sourceString.slice(1).toLowerCase();
+  return sourceString[0].toUpperCase() + sourceString.slice(1).toLowerCase()
 }
 
 export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
@@ -38,5 +38,5 @@ export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
   month: 'long',
   year: 'numeric',
-  hour: 'numeric'
+  hour: 'numeric',
 })

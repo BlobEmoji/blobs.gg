@@ -17,15 +17,14 @@ function emojiUrl(id, extension, size) {
   return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`
 }
 
-export default function MaterialEmoji(
-  {
-    id,
-    animated,
-    name,
-    guild,
-    baseSize = 64,
-    showGuild = false,
-  }) {
+export default function MaterialEmoji({
+  id,
+  animated,
+  name,
+  guild,
+  baseSize = 64,
+  showGuild = false,
+}) {
   const extension = animated ? 'gif' : 'png'
   const classes = useStyles()
   let alt = `:${name}:`

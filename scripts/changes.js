@@ -16,18 +16,21 @@ function App() {
           type: prefersDarkMode ? 'dark' : 'light',
         },
       }),
-    [prefersDarkMode],
+    [prefersDarkMode]
   )
 
   return (
     <ThemeProvider theme={theme}>
       <h2>Global Blob Change Log</h2>
-      <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
+      <p>
+        This page tracks the changes of all blobs in any of our partnered
+        servers.
+      </p>
       <Grid container spacing={3}>
-        <RecentChangesWrapper/>
+        <RecentChangesWrapper />
       </Grid>
     </ThemeProvider>
   )
 }
 
-ReactDOM.render(<App/>, document.getElementById('changestarget'))
+ReactDOM.render(<App />, document.getElementById('changestarget'))
