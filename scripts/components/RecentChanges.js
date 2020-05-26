@@ -252,6 +252,38 @@ export default class RecentChangesWrapper extends Component {
     return changes
   }
 
+  async fetchMoreChanges() {
+    this.setState({ fetching: true })
+    const response = await fetch(
+      `${HISTORY_ENDPOINT}?before=${this.state.earliest}`
+    )
+    const json = await response.json()
+
+    if (json.length === 0) {
+      // catch end of data stream, this leaves fetching true, preventing any more requests
+      return
+    }
+
+    let transformed = this.historyTransform(json)
+    let merged = this.state.changes
+    for (const key in transformed) {
+      if (transformed.hasOwnProperty(key)) {
+        const changeSet = transformed[key]
+        if (merged.hasOwnProperty(key)) {
+          merged[key].push(...changeSet)
+        } else {
+          merged[key] = changeSet
+        }
+      }
+    }
+
+    this.setState({
+      changes: merged,
+      earliest: json[json.length - 1].changed_at,
+      fetching: false,
+    })
+  }
+
   listener = async () => {
     // The total scroll height of the page, minus the height of the screen.
     const ending = document.body.scrollHeight - window.innerHeight
@@ -262,35 +294,7 @@ export default class RecentChangesWrapper extends Component {
       ending - window.scrollY <= window.innerHeight / 2 &&
       !this.state.fetching
     ) {
-      this.setState({ fetching: true })
-      const response = await fetch(
-        `${HISTORY_ENDPOINT}?before=${this.state.earliest}`
-      )
-      const json = await response.json()
-
-      if (json.length === 0) {
-        // catch end of data stream, this leaves fetching true, preventing any more requests
-        return
-      }
-
-      let transformed = this.historyTransform(json)
-      let merged = this.state.changes
-      for (const key in transformed) {
-        if (transformed.hasOwnProperty(key)) {
-          const changeSet = transformed[key]
-          if (merged.hasOwnProperty(key)) {
-            merged[key].push(...changeSet)
-          } else {
-            merged[key] = changeSet
-          }
-        }
-      }
-
-      this.setState({
-        changes: merged,
-        earliest: json[json.length - 1].changed_at,
-        fetching: false,
-      })
+      this.fetchMoreChanges()
     }
   }
   componentDidMount = async () => {
@@ -301,6 +305,9 @@ export default class RecentChangesWrapper extends Component {
       earliest: json[json.length - 1].changed_at,
     })
     window.addEventListener('scroll', this.listener)
+    if (document.body.scrollHeight < window.innerHeight) {
+      this.fetchMoreChanges()
+    }
   }
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.listener)
