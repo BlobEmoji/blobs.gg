@@ -4,6 +4,7 @@ import RecentChangesWrapper from './components/RecentChanges'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
+import Grid from '@material-ui/core/Grid'
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
@@ -20,7 +21,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RecentChangesWrapper/>
+      <h2>Global Blob Change Log</h2>
+      <p>This page tracks the changes of all blobs in any of our partnered servers.</p>
+      <Grid container spacing={3}>
+        <RecentChangesWrapper/>
+      </Grid>
     </ThemeProvider>
   )
 }
