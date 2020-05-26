@@ -294,7 +294,7 @@ export default class RecentChangesWrapper extends Component {
       ending - window.scrollY <= window.innerHeight / 2 &&
       !this.state.fetching
     ) {
-      this.fetchMoreChanges()
+      await this.fetchMoreChanges()
     }
   }
   componentDidMount = async () => {
@@ -305,8 +305,12 @@ export default class RecentChangesWrapper extends Component {
       earliest: json[json.length - 1].changed_at,
     })
     window.addEventListener('scroll', this.listener)
-    if (document.body.scrollHeight < window.innerHeight) {
-      this.fetchMoreChanges()
+    while (
+      document.body.scrollHeight < window.innerHeight &&
+      !this.state.fetching
+    ) {
+      // eslint-disable-next-line no-await-in-loop
+      await this.fetchMoreChanges()
     }
   }
   componentWillUnmount = () => {
