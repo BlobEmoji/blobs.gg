@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
@@ -22,6 +22,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { scrollListener } from '../hooks'
+import { log } from '../utils'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
@@ -246,15 +248,63 @@ export default class RecentChangesWrapper extends Component {
         changes[key].push(change)
       }
     }
-    this.setState({ changes: changes })
+
+    return changes
   }
 
+  listener = async () => {
+    // The total scroll height of the page, minus the height of the screen.
+    const ending = document.body.scrollHeight - window.innerHeight
+
+    // `window.scrollY` refers to the distance from the top of the page of
+    // the upper border of the viewport.
+    if (
+      ending - window.scrollY <= window.innerHeight / 2 &&
+      !this.state.fetching
+    ) {
+      this.setState({ fetching: true })
+      const response = await fetch(
+        `${HISTORY_ENDPOINT}?before=${this.state.earliest}`
+      )
+      const json = await response.json()
+
+      if (json.length === 0) {
+        // catch end of data stream, this leaves fetching true, preventing any more requests
+        return
+      }
+
+      let transformed = this.historyTransform(json)
+      let merged = this.state.changes
+      for (const key in transformed) {
+        if (transformed.hasOwnProperty(key)) {
+          const changeSet = transformed[key]
+          if (merged.hasOwnProperty(key)) {
+            merged[key].push(...changeSet)
+          } else {
+            merged[key] = changeSet
+          }
+        }
+      }
+
+      this.setState({
+        changes: merged,
+        earliest: json[json.length - 1].changed_at,
+        fetching: false,
+      })
+    }
+  }
   componentDidMount = async () => {
     const response = await fetch(HISTORY_ENDPOINT)
     const json = await response.json()
-    this.historyTransform(json)
+    this.setState({
+      changes: this.historyTransform(json),
+      earliest: json[json.length - 1].changed_at,
+    })
+    window.addEventListener('scroll', this.listener)
   }
-
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.listener)
+  }
   render() {
     const { changes } = this.state
     const randomArrayLength = [3, 4, 5]
