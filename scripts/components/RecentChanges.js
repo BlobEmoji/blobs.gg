@@ -22,12 +22,19 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const HISTORY_ENDPOINT =
   window.location.host.endsWith('now.sh') ||
   process.env.NODE_ENV === 'development'
     ? 'https://api.mousey.app/v3/emoji/test/changes'
     : 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+
+const useStyles = makeStyles({
+  panelDetails: {
+    padding: 0,
+  },
+})
 
 function SkeletalLoading() {
   const randomArrayLength = [3, 4, 5, 6, 7]
@@ -130,6 +137,7 @@ TableGen.propTypes = {
 function RenderChangeSet(props) {
   let { changeSet } = props
   const titleDate = new Date(changeSet[0].changed_at)
+  const classes = useStyles()
   let moreChangeSet
   let moreTest = false
   let moreBlobs = null
@@ -189,22 +197,24 @@ function RenderChangeSet(props) {
           <Table>
             <TableBody>{blobs}</TableBody>
           </Table>
-          {moreTest && (
-            <ExpansionPanel>
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="Panel Controls"
-              >
-                {`See ${moreChangeSet.length} more changes`}
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+        </TableContainer>
+        {moreTest && (
+          <ExpansionPanel>
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="Panel Controls"
+            >
+              {`See ${moreChangeSet.length} more changes`}
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails className={classes.panelDetails}>
+              <TableContainer>
                 <Table>
                   <TableBody>{moreBlobs}</TableBody>
                 </Table>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          )}
-        </TableContainer>
+              </TableContainer>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        )}
       </Card>
     </Grid>
   )
@@ -314,6 +324,7 @@ export default class RecentChangesWrapper extends Component {
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.listener)
   }
+
   render() {
     const { changes } = this.state
     const randomArrayLength = [3, 4, 5]
