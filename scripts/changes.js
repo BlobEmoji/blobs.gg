@@ -44,7 +44,7 @@ function App() {
             <div className="links"/>
           </nav>
         </main>
-        <Typography variant="h4">Global Blob Change Log</Typography>
+        <Typography variant="h4">Global Blob Changelog</Typography>
         <p>
           This page tracks the changes of all blobs in any of our partnered
           servers.
