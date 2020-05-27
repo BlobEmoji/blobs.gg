@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import RecentChangesWrapper from './components/RecentChanges'
+import RecentChangesWrapper from './components/RecentChanges/RecentChanges'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import Grid from '@material-ui/core/Grid'
