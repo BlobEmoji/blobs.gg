@@ -1,4 +1,3 @@
-import TableGen from './TableGen'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -20,6 +19,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import PropTypes from 'prop-types'
 import React from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import TableRowGen from './TableRowGen'
 
 function eventProcessing(each) {
   let emoji = each.emoji || each.before
@@ -67,7 +67,7 @@ export default function RenderChangeSet(props) {
     const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
 
     return (
-      <TableGen
+      <TableRowGen
         key={each.changed_at}
         eventIcon={eventIcon}
         eventName={each.event.split('_')[1]}
@@ -84,7 +84,7 @@ export default function RenderChangeSet(props) {
       const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
 
       return (
-        <TableGen
+        <TableRowGen
           key={each.changed_at}
           eventIcon={eventIcon}
           eventName={each.event.split('_')[1]}

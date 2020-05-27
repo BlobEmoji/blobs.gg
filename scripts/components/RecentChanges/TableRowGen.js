@@ -5,7 +5,7 @@ import MaterialEmoji from '../MaterialEmoji'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-export default function TableGen(props) {
+export default function TableRowGen(props) {
   const { eventIcon, eventName, guild, emoji, action, afterEmoji } = props
 
   return (
@@ -25,7 +25,7 @@ export default function TableGen(props) {
   )
 }
 
-TableGen.propTypes = {
+TableRowGen.propTypes = {
   eventIcon: PropTypes.object.isRequired,
   eventName: PropTypes.string.isRequired,
   guild: PropTypes.object.isRequired,
