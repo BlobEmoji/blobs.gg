@@ -55,7 +55,7 @@ MaterialEmoji.propTypes = {
   id: PropTypes.string.isRequired,
   animated: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
-  guild: PropTypes.object.isRequired,
+  guild: PropTypes.object,
   baseSize: PropTypes.number,
   showGuild: PropTypes.bool,
 }

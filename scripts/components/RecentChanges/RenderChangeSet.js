@@ -21,23 +21,19 @@ import React from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import TableRowGen from './TableRowGen'
 
+const emojiAction = {
+  EMOJI_REMOVE: <RemoveAvatar />,
+  EMOJI_CREATE: <CreateAvatar />,
+  EMOJI_RENAME: <RenameAvatar />,
+  EMOJI_UPDATE: <UpdateAvatar />,
+}
+
 function eventProcessing(each) {
   let emoji = each.emoji || each.before
   let action = each.after ? 'to' : ''
   let afterEmoji = each.after || null
-  let eventIcon
 
-  if (each.event === 'EMOJI_REMOVE') {
-    eventIcon = <RemoveAvatar />
-  } else if (each.event === 'EMOJI_CREATE') {
-    eventIcon = <CreateAvatar />
-  } else if (each.event === 'EMOJI_RENAME') {
-    eventIcon = <RenameAvatar />
-  } else if (each.event === 'EMOJI_UPDATE') {
-    eventIcon = <UpdateAvatar />
-  }
-
-  return { emoji, action, afterEmoji, eventIcon }
+  return { emoji, action, afterEmoji }
 }
 
 const useStyles = makeStyles({
@@ -64,14 +60,14 @@ export default function RenderChangeSet(props) {
   }
 
   const blobs = changeSet.map((each) => {
-    const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
+    const { emoji, action, afterEmoji } = eventProcessing(each)
+    const EventIcon = emojiAction[each.event]
 
     return (
       <TableRowGen
         key={each.changed_at}
-        eventIcon={eventIcon}
+        eventIcon={EventIcon}
         eventName={each.event.split('_')[1]}
-        guild={guild}
         emoji={emoji}
         action={action}
         afterEmoji={afterEmoji}
@@ -81,14 +77,14 @@ export default function RenderChangeSet(props) {
 
   if (moreTest) {
     moreBlobs = moreChangeSet.map((each) => {
-      const { emoji, action, afterEmoji, eventIcon } = eventProcessing(each)
+      const { emoji, action, afterEmoji } = eventProcessing(each)
+      const EventIcon = emojiAction[each.event]
 
       return (
         <TableRowGen
           key={each.changed_at}
-          eventIcon={eventIcon}
+          eventIcon={EventIcon}
           eventName={each.event.split('_')[1]}
-          guild={guild}
           emoji={emoji}
           action={action}
           afterEmoji={afterEmoji}

@@ -38,11 +38,30 @@ export default class RecentChangesWrapper extends Component {
 
     this.state = {
       changes: {},
+      fetching: false,
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    const a = { ...this.state }
+    delete a.fetching
+    delete nextState.fetching
+
+    return JSON.stringify(a) !== JSON.stringify(nextState)
+  }
+
   async fetchMoreChanges() {
-    this.setState({ fetching: true })
+    let i,
+      j,
+      chunk = 5
+
+    if (this.state.fetching) {
+      console.error("Don't call fetchMoreChanges when already fetching")
+      return
+    }
+
+    let merged = JSON.parse(JSON.stringify(this.state.changes))
+    await this.setState({ fetching: true })
     const response = await fetch(
       `${HISTORY_ENDPOINT}?before=${this.state.earliest}`
     )
@@ -54,20 +73,29 @@ export default class RecentChangesWrapper extends Component {
     }
 
     let transformed = historyTransform(json)
-    let merged = this.state.changes
-    for (const key in transformed) {
-      if (transformed.hasOwnProperty(key)) {
-        const changeSet = transformed[key]
-        if (merged.hasOwnProperty(key)) {
-          merged[key].push(...changeSet)
+    for (const [key, value] of Object.entries(transformed)) {
+      const changeSet = value
+      if (merged.hasOwnProperty(key)) {
+        if (changeSet.length > 5) {
+          for (i = 0, j = changeSet.length; i < j; i += chunk) {
+            let chunkData = changeSet.slice(i, i + chunk)
+            merged[key].push(...chunkData)
+            // eslint-disable-next-line no-await-in-loop
+            await this.setState({ changes: merged })
+          }
         } else {
-          merged[key] = changeSet
+          merged[key].push(...changeSet)
+          // eslint-disable-next-line no-await-in-loop
+          await this.setState({ changes: merged })
         }
+      } else {
+        merged[key] = changeSet
+        // eslint-disable-next-line no-await-in-loop
+        await this.setState({ changes: merged })
       }
     }
 
-    this.setState({
-      changes: merged,
+    await this.setState({
       earliest: json[json.length - 1].changed_at,
       fetching: false,
     })
@@ -81,7 +109,7 @@ export default class RecentChangesWrapper extends Component {
     // the upper border of the viewport.
     if (
       ending - window.scrollY <= window.innerHeight / 2 &&
-      !this.state.fetching
+      this.state.fetching === false
     ) {
       await this.fetchMoreChanges()
     }
@@ -93,15 +121,26 @@ export default class RecentChangesWrapper extends Component {
       changes: historyTransform(json),
       earliest: json[json.length - 1].changed_at,
     })
+
+    let before = performance.now()
+    await this.screenHeight()
+    let after = performance.now()
+
+    console.log(`Mount Screen took ${after - before}ms`)
+
     window.addEventListener('scroll', this.listener)
-    while (
+  }
+
+  screenHeight = async () => {
+    if (
       document.body.scrollHeight < window.innerHeight &&
       !this.state.fetching
     ) {
-      // eslint-disable-next-line no-await-in-loop
       await this.fetchMoreChanges()
+      await this.screenHeight()
     }
   }
+
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.listener)
   }
