@@ -10,9 +10,26 @@ import Typography from '@material-ui/core/Typography'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Header from './components/Header'
+import { log, storageAvailable, warn } from './utils'
 
 function App() {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
+    noSsr: true
+  })
+
+  if (storageAvailable('localStorage')) {
+    log('Fetching local storage')
+    const localStorageTheme = localStorage.getItem('theme')
+    if (localStorageTheme === null) {
+      log('No theme detected. Using automatic')
+      localStorage.setItem('theme', prefersDarkMode.toString())
+    } else {
+      log('Using theme in local storage')
+      prefersDarkMode = localStorageTheme === 'true'
+    }
+  } else {
+    warn('Local Storage unsupported. Using automatic detection fallback')
+  }
 
   const theme = React.useMemo(
     () =>
