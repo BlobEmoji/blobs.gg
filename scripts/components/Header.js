@@ -10,6 +10,7 @@ import ListIcon from '@material-ui/icons/List'
 import HomeIcon from '@material-ui/icons/Home'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
+import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
@@ -35,12 +36,12 @@ export default function Header() {
           Blob Emoji
         </Typography>
         <Tooltip title="Home Page" arrow>
-          <IconButton>
+          <IconButton component={Link} href="/index.html">
             <HomeIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Changelog Page" arrow>
-          <IconButton>
+          <IconButton component={Link} href="/changes.html">
             <ListIcon />
           </IconButton>
         </Tooltip>
