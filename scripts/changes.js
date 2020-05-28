@@ -26,15 +26,21 @@ function storageHandler() {
   })
 
   if (storageAvailable('localStorage')) {
-    log('Fetching local storage')
-    const localStorageTheme = localStorage.getItem('theme')
-    if (localStorageTheme === null) {
-      log('No theme detected. Using automatic')
-      localStorage.setItem('theme', prefersDarkMode.toString())
-      localStorage.setItem('automatic', 'true')
+    log('Fetching Automatic check')
+    const localStorageAutomatic = localStorage.getItem('automated')
+    if (localStorageAutomatic === 'false') {
+      log('Is not automated. Fetching local storage')
+      const localStorageTheme = localStorage.getItem('theme')
+      if (localStorageTheme === null) {
+        log('No theme detected. Using automatic')
+        localStorage.setItem('theme', prefersDarkMode.toString())
+        localStorage.setItem('automatic', 'true')
+      } else {
+        log('Using theme in local storage')
+        prefersDarkMode = localStorageTheme === 'true'
+      }
     } else {
-      log('Using theme in local storage')
-      prefersDarkMode = localStorageTheme === 'true'
+      log('Is automated. Using user preference')
     }
   } else {
     warn('Local Storage unsupported. Using automatic detection fallback')
@@ -78,7 +84,11 @@ function App() {
           <RecentChangesWrapper />
         </Grid>
       </Container>
-      <SettingsDialog open={dialogOpen} onClose={toggleDialogOpen} handleReload={handleReload}/>
+      <SettingsDialog
+        open={dialogOpen}
+        onClose={toggleDialogOpen}
+        handleReload={handleReload}
+      />
     </ThemeProvider>
   )
 }
