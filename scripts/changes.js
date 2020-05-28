@@ -45,7 +45,7 @@ function storageHandler() {
 
 function App() {
   let prefersDarkMode = storageHandler()
-  const [dialogOpen, toggleDialogOpen] = useState(true)
+  const [dialogOpen, toggleDialogOpen] = useState(false)
   const [reload, handleReload] = useState(0)
 
   const theme = React.useMemo(
