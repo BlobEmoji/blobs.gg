@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import ReactDOM from 'react-dom'
 import RecentChangesWrapper from './components/RecentChanges/RecentChanges'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
@@ -11,10 +11,18 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Header from './components/Header'
 import { log, storageAvailable, warn } from './utils'
+import SettingsDialog from './components/SettingsDialog'
 
-function App() {
+export const Settings = createContext({
+  // eslint-disable-next-line no-empty-function
+  handleOpen: () => {},
+  // eslint-disable-next-line no-empty-function
+  handleReload: () => {},
+})
+
+function storageHandler() {
   let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
-    noSsr: true
+    noSsr: true,
   })
 
   if (storageAvailable('localStorage')) {
@@ -23,6 +31,7 @@ function App() {
     if (localStorageTheme === null) {
       log('No theme detected. Using automatic')
       localStorage.setItem('theme', prefersDarkMode.toString())
+      localStorage.setItem('automatic', 'true')
     } else {
       log('Using theme in local storage')
       prefersDarkMode = localStorageTheme === 'true'
@@ -30,6 +39,14 @@ function App() {
   } else {
     warn('Local Storage unsupported. Using automatic detection fallback')
   }
+
+  return prefersDarkMode
+}
+
+function App() {
+  let prefersDarkMode = storageHandler()
+  const [dialogOpen, toggleDialogOpen] = useState(true)
+  const [reload, handleReload] = useState(0)
 
   const theme = React.useMemo(
     () =>
@@ -49,7 +66,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="md">
-        <Header />
+        <Settings.Provider value={{ handleOpen: toggleDialogOpen }}>
+          <Header />
+        </Settings.Provider>
         <Typography variant="h4">Global Blob Changelog</Typography>
         <p>
           This page tracks the changes of all blobs in any of our partnered
@@ -59,6 +78,7 @@ function App() {
           <RecentChangesWrapper />
         </Grid>
       </Container>
+      <SettingsDialog open={dialogOpen} onClose={toggleDialogOpen} handleReload={handleReload}/>
     </ThemeProvider>
   )
 }

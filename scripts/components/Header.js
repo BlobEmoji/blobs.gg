@@ -1,5 +1,5 @@
 import server1 from '../../assets/server_icons/server1.svg'
-import React from 'react'
+import React, { useCallback } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -11,6 +11,8 @@ import HomeIcon from '@material-ui/icons/Home'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import Link from '@material-ui/core/Link'
+import { Settings } from '../changes'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
@@ -20,6 +22,22 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }))
+
+function SettingsButton(props) {
+  const handleOpen = useCallback(() => props.handleOpen(true), [
+    props.handleOpen,
+  ])
+
+  return (
+    <IconButton onClick={handleOpen}>
+      <SettingsIcon />
+    </IconButton>
+  )
+}
+
+SettingsButton.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
+}
 
 export default function Header() {
   const classes = useStyles()
@@ -46,9 +64,11 @@ export default function Header() {
           </IconButton>
         </Tooltip>
         <Tooltip title="Settings" arrow>
-          <IconButton>
-            <SettingsIcon />
-          </IconButton>
+          <span>
+            <Settings.Consumer>
+              {({ handleOpen }) => <SettingsButton handleOpen={handleOpen} />}
+            </Settings.Consumer>
+          </span>
         </Tooltip>
       </Toolbar>
     </AppBar>
