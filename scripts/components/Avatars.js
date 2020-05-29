@@ -1,6 +1,15 @@
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
 import React from 'react'
+import DeleteIcon from '@material-ui/icons/Delete'
+import red from '@material-ui/core/colors/red'
+import AddIcon from '@material-ui/icons/Add'
+import green from '@material-ui/core/colors/green'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
+import lightBlue from '@material-ui/core/colors/lightBlue'
+import BrushIcon from '@material-ui/icons/Brush'
+import indigo from '@material-ui/core/colors/indigo'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 export function GuildAvatar(props) {
   const { name, src } = props
@@ -21,42 +30,41 @@ GuildAvatar.propTypes = {
   src: PropTypes.object.isRequired,
 }
 
+const useStyles = makeStyles({
+  delete: {
+    color: red[500],
+  },
+  create: {
+    color: green[500],
+  },
+  rename: {
+    color: lightBlue[500],
+  },
+  update: {
+    color: indigo[400],
+  },
+})
+
 export function RemoveAvatar() {
-  return (
-    <Avatar
-      alt="Removed"
-      src="https://cdn.discordapp.com/emojis/567088349484023818.png?v=1"
-      variant="square"
-    />
-  )
+  const classes = useStyles()
+
+  return <DeleteIcon fontSize="large" className={classes.delete} />
 }
 
 export function CreateAvatar() {
-  return (
-    <Avatar
-      alt="Created"
-      src="https://cdn.discordapp.com/emojis/567088336166977536.png?v=1"
-      variant="square"
-    />
-  )
+  const classes = useStyles()
+
+  return <AddIcon fontSize="large" className={classes.create} />
 }
 
 export function RenameAvatar() {
-  return (
-    <Avatar
-      alt="Renamed"
-      src="https://discordapp.com/assets/b37d783fa2330771124219f7f13f2f31.svg"
-      variant="square"
-    />
-  )
+  const classes = useStyles()
+
+  return <EditOutlinedIcon fontSize="large" className={classes.rename} />
 }
 
 export function UpdateAvatar() {
-  return (
-    <Avatar
-      alt="Updated"
-      src="https://discordapp.com/assets/e1ec53c5d89c0291001989a36716aa9a.svg"
-      variant="square"
-    />
-  )
+  const classes = useStyles()
+
+  return <BrushIcon fontSize="large" className={classes.rename} />
 }
