@@ -50,7 +50,7 @@ export default function ChangeSet(props) {
   guild.id = guild.id.toString()
 
   let hasMore = false
-  let collapsedChangeSet = null
+  let collapsedChangeSet = []
   let collapsedRows = null
 
   function rows(change, index) {
