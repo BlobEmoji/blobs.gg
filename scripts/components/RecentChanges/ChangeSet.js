@@ -53,7 +53,7 @@ export default function ChangeSet(props) {
   let collapsedChangeSet = null
   let collapsedRows = null
 
-  function rows(change) {
+  function rows(change, index) {
     const EventIcon = emojiAction[change.event]
 
     const emoji = change.emoji || change.before
@@ -62,7 +62,7 @@ export default function ChangeSet(props) {
 
     return (
       <ChangeRow
-        key={change.changed_at}
+        key={`${change.changed_at}-${index}`}
         eventIcon={EventIcon}
         eventName={change.event.split('_')[1]}
         emoji={emoji}
