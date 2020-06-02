@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import RecentChangesWrapper from './components/RecentChanges/RecentChanges'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
-import Grid from '@material-ui/core/Grid'
 import grey from '@material-ui/core/colors/grey'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
@@ -80,9 +79,7 @@ function App() {
           This page tracks the changes of all blobs in any of our partnered
           servers.
         </p>
-        <Grid container spacing={3}>
-          <RecentChangesWrapper />
-        </Grid>
+        <RecentChangesWrapper />
       </Container>
       <SettingsDialog
         open={dialogOpen}
