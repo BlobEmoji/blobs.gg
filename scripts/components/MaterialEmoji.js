@@ -9,6 +9,8 @@ const useStyles = makeStyles({
     objectFit: 'contain',
     width: '32px',
     height: '32px',
+    verticalAlign: 'middle',
+    display: 'inline-block',
   },
 })
 

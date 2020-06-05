@@ -33,15 +33,19 @@ GuildAvatar.propTypes = {
 const useStyles = makeStyles({
   delete: {
     color: red[500],
+    verticalAlign: 'middle',
   },
   create: {
     color: green[500],
+    verticalAlign: 'middle',
   },
   rename: {
     color: lightBlue[500],
+    verticalAlign: 'middle',
   },
   update: {
     color: indigo[400],
+    verticalAlign: 'middle',
   },
 })
 
