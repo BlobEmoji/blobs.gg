@@ -65,7 +65,10 @@ const useStyles = makeStyles((theme) => ({
 export default function SettingsDialog(props) {
   const { open, onClose, handleReload } = props
   const onCloseWrapper = useCallback(() => onClose(false), [onClose])
-  const handleReloadWrapper = useCallback((randomInt) => handleReload(randomInt), [handleReload])
+  const handleReloadWrapper = useCallback(
+    (randomInt) => handleReload(randomInt),
+    [handleReload]
+  )
   const classes = useStyles()
   const theme = useTheme()
   const { icon, disabled } = iconHandler(theme)
@@ -114,5 +117,5 @@ export default function SettingsDialog(props) {
 SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  handleReload: PropTypes.func.isRequired
+  handleReload: PropTypes.func.isRequired,
 }
