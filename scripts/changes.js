@@ -56,6 +56,23 @@ function App() {
   const theme = React.useMemo(
     () =>
       createMuiTheme({
+        overrides: {
+          MuiExpansionPanel: {
+            root: {
+              '&:before': {
+                display: 'none',
+              },
+              '&$expanded': {
+                marginTop: '0',
+              },
+            },
+          },
+          MuiExpansionPanelSummary: {
+            root: {
+              borderBottom: '1px solid rgba(224, 224, 224, 1)',
+            },
+          },
+        },
         palette: {
           type: prefersDarkMode ? 'dark' : 'light',
           background: {
