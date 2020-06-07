@@ -58,8 +58,8 @@ export default function Header() {
             <HomeIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Changelog Page" arrow>
-          <IconButton component={Link} href="/changes.html">
+        <Tooltip title="Emoji Changelog" arrow>
+          <IconButton component={Link} href="/changes">
             <ListIcon />
           </IconButton>
         </Tooltip>
