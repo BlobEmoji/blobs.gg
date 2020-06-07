@@ -54,7 +54,7 @@ export default function Header() {
           Blob Emoji
         </Typography>
         <Tooltip title="Home" arrow>
-          <IconButton component={Link} href="/index.html">
+          <IconButton component={Link} href="/">
             <HomeIcon />
           </IconButton>
         </Tooltip>
