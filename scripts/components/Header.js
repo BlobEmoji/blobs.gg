@@ -53,7 +53,7 @@ export default function Header() {
         <Typography variant="h6" className={classes.title}>
           Blob Emoji
         </Typography>
-        <Tooltip title="Home Page" arrow>
+        <Tooltip title="Home" arrow>
           <IconButton component={Link} href="/index.html">
             <HomeIcon />
           </IconButton>
