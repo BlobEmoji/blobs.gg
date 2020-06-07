@@ -100,7 +100,7 @@ export default function SettingsDialog(props) {
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Typography variant="h6">Theme Switch</Typography>
+        <Typography variant="h6">Theme</Typography>
         <IconButton
           aria-label="Toggle Mode"
           className={classes.centre}
