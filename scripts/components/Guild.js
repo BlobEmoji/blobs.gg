@@ -98,7 +98,7 @@ export default class Guild extends React.Component {
           href={guild.invite}
           target="_blank"
           className="button join-guild"
-          rel="noopener noreferrer"
+          rel="noopener"
           onClick={this.handleJoinClick}
         >
           Join Server

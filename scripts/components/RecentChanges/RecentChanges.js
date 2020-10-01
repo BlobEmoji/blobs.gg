@@ -5,11 +5,7 @@ import { useScrollNearEnd } from '../../hooks'
 import SkeletonChangeSet from './SkeletonChangeSet'
 import ChangeSet from './ChangeSet'
 
-const HISTORY_ENDPOINT =
-  window.location.host.endsWith('now.sh') ||
-  process.env.NODE_ENV === 'development'
-    ? 'https://api.mousey.app/v3/emoji/test/changes'
-    : 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
 
 const HISTORY_EVENTS = [
   'EMOJI_CREATE',

@@ -95,6 +95,7 @@ module.exports = {
     'react/jsx-closing-tag-location': OFF,
     'react/prop-types': WARN,
     'react/forbid-prop-types': OFF,
+    'react/jsx-no-target-blank': [WARN, { allowReferrer: true }],
   },
 
   globals: {
