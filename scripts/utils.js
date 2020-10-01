@@ -48,6 +48,7 @@ export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'long',
   year: 'numeric',
   hour: 'numeric',
+  minute: 'numeric',
 })
 
 export function storageAvailable(type) {
