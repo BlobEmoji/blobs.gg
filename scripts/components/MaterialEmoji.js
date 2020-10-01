@@ -7,8 +7,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 const useStyles = makeStyles({
   emoji: {
     objectFit: 'contain',
-    width: '32px',
-    height: '32px',
+    width: 32,
+    height: 32,
     verticalAlign: 'middle',
     display: 'inline-block',
   },
@@ -44,6 +44,9 @@ export default function MaterialEmoji({
     <Tooltip title={alt} arrow>
       <Avatar
         alt={name}
+        classes={{
+          img: classes.emoji,
+        }}
         srcSet={srcSet}
         src={emojiUrl(id, extension, baseSize)}
         variant="square"
