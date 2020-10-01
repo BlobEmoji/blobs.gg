@@ -3,20 +3,23 @@
   "private": true,
   "version": "0.0.1",
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/runtime": "^7.9.6",
-    "@material-ui/core": "^4.10.1",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/runtime": "^7.11.2",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.55",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/styles": "^4.10.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^1.19.1",
-    "sass": "^1.26.5"
+    "babel-types": "^6.26.0",
+    "eslint": "^7.10.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.2",
+    "parcel": "next",
+    "prettier": "^2.1.2",
+    "sass": "^1.26.11"
   },
   "prettier": {
     "semi": false,
@@ -39,6 +42,9 @@
     "react-dom": "^16.13.1"
   },
   "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
       [

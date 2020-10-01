@@ -1,7 +1,13 @@
 node_modules
 
+# yarn
+.yarn
+.yarnrc.yml
+.pnp.js
+yarn.lock
+
 # parcel
-/.cache
+/.parcel-cache
 /dist
 
 .DS_Store

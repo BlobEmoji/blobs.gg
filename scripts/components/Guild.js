@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import Emoji from './Emoji'
 import GuildIcon from './GuildIcon'
-import chevron from '../../assets/chevron-down-solid.svg'
+import chevron from 'url:../../assets/chevron-down-solid.svg'
 import { shuffleArray } from '../utils'
 
 const RANDOM_SAMPLE_SIZE = 6
