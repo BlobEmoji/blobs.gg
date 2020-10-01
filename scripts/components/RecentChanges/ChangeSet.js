@@ -12,10 +12,10 @@ import {
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { DateTimeFormatter } from '../../utils'
@@ -93,21 +93,21 @@ export default function ChangeSet(props) {
         </Table>
       </TableContainer>
       {hasMore && (
-        <ExpansionPanel>
-          <ExpansionPanelSummary
+        <Accordion>
+          <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="Panel Controls"
           >
             {`See ${collapsedChangeSet.length} more changes`}
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.panelDetails}>
+          </AccordionSummary>
+          <AccordionDetails className={classes.panelDetails}>
             <TableContainer>
               <Table>
                 <TableBody>{collapsedRows}</TableBody>
               </Table>
             </TableContainer>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+          </AccordionDetails>
+        </Accordion>
       )}
     </Card>
   )
