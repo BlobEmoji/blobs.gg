@@ -5,12 +5,14 @@ import Tooltip from '@material-ui/core/Tooltip'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
-  emoji: {
-    objectFit: 'contain',
+  div: {
     width: 32,
     height: 32,
     verticalAlign: 'middle',
     display: 'inline-block',
+  },
+  emoji: {
+    objectFit: 'contain',
   },
 })
 
@@ -50,7 +52,7 @@ export default function MaterialEmoji({
         srcSet={srcSet}
         src={emojiUrl(id, extension, baseSize)}
         variant="square"
-        className={classes.emoji}
+        className={classes.div}
       />
     </Tooltip>
   )
