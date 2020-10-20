@@ -40,8 +40,8 @@ export default class Search extends React.Component {
     return sadBlob == null ? null : <Emoji {...sadBlob} />
   }
 
-  handleQueryChange = (event) => {
-    const value = event.currentTarget.value
+  handleQueryChange = (event, querySearch) => {
+    const value = querySearch ? querySearch : event.currentTarget.value
 
     this.setState({
       query: value,
@@ -80,6 +80,13 @@ export default class Search extends React.Component {
     return this.allGuilds
       .filter((guild) => insensitiveIncludes(guild.name, query))
       .slice(0, 3)
+  }
+
+  componentDidMount() {
+    let search = new URL(window.location).searchParams
+    if (search.has('name')) {
+      this.handleQueryChange(null, search.get('name'))
+    }
   }
 
   render() {
