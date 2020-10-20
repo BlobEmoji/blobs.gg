@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>Blobs.gg</ShortName>
+    <Description>Blobs.gg search for Blobs</Description>
+    <InputEncoding>[UTF-8]</InputEncoding>
+    <Image width="16" height="16" type="image/x-icon">https://blobs.gg/favicon.ico</Image>
+    <Url type="text/html" method="get" template="https://blobs.gg/">
+        <Param name="name" value="{searchTerms}"/>
+    </Url>
+    <Developer>blobs.gg Developer Team</Developer>
+    <Attribution>Search Data Copyright 2020, blobs.gg</Attribution>
+    <AdultContent>false</AdultContent>
+    <Language>en-us</Language>
+    <moz:SearchForm>https://blobs.gg/</moz:SearchForm>
+</OpenSearchDescription>
