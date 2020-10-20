@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import Emoji from './Emoji'
 import GuildIcon from './GuildIcon'
-import chevron from '../../assets/chevron-down-solid.svg'
+import chevron from 'url:../../assets/chevron-down-solid.svg'
 import { shuffleArray } from '../utils'
 
 const RANDOM_SAMPLE_SIZE = 6
@@ -98,7 +98,7 @@ export default class Guild extends React.Component {
           href={guild.invite}
           target="_blank"
           className="button join-guild"
-          rel="noopener noreferrer"
+          rel="noopener"
           onClick={this.handleJoinClick}
         >
           Join Server

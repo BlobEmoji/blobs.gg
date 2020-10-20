@@ -57,7 +57,7 @@ function App() {
     () =>
       createMuiTheme({
         overrides: {
-          MuiExpansionPanel: {
+          MuiAccordion: {
             root: {
               '&:before': {
                 display: 'none',
@@ -67,7 +67,7 @@ function App() {
               },
             },
           },
-          MuiExpansionPanelSummary: {
+          MuiAccordionSummary: {
             root: {
               borderBottom: '1px solid rgba(224, 224, 224, 1)',
             },

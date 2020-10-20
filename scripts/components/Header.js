@@ -1,4 +1,4 @@
-import server1 from '../../assets/server_icons/server1.svg'
+import server1 from 'url:../../assets/server_icons/server1.svg'
 import React, { useCallback } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
