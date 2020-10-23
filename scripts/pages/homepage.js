@@ -6,6 +6,10 @@ import PropTypes from 'prop-types'
 
 class Homepage extends Component {
   render() {
+    const { emojis } = this.props
+    console.log(10, emojis);
+    const officialEmojis = emojis.hasOwnProperty('groups') ? emojis.groups.blobs : {}
+
     return (
       <main>
         <nav>
@@ -22,7 +26,7 @@ class Homepage extends Component {
         </header>
         {/*React will be mounted into this DOM node.*/}
         <section id="search" hidden/>
-        <OfficialServers data={this.props.data}/>
+        <OfficialServers emojis={officialEmojis}/>
         <section id="downloads-licensing">
           <p>
             All blobs that are uploaded to official Blob Emoji servers are
@@ -39,15 +43,15 @@ class Homepage extends Component {
             license.
           </p>
         </section>
-        <CommunityServers data={this.props.data}/>
+        <CommunityServers/>
       </main>
     )
   }
 }
 
 Homepage.propTypes = {
-  data: PropTypes.object.isRequired,
-  formattedCount: PropTypes.number.isRequired
+  formattedCount: PropTypes.string.isRequired,
+  emojis: PropTypes.object.isRequired,
 }
 
 export default Homepage

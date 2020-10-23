@@ -4,7 +4,8 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount } from './utils'
+import { calculateEmojiCount, log } from './utils'
+import { Emojis } from './emojis'
 
 const theme = createMuiTheme({})
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
@@ -15,7 +16,8 @@ class App extends Component {
 
     this.state = {
       blob_data: {},
-      formattedCount: 0,
+      formattedCount: '0',
+      emojis: []
     }
   }
 
@@ -25,10 +27,13 @@ class App extends Component {
     const data = await resp.json()
     const count = calculateEmojiCount(data)
     const formattedCount = new Intl.NumberFormat().format(count)
-    this.setState({ blob_data: data, formattedCount: formattedCount })
+    const emojis = new Emojis(data)
+    log('Emojis:', emojis)
+    this.setState({ blob_data: data, formattedCount: formattedCount, emojis: emojis })
   }
 
   render() {
+    const { formattedCount, emojis } = this.state
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline/>
@@ -36,7 +41,7 @@ class App extends Component {
           <Switch>
             <Route
               exact-path="/"
-              children={<Homepage data={this.state.blob_data} formattedCount={this.state.formattedCount}/>}/>
+              children={<Homepage formattedCount={formattedCount} emojis={emojis}/>}/>
           </Switch>
         </Router>
       </ThemeProvider>

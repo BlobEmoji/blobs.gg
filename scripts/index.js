@@ -8,21 +8,15 @@ import { CommunityGuilds, Guilds } from './components/Guilds'
 import App from './App'
 
 function mount(data) {
-  const emojis = new Emojis(data)
-
-  log('Emojis:', emojis)
-
   log('Mounting search...')
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
   ReactDOM.render(<Search emojis={emojis} />, searchNode)
 
   log('Mounting guilds...')
-  const guildsNode = document.querySelector('.guilds')
   const communityGuildsNode = document.querySelector(
     '.community-guilds-wrapper'
   )
-  ReactDOM.render(<Guilds guilds={emojis.groups.blobs.guilds} />, guildsNode)
   ReactDOM.render(
     <CommunityGuilds guilds={emojis.groups['community-blobs'].guilds} />,
     communityGuildsNode
