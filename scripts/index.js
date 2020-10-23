@@ -5,6 +5,7 @@ import { log } from './utils'
 import { Emojis } from './emojis'
 import Search from './components/Search'
 import { CommunityGuilds, Guilds } from './components/Guilds'
+import App from './App'
 
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 
@@ -50,15 +51,17 @@ function mount(data) {
   )
 }
 
-if (typeof window.fetch !== 'undefined') {
-  log('Fetching data...')
+// if (typeof window.fetch !== 'undefined') {
+//   log('Fetching data...')
+//
+//   fetch(BLOBS_ENDPOINT)
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//       updatePageState(data)
+//       mount(data)
+//     })
+// } else {
+//   log('No window.fetch.')
+// }
 
-  fetch(BLOBS_ENDPOINT)
-    .then((resp) => resp.json())
-    .then((data) => {
-      updatePageState(data)
-      mount(data)
-    })
-} else {
-  log('No window.fetch.')
-}
+ReactDOM.render(<App/>, document.getElementById("root"))

@@ -96,6 +96,7 @@ module.exports = {
     'react/prop-types': WARN,
     'react/forbid-prop-types': OFF,
     'react/jsx-no-target-blank': [WARN, { allowReferrer: true }],
+    'react/no-children-prop': OFF
   },
 
   globals: {
