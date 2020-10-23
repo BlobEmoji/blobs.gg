@@ -3,7 +3,7 @@ export function log(...info) {
     '%c[blobs.gg]%c',
     'color: lightgreen; font-weight: bold',
     'color: inherit; font-weight: inherit',
-    ...info
+    ...info,
   )
 }
 
@@ -12,7 +12,7 @@ export function warn(...info) {
     '%c[blobs.gg]%c',
     'color: red; font-weight: bold',
     'color: inherit; font-weight: inherit',
-    ...info
+    ...info,
   )
 }
 
@@ -76,4 +76,18 @@ export function storageAvailable(type) {
       storage.length !== 0
     )
   }
+}
+
+export function calculateEmojiCount(data) {
+  let count = 0
+
+  // Using nested `for` loops here instead of `Array.prototype.reduce` for
+  // the sake of readability.
+  for (const guilds of Object.values(data)) {
+    for (const guild of Object.values(guilds)) {
+      count += guild.emoji.length
+    }
+  }
+
+  return count
 }

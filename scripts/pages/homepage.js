@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import server1 from 'url:../../assets/server_icons/server1.svg'
 import OfficialServers from '../components/officialServers'
 import CommunityServers from '../components/communityServers'
+import PropTypes from 'prop-types'
 
 class Homepage extends Component {
   render() {
@@ -16,12 +17,12 @@ class Homepage extends Component {
         </nav>
         <header>
           <p className="lead">
-            <span id="emoji-count">Over 400</span> fun and playful Blob Emoji for Discord
+            Over <span id="emoji-count">{this.props.formattedCount}</span> fun and playful Blob Emoji for Discord
           </p>
         </header>
         {/*React will be mounted into this DOM node.*/}
         <section id="search" hidden/>
-        <OfficialServers/>
+        <OfficialServers data={this.props.data}/>
         <section id="downloads-licensing">
           <p>
             All blobs that are uploaded to official Blob Emoji servers are
@@ -38,10 +39,15 @@ class Homepage extends Component {
             license.
           </p>
         </section>
-        <CommunityServers/>
+        <CommunityServers data={this.props.data}/>
       </main>
     )
   }
+}
+
+Homepage.propTypes = {
+  data: PropTypes.object.isRequired,
+  formattedCount: PropTypes.number.isRequired
 }
 
 export default Homepage
