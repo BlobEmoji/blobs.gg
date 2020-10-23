@@ -7,8 +7,9 @@ import PropTypes from 'prop-types'
 class Homepage extends Component {
   render() {
     const { emojis } = this.props
-    console.log(10, emojis);
+    console.log(10, emojis)
     const officialEmojis = emojis.hasOwnProperty('groups') ? emojis.groups.blobs : {}
+    const communityEmojis = emojis.hasOwnProperty('groups') ? emojis.groups['community-blobs'] : {}
 
     return (
       <main>
@@ -43,7 +44,7 @@ class Homepage extends Component {
             license.
           </p>
         </section>
-        <CommunityServers/>
+        <CommunityServers emojis={communityEmojis}/>
       </main>
     )
   }

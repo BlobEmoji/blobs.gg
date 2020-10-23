@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       blob_data: {},
       formattedCount: '0',
-      emojis: []
+      emojis: {}
     }
   }
 
