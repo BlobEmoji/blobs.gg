@@ -2,9 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { log } from './utils'
-import { Emojis } from './emojis'
 import Search from './components/Search'
-import { CommunityGuilds, Guilds } from './components/Guilds'
 import App from './App'
 
 function mount(data) {
@@ -12,15 +10,6 @@ function mount(data) {
   const searchNode = document.querySelector('#search')
   searchNode.removeAttribute('hidden')
   ReactDOM.render(<Search emojis={emojis} />, searchNode)
-
-  log('Mounting guilds...')
-  const communityGuildsNode = document.querySelector(
-    '.community-guilds-wrapper'
-  )
-  ReactDOM.render(
-    <CommunityGuilds guilds={emojis.groups['community-blobs'].guilds} />,
-    communityGuildsNode
-  )
 }
 
 // if (typeof window.fetch !== 'undefined') {
@@ -36,4 +25,4 @@ function mount(data) {
 //   log('No window.fetch.')
 // }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))

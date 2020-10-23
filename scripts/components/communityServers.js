@@ -1,9 +1,15 @@
 import React from 'react'
 import nitro from 'url:../../assets/discord/nitro.png'
 import PropTypes from 'prop-types'
-import { CommunityGuilds } from './Guilds'
+import { Guilds } from './material/guilds'
+import { shuffleArray } from '../utils'
 
 function CommunityServers(props) {
+  let shuffled;
+  if (props.emojis.hasOwnProperty('guilds')) {
+    shuffled = shuffleArray(props.emojis.guilds)
+  }
+
   return (
     <>
       <section id="community-blob-servers">
@@ -34,9 +40,9 @@ function CommunityServers(props) {
           subscription.
         </p>
         {/*React will be mounted into this DOM node*/}
-        <div className="community-guilds-wrapper"/>
+        <div className="community-guilds-wrapper" />
       </section>
-      {props.emojis.hasOwnProperty('guilds') && <CommunityGuilds guilds={props.emojis.guilds}/>}
+      {props.emojis.hasOwnProperty('guilds') && <Guilds guilds={shuffled} slice/>}
     </>
   )
 }
