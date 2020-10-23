@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Container from '@material-ui/core/Container'
 import Header from '../components/Header'
 import Typography from '@material-ui/core/Typography'
+import Search from '../components/Search'
 
 class Homepage extends Component {
   render() {
@@ -15,11 +16,10 @@ class Homepage extends Component {
 
     return (
       <Container maxWidth="md">
-        <Header/>
+        <Header />
         <Typography variant="h5">Over {this.props.formattedCount} fun and playful Blob Emoji for Discord</Typography>
-        {/*React will be mounted into this DOM node.*/}
-        <section id="search" hidden/>
-        <OfficialServers emojis={officialEmojis}/>
+        {emojis.hasOwnProperty('groups') ? <Search emojis={emojis} /> : null}
+        <OfficialServers emojis={officialEmojis} />
         <section id="downloads-licensing">
           <p>
             All blobs that are uploaded to official Blob Emoji servers are
@@ -36,7 +36,7 @@ class Homepage extends Component {
             license.
           </p>
         </section>
-        <CommunityServers emojis={communityEmojis}/>
+        <CommunityServers emojis={communityEmojis} />
       </Container>
     )
   }
