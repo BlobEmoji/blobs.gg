@@ -91,3 +91,24 @@ export function calculateEmojiCount(data) {
 
   return count
 }
+
+/**
+ * Splits a input array into chunks
+ *
+ * @param {Array} inputArray The input Array that is to be Chunked
+ * @param {Number} chunkSize The size of the chunk
+ * @returns {Array} The chunked array
+ */
+export function chunker(inputArray, chunkSize= 6) {
+  return inputArray.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / chunkSize)
+
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = [] // start a new chunk
+    }
+
+    resultArray[chunkIndex].push(item)
+
+    return resultArray
+  }, [])
+}

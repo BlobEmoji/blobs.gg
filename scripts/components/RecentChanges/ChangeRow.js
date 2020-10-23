@@ -4,7 +4,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 
 import { titleCase } from '../../utils'
-import MaterialEmoji from '../MaterialEmoji'
+import MaterialEmoji from '../material/MaterialEmoji'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { useMediaQuery } from '@material-ui/core'
 import useTheme from '@material-ui/core/styles/useTheme'

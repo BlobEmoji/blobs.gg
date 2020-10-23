@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
 import Tooltip from '@material-ui/core/Tooltip'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import clsx from 'clsx'
 
 const useStyles = makeStyles({
   div: {
@@ -28,6 +29,7 @@ export default function MaterialEmoji({
   guild,
   baseSize = 64,
   showGuild = false,
+  className
 }) {
   const extension = animated ? 'gif' : 'png'
   const classes = useStyles()
@@ -52,7 +54,7 @@ export default function MaterialEmoji({
         srcSet={srcSet}
         src={emojiUrl(id, extension, baseSize)}
         variant="square"
-        className={classes.div}
+        className={clsx(classes.div, className)}
       />
     </Tooltip>
   )
@@ -65,4 +67,5 @@ MaterialEmoji.propTypes = {
   guild: PropTypes.object,
   baseSize: PropTypes.number,
   showGuild: PropTypes.bool,
+  className: PropTypes.string
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import server1 from 'url:../../assets/server_icons/server1.svg'
 import OfficialServers from '../components/officialServers'
 import CommunityServers from '../components/communityServers'
 import PropTypes from 'prop-types'
+import Container from '@material-ui/core/Container'
+import Header from '../components/Header'
+import Typography from '@material-ui/core/Typography'
 
 class Homepage extends Component {
   render() {
@@ -12,19 +14,9 @@ class Homepage extends Component {
     const communityEmojis = emojis.hasOwnProperty('groups') ? emojis.groups['community-blobs'] : {}
 
     return (
-      <main>
-        <nav>
-          <h1>
-            <img alt="Blob Emoji server icon" src={server1}/>
-            Blob Emoji
-          </h1>
-          <div className="links"/>
-        </nav>
-        <header>
-          <p className="lead">
-            Over <span id="emoji-count">{this.props.formattedCount}</span> fun and playful Blob Emoji for Discord
-          </p>
-        </header>
+      <Container maxWidth="md">
+        <Header/>
+        <Typography variant="h5">Over {this.props.formattedCount} fun and playful Blob Emoji for Discord</Typography>
         {/*React will be mounted into this DOM node.*/}
         <section id="search" hidden/>
         <OfficialServers emojis={officialEmojis}/>
@@ -45,7 +37,7 @@ class Homepage extends Component {
           </p>
         </section>
         <CommunityServers emojis={communityEmojis}/>
-      </main>
+      </Container>
     )
   }
 }
