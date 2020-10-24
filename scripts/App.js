@@ -103,6 +103,11 @@ function App() {
       },
       primary: green,
     },
+    typography: {
+      body2: {
+        color: '#CCC',
+      },
+    },
   }), [prefersDarkMode])
 
   return (
