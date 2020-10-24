@@ -1,5 +1,5 @@
 import server1 from 'url:../../assets/server_icons/server1.svg'
-import React, { useCallback } from 'react'
+import React, { forwardRef, useCallback } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -11,7 +11,6 @@ import HomeIcon from '@material-ui/icons/Home'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import Link from '@material-ui/core/Link'
-import { Settings } from '../changes'
 import PropTypes from 'prop-types'
 
 const useStyles = makeStyles((theme) => ({
@@ -23,23 +22,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function SettingsButton(props) {
+const SettingsButton = forwardRef(function SettingsButton(props, ref) {
   const handleOpen = useCallback(() => props.handleOpen(true), [
     props.handleOpen,
   ])
 
   return (
-    <IconButton onClick={handleOpen}>
+    <IconButton onClick={handleOpen} ref={ref}>
       <SettingsIcon />
     </IconButton>
   )
-}
+})
 
 SettingsButton.propTypes = {
   handleOpen: PropTypes.func.isRequired,
 }
 
-export default function Header() {
+function Header(props) {
   const classes = useStyles()
 
   return (
@@ -64,13 +63,15 @@ export default function Header() {
           </IconButton>
         </Tooltip>
         <Tooltip title="Settings" arrow>
-          <span>
-            <Settings.Consumer>
-              {({ handleOpen }) => <SettingsButton handleOpen={handleOpen} />}
-            </Settings.Consumer>
-          </span>
+          <SettingsButton handleOpen={props.handleOpen} />
         </Tooltip>
       </Toolbar>
     </AppBar>
   )
 }
+
+Header.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
+}
+
+export default Header

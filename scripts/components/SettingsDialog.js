@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     display: 'block',
   },
+  dialogMargin: {
+    marginRight: '2rem'
+  }
 }))
 
 export default function SettingsDialog(props) {
@@ -89,7 +92,7 @@ export default function SettingsDialog(props) {
       onClose={onCloseWrapper}
       aria-labelledby="settings-dialog-title"
     >
-      <DialogTitle id="settings-dialog-title">
+      <DialogTitle id="settings-dialog-title" className={classes.dialogMargin}>
         Settings
         <IconButton
           aria-label="close"

@@ -1,52 +1,129 @@
-import React, { Component } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount, log } from './utils'
+import { calculateEmojiCount, log, storageAvailable, warn } from './utils'
 import { Emojis } from './emojis'
+import Changepage from './pages/changepage'
+import Header from './components/Header'
+import Container from '@material-ui/core/Container'
+import grey from '@material-ui/core/colors/grey'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import SettingsDialog from './components/SettingsDialog'
 
-const theme = createMuiTheme({})
+function storageHandler() {
+  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
+    noSsr: true,
+  })
+
+  if (storageAvailable('localStorage')) {
+    log('Fetching Automatic check')
+    const localStorageAutomatic = localStorage.getItem('automated')
+    if (localStorageAutomatic === 'false') {
+      log('Is not automated. Fetching local storage')
+      const localStorageTheme = localStorage.getItem('theme')
+      if (localStorageTheme === null) {
+        log('No theme detected. Using automatic')
+        localStorage.setItem('theme', prefersDarkMode.toString())
+        localStorage.setItem('automatic', 'true')
+      } else {
+        log('Using theme in local storage')
+        prefersDarkMode = localStorageTheme === 'true'
+      }
+    } else {
+      log('Is automated. Using user preference')
+    }
+  } else {
+    warn('Local Storage unsupported. Using automatic detection fallback')
+  }
+
+  return prefersDarkMode
+}
+
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
+function App() {
+  const [formattedCount, setFormattedCount] = useState('0')
+  const [emojis, setEmojis] = useState({})
+  const [apiData, setApiData] = useState({})
+  const [settingsOpen, toggleSettingsOpen] = useState(false)
+  const [reload, handleReload] = useState(0)
+  const prefersDarkMode = storageHandler()
 
-    this.state = {
-      blob_data: {},
-      formattedCount: '0',
-      emojis: {}
+  useEffect(() => {
+    if (apiData.hasOwnProperty('blobs')) {
+      return
     }
-  }
+    const fetchData = async () => {
+      const resp = await fetch(BLOBS_ENDPOINT)
+      const data = await resp.json()
+      setApiData(data)
+    }
+    fetchData()
+  }, [apiData])
 
+  useEffect(() => {
+    if (!apiData.hasOwnProperty('blobs')) {
+      return
+    }
+    const count = calculateEmojiCount(apiData)
+    const newFormattedCount = new Intl.NumberFormat().format(count)
+    const newEmojis = new Emojis(apiData)
+    log('Emojis:', newEmojis)
+    setFormattedCount(newFormattedCount)
+    setEmojis(newEmojis)
+  }, [apiData])
 
-  async componentDidMount() {
-    const resp = await fetch(BLOBS_ENDPOINT)
-    const data = await resp.json()
-    const count = calculateEmojiCount(data)
-    const formattedCount = new Intl.NumberFormat().format(count)
-    const emojis = new Emojis(data)
-    log('Emojis:', emojis)
-    this.setState({ blob_data: data, formattedCount: formattedCount, emojis: emojis })
-  }
+  const theme = useMemo(() => createMuiTheme({
+    overrides: {
+      MuiAccordion: {
+        root: {
+          '&:before': {
+            display: 'none',
+          },
+          '&$expanded': {
+            marginTop: '0',
+          },
+        },
+      },
+      MuiAccordionSummary: {
+        root: {
+          borderBottom: '1px solid rgba(224, 224, 224, 1)',
+        },
+      },
+    },
+    palette: {
+      type: prefersDarkMode ? 'dark' : 'light',
+      background: {
+        paper: prefersDarkMode ? grey[800] : grey[100],
+        default: prefersDarkMode ? grey[900] : grey[50],
+      },
+    },
+  }), [prefersDarkMode])
 
-  render() {
-    const { formattedCount, emojis } = this.state
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <Router>
-          <Switch>
-            <Route
-              exact-path="/"
-              children={<Homepage formattedCount={formattedCount} emojis={emojis}/>}/>
-          </Switch>
-        </Router>
-      </ThemeProvider>
-    )
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Container maxWidth="md">
+          <Header handleOpen={toggleSettingsOpen}/>
+        </Container>
+        <Switch>
+          <Route path="/changes" children={<Changepage />} />
+          <Route
+            exact-path="/"
+            children={<Homepage formattedCount={formattedCount} emojis={emojis} />} />
+        </Switch>
+        <SettingsDialog
+          open={settingsOpen}
+          onClose={toggleSettingsOpen}
+          handleReload={handleReload}
+        />
+      </Router>
+    </ThemeProvider>
+  )
 }
 
 export default App
