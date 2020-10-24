@@ -18,6 +18,7 @@ import Grid from '@material-ui/core/Grid'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
+import Link from '@material-ui/core/Link'
 
 const RANDOM_SAMPLE_SIZE = 6
 const useStyles = makeStyles((theme) => ({
@@ -77,14 +78,18 @@ EmojiRow.propTypes = {
   randomSample: PropTypes.array.isRequired,
 }
 
-function JoinServer() {
+function JoinServer(props) {
   const classes = useStyles()
 
   return (
-    <Button size="small" color="primary" variant="contained" className={classes.joinServer}>
+    <Button size="small" color="primary" variant="contained" className={classes.joinServer} component={Link} href={props.invite}>
       Join Server
     </Button>
   )
+}
+
+JoinServer.propTypes = {
+  invite: PropTypes.string.isRequired
 }
 
 function ShowMore(props) {
@@ -134,7 +139,7 @@ class Guild extends Component {
             {expanded ? <ManyEmojiRows emoji={guild.emoji} /> : <EmojiRow randomSample={this.state.randomSample} />}
           </CardContent>
           <CardActions>
-            <JoinServer />
+            <JoinServer invite={guild.invite}/>
           </CardActions>
         </Card>
       </Grid>
