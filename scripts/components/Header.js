@@ -10,8 +10,8 @@ import ListIcon from '@material-ui/icons/List'
 import HomeIcon from '@material-ui/icons/Home'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
-import Link from '@material-ui/core/Link'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
@@ -53,12 +53,12 @@ function Header(props) {
           Blob Emoji
         </Typography>
         <Tooltip title="Home" arrow>
-          <IconButton component={Link} href="/">
+          <IconButton component={Link} to="/">
             <HomeIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Emoji Changelog" arrow>
-          <IconButton component={Link} href="/changes">
+          <IconButton component={Link} to="/changes">
             <ListIcon />
           </IconButton>
         </Tooltip>
