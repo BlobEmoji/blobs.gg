@@ -1,13 +1,56 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
-
-import Emoji from './Emoji'
 import { Guilds } from './Guilds'
 import SearchResult from './SearchResult'
+import TextField from '@material-ui/core/TextField'
+import Box from '@material-ui/core/Box'
+import makeStyles from '@material-ui/core/styles/makeStyles'
+import MaterialEmoji from './material/MaterialEmoji'
+
+const useStyles = makeStyles({
+  noResults: {
+    margin: '3rem 0',
+    textAlign: 'center',
+  },
+})
 
 function insensitiveIncludes(haystack, needle) {
   return haystack.toLowerCase().includes(needle.toLowerCase())
+}
+
+function Contents(props) {
+  const classes = useStyles()
+  if (props.hasResults) {
+    return (
+      <>
+        <div id="search-results-guilds">
+          <Guilds guilds={props.filteredGuilds} />
+        </div>
+        <div id="search-results-blobs">
+          {props.filteredBlobs.map((blob) => (
+            <SearchResult key={blob.id} blob={blob} />
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  if (props.hideNoResults) {
+    return null
+  }
+
+  return (
+    <Box className={classes.noResults}>No results. {<MaterialEmoji baseSize={32} {...props.sadBlob} />}</Box>
+  )
+}
+
+Contents.propTypes = {
+  hasResults: PropTypes.bool.isRequired,
+  filteredGuilds: PropTypes.array.isRequired,
+  filteredBlobs: PropTypes.array.isRequired,
+  hideNoResults: PropTypes.bool.isRequired,
+  sadBlob: PropTypes.object.isRequired,
 }
 
 export default class Search extends React.Component {
@@ -35,9 +78,9 @@ export default class Search extends React.Component {
   getSadBlob() {
     const sadBlob = this.allEmoji.find(
       (emoji) =>
-        emoji.guild.id === '272885620769161216' && emoji.name === 'blobsad'
+        emoji.guild.id === '272885620769161216' && emoji.name === 'blobsad',
     )
-    return sadBlob == null ? null : <Emoji {...sadBlob} />
+    return sadBlob == null ? null : sadBlob
   }
 
   handleQueryChange = (event, querySearch) => {
@@ -100,31 +143,24 @@ export default class Search extends React.Component {
 
     return (
       <>
-        <input
-          id="search-field"
+        <TextField
           type="text"
           placeholder="Search for blobs and servers"
           value={query}
           onChange={this.handleQueryChange}
+          fullWidth
+          variant="filled"
+          color="secondary"
         />
-        <div id="search-results">
-          {!hasResults ? (
-            hideNoResults ? null : (
-              <div className="no-results">No results. {this.getSadBlob()}</div>
-            )
-          ) : (
-            <>
-              <div id="search-results-guilds">
-                <Guilds guilds={filteredGuilds} />
-              </div>
-              <div id="search-results-blobs">
-                {filteredBlobs.map((blob) => (
-                  <SearchResult key={blob.id} blob={blob} />
-                ))}
-              </div>
-            </>
-          )}
-        </div>
+        <Box>
+          <Contents
+            hasResults={hasResults}
+            filteredBlobs={filteredBlobs}
+            filteredGuilds={filteredGuilds}
+            hideNoResults={hideNoResults}
+            sadBlob={this.getSadBlob()}
+          />
+        </Box>
       </>
     )
   }

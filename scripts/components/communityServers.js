@@ -3,26 +3,26 @@ import nitro from 'url:../../assets/discord/nitro.png'
 import PropTypes from 'prop-types'
 import { Guilds } from './material/guilds'
 import { shuffleArray } from '../utils'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
 
 function CommunityServers(props) {
-  let shuffled;
+  let shuffled
   if (props.emojis.hasOwnProperty('guilds')) {
     shuffled = shuffleArray(props.emojis.guilds)
   }
 
   return (
     <>
-      <section id="community-blob-servers">
-        <h2>Community Blob Servers</h2>
-
-        <p>
+      <Box>
+        <Typography variant="h5">Community Blob Servers</Typography>
+        <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
-          official
-          <a href="https://1.blobs.gg" target="_blank">Blob Emoji server</a>
-          and message our Blob Mail bot.
-        </p>
-
-        <p>
+          official <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">Blob Emoji server</Link> and message
+          our Blob Mail bot.
+        </Typography>
+        <Typography variant="body2">
           In order to use custom emoji in other Discord Servers you need an
           active
           <img
@@ -30,19 +30,10 @@ function CommunityServers(props) {
             src={nitro}
             alt="Discord Nitro icon"
           />
-          <a
-            href="https://discordapp.com/nitro"
-            target="_blank"
-            className="strong"
-            rel="noopener"
-          >Discord Nitro</a
-          >
-          subscription.
-        </p>
-        {/*React will be mounted into this DOM node*/}
-        <div className="community-guilds-wrapper" />
-      </section>
-      {props.emojis.hasOwnProperty('guilds') && <Guilds guilds={shuffled} slice/>}
+          <Link href="https://discordapp.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
+        </Typography>
+      </Box>
+      {props.emojis.hasOwnProperty('guilds') && <Guilds guilds={shuffled} slice />}
     </>
   )
 }

@@ -94,6 +94,11 @@ function App() {
           borderBottom: '1px solid rgba(224, 224, 224, 1)',
         },
       },
+      MuiLink: {
+        root: {
+          color: 'white',
+        },
+      },
     },
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
@@ -102,10 +107,18 @@ function App() {
         default: prefersDarkMode ? grey[900] : grey[50],
       },
       primary: green,
+      secondary: {
+        main: '#FCC21B',
+      },
     },
     typography: {
       body2: {
         color: '#CCC',
+        margin: '1rem 0',
+      },
+      h5: {
+        margin: '2rem 0',
+        fontWeight: 'bold',
       },
     },
   }), [prefersDarkMode])
