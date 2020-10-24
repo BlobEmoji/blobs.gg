@@ -99,6 +99,12 @@ function App() {
           color: 'white',
         },
       },
+      MuiFilledInput: {
+        input: {
+          paddingTop: '19px',
+          paddingBottom: '18px',
+        },
+      },
     },
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
