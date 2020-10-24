@@ -1,17 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
-import { Guilds } from './Guilds'
-import SearchResult from './SearchResult'
 import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import MaterialEmoji from './material/MaterialEmoji'
+import { Guilds } from './material/guilds'
 
 const useStyles = makeStyles({
   noResults: {
     margin: '3rem 0',
     textAlign: 'center',
+  },
+  guilds: {
+    marginTop: '1rem',
   },
 })
 
@@ -24,14 +26,10 @@ function Contents(props) {
   if (props.hasResults) {
     return (
       <>
-        <div id="search-results-guilds">
-          <Guilds guilds={props.filteredGuilds} />
-        </div>
-        <div id="search-results-blobs">
-          {props.filteredBlobs.map((blob) => (
-            <SearchResult key={blob.id} blob={blob} />
-          ))}
-        </div>
+        <Guilds guilds={props.filteredGuilds} className={classes.guilds} />
+        {props.filteredBlobs.map((blob) => (
+          <MaterialEmoji key={blob.id} invite showGuild {...blob} />
+        ))}
       </>
     )
   }

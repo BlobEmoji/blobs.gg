@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar'
 import Tooltip from '@material-ui/core/Tooltip'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import clsx from 'clsx'
+import Link from '@material-ui/core/Link'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
   div: {
-    width: 32,
-    height: 32,
+    width: 'inherit',
+    height: 'inherit',
     verticalAlign: 'middle',
     display: 'inline-block',
   },
   emoji: {
     objectFit: 'contain',
+  },
+  box: {
+    margin: '1rem',
   },
 })
 
@@ -22,15 +27,26 @@ function emojiUrl(id, extension, size) {
   return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`
 }
 
-export default function MaterialEmoji({
-  id,
-  animated,
-  name,
-  guild,
-  baseSize = 64,
-  showGuild = false,
-  className
-}) {
+const ConditionalLink = forwardRef(function ConditionalLink(props, ref) {
+  return props.link ? props.wrapper(props.children, ref) : props.children
+})
+
+ConditionalLink.propTypes = {
+  link: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  wrapper: PropTypes.any.isRequired,
+}
+
+function MaterialEmoji(props) {
+  const {
+    id,
+    animated,
+    name,
+    guild,
+    baseSize,
+    showGuild,
+    className,
+  } = props
   const extension = animated ? 'gif' : 'png'
   const classes = useStyles()
   let alt = `:${name}:`
@@ -44,19 +60,27 @@ export default function MaterialEmoji({
     ${emojiUrl(id, extension, baseSize * 2)} 2x
   `
 
+  function wrapper(children) {
+    return <Link href={guild.invite}>{children}</Link>
+  }
+
   return (
-    <Tooltip title={alt} arrow>
-      <Avatar
-        alt={name}
-        classes={{
-          img: classes.emoji,
-        }}
-        srcSet={srcSet}
-        src={emojiUrl(id, extension, baseSize)}
-        variant="square"
-        className={clsx(classes.div, className)}
-      />
-    </Tooltip>
+    <Box display="inline-block" width={baseSize} height={baseSize} className={clsx( props.invite && classes.box)}>
+      <ConditionalLink link={props.invite} wrapper={wrapper}>
+        <Tooltip title={alt} arrow>
+          <Avatar
+            alt={name}
+            classes={{
+              img: classes.emoji,
+            }}
+            srcSet={srcSet}
+            src={emojiUrl(id, extension, baseSize)}
+            variant="square"
+            className={clsx(classes.div, className)}
+          />
+        </Tooltip>
+      </ConditionalLink>
+    </Box>
   )
 }
 
@@ -67,5 +91,14 @@ MaterialEmoji.propTypes = {
   guild: PropTypes.object,
   baseSize: PropTypes.number,
   showGuild: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  invite: PropTypes.bool,
 }
+
+MaterialEmoji.defaultProps = {
+  invite: false,
+  baseSize: 64,
+  showGuild: false,
+}
+
+export default MaterialEmoji

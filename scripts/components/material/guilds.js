@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { useScrollNearEnd } from '../../hooks'
 
 export function Guilds(props) {
-  const { guilds, perPage, slice } = props
+  const { guilds, perPage, slice, className } = props
   const [upTo, setUpTo] = React.useState(perPage)
   let newGuilds = guilds;
   if (slice) {
@@ -22,7 +22,7 @@ export function Guilds(props) {
   })
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} className={className}>
       {newGuilds.map((guild) => (
         <Guild key={guild.id} guild={guild} />
       ))}
@@ -39,4 +39,5 @@ Guilds.propTypes = {
   guilds: PropTypes.array.isRequired,
   slice: PropTypes.bool,
   perPage: PropTypes.number,
+  className: PropTypes.string
 }
