@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   joinServer: {
     textTransform: 'none',
-    backgroundColor: 'green',
+    color: 'white',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -81,7 +81,7 @@ function JoinServer() {
   const classes = useStyles()
 
   return (
-    <Button size="small" className={classes.joinServer}>
+    <Button size="small" color="primary" variant="contained" className={classes.joinServer}>
       Join Server
     </Button>
   )

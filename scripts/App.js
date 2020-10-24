@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container'
 import grey from '@material-ui/core/colors/grey'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SettingsDialog from './components/SettingsDialog'
+import green from '@material-ui/core/colors/green'
 
 function storageHandler() {
   let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
@@ -100,6 +101,7 @@ function App() {
         paper: prefersDarkMode ? grey[800] : grey[100],
         default: prefersDarkMode ? grey[900] : grey[50],
       },
+      primary: green,
     },
   }), [prefersDarkMode])
 
@@ -108,7 +110,7 @@ function App() {
       <CssBaseline />
       <Router>
         <Container maxWidth="md">
-          <Header handleOpen={toggleSettingsOpen}/>
+          <Header handleOpen={toggleSettingsOpen} />
         </Container>
         <Switch>
           <Route path="/changes" children={<Changepage />} />
