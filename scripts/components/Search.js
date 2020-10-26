@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import MaterialEmoji from './material/MaterialEmoji'
 import { Guilds } from './material/guilds'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const useStyles = makeStyles({
   noResults: {
@@ -51,11 +52,7 @@ Contents.propTypes = {
   sadBlob: PropTypes.object.isRequired,
 }
 
-export default class Search extends React.Component {
-  static propTypes = {
-    emojis: PropTypes.object.isRequired,
-  }
-
+class Search extends React.Component {
   constructor(props) {
     super(props)
 
@@ -64,22 +61,21 @@ export default class Search extends React.Component {
       isDebouncing: false,
       filteredBlobs: [],
       filteredGuilds: {},
+      allEmoji: [],
+      allGuilds: [],
+      loading: true
     }
-
-    // Calculate these values once, as they are fairly large.
-    this.allEmoji = this.props.emojis.getAllEmoji()
-    this.allGuilds = this.props.emojis.getAllGuilds()
-
-    this.calculateResultsDebounced = debounce(this.calculateResults, 150)
   }
 
   getSadBlob() {
-    const sadBlob = this.allEmoji.find(
+    const sadBlob = this.state.allEmoji.find(
       (emoji) =>
         emoji.guild.id === '272885620769161216' && emoji.name === 'blobsad',
     )
     return sadBlob == null ? null : sadBlob
   }
+
+  calculateResultsDebounced = debounce(this.calculateResults, 150)
 
   handleQueryChange = (event, querySearch) => {
     const value = querySearch ? querySearch : event.currentTarget.value
@@ -111,16 +107,25 @@ export default class Search extends React.Component {
   }
 
   filterBlobs(query) {
-    return this.allEmoji
+    return this.state.allEmoji
       .filter((blob) => insensitiveIncludes(blob.name, query))
       .sort(({ name: a }, { name: b }) => a.length - b.length)
       .slice(0, 8 * 5)
   }
 
   filterGuilds(query) {
-    return this.allGuilds
+    return this.state.allGuilds
       .filter((guild) => insensitiveIncludes(guild.name, query))
       .slice(0, 3)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.emojis !== prevProps.emojis) {
+      // Calculate these values once, as they are fairly large.
+      const allEmoji = this.props.emojis.getAllEmoji()
+      const allGuilds = this.props.emojis.getAllGuilds()
+      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false })
+    }
   }
 
   componentDidMount() {
@@ -149,17 +154,26 @@ export default class Search extends React.Component {
           fullWidth
           variant="filled"
           color="secondary"
+          InputProps={{
+            endAdornment: this.state.loading ? <CircularProgress/> : null
+          }}
         />
         <Box>
-          <Contents
+          {!this.state.loading && <Contents
             hasResults={hasResults}
             filteredBlobs={filteredBlobs}
             filteredGuilds={filteredGuilds}
             hideNoResults={hideNoResults}
             sadBlob={this.getSadBlob()}
-          />
+          />}
         </Box>
       </>
     )
   }
 }
+
+Search.propTypes = {
+  emojis: PropTypes.object.isRequired
+}
+
+export default Search

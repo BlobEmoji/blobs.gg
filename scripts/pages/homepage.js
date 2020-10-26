@@ -24,7 +24,7 @@ function Homepage(props) {
     <Container maxWidth="md">
       <Typography variant="h5" className={classes.overHeader}>Over {formattedCount} fun and playful Blob Emoji for
         Discord</Typography>
-      {emojis.hasOwnProperty('groups') ? <Search emojis={emojis} /> : null}
+      <Search emojis={emojis} />
       <OfficialServers emojis={officialEmojis} />
       <CommunityServers emojis={communityEmojis} />
     </Container>
