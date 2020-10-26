@@ -60,7 +60,7 @@ class Search extends React.Component {
       query: '',
       isDebouncing: false,
       filteredBlobs: [],
-      filteredGuilds: {},
+      filteredGuilds: [],
       allEmoji: [],
       allGuilds: [],
       loading: true
