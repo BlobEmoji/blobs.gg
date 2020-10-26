@@ -105,6 +105,16 @@ function App() {
           paddingBottom: '18px',
         },
       },
+      MuiCardHeader: {
+        content: {
+          maxWidth: 'calc(100% - 99px)'
+        },
+        title: {
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        },
+      },
     },
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
@@ -127,6 +137,11 @@ function App() {
         fontWeight: 'bold',
       },
     },
+    breakpoints: {
+      values: {
+        md: 1000
+      }
+    }
   }), [prefersDarkMode])
 
   return (
