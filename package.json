@@ -17,7 +17,7 @@
     "eslint": "^7.11.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.5",
-    "parcel": "next",
+    "parcel": "2.0.0-beta.1",
     "@svgr/parcel-plugin-svgr": "^5.4.0",
     "prettier": "^2.1.2",
     "sass": "^1.27.0"
@@ -31,8 +31,8 @@
     "proseWrap": "always"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --detailed-report"
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html --detailed-report 20"
   },
   "dependencies": {
     "classnames": "^2.2.6",
