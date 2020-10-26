@@ -7,6 +7,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import MaterialEmoji from './material/MaterialEmoji'
 import { Guilds } from './material/guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles({
   noResults: {
@@ -63,7 +64,7 @@ class Search extends React.Component {
       filteredGuilds: [],
       allEmoji: [],
       allGuilds: [],
-      loading: true
+      loading: true,
     }
   }
 
@@ -146,18 +147,21 @@ class Search extends React.Component {
 
     return (
       <>
-        <TextField
-          type="text"
-          placeholder="Search for blobs and servers"
-          value={query}
-          onChange={this.handleQueryChange}
-          fullWidth
-          variant="filled"
-          color="secondary"
-          InputProps={{
-            endAdornment: this.state.loading ? <CircularProgress/> : null
-          }}
-        />
+        <Tooltip title={this.state.loading ? 'Loading' : ''} arrow>
+          <TextField
+            disabled={this.state.loading}
+            type="text"
+            placeholder="Search for blobs and servers"
+            value={query}
+            onChange={this.handleQueryChange}
+            fullWidth
+            variant="filled"
+            color="secondary"
+            InputProps={{
+              endAdornment: this.state.loading ? <CircularProgress /> : null,
+            }}
+          />
+        </Tooltip>
         <Box>
           {!this.state.loading && <Contents
             hasResults={hasResults}
@@ -173,7 +177,7 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  emojis: PropTypes.object.isRequired
+  emojis: PropTypes.object.isRequired,
 }
 
 export default Search
