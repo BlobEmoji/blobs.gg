@@ -77,7 +77,7 @@ function ShowMore(props) {
 
   return (
     <IconButton onClick={props.handleClick} className={clsx(classes.expand, { [classes.expandOpen]: expanded })}>
-      {expanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+      <KeyboardArrowDownIcon />
     </IconButton>
   )
 }
