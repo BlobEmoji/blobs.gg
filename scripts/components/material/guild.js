@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  guildHeader: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 }))
 
 
@@ -82,14 +86,16 @@ function JoinServer(props) {
   const classes = useStyles()
 
   return (
-    <Button size="small" color="primary" variant="contained" className={classes.joinServer} component={Link} href={props.invite}>
+    <Button
+      size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
+      href={props.invite}>
       Join Server
     </Button>
   )
 }
 
 JoinServer.propTypes = {
-  invite: PropTypes.string.isRequired
+  invite: PropTypes.string.isRequired,
 }
 
 function ShowMore(props) {
@@ -106,6 +112,25 @@ function ShowMore(props) {
 ShowMore.propTypes = {
   expanded: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
+}
+
+function GuildHeader(props) {
+  const classes = useStyles()
+  const { guild } = props
+  return (
+    <CardHeader
+      avatar={<GuildAvatar name={guild.name} src={guild} />}
+      title={guild.name}
+      action={<ShowMore handleClick={props.handleClick} expanded={props.expanded} />}
+      className={classes.guildHeader}
+    />
+  )
+}
+
+GuildHeader.propTypes = {
+  guild: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  expanded: PropTypes.bool.isRequired,
 }
 
 class Guild extends Component {
@@ -130,16 +155,12 @@ class Guild extends Component {
     return (
       <Grid item xs={4}>
         <Card>
-          <CardHeader
-            avatar={<GuildAvatar name={guild.name} src={guild} />}
-            title={guild.name}
-            action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} />}
-          />
+          <GuildHeader guild={guild} expanded={this.state.expanded} handleClick={this.handleClick} />
           <CardContent>
             {expanded ? <ManyEmojiRows emoji={guild.emoji} /> : <EmojiRow randomSample={this.state.randomSample} />}
           </CardContent>
           <CardActions>
-            <JoinServer invite={guild.invite}/>
+            <JoinServer invite={guild.invite} />
           </CardActions>
         </Card>
       </Grid>
