@@ -28,7 +28,7 @@ function Contents(props) {
   if (props.hasResults) {
     return (
       <>
-        <Guilds guilds={props.filteredGuilds} className={classes.guilds} />
+        <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0}/>
         {props.filteredBlobs.map((blob) => (
           <MaterialEmoji key={blob.id} invite showGuild {...blob} />
         ))}

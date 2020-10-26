@@ -1,5 +1,5 @@
 import server1 from 'url:../../assets/server_icons/server1.svg'
-import React, { forwardRef, useCallback } from 'react'
+import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -22,24 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SettingsButton = forwardRef(function SettingsButton(props, ref) {
-  const handleOpen = useCallback(() => props.handleOpen(true), [
-    props.handleOpen,
-  ])
-
-  return (
-    <IconButton onClick={handleOpen} ref={ref}>
-      <SettingsIcon />
-    </IconButton>
-  )
-})
-
-SettingsButton.propTypes = {
-  handleOpen: PropTypes.func.isRequired,
-}
-
 function Header(props) {
   const classes = useStyles()
+
+  function handleOpen() {
+    props.handleOpen(true)
+  }
 
   return (
     <AppBar position="static" color="inherit">
@@ -63,7 +51,9 @@ function Header(props) {
           </IconButton>
         </Tooltip>
         <Tooltip title="Settings" arrow>
-          <SettingsButton handleOpen={props.handleOpen} />
+          <IconButton onClick={handleOpen}>
+            <SettingsIcon />
+          </IconButton>
         </Tooltip>
       </Toolbar>
     </AppBar>
