@@ -33,7 +33,7 @@ function CommunityServers(props) {
           <Link href="https://discordapp.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
         </Typography>
       </Box>
-      {props.emojis.hasOwnProperty('guilds') && <Guilds guilds={shuffled} slice />}
+      <Guilds guilds={shuffled} slice skeletonCount={9}/>
     </>
   )
 }

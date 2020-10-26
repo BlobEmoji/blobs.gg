@@ -47,7 +47,7 @@ const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 
 function App() {
   const [formattedCount, setFormattedCount] = useState('0')
-  const [emojis, setEmojis] = useState({})
+  const [emojis, setEmojis] = useState({ groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } } })
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
   const [reload, handleReload] = useState(0)
@@ -107,12 +107,12 @@ function App() {
       },
       MuiCardHeader: {
         content: {
-          maxWidth: 'calc(100% - 99px)'
+          maxWidth: 'calc(100% - 99px)',
         },
         title: {
           overflow: 'hidden',
           textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap'
+          whiteSpace: 'nowrap',
         },
       },
     },
@@ -139,9 +139,9 @@ function App() {
     },
     breakpoints: {
       values: {
-        md: 1000
-      }
-    }
+        md: 1000,
+      },
+    },
   }), [prefersDarkMode])
 
   return (

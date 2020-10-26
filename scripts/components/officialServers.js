@@ -18,7 +18,7 @@ function OfficialServers(props) {
   return (
     <>
       <Typography variant="h5">The Official Blob Emoji Servers</Typography>
-      {props.emojis.hasOwnProperty('guilds') && <Guilds guilds={props.emojis.guilds} />}
+      <Guilds guilds={props.emojis.guilds} skeletonCount={6}/>
       <Box className={classes.licenceContainer}>
         <Typography variant="body2">
           All blobs that are uploaded to official Blob Emoji servers are

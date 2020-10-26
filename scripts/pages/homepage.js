@@ -16,8 +16,8 @@ const useStyles = makeStyles({
 
 function Homepage(props) {
   const { emojis, formattedCount } = props
-  const officialEmojis = emojis.hasOwnProperty('groups') ? emojis.groups.blobs : {}
-  const communityEmojis = emojis.hasOwnProperty('groups') ? emojis.groups['community-blobs'] : {}
+  const officialEmojis = emojis.groups.blobs
+  const communityEmojis = emojis.groups['community-blobs']
   const classes = useStyles()
 
   return (
