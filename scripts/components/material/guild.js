@@ -9,22 +9,19 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import CardContent from '@material-ui/core/CardContent'
 import MaterialEmoji from './MaterialEmoji'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
+import Box from '@material-ui/core/Box'
 
 const RANDOM_SAMPLE_SIZE = 6
 const useStyles = makeStyles((theme) => ({
   cell: {
     borderBottom: 0,
-    padding: 0,
+    padding: '0 15px 0 0',
   },
   joinServer: {
     textTransform: 'none',
@@ -42,54 +39,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-
-function ManyEmojiRows(props) {
-  return (
-    props.emoji.map((emoji) => (
-      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji} />
-    ))
-  )
-}
-
-ManyEmojiRows.propTypes = {
-  emoji: PropTypes.array.isRequired,
-}
-
-
 function EmojiRow(props) {
   const classes = useStyles()
 
   return (
-    <Table>
-      <TableBody>
-        <TableRow>
-          {props.randomSample.map((emoji) => (
-            <TableCell className={classes.cell} key={emoji.id}>
-              <MaterialEmoji baseSize={32} {...emoji} />
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableBody>
-    </Table>
+    props.emoji.map((emoji) => (
+      <Box display="inline-block" className={classes.cell} key={emoji.id}>
+        <MaterialEmoji baseSize={32} {...emoji} />
+      </Box>
+    ))
   )
 }
 
 EmojiRow.propTypes = {
-  randomSample: PropTypes.array.isRequired,
+  emoji: PropTypes.array.isRequired,
 }
 
 function JoinServer(props) {
   const classes = useStyles()
 
   return (
-    <Button size="small" color="primary" variant="contained" className={classes.joinServer} component={Link} href={props.invite}>
+    <Button
+      size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
+      href={props.invite}>
       Join Server
     </Button>
   )
 }
 
 JoinServer.propTypes = {
-  invite: PropTypes.string.isRequired
+  invite: PropTypes.string.isRequired,
 }
 
 function ShowMore(props) {
@@ -136,10 +115,10 @@ class Guild extends Component {
             action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} />}
           />
           <CardContent>
-            {expanded ? <ManyEmojiRows emoji={guild.emoji} /> : <EmojiRow randomSample={this.state.randomSample} />}
+            <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
           </CardContent>
           <CardActions>
-            <JoinServer invite={guild.invite}/>
+            <JoinServer invite={guild.invite} />
           </CardActions>
         </Card>
       </Grid>
