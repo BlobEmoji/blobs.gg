@@ -14,13 +14,12 @@ import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
-import Box from '@material-ui/core/Box'
 
 const RANDOM_SAMPLE_SIZE = 6
 const useStyles = makeStyles((theme) => ({
   cell: {
     borderBottom: 0,
-    padding: '0 15px 0 0',
+    margin: '0 15px 0 0',
   },
   joinServer: {
     textTransform: 'none',
@@ -43,9 +42,7 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <Box display="inline-block" className={classes.cell} key={emoji.id}>
-        <MaterialEmoji baseSize={32} {...emoji} />
-      </Box>
+      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji} boxClassName={classes.cell} />
     ))
   )
 }
@@ -92,7 +89,6 @@ class Guild extends Component {
     const { guild } = this.props
 
     this.state = {
-      guild: guild,
       randomSample: shuffleArray(guild.emoji).slice(0, RANDOM_SAMPLE_SIZE),
       expanded: false,
     }
@@ -102,8 +98,20 @@ class Guild extends Component {
     this.setState({ expanded: !this.state.expanded })
   }
 
+  componentDidMount() {
+    if (this.props.communityRender) {
+      this.props.communityRender()
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return nextProps.communityRender === this.props.communityRender;
+
+  }
+
   render() {
-    const { guild, expanded } = this.state
+    const { expanded } = this.state
+    const { guild } = this.props
 
     return (
       <Grid item xs={4}>
@@ -127,6 +135,7 @@ class Guild extends Component {
 
 Guild.propTypes = {
   guild: PropTypes.object.isRequired,
+  communityRender: PropTypes.func,
 }
 
 export default Guild

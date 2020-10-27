@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import MaterialEmoji from './material/MaterialEmoji'
-import { Guilds } from './material/guilds'
+import Guilds from './material/guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
 

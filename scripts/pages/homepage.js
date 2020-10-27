@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import OfficialServers from '../components/officialServers'
 import CommunityServers from '../components/communityServers'
 import PropTypes from 'prop-types'
@@ -16,17 +16,22 @@ const useStyles = makeStyles({
 
 function Homepage(props) {
   const { emojis, formattedCount } = props
+  const [waiting, setWaiting] = useState(true)
   const officialEmojis = emojis.groups.blobs
   const communityEmojis = emojis.groups['community-blobs']
   const classes = useStyles()
+
+  function communityRender() {
+    setWaiting(false)
+  }
 
   return (
     <Container maxWidth="md">
       <Typography variant="h5" className={classes.overHeader}>Over {formattedCount} fun and playful Blob Emoji for
         Discord</Typography>
       <Search emojis={emojis} />
-      <OfficialServers emojis={officialEmojis} />
-      <CommunityServers emojis={communityEmojis} />
+      <OfficialServers emojis={officialEmojis} communityRender={communityRender} />
+      <CommunityServers emojis={communityEmojis} waiting={waiting} />
     </Container>
   )
 }

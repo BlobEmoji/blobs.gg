@@ -65,7 +65,9 @@ function MaterialEmoji(props) {
   }
 
   return (
-    <Box display="inline-block" width={baseSize} height={baseSize} className={clsx( props.invite && classes.box)}>
+    <Box
+      display="inline-block" width={baseSize} height={baseSize}
+      className={clsx(props.invite && classes.box, props.boxClassName)}>
       <ConditionalLink link={props.invite} wrapper={wrapper}>
         <Tooltip title={alt} arrow>
           <Avatar
@@ -93,12 +95,14 @@ MaterialEmoji.propTypes = {
   showGuild: PropTypes.bool,
   className: PropTypes.string,
   invite: PropTypes.bool,
+  boxClassName: PropTypes.string,
 }
 
 MaterialEmoji.defaultProps = {
   invite: false,
   baseSize: 64,
   showGuild: false,
+  boxClassName: '',
 }
 
 export default MaterialEmoji

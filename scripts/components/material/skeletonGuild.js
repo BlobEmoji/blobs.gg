@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Grid from '@material-ui/core/Grid'
 import CardHeader from '@material-ui/core/CardHeader'
 import Card from '@material-ui/core/Card'
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 })
 
-function SkeletonGuild() {
+const SkeletonGuild = memo(function SkeletonGuild() {
   const classes = useStyles()
 
   return (
@@ -39,6 +39,6 @@ function SkeletonGuild() {
       </Card>
     </Grid>
   )
-}
+})
 
 export default SkeletonGuild
