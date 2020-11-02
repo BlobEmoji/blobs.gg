@@ -141,7 +141,6 @@ function App() {
     typography: {
       body2: {
         color: prefersDarkMode ? '#CCC' : 'rgba(0, 0, 0, 0.87)',
-        margin: '1rem 0',
       },
       h5: {
         margin: '2rem 0',
