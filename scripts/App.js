@@ -107,7 +107,7 @@ function App() {
       },
       MuiLink: {
         root: {
-          color: 'white',
+          color: prefersDarkMode ? 'white' : 'black',
         },
       },
       MuiFilledInput: {
@@ -140,7 +140,7 @@ function App() {
     },
     typography: {
       body2: {
-        color: '#CCC',
+        color: prefersDarkMode ? '#CCC' : 'rgba(0, 0, 0, 0.87)',
         margin: '1rem 0',
       },
       h5: {
@@ -150,7 +150,7 @@ function App() {
     },
     breakpoints: {
       values: {
-        md: 1000,
+        md: 1100,
       },
     },
   }), [prefersDarkMode])
