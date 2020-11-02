@@ -2,13 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
-import {
-  CreateAvatar,
-  GuildAvatar,
-  RemoveAvatar,
-  RenameAvatar,
-  UpdateAvatar,
-} from '../Avatars'
+import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from '../Avatars'
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -20,6 +14,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { DateTimeFormatter } from '../../utils'
 import ChangeRow from './ChangeRow'
+import Grid from '@material-ui/core/Grid'
 
 const emojiAction = {
   EMOJI_REMOVE: <RemoveAvatar />,
@@ -81,35 +76,37 @@ export default function ChangeSet(props) {
   const blobs = changeSet.map(rows)
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        avatar={<GuildAvatar name={guild.name} src={guild} />}
-        title={guild.name}
-        subheader={DateTimeFormatter.format(date)}
-      />
-      <TableContainer>
-        <Table>
-          <TableBody>{blobs}</TableBody>
-        </Table>
-      </TableContainer>
-      {hasMore && (
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="Panel Controls"
-          >
-            {`See ${collapsedChangeSet.length} more changes`}
-          </AccordionSummary>
-          <AccordionDetails className={classes.panelDetails}>
-            <TableContainer>
-              <Table>
-                <TableBody>{collapsedRows}</TableBody>
-              </Table>
-            </TableContainer>
-          </AccordionDetails>
-        </Accordion>
-      )}
-    </Card>
+    <Grid item xs={6}>
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={<GuildAvatar name={guild.name} src={guild} />}
+          title={guild.name}
+          subheader={DateTimeFormatter.format(date)}
+        />
+        <TableContainer>
+          <Table>
+            <TableBody>{blobs}</TableBody>
+          </Table>
+        </TableContainer>
+        {hasMore && (
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="Panel Controls"
+            >
+              {`See ${collapsedChangeSet.length} more changes`}
+            </AccordionSummary>
+            <AccordionDetails className={classes.panelDetails}>
+              <TableContainer>
+                <Table>
+                  <TableBody>{collapsedRows}</TableBody>
+                </Table>
+              </TableContainer>
+            </AccordionDetails>
+          </Accordion>
+        )}
+      </Card>
+    </Grid>
   )
 }
 

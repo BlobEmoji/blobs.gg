@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   card: {
@@ -19,7 +20,7 @@ export default function SkeletonChangeSet() {
   const amounts = [3, 4, 5, 6, 7]
   const classes = useStyles()
   const [length] = React.useState(
-    amounts[Math.floor(Math.random() * amounts.length)]
+    amounts[Math.floor(Math.random() * amounts.length)],
   )
 
   const skeletons = Array.from({ length }, (_, index) => {
@@ -47,17 +48,19 @@ export default function SkeletonChangeSet() {
   })
 
   return (
-    <Card className={classes.card}>
-      <CardHeader
-        avatar={<Skeleton variant="circle" width={40} height={40} />}
-        title={<Skeleton height={22} width="80%" />}
-        subheader={<Skeleton height={22} width="60%" />}
-      />
-      <TableContainer>
-        <Table>
-          <TableBody>{skeletons}</TableBody>
-        </Table>
-      </TableContainer>
-    </Card>
+    <Grid item xs={6}>
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={<Skeleton variant="circle" width={40} height={40} />}
+          title={<Skeleton height={22} width="80%" />}
+          subheader={<Skeleton height={22} width="60%" />}
+        />
+        <TableContainer>
+          <Table>
+            <TableBody>{skeletons}</TableBody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </Grid>
   )
 }
