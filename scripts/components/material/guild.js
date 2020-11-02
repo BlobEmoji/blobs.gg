@@ -14,12 +14,14 @@ import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
+import Box from '@material-ui/core/Box'
 
 const RANDOM_SAMPLE_SIZE = 6
 const useStyles = makeStyles((theme) => ({
   cell: {
     borderBottom: 0,
     margin: '0 15px 0 0',
+    flexGrow: '1',
   },
   joinServer: {
     textTransform: 'none',
@@ -105,7 +107,7 @@ class Guild extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.communityRender === this.props.communityRender;
+    return nextProps.communityRender === this.props.communityRender
 
   }
 
@@ -122,7 +124,9 @@ class Guild extends Component {
             action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} />}
           />
           <CardContent>
-            <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
+            <Box display="flex" alignItems="center">
+              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
+            </Box>
           </CardContent>
           <CardActions>
             <JoinServer invite={guild.invite} />

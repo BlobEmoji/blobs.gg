@@ -25,7 +25,7 @@ function Guilds(props) {
 
   if (guilds.length === 0) {
     return (
-      <Grid container spacing={1} className={className}>
+      <Grid container spacing={3} className={className}>
         {Array.from({ length: props.skeletonCount }, (_, index) => (
           <SkeletonGuild key={index} />
         ))}
@@ -34,7 +34,7 @@ function Guilds(props) {
   }
 
   return (
-    <Grid container spacing={1} className={className}>
+    <Grid container spacing={3} className={className}>
       {newGuilds.map((guild) => (
         <Guild key={guild.id} guild={guild} communityRender={props.communityRender} />
       ))}
