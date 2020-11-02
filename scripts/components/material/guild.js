@@ -20,8 +20,7 @@ const RANDOM_SAMPLE_SIZE = 6
 const useStyles = makeStyles((theme) => ({
   cell: {
     borderBottom: 0,
-    margin: '0 15px 0 0',
-    flexGrow: '1',
+    margin: 0,
   },
   joinServer: {
     textTransform: 'none',
@@ -37,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  cellMargin: {
+    borderBottom: 0,
+    margin: '0 15px 0 0',
+  },
 }))
 
 function EmojiRow(props) {
@@ -44,13 +47,15 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji} boxClassName={classes.cell} />
+      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji}
+                     boxClassName={clsx(props.many ? classes.cellMargin : classes.cell)} />
     ))
   )
 }
 
 EmojiRow.propTypes = {
   emoji: PropTypes.array.isRequired,
+  many: PropTypes.bool.isRequired,
 }
 
 function JoinServer(props) {
@@ -124,8 +129,10 @@ class Guild extends Component {
             action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} />}
           />
           <CardContent>
-            <Box display="flex" alignItems="center">
-              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
+            <Box
+              display="flex" justifyContent={expanded ? 'center' : 'space-around'} flexWrap="wrap"
+              alignContent="space-around">
+              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} many={expanded} />
             </Box>
           </CardContent>
           <CardActions>
