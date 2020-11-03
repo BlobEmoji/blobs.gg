@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
   cell: {
-    paddingRight: '15px',
+    padding: '0 0.3rem',
   },
 })
 
@@ -27,14 +27,14 @@ const SkeletonGuild = memo(function SkeletonGuild() {
           action={<IconButton disabled><Skeleton variant="circle" width={32} height={32} /></IconButton>}
         />
         <CardContent>
-          {Array.from({ length: 6 }, (_, index) => (
+          {Array.from({ length: 7 }, (_, index) => (
             <Box key={index} display="inline-block" className={classes.cell}>
               <Skeleton variant="circle" width={32} height={32} />
             </Box>
           ))}
         </CardContent>
         <CardActions>
-          <Skeleton height={49} width="25%" />
+          <Skeleton height={35} width="25%" />
         </CardActions>
       </Card>
     </Grid>
