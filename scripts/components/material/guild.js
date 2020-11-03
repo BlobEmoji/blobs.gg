@@ -16,11 +16,11 @@ import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
 
-const RANDOM_SAMPLE_SIZE = 6
+const RANDOM_SAMPLE_SIZE = 7
 const useStyles = makeStyles((theme) => ({
   cell: {
     borderBottom: 0,
-    margin: 0,
+    margin: '0.3rem',
   },
   joinServer: {
     textTransform: 'none',
@@ -36,10 +36,6 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  cellMargin: {
-    borderBottom: 0,
-    margin: '0 15px 0 0',
-  },
 }))
 
 function EmojiRow(props) {
@@ -48,14 +44,13 @@ function EmojiRow(props) {
   return (
     props.emoji.map((emoji) => (
       <MaterialEmoji baseSize={32} key={emoji.id} {...emoji}
-                     boxClassName={clsx(props.many ? classes.cellMargin : classes.cell)} />
+                     boxClassName={clsx(classes.cell)} />
     ))
   )
 }
 
 EmojiRow.propTypes = {
   emoji: PropTypes.array.isRequired,
-  many: PropTypes.bool.isRequired,
 }
 
 function JoinServer(props) {
@@ -131,8 +126,8 @@ class Guild extends Component {
           <CardContent>
             <Box
               display="flex" justifyContent={expanded ? 'center' : 'space-around'} flexWrap="wrap"
-              alignContent="space-around">
-              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} many={expanded} />
+              alignContent="space-around" margin="0 -0.3rem">
+              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
             </Box>
           </CardContent>
           <CardActions>
