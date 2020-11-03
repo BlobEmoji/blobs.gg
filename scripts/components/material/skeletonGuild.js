@@ -34,7 +34,7 @@ const SkeletonGuild = memo(function SkeletonGuild() {
           ))}
         </CardContent>
         <CardActions>
-          <Skeleton height={35} width="25%" />
+          <Skeleton height={24} width="25%" />
         </CardActions>
       </Card>
     </Grid>
