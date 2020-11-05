@@ -52,8 +52,8 @@ ReactGA.initialize('UA-124174886-4')
 ReactGA.pageview(window.location.pathname + window.location.search)
 
 history.listen((location) => {
-  ReactGA.set({ page: location.pathname })
-  ReactGA.pageview(location.pathname)
+  ReactGA.set({ page: location.location.pathname })
+  ReactGA.pageview(location.location.pathname)
 })
 
 function App() {
@@ -124,6 +124,11 @@ function App() {
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
+        },
+      },
+      MuiTooltip: {
+        tooltipPlacementBottom: {
+          margin: '6px 0',
         },
       },
     },
