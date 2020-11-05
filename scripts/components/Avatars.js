@@ -10,18 +10,21 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import BrushIcon from '@material-ui/icons/Brush'
 import indigo from '@material-ui/core/colors/indigo'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import Tooltip from '@material-ui/core/Tooltip'
 
 export function GuildAvatar(props) {
   const { name, src } = props
   const { id, icon } = src
 
   return (
-    <Avatar
-      alt={name}
-      src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
-    >
-      {name}
-    </Avatar>
+    <Tooltip title={name} arrow>
+      <Avatar
+        alt={name}
+        src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
+      >
+        {name}
+      </Avatar>
+    </Tooltip>
   )
 }
 
