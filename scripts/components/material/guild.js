@@ -35,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)',
-    height: 40,
-    width: 40,
   },
 }))
 
