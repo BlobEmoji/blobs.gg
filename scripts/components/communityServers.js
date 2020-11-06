@@ -38,7 +38,7 @@ function CommunityServers(props) {
             src={nitro}
             alt="Discord Nitro icon"
           />
-          <Link href="https://discordapp.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
+          <Link href="https://discord.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
         </Typography>
       </Box>
       <Guilds guilds={shuffled} slice skeletonCount={9} />
