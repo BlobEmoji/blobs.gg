@@ -130,8 +130,8 @@ class Guild extends Component {
           />
           <CardContent>
             <Box
-              display="flex" justifyContent={expanded ? 'center' : 'space-around'} flexWrap="wrap"
-              alignContent="space-around" margin="-0.3rem 0">
+              display="flex" justifyContent="space-between" flexWrap="wrap"
+              margin="-0.3rem 0" padding="0 0.1rem">
               <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
             </Box>
           </CardContent>
