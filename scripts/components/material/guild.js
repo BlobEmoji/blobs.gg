@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)',
+    height: 40,
+    width: 40,
   },
 }))
 
@@ -59,7 +61,7 @@ function JoinServer(props) {
   return (
     <Button
       size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
-      href={props.invite}>
+      href={props.invite} target="_blank">
       Join Server
     </Button>
   )
