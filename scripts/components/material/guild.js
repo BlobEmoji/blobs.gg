@@ -46,7 +46,7 @@ function EmojiRow(props) {
   return (
     props.emoji.map((emoji) => (
       <MaterialEmoji baseSize={32} key={emoji.id} {...emoji}
-                     boxClassName={clsx(classes.cell)} />
+        boxClassName={clsx(classes.cell)} />
     ))
   )
 }
@@ -113,7 +113,7 @@ class Guild extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps) {
     return nextProps.communityRender === this.props.communityRender
 
   }

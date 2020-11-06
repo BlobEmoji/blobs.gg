@@ -120,7 +120,7 @@ class Search extends React.Component {
       .slice(0, 3)
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (this.props.emojis !== prevProps.emojis) {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()

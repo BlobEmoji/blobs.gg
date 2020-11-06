@@ -61,7 +61,7 @@ function App() {
   const [emojis, setEmojis] = useState({ groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } } })
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
-  const [reload, handleReload] = useState(0)
+  const [, handleReload] = useState(0)
   const prefersDarkMode = storageHandler()
 
   useEffect(() => {
