@@ -8,10 +8,15 @@ import MaterialEmoji from '../material/MaterialEmoji'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { useMediaQuery } from '@material-ui/core'
 import useTheme from '@material-ui/core/styles/useTheme'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
-  span: {
-    paddingLeft: '1rem',
+  //TODO - Make these unnecessary
+  create: {
+    paddingRight: '0.5975rem',
+  },
+  rename: {
+    paddingRight: '0.367rem',
   },
 })
 
@@ -24,9 +29,46 @@ export default function ChangeRow({
 }) {
   const classes = useStyles()
   const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.up('sm'))
+  //TODO - Restore the "useMediaQuery" and fix long names
+  const matches = true
 
   return (
+    <Box display="flex" alignItems="center">
+      <Box padding="0.5rem">
+        {eventIcon}
+      </Box>
+      <Box padding="0.25rem">
+        {
+          (eventName === 'CREATE') ? (
+            <span className={classes.create}>{`${titleCase(eventName)}d`}</span>
+          ) : (eventName === 'UPDATE') ? (
+            <span className={classes.rename}>{`${titleCase(eventName)}d`}</span>
+          ) : <span>{`${titleCase(eventName)}d`}</span>
+        }
+      </Box>
+      <Box>
+        <Box padding="0.5rem">
+          <MaterialEmoji baseSize={32} {...emoji} />
+        </Box>
+      </Box>
+      {matches &&
+          <Box padding="0.25rem">
+            {emoji.name}
+          </Box>
+      }
+      <Box padding="0.25rem">{action}</Box>
+      {afterEmoji ? (
+        <Box padding="0.5rem">
+          <MaterialEmoji baseSize={32} {...afterEmoji} />
+        </Box>
+      ) : null}
+      {(matches && afterEmoji) &&
+          <Box padding="0.25rem">
+            {afterEmoji.name}
+          </Box>
+      }
+    </Box>
+    /*
     <TableRow>
       <TableCell>
         {eventIcon}
@@ -46,6 +88,7 @@ export default function ChangeRow({
         ) : null}
       </TableCell>
     </TableRow>
+    */
   )
 }
 
