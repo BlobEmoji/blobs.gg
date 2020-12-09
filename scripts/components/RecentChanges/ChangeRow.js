@@ -1,24 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
 
 import { titleCase } from '../../utils'
 import MaterialEmoji from '../material/MaterialEmoji'
-import makeStyles from '@material-ui/core/styles/makeStyles'
-import { useMediaQuery } from '@material-ui/core'
-import useTheme from '@material-ui/core/styles/useTheme'
 import Box from '@material-ui/core/Box'
-
-const useStyles = makeStyles({
-  //TODO - Make these unnecessary
-  create: {
-    paddingRight: '0.5975rem',
-  },
-  rename: {
-    paddingRight: '0.367rem',
-  },
-})
 
 export default function ChangeRow({
   eventIcon,
@@ -27,31 +12,20 @@ export default function ChangeRow({
   action,
   afterEmoji,
 }) {
-  const classes = useStyles()
-  const theme = useTheme()
-  //TODO - Restore the "useMediaQuery" and fix long names
-  const matches = true
-
   return (
     <Box display="flex" alignItems="center">
-      <Box padding="0.5rem">
-        {eventIcon}
-      </Box>
-      <Box padding="0.25rem">
-        {
-          (eventName === 'CREATE') ? (
-            <span className={classes.create}>{`${titleCase(eventName)}d`}</span>
-          ) : (eventName === 'UPDATE') ? (
-            <span className={classes.rename}>{`${titleCase(eventName)}d`}</span>
-          ) : <span>{`${titleCase(eventName)}d`}</span>
-        }
+      <Box display="flex" alignItems="center" minWidth="7.1rem">
+        <Box padding="0.5rem">
+          {eventIcon}
+        </Box>
+        <span>{`${titleCase(eventName)}d`}</span>
       </Box>
       <Box>
         <Box padding="0.5rem">
           <MaterialEmoji baseSize={32} {...emoji} />
         </Box>
       </Box>
-      {matches &&
+      {!afterEmoji &&
           <Box padding="0.25rem">
             {emoji.name}
           </Box>
@@ -62,33 +36,12 @@ export default function ChangeRow({
           <MaterialEmoji baseSize={32} {...afterEmoji} />
         </Box>
       ) : null}
-      {(matches && afterEmoji) &&
-          <Box padding="0.25rem">
+      {afterEmoji &&
+          <Box padding="0.25rem" maxWidth="15rem" overflow="hidden" textOverflow="ellipsis">
             {afterEmoji.name}
           </Box>
       }
     </Box>
-    /*
-    <TableRow>
-      <TableCell>
-        {eventIcon}
-        <span className={classes.span}>{`${titleCase(eventName)}d`}</span>
-      </TableCell>
-      <TableCell>
-        <MaterialEmoji baseSize={32} {...emoji} />
-        {matches && <span className={classes.span}>{emoji.name}</span>}
-      </TableCell>
-      <TableCell>{action}</TableCell>
-      <TableCell>
-        {afterEmoji ? (
-          <>
-            <MaterialEmoji baseSize={32} {...afterEmoji} />
-            {matches && <span className={classes.span}>{afterEmoji.name}</span>}
-          </>
-        ) : null}
-      </TableCell>
-    </TableRow>
-    */
   )
 }
 
