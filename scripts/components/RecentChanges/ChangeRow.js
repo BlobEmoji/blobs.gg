@@ -20,10 +20,8 @@ export default function ChangeRow({
         </Box>
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
-      <Box>
-        <Box padding="0.5rem">
-          <MaterialEmoji baseSize={32} {...emoji} />
-        </Box>
+      <Box padding="0.5rem">
+        <MaterialEmoji baseSize={32} {...emoji} />
       </Box>
       {!afterEmoji &&
           <Box padding="0.25rem">
