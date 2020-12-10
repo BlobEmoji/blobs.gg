@@ -27,8 +27,9 @@ function Homepage(props) {
 
   return (
     <Container maxWidth="md">
-      <Typography variant="h5" className={classes.overHeader}>Over {formattedCount} fun and playful Blob Emoji for
-        Discord</Typography>
+      <Typography variant="h5" className={classes.overHeader}>
+        {formattedCount} fun and playful Blob Emoji for Discord
+      </Typography>
       <Search emojis={emojis} />
       <OfficialServers emojis={officialEmojis} communityRender={communityRender} />
       <CommunityServers emojis={communityEmojis} waiting={waiting} />
