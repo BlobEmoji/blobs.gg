@@ -43,8 +43,8 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji}
-                     boxClassName={clsx(classes.cell)} />
+      <MaterialEmoji
+        baseSize={32} key={emoji.id} {...emoji} boxClassName={clsx(classes.cell)} />
     ))
   )
 }
@@ -59,7 +59,7 @@ function JoinServer(props) {
   return (
     <Button
       size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
-      href={props.invite}>
+      href={props.invite} target="_blank">
       Join Server
     </Button>
   )
@@ -71,7 +71,11 @@ JoinServer.propTypes = {
 
 function ShowMore(props) {
   const classes = useStyles()
-  const { expanded } = props
+  const { expanded, emojiCount } = props
+
+  if (emojiCount <= RANDOM_SAMPLE_SIZE) {
+    return null
+  }
 
   return (
     <IconButton onClick={props.handleClick} className={clsx(classes.expand, { [classes.expandOpen]: expanded })}>
@@ -82,6 +86,7 @@ function ShowMore(props) {
 
 ShowMore.propTypes = {
   expanded: PropTypes.bool.isRequired,
+  emojiCount: PropTypes.number,
   handleClick: PropTypes.func.isRequired,
 }
 
@@ -106,6 +111,7 @@ class Guild extends Component {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return nextProps.communityRender === this.props.communityRender
 
@@ -121,12 +127,12 @@ class Guild extends Component {
           <CardHeader
             avatar={<GuildAvatar name={guild.name} src={guild} />}
             title={guild.name}
-            action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} />}
+            action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} emojiCount={guild.emoji.length}/>}
           />
           <CardContent>
             <Box
-              display="flex" justifyContent={expanded ? 'center' : 'space-around'} flexWrap="wrap"
-              alignContent="space-around" margin="-0.3rem 0">
+              display="grid" gridTemplateColumns="repeat(7, 1fr)"
+              margin="-0.3rem 0" padding="0 0.1rem">
               <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
             </Box>
           </CardContent>

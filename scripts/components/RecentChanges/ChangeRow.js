@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
 
 import { titleCase } from '../../utils'
 import MaterialEmoji from '../material/MaterialEmoji'
+import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import { useMediaQuery } from '@material-ui/core'
-import useTheme from '@material-ui/core/styles/useTheme'
+import clsx from 'clsx'
 
 const useStyles = makeStyles({
-  span: {
-    paddingLeft: '1rem',
+  changelogBox: {
+    margin: '0.5rem',
   },
+  text: {
+    padding: '0.25rem'
+  }
 })
 
 export default function ChangeRow({
@@ -23,29 +24,27 @@ export default function ChangeRow({
   afterEmoji,
 }) {
   const classes = useStyles()
-  const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.up('sm'))
-
+  
   return (
-    <TableRow>
-      <TableCell>
+    <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center" minWidth="7.1rem">
         {eventIcon}
-        <span className={classes.span}>{`${titleCase(eventName)}d`}</span>
-      </TableCell>
-      <TableCell>
-        <MaterialEmoji baseSize={32} {...emoji} />
-        {matches && <span className={classes.span}>{emoji.name}</span>}
-      </TableCell>
-      <TableCell>{action}</TableCell>
-      <TableCell>
-        {afterEmoji ? (
-          <>
-            <MaterialEmoji baseSize={32} {...afterEmoji} />
-            {matches && <span className={classes.span}>{afterEmoji.name}</span>}
-          </>
-        ) : null}
-      </TableCell>
-    </TableRow>
+        <span>{`${titleCase(eventName)}d`}</span>
+      </Box>
+      <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
+      {!afterEmoji &&
+        <Box className={classes.text}>{emoji.name}</Box>
+      }
+      <Box className={classes.text}>{action}</Box>
+      {afterEmoji && (
+        <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
+      )}
+      {afterEmoji &&
+        <Box className={classes.text} maxWidth="15rem" overflow="hidden" textOverflow="ellipsis">
+          {afterEmoji.name}
+        </Box>
+      }
+    </Box>
   )
 }
 

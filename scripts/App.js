@@ -61,9 +61,16 @@ function App() {
   const [emojis, setEmojis] = useState({ groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } } })
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
-  const [reload, handleReload] = useState(0)
+  const [, handleReload] = useState(0)
   const prefersDarkMode = storageHandler()
 
+  useEffect(() => {
+    if (formattedCount === '0') {
+      const newFormattedCount = new Intl.NumberFormat().format(4400)
+      setFormattedCount(`Over ${newFormattedCount}`)
+    }
+  }, [formattedCount])
+  
   useEffect(() => {
     if (apiData.hasOwnProperty('blobs')) {
       return

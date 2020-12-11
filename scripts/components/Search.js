@@ -120,6 +120,7 @@ class Search extends React.Component {
       .slice(0, 3)
   }
 
+  // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.emojis !== prevProps.emojis) {
       // Calculate these values once, as they are fairly large.

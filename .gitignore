@@ -1,3 +1,4 @@
+# npm
 node_modules
 
 # yarn
@@ -10,6 +11,9 @@ yarn.lock
 /.parcel-cache
 /dist
 
+# macOS
 .DS_Store
 
+# IDEs
 **.idea
+.vscode

@@ -3,13 +3,10 @@ import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from '../Avatars'
-import TableContainer from '@material-ui/core/TableContainer'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
 import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 import { DateTimeFormatter } from '../../utils'
@@ -30,6 +27,9 @@ const useStyles = makeStyles({
   panelDetails: {
     padding: 0,
   },
+  accordionDetails: {
+    flexDirection: 'column'
+  }
 })
 
 const DEFAULT_MAXIMUM = 10
@@ -76,18 +76,14 @@ export default function ChangeSet(props) {
   const blobs = changeSet.map(rows)
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12} md={6}>
       <Card className={classes.card}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
           subheader={DateTimeFormatter.format(date)}
         />
-        <TableContainer>
-          <Table>
-            <TableBody>{blobs}</TableBody>
-          </Table>
-        </TableContainer>
+        {blobs}
         {hasMore && (
           <Accordion>
             <AccordionSummary
@@ -96,12 +92,8 @@ export default function ChangeSet(props) {
             >
               {`See ${collapsedChangeSet.length} more changes`}
             </AccordionSummary>
-            <AccordionDetails className={classes.panelDetails}>
-              <TableContainer>
-                <Table>
-                  <TableBody>{collapsedRows}</TableBody>
-                </Table>
-              </TableContainer>
+            <AccordionDetails className={classes.accordionDetails}>
+              {collapsedRows}
             </AccordionDetails>
           </Accordion>
         )}

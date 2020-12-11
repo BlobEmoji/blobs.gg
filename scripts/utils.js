@@ -16,9 +16,7 @@ export function warn(...info) {
   )
 }
 
-/**
- * Shuffles an array using the Fisher-Yates shuffle algorithm.
- */
+// Shuffles an array using the Fisher-Yates shuffle algorithm.
 export function shuffleArray(source) {
   // Copy the source array.
   let array = [...source]
