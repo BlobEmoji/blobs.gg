@@ -66,8 +66,8 @@ function App() {
 
   useEffect(() => {
     if (formattedCount === '0') {
-      const newFormattedCount = new Intl.NumberFormat().format(4200)
-      setFormattedCount(newFormattedCount)
+      const newFormattedCount = new Intl.NumberFormat().format(4400)
+      setFormattedCount(`Over ${newFormattedCount}`)
     }
   }, [formattedCount])
   useEffect(() => {
