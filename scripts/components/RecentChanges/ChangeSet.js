@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from '../Avatars'
 import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import makeStyles from '@material-ui/core/styles/makeStyles'
@@ -26,6 +27,9 @@ const useStyles = makeStyles({
   panelDetails: {
     padding: 0,
   },
+  accordionDetails: {
+    flexDirection: 'column'
+  }
 })
 
 const DEFAULT_MAXIMUM = 10
@@ -88,7 +92,9 @@ export default function ChangeSet(props) {
             >
               {`See ${collapsedChangeSet.length} more changes`}
             </AccordionSummary>
-            {collapsedRows}
+            <AccordionDetails className={classes.accordionDetails}>
+              {collapsedRows}
+            </AccordionDetails>
           </Accordion>
         )}
       </Card>

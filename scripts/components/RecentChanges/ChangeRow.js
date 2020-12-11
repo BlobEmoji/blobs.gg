@@ -4,6 +4,17 @@ import React from 'react'
 import { titleCase } from '../../utils'
 import MaterialEmoji from '../material/MaterialEmoji'
 import Box from '@material-ui/core/Box'
+import makeStyles from '@material-ui/core/styles/makeStyles'
+import clsx from 'clsx'
+
+const useStyles = makeStyles({
+  changelogBox: {
+    margin: '0.5rem',
+  },
+  text: {
+    padding: '0.25rem'
+  }
+})
 
 export default function ChangeRow({
   eventIcon,
@@ -12,32 +23,26 @@ export default function ChangeRow({
   action,
   afterEmoji,
 }) {
+  const classes = useStyles()
+  
   return (
     <Box display="flex" alignItems="center">
       <Box display="flex" alignItems="center" minWidth="7.1rem">
-        <Box padding="0.5rem">
-          {eventIcon}
-        </Box>
+        {eventIcon}
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
-      <Box padding="0.5rem">
-        <MaterialEmoji baseSize={32} {...emoji} />
-      </Box>
+      <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
       {!afterEmoji &&
-          <Box padding="0.25rem">
-            {emoji.name}
-          </Box>
+        <Box className={classes.text}>{emoji.name}</Box>
       }
-      <Box padding="0.25rem">{action}</Box>
-      {afterEmoji ? (
-        <Box padding="0.5rem">
-          <MaterialEmoji baseSize={32} {...afterEmoji} />
-        </Box>
-      ) : null}
+      <Box className={classes.text}>{action}</Box>
+      {afterEmoji && (
+        <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
+      )}
       {afterEmoji &&
-          <Box padding="0.25rem" maxWidth="15rem" overflow="hidden" textOverflow="ellipsis">
-            {afterEmoji.name}
-          </Box>
+        <Box className={classes.text} maxWidth="15rem" overflow="hidden" textOverflow="ellipsis">
+          {afterEmoji.name}
+        </Box>
       }
     </Box>
   )

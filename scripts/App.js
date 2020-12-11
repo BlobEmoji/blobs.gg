@@ -57,13 +57,19 @@ history.listen((location) => {
 })
 
 function App() {
-  const [formattedCount, setFormattedCount] = useState('Over 4.200')
+  const [formattedCount, setFormattedCount] = useState('0')
   const [emojis, setEmojis] = useState({ groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } } })
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
   const [, handleReload] = useState(0)
   const prefersDarkMode = storageHandler()
 
+  useEffect(() => {
+    if (formattedCount === '0') {
+      const newFormattedCount = new Intl.NumberFormat().format(4200)
+      setFormattedCount(newFormattedCount)
+    }
+  }, [formattedCount])
   useEffect(() => {
     if (apiData.hasOwnProperty('blobs')) {
       return

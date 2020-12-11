@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { GuildAvatar } from '../Avatars'
@@ -43,8 +44,8 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <MaterialEmoji baseSize={32} key={emoji.id} {...emoji}
-        boxClassName={clsx(classes.cell)} />
+      <MaterialEmoji
+        baseSize={32} key={emoji.id} {...emoji} boxClassName={clsx(classes.cell)} />
     ))
   )
 }
@@ -73,7 +74,7 @@ function ShowMore(props) {
   const classes = useStyles()
   const { expanded, emojiCount } = props
 
-  if (emojiCount !== undefined && emojiCount <= RANDOM_SAMPLE_SIZE) {
+  if (emojiCount <= RANDOM_SAMPLE_SIZE) {
     return null
   }
 
@@ -111,7 +112,7 @@ class Guild extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     return nextProps.communityRender === this.props.communityRender
 
   }

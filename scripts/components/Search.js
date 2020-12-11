@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
@@ -120,7 +121,7 @@ class Search extends React.Component {
       .slice(0, 3)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.emojis !== prevProps.emojis) {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
