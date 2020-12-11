@@ -70,6 +70,7 @@ function App() {
       setFormattedCount(`Over ${newFormattedCount}`)
     }
   }, [formattedCount])
+  
   useEffect(() => {
     if (apiData.hasOwnProperty('blobs')) {
       return
