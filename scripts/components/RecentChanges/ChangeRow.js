@@ -12,8 +12,13 @@ const useStyles = makeStyles({
     margin: '0.5rem',
   },
   text: {
-    padding: '0.25rem'
-  }
+    padding: '0.25rem',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  to: {
+    padding: '0.25rem',
+  },
 })
 
 export default function ChangeRow({
@@ -35,12 +40,12 @@ export default function ChangeRow({
       {!afterEmoji &&
         <Box className={classes.text}>{emoji.name}</Box>
       }
-      <Box className={classes.text}>{action}</Box>
+      <Box className={classes.to}>{action}</Box>
       {afterEmoji && (
         <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
       )}
       {afterEmoji &&
-        <Box className={classes.text} maxWidth="15rem" overflow="hidden" textOverflow="ellipsis">
+        <Box className={classes.text}>
           {afterEmoji.name}
         </Box>
       }

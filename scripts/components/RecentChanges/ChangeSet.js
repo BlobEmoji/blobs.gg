@@ -22,7 +22,7 @@ const emojiAction = {
 
 const useStyles = makeStyles({
   card: {
-    marginBottom: '2rem',
+    marginBottom: '1rem',
   },
   panelDetails: {
     padding: 0,
