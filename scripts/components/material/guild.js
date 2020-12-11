@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { GuildAvatar } from '../Avatars'
@@ -112,6 +111,7 @@ class Guild extends Component {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return nextProps.communityRender === this.props.communityRender
 
