@@ -28,7 +28,7 @@ function Contents(props) {
   if (props.hasResults) {
     return (
       <>
-        <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0}/>
+        <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
         {props.filteredBlobs.map((blob) => (
           <MaterialEmoji key={blob.id} invite showGuild {...blob} />
         ))}
@@ -134,6 +134,12 @@ class Search extends React.Component {
     let search = new URL(window.location).searchParams
     if (search.has('name')) {
       this.handleQueryChange(null, search.get('name'))
+    }
+    if (this.props.emojis.groups.blobs.guilds.length > 0) {
+      // Calculate these values once, as they are fairly large.
+      const allEmoji = this.props.emojis.getAllEmoji()
+      const allGuilds = this.props.emojis.getAllGuilds()
+      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false })
     }
   }
 
