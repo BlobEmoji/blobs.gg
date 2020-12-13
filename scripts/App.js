@@ -52,8 +52,8 @@ ReactGA.initialize('UA-124174886-4')
 ReactGA.pageview(window.location.pathname + window.location.search)
 
 history.listen((location) => {
-  ReactGA.set({ page: location.location.pathname })
-  ReactGA.pageview(location.location.pathname)
+  ReactGA.set({ page: location.pathname })
+  ReactGA.pageview(location.pathname)
 })
 
 function App() {
@@ -70,7 +70,7 @@ function App() {
       setFormattedCount(`Over ${newFormattedCount}`)
     }
   }, [formattedCount])
-  
+
   useEffect(() => {
     if (apiData.hasOwnProperty('blobs')) {
       return

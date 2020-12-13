@@ -37,7 +37,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
-    "history": "^5.0.0",
+    "history": "4.9.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
