@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
+import { withTranslation } from 'react-i18next'
 
 const RANDOM_SAMPLE_SIZE = 7
 const useStyles = makeStyles((theme) => ({
@@ -60,13 +61,14 @@ function JoinServer(props) {
     <Button
       size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
       href={props.invite} target="_blank">
-      Join Server
+      {props.t('Join Server')}
     </Button>
   )
 }
 
 JoinServer.propTypes = {
   invite: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 function ShowMore(props) {
@@ -114,12 +116,11 @@ class Guild extends Component {
   // eslint-disable-next-line no-unused-vars
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return nextProps.communityRender === this.props.communityRender
-
   }
 
   render() {
     const { expanded } = this.state
-    const { guild } = this.props
+    const { guild, t } = this.props
 
     return (
       <Grid item xs={4}>
@@ -127,7 +128,9 @@ class Guild extends Component {
           <CardHeader
             avatar={<GuildAvatar name={guild.name} src={guild} />}
             title={guild.name}
-            action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} emojiCount={guild.emoji.length}/>}
+            action={<ShowMore
+              handleClick={this.handleClick} expanded={this.state.expanded}
+              emojiCount={guild.emoji.length} />}
           />
           <CardContent>
             <Box
@@ -137,7 +140,7 @@ class Guild extends Component {
             </Box>
           </CardContent>
           <CardActions>
-            <JoinServer invite={guild.invite} />
+            <JoinServer invite={guild.invite} t={t}/>
           </CardActions>
         </Card>
       </Grid>
@@ -148,6 +151,7 @@ class Guild extends Component {
 Guild.propTypes = {
   guild: PropTypes.object.isRequired,
   communityRender: PropTypes.func,
+  t: PropTypes.func.isRequired
 }
 
-export default Guild
+export default withTranslation()(Guild)

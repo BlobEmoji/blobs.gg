@@ -12,6 +12,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import { DateTimeFormatter } from '../../utils'
 import ChangeRow from './ChangeRow'
 import Grid from '@material-ui/core/Grid'
+import { Trans, withTranslation } from 'react-i18next'
 
 const emojiAction = {
   EMOJI_REMOVE: <RemoveAvatar />,
@@ -28,13 +29,13 @@ const useStyles = makeStyles({
     padding: 0,
   },
   accordionDetails: {
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 })
 
 const DEFAULT_MAXIMUM = 10
 
-export default function ChangeSet(props) {
+function ChangeSet(props) {
   let { changeSet } = props
 
   const date = new Date(changeSet[0].changed_at)
@@ -90,7 +91,10 @@ export default function ChangeSet(props) {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >
-              {`See ${collapsedChangeSet.length} more changes`}
+              <Trans
+                i18nKey="changeset.seeMore"
+                values={{ count: collapsedChangeSet.length }}
+              />
             </AccordionSummary>
             <AccordionDetails className={classes.accordionDetails}>
               {collapsedRows}
@@ -105,3 +109,5 @@ export default function ChangeSet(props) {
 ChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
 }
+
+export default withTranslation()(ChangeSet)

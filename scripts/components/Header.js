@@ -12,6 +12,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
+import LanguageIcon from '@material-ui/icons/Language'
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
@@ -23,10 +25,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function Header(props) {
+  const { i18n, t, tReady } = props
   const classes = useStyles()
 
   function handleOpen() {
     props.handleOpen(true)
+  }
+
+  function toggleLang() {
+    i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en')
   }
 
   return (
@@ -35,24 +42,31 @@ function Header(props) {
         <Avatar
           src={server1}
           className={classes.mainIcon}
-          alt="Blob Emoji Server Icon"
+          alt={`Blob Emoji ${t('Server Icon')}`}
         />
         <Typography variant="h6" className={classes.title}>
           Blob Emoji
         </Typography>
-        <Tooltip title="Home" arrow>
-          <IconButton component={Link} to="/">
-            <HomeIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Emoji Changelog" arrow>
-          <IconButton component={Link} to="/changes">
-            <ListIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Settings" arrow>
-          <IconButton onClick={handleOpen}>
-            <SettingsIcon />
+        {tReady && <>
+          <Tooltip title={t('Home')} arrow>
+            <IconButton component={Link} to="/">
+              <HomeIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('Emoji Changelog')} arrow>
+            <IconButton component={Link} to="/changes">
+              <ListIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('Settings')} arrow>
+            <IconButton onClick={handleOpen}>
+              <SettingsIcon />
+            </IconButton>
+          </Tooltip>
+        </>}
+        <Tooltip title="Toggle FR" arrow>
+          <IconButton onClick={toggleLang}>
+            <LanguageIcon />
           </IconButton>
         </Tooltip>
       </Toolbar>
@@ -62,6 +76,12 @@ function Header(props) {
 
 Header.propTypes = {
   handleOpen: PropTypes.func.isRequired,
+  i18n: PropTypes.shape({
+    language: PropTypes.string.isRequired,
+    changeLanguage: PropTypes.func.isRequired,
+  }).isRequired,
+  t: PropTypes.func.isRequired,
+  tReady: PropTypes.bool.isRequired,
 }
 
-export default Header
+export default withTranslation()(Header)

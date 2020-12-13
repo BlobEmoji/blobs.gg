@@ -3,15 +3,14 @@ import Typography from '@material-ui/core/Typography'
 import RecentChangesWrapper from '../components/RecentChanges/RecentChanges'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
+import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 
-function ChangePage() {
+function ChangePage(props) {
   return (
     <Container maxWidth="md">
-      <Typography variant="h4">Global Blob Changelog</Typography>
-      <p>
-        This page tracks the changes of all blobs in any of our partnered
-        servers.
-      </p>
+      <Typography variant="h4">{props.t('changepage.title')}</Typography>
+      <Typography variant="body2">{props.t('changepage.description')}</Typography>
       <Grid container spacing={3}>
         <RecentChangesWrapper />
       </Grid>
@@ -19,4 +18,8 @@ function ChangePage() {
   )
 }
 
-export default ChangePage
+ChangePage.propTypes = {
+  t: PropTypes.func.isRequired,
+}
+
+export default withTranslation()(ChangePage)

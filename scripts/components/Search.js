@@ -8,6 +8,7 @@ import MaterialEmoji from './material/MaterialEmoji'
 import Guilds from './material/guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
+import { withTranslation } from 'react-i18next'
 
 const useStyles = makeStyles({
   noResults: {
@@ -25,6 +26,7 @@ function insensitiveIncludes(haystack, needle) {
 
 function Contents(props) {
   const classes = useStyles()
+  const { t } = props
   if (props.hasResults) {
     return (
       <>
@@ -41,7 +43,7 @@ function Contents(props) {
   }
 
   return (
-    <Box className={classes.noResults}>No results. {<MaterialEmoji baseSize={32} {...props.sadBlob} />}</Box>
+    <Box className={classes.noResults}>{t('No results')}. {<MaterialEmoji baseSize={32} {...props.sadBlob} />}</Box>
   )
 }
 
@@ -51,6 +53,7 @@ Contents.propTypes = {
   filteredBlobs: PropTypes.array.isRequired,
   hideNoResults: PropTypes.bool.isRequired,
   sadBlob: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 }
 
 class Search extends React.Component {
@@ -151,14 +154,15 @@ class Search extends React.Component {
       filteredGuilds != null &&
       (filteredBlobs.length !== 0 || Object.keys(filteredGuilds).length !== 0)
     const hideNoResults = query.length === 0 || isDebouncing
+    const { t } = this.props
 
     return (
       <>
-        <Tooltip title={this.state.loading ? 'Loading' : ''} arrow>
+        <Tooltip title={this.state.loading ? t('Loading') : ''} arrow>
           <TextField
             disabled={this.state.loading}
             type="text"
-            placeholder="Search for blobs and servers"
+            placeholder={t('search placeholder')}
             value={query}
             onChange={this.handleQueryChange}
             fullWidth
@@ -176,6 +180,7 @@ class Search extends React.Component {
             filteredGuilds={filteredGuilds}
             hideNoResults={hideNoResults}
             sadBlob={this.getSadBlob()}
+            t={t}
           />}
         </Box>
       </>
@@ -185,6 +190,7 @@ class Search extends React.Component {
 
 Search.propTypes = {
   emojis: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
-export default Search
+export default withTranslation()(Search)

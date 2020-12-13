@@ -1,0 +1,36 @@
+{
+  "en": {
+    "translation": {
+      "homepage welcome": "fun and playful Blob Emoji for Discord",
+      "Home": "Home",
+      "Emoji Changelog": "Emoji Changelog",
+      "Settings": "Settings",
+      "Server Icon": "Server Icon",
+      "search placeholder": "Search for blobs and servers",
+      "Loading": "Loading",
+      "No results": "No results",
+      "Join Server": "Join Server",
+      "officialServers": {
+        "title": "The Official Blob Emoji Servers",
+        "license": {
+          "1": "All blobs that are uploaded to official Blob Emoji servers are licensed under the <1>Apache License 2.0</1>, the same license that <3>Noto Emoji</3> by Google are licensed under.",
+          "2": "All blobs from the official servers can be downloaded <1>here</1>. Make sure to follow the license."
+        }
+      },
+      "communityServers": {
+        "title": "Community Blob Servers",
+        "note": {
+          "1": "To add your Blob Server to our Community Servers section, join the official <1>Blob Emoji server</1> and message our Blob Mail bot.",
+          "2": "In order to use custom emoji in other Discord Servers you need an active <1/><2>Discord Nitro</2> subscription."
+        }
+      },
+      "changepage": {
+        "title": "Global Blob Changelog",
+        "description": "This page tracks the changes of all blobs in any of our partnered servers."
+      },
+      "changeset": {
+        "seeMore": "See {{count}} more changes"
+      }
+    }
+  }
+}

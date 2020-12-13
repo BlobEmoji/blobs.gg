@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Search from '../components/Search'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import { withTranslation } from 'react-i18next'
 
 const useStyles = makeStyles({
   overHeader: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 function Homepage(props) {
-  const { emojis, formattedCount } = props
+  const { emojis, formattedCount, t, tReady } = props
   const [waiting, setWaiting] = useState(true)
   const officialEmojis = emojis.groups.blobs
   const communityEmojis = emojis.groups['community-blobs']
@@ -27,9 +28,9 @@ function Homepage(props) {
 
   return (
     <Container maxWidth="md">
-      <Typography variant="h5" className={classes.overHeader}>
-        {formattedCount} fun and playful Blob Emoji for Discord
-      </Typography>
+      {tReady && <Typography variant="h5" className={classes.overHeader}>
+        {formattedCount} {t('homepage welcome')}
+      </Typography>}
       <Search emojis={emojis} />
       <OfficialServers emojis={officialEmojis} communityRender={communityRender} />
       <CommunityServers emojis={communityEmojis} waiting={waiting} />
@@ -40,6 +41,8 @@ function Homepage(props) {
 Homepage.propTypes = {
   formattedCount: PropTypes.string.isRequired,
   emojis: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  tReady: PropTypes.bool.isRequired
 }
 
-export default Homepage
+export default withTranslation()(Homepage)
