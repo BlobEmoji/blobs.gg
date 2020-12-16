@@ -9,7 +9,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-import { DateTimeFormatter } from '../../utils'
+import { getDateTimeFormatter } from '../../utils'
 import ChangeRow from './ChangeRow'
 import Grid from '@material-ui/core/Grid'
 
@@ -81,7 +81,7 @@ export default function ChangeSet(props) {
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
-          subheader={DateTimeFormatter.format(date)}
+          subheader={getDateTimeFormatter().format(date)}
         />
         {blobs}
         {hasMore && (

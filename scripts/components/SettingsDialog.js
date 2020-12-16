@@ -85,6 +85,19 @@ export default function SettingsDialog(props) {
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
+  function toggleHourFormat() {
+    if (disabled) {
+      return
+    }
+    const oldState = localStorage.getItem('hourFormat');
+    let newState;
+    if (oldState === 'false') { newState = 'true'; }
+    if (oldState === 'true') { newState = 'false'; }
+    localStorage.setItem('hourFormat', newState)
+    localStorage.setItem('automated', 'false')
+    handleReloadWrapper(Math.round(Math.random() * 100))
+  }
+
   return (
     <Dialog
       maxWidth="xs"
@@ -109,6 +122,14 @@ export default function SettingsDialog(props) {
           className={classes.centre}
           disabled={disabled}
           onClick={toggleTheme}
+        >
+          {icon}
+        </IconButton>
+        <IconButton
+          aria-label="Toggle Hour Format"
+          className={classes.centre}
+          disabled={disabled}
+          onClick={toggleHourFormat}
         >
           {icon}
         </IconButton>

@@ -49,6 +49,29 @@ export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   minute: 'numeric',
 })
 
+export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: false
+})
+
+export function getHourFormat() {
+  const date = new Intl.DateTimeFormat('default', { hour: 'numeric', minute: 'numeric' }).resolvedOptions();
+  return date.hour12;
+}
+
+export function getDateTimeFormatter() {
+  if (localStorage.getItem('hourFormat') === 'true') {
+    return DateTimeFormatter;
+  }
+
+  return DateTimeFormatter24;
+}
+
 export function storageAvailable(type) {
   let storage
   try {
