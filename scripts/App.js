@@ -4,7 +4,7 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount, log, storageAvailable, warn, getHourFormat } from './utils'
+import { calculateEmojiCount, log, storageAvailable, warn, getDefaultHourFormat } from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -38,7 +38,7 @@ function storageHandler() {
       const localStorageHourFormat = localStorage.getItem('hourFormat')
       if (localStorageHourFormat === null) {
         log('No hour format detected. Using automatic')
-        localStorage.setItem('hourFormat', getHourFormat())
+        localStorage.setItem('hourFormat', getDefaultHourFormat())
         localStorage.setItem('automatic', 'true')
       } else {
         log('Using hour format in local storage')

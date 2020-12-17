@@ -59,13 +59,17 @@ export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', {
   hour12: false
 })
 
-export function getHourFormat() {
+export function getDefaultHourFormat() {
   const date = new Intl.DateTimeFormat('default', { hour: 'numeric', minute: 'numeric' }).resolvedOptions();
   return date.hour12;
 }
 
+export function getHourFormat() {
+  return localStorage.getItem('hourFormat') === 'true';
+}
+
 export function getDateTimeFormatter() {
-  if (localStorage.getItem('hourFormat') === 'true') {
+  if (getHourFormat()) {
     return DateTimeFormatter;
   }
 

@@ -10,13 +10,24 @@ import Typography from '@material-ui/core/Typography'
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-import { storageAvailable, warn } from '../utils'
+import { storageAvailable, warn, getHourFormat } from '../utils'
 import useTheme from '@material-ui/core/styles/useTheme'
+import Box from '@material-ui/core/Box'
+import DialogContentText from '@material-ui/core/DialogContentText';
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
 
-const mode = {
-  light: <BrightnessLowIcon />,
-  dark: <BrightnessHighIcon />,
-  automated: <Brightness4Icon />,
+const themeIcons = {
+  light: <BrightnessLowIcon fontSize="small" />,
+  dark: <BrightnessHighIcon fontSize="small" />,
+  automated: <Brightness4Icon fontSize="small" />,
+}
+
+const hourFormatIcons = {
+  half: <AccessAlarmIcon fontSize="small" />,
+  full: <AccessTimeIcon fontSize="small" />,
+  automated: <AvTimerIcon fontSize="small" />,
 }
 
 const oppositeTheme = {
@@ -24,12 +35,12 @@ const oppositeTheme = {
   dark: false,
 }
 
-function iconHandler(theme) {
+function themeIconHandler(theme) {
   const disabled = !storageAvailable('localStorage')
   let icon
 
   if (disabled === true) {
-    icon = mode.automated
+    icon = themeIcons.automated
   } else {
     let automated = localStorage.getItem('automated')
     if (automated === null) {
@@ -41,13 +52,40 @@ function iconHandler(theme) {
     }
 
     if (automated === true) {
-      icon = mode.automated
+      icon = themeIcons.automated
     } else {
-      icon = mode[theme.palette.type]
+      icon = themeIcons[theme.palette.type]
     }
   }
 
-  return { icon: icon, disabled: disabled }
+  return { themeIcon: icon, disabled: disabled }
+}
+
+//TODO - Separate automated from the hour format
+function hourFormatIconHandler() {
+  const disabled = !storageAvailable('localStorage')
+  let icon
+
+  if (disabled === true) {
+    icon = hourFormatIcons.automated
+  } else {
+    let automated = localStorage.getItem('automated')
+    if (automated === null) {
+      warn('automated was null. Setting automated')
+      localStorage.setItem('automated', 'true')
+      automated = true
+    } else {
+      automated = automated === 'true'
+    }
+
+    if (automated === true) {
+      icon = hourFormatIcons.automated
+    } else {
+      icon = getHourFormat() ? hourFormatIcons.full : hourFormatIcons.half
+    }
+  }
+
+  return { hourFormatIcon: icon, disabled: disabled }
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -56,12 +94,14 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
   },
-  centre: {
-    margin: '0 auto',
-    display: 'block',
+  optionText: {
+    marginRight: '2.5rem',
+    marginBottom: 0,
   },
-  dialogMargin: {
-    marginRight: '2rem'
+  optionButton: {
+    marginLeft: 'auto',
+    marginRight: '-12px',
+    display: 'block',
   }
 }))
 
@@ -74,10 +114,11 @@ export default function SettingsDialog(props) {
   )
   const classes = useStyles()
   const theme = useTheme()
-  const { icon, disabled } = iconHandler(theme)
+  const { themeIcon, isThemeDisabled } = themeIconHandler(theme)
+  const { hourFormatIcon, isHourFormatDisabled } = hourFormatIconHandler()
 
   function toggleTheme() {
-    if (disabled) {
+    if (isThemeDisabled) {
       return
     }
     localStorage.setItem('theme', oppositeTheme[theme.palette.type].toString())
@@ -86,7 +127,7 @@ export default function SettingsDialog(props) {
   }
 
   function toggleHourFormat() {
-    if (disabled) {
+    if (isHourFormatDisabled) {
       return
     }
     const oldState = localStorage.getItem('hourFormat');
@@ -105,7 +146,7 @@ export default function SettingsDialog(props) {
       onClose={onCloseWrapper}
       aria-labelledby="settings-dialog-title"
     >
-      <DialogTitle id="settings-dialog-title" className={classes.dialogMargin}>
+      <DialogTitle id="settings-dialog-title">
         Settings
         <IconButton
           aria-label="close"
@@ -116,23 +157,32 @@ export default function SettingsDialog(props) {
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Typography variant="h6">Theme</Typography>
-        <IconButton
-          aria-label="Toggle Mode"
-          className={classes.centre}
-          disabled={disabled}
-          onClick={toggleTheme}
-        >
-          {icon}
-        </IconButton>
-        <IconButton
-          aria-label="Toggle Hour Format"
-          className={classes.centre}
-          disabled={disabled}
-          onClick={toggleHourFormat}
-        >
-          {icon}
-        </IconButton>
+        <Box display="flex" alignItems="center" alignContent="space-around">
+          <DialogContentText className={classes.optionText}>
+            Toggle Theme
+          </DialogContentText>
+          <IconButton
+            aria-label="Toggle Theme"
+            className={classes.optionButton}
+            disabled={isThemeDisabled}
+            onClick={toggleTheme}
+          >
+            {themeIcon}
+          </IconButton>
+        </Box>
+        <Box display="flex" alignItems="center" alignContent="space-around">
+          <DialogContentText className={classes.optionText}>
+            Toggle Hour Format
+          </DialogContentText>
+          <IconButton
+            aria-label="Toggle Hour Format"
+            className={classes.optionButton}
+            disabled={isHourFormatDisabled}
+            onClick={toggleHourFormat}
+          >
+            {hourFormatIcon}
+          </IconButton>
+        </Box>
       </DialogContent>
     </Dialog>
   )
