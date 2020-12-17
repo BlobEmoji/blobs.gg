@@ -76,7 +76,7 @@ export default function ChangeSet(props) {
   const blobs = changeSet.map(rows)
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} sm={6}>
       <Card className={classes.card}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
