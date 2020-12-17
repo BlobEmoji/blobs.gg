@@ -94,6 +94,10 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
   },
+  optionContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   optionText: {
     marginRight: '2.5rem',
     marginBottom: 0,
@@ -170,7 +174,7 @@ export default function SettingsDialog(props) {
             {themeIcon}
           </IconButton>
         </Box>
-        <Box display="flex" alignItems="center" alignContent="space-around">
+        <Box className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
             Toggle Hour Format
           </DialogContentText>
