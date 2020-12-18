@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import DialogContent from '@material-ui/core/DialogContent'
-import Typography from '@material-ui/core/Typography'
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
@@ -81,7 +80,7 @@ function hourFormatIconHandler() {
     if (automated === true) {
       icon = hourFormatIcons.automated
     } else {
-      icon = getHourFormat() ? hourFormatIcons.full : hourFormatIcons.half
+      icon = getHourFormat() ? hourFormatIcons.half : hourFormatIcons.full
     }
   }
 
