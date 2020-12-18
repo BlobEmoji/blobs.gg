@@ -177,6 +177,7 @@ function App() {
           open={settingsOpen}
           onClose={toggleSettingsOpen}
           handleReload={handleReload}
+          setIsTime12={setIsTime12}
         />
       </Router>
     </ThemeProvider>

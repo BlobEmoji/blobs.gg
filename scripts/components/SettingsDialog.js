@@ -135,6 +135,7 @@ export default function SettingsDialog(props) {
     const defaultHoursFormat = getDefaultHourFormat()
     const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
     setKeyWrapper('prefers12Hour', !resIsTime12)
+    props.setIsTime12(!resIsTime12)
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
@@ -191,4 +192,5 @@ SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   handleReload: PropTypes.func.isRequired,
+  setIsTime12: PropTypes.func.isRequired
 }
