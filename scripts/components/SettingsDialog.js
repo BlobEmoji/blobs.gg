@@ -16,6 +16,7 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
 import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import AvTimerIcon from '@material-ui/icons/AvTimer'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const themeIcons = {
   false: <BrightnessLowIcon fontSize="small" />,
@@ -56,7 +57,8 @@ function iconHandler(key, icons) {
       break
     }
     // eslint-disable-next-line no-empty
-    default: {}
+    default: {
+    }
     }
   }
   return icon
@@ -184,25 +186,29 @@ export default function SettingsDialog(props) {
           <DialogContentText className={classes.optionText}>
             Toggle Theme
           </DialogContentText>
-          <IconButton
-            aria-label="Toggle Theme"
-            className={classes.optionButton}
-            onClick={toggleTheme}
-          >
-            {themeIcon}
-          </IconButton>
+          <Tooltip title="Toggle Theme" arrow>
+            <IconButton
+              aria-label="Toggle Theme"
+              className={classes.optionButton}
+              onClick={toggleTheme}
+            >
+              {themeIcon}
+            </IconButton>
+          </Tooltip>
         </Box>
         <Box className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
             Toggle Hour Format
           </DialogContentText>
-          <IconButton
-            aria-label="Toggle Hour Format"
-            className={classes.optionButton}
-            onClick={toggleHourFormat}
-          >
-            {hourFormatIcon}
-          </IconButton>
+          <Tooltip title="Toggle Hour Format" arrow>
+            <IconButton
+              aria-label="Toggle Hour Format"
+              className={classes.optionButton}
+              onClick={toggleHourFormat}
+            >
+              {hourFormatIcon}
+            </IconButton>
+          </Tooltip>
         </Box>
       </DialogContent>
     </Dialog>
