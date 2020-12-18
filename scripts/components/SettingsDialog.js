@@ -135,7 +135,7 @@ export default function SettingsDialog(props) {
     }
     const oldState = localStorage.getItem('hourFormat');
     let newState;
-    if (oldState === 'false') { newState = 'true'; }
+    if (oldState === 'false' || oldState === null) { newState = 'true'; }
     if (oldState === 'true') { newState = 'false'; }
     localStorage.setItem('hourFormat', newState)
     localStorage.setItem('automated', 'false')
