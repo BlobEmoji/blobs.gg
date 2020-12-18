@@ -69,7 +69,13 @@ export function getHourFormat() {
 }
 
 export function getDateTimeFormatter() {
-  if (getHourFormat()) {
+  let isTime12 = false;
+
+  if (localStorage.getItem('hourFormat') === null) {
+    isTime12 = getDefaultHourFormat();
+  }
+
+  if (getHourFormat() || isTime12) {
     return DateTimeFormatter;
   }
 
