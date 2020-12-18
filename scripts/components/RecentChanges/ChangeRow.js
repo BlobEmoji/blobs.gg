@@ -22,21 +22,22 @@ const useStyles = makeStyles({
   },
 })
 
-export default function ChangeRow({
+function ChangeRow({
   eventIcon,
   eventName,
   emoji,
   action,
   afterEmoji,
   changedAt,
+  isTime12
 }) {
   const classes = useStyles()
-  
+
   return (
     <Box display="flex" alignItems="center">
       <Box display="flex" alignItems="center" minWidth="7.1rem">
         <Box margin="0.5rem">
-          <Tooltip title={getDateTimeFormatter().format(new Date(changedAt))} arrow>
+          <Tooltip title={getDateTimeFormatter(isTime12).format(new Date(changedAt))} arrow>
             <div>{eventIcon}</div>
           </Tooltip>
         </Box>
@@ -66,4 +67,7 @@ ChangeRow.propTypes = {
   action: PropTypes.string.isRequired,
   afterEmoji: PropTypes.object,
   changedAt: PropTypes.string.isRequired,
+  isTime12: PropTypes.bool.isRequired
 }
+
+export default ChangeRow

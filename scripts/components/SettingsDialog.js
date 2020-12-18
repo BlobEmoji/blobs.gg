@@ -9,13 +9,13 @@ import DialogContent from '@material-ui/core/DialogContent'
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-import { storageAvailable, warn, getHourFormat } from '../utils'
+import { getDefaultHourFormat, getHourFormat, getKeyWrapper, setKeyWrapper, storageAvailable, warn } from '../utils'
 import useTheme from '@material-ui/core/styles/useTheme'
 import Box from '@material-ui/core/Box'
-import DialogContentText from '@material-ui/core/DialogContentText';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import AvTimerIcon from '@material-ui/icons/AvTimer';
+import DialogContentText from '@material-ui/core/DialogContentText'
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
+import AccessTimeIcon from '@material-ui/icons/AccessTime'
+import AvTimerIcon from '@material-ui/icons/AvTimer'
 
 const themeIcons = {
   light: <BrightnessLowIcon fontSize="small" />,
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: '-12px',
     display: 'block',
-  }
+  },
 }))
 
 export default function SettingsDialog(props) {
@@ -113,7 +113,7 @@ export default function SettingsDialog(props) {
   const onCloseWrapper = useCallback(() => onClose(false), [onClose])
   const handleReloadWrapper = useCallback(
     (randomInt) => handleReload(randomInt),
-    [handleReload]
+    [handleReload],
   )
   const classes = useStyles()
   const theme = useTheme()
@@ -124,8 +124,7 @@ export default function SettingsDialog(props) {
     if (isThemeDisabled) {
       return
     }
-    localStorage.setItem('theme', oppositeTheme[theme.palette.type].toString())
-    localStorage.setItem('automated', 'false')
+    setKeyWrapper('darkTheme', oppositeTheme[theme.palette.type])
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
@@ -133,12 +132,9 @@ export default function SettingsDialog(props) {
     if (isHourFormatDisabled) {
       return
     }
-    const oldState = localStorage.getItem('hourFormat');
-    let newState;
-    if (oldState === 'false' || oldState === null) { newState = 'true'; }
-    if (oldState === 'true') { newState = 'false'; }
-    localStorage.setItem('hourFormat', newState)
-    localStorage.setItem('automated', 'false')
+    const defaultHoursFormat = getDefaultHourFormat()
+    const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
+    setKeyWrapper('prefers12Hour', !resIsTime12)
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
