@@ -18,20 +18,48 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import AvTimerIcon from '@material-ui/icons/AvTimer'
 
 const themeIcons = {
-  light: <BrightnessLowIcon fontSize="small" />,
-  dark: <BrightnessHighIcon fontSize="small" />,
+  false: <BrightnessLowIcon fontSize="small" />,
+  true: <BrightnessHighIcon fontSize="small" />,
   automated: <Brightness4Icon fontSize="small" />,
 }
 
 const hourFormatIcons = {
-  half: <AccessAlarmIcon fontSize="small" />,
-  full: <AccessTimeIcon fontSize="small" />,
+  true: <AccessAlarmIcon fontSize="small" />,
+  false: <AccessTimeIcon fontSize="small" />,
   automated: <AvTimerIcon fontSize="small" />,
 }
 
 const oppositeTheme = {
   light: true,
   dark: false,
+}
+
+function iconHandler(key, icons) {
+  const disabled = !storageAvailable('localStorage')
+  let icon
+
+  if (disabled === true) {
+    icon = icons.automated
+  } else {
+    const value = localStorage.getItem(key)
+    switch (value) {
+    case '3': {
+      icon = icons.automated
+      break
+    }
+    case '2': {
+      icon = icons.false
+      break
+    }
+    case '1': {
+      icon = icons.true
+      break
+    }
+    // eslint-disable-next-line no-empty
+    default: {}
+    }
+  }
+  return icon
 }
 
 function themeIconHandler(theme) {
@@ -41,6 +69,7 @@ function themeIconHandler(theme) {
   if (disabled === true) {
     icon = themeIcons.automated
   } else {
+    const value = localStorage.getItem(key)
     let automated = localStorage.getItem('automated')
     if (automated === null) {
       warn('automated was null. Setting automated')
@@ -117,21 +146,15 @@ export default function SettingsDialog(props) {
   )
   const classes = useStyles()
   const theme = useTheme()
-  const { themeIcon, isThemeDisabled } = themeIconHandler(theme)
-  const { hourFormatIcon, isHourFormatDisabled } = hourFormatIconHandler()
+  const themeIcon = iconHandler('darkTheme', themeIcons)
+  const hourFormatIcon = iconHandler('prefers12Hour', hourFormatIcons)
 
   function toggleTheme() {
-    if (isThemeDisabled) {
-      return
-    }
     setKeyWrapper('darkTheme', oppositeTheme[theme.palette.type])
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
   function toggleHourFormat() {
-    if (isHourFormatDisabled) {
-      return
-    }
     const defaultHoursFormat = getDefaultHourFormat()
     const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
     setKeyWrapper('prefers12Hour', !resIsTime12)
@@ -164,7 +187,6 @@ export default function SettingsDialog(props) {
           <IconButton
             aria-label="Toggle Theme"
             className={classes.optionButton}
-            disabled={isThemeDisabled}
             onClick={toggleTheme}
           >
             {themeIcon}
@@ -177,7 +199,6 @@ export default function SettingsDialog(props) {
           <IconButton
             aria-label="Toggle Hour Format"
             className={classes.optionButton}
-            disabled={isHourFormatDisabled}
             onClick={toggleHourFormat}
           >
             {hourFormatIcon}
@@ -192,5 +213,5 @@ SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   handleReload: PropTypes.func.isRequired,
-  setIsTime12: PropTypes.func.isRequired
+  setIsTime12: PropTypes.func.isRequired,
 }
