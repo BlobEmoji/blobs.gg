@@ -57,8 +57,7 @@ function iconHandler(key, icons) {
       break
     }
     // eslint-disable-next-line no-empty
-    default: {
-    }
+    default: {}
     }
   }
   return icon
@@ -67,30 +66,14 @@ function iconHandler(key, icons) {
 function getTooltipString(key) {
   const value = localStorage.getItem(key)
   let string = 'Toggle to '
-  
+
   if (key === 'darkTheme') {
-    switch (value) {
-    case '2':
-      return string + 'Dark Theme'
-    case '1':
-      return string + 'Light Theme'
-    default:
-      return 'Toggle Theme'
-    }
+    return `${string}${value === '2' ? 'Dark' : 'Light'} Theme`
+  } else if (key === 'prefers12Hour') {
+    return `${string}${value === '2' ? '12h' : '24h'} Theme`
   }
+  return `${string}${key}`
 
-  if (key === 'prefers12Hour') {
-    switch (value) {
-    case '2':
-      return string + '12h Format'
-    case '1':
-      return string + '24h Format'
-    default:
-      return 'Toggle Hour Format'
-    }
-  }
-
-  return ''
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -114,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SettingsDialog(props) {
+function SettingsDialog(props) {
   const { open, onClose, handleReload } = props
   const onCloseWrapper = useCallback(() => onClose(false), [onClose])
   const handleReloadWrapper = useCallback(
@@ -196,3 +179,5 @@ SettingsDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   handleReload: PropTypes.func.isRequired,
 }
+
+export default SettingsDialog
