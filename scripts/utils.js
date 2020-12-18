@@ -64,10 +64,6 @@ export function getDefaultHourFormat() {
   return date.hour12
 }
 
-export function getHourFormat() {
-  return localStorage.getItem('hourFormat') === 'true'
-}
-
 export function storageAvailable(type) {
   let storage
   try {
@@ -179,12 +175,15 @@ export function getKeyWrapper(key, value) {
   return [value, false]
 }
 
+export function getHourFormat() {
+  return getKeyWrapper('prefers12Hour', getDefaultHourFormat())[0]
+}
+
 /**
- * @param {Boolean} isTime12 Is 12 hour
  * @returns {Intl.DateTimeFormat} Date formatter
  */
-export function getDateTimeFormatter(isTime12) {
-  if (getHourFormat() || isTime12) {
+export function getDateTimeFormatter() {
+  if (getHourFormat()) {
     return DateTimeFormatter
   }
 

@@ -22,7 +22,7 @@ function getConfig() {
   })
   const defaultHoursFormat = getDefaultHourFormat()
   const [resPDM, resPDMLS] = getKeyWrapper('darkTheme', prefersDarkMode)
-  const [resHF, resHFLS] = getKeyWrapper('hourFormat', defaultHoursFormat)
+  const [resHF, resHFLS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
   return { prefersDarkMode: resPDM, prefersHour12: resHF }
 }
 
@@ -44,15 +44,6 @@ function App() {
   const [settingsOpen, toggleSettingsOpen] = useState(false)
   const [, handleReload] = useState(0)
   const { prefersDarkMode } = getConfig()
-  const [isTime12, setIsTime12] = React.useState(null)
-
-  useEffect(() => {
-    if (isTime12 === null) {
-      const defaultHoursFormat = getDefaultHourFormat()
-      const [resIsTime12, isTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
-      setIsTime12(resIsTime12)
-    }
-  }, [isTime12])
 
   useEffect(() => {
     if (formattedCount === '0') {
@@ -168,7 +159,7 @@ function App() {
           <Header handleOpen={toggleSettingsOpen} />
         </Container>
         <Switch>
-          <Route path="/changes" children={<Changepage isTime12={isTime12}/>} />
+          <Route path="/changes" children={<Changepage />} />
           <Route
             exact-path="/"
             children={<Homepage formattedCount={formattedCount} emojis={emojis} />} />
@@ -177,7 +168,6 @@ function App() {
           open={settingsOpen}
           onClose={toggleSettingsOpen}
           handleReload={handleReload}
-          setIsTime12={setIsTime12}
         />
       </Router>
     </ThemeProvider>

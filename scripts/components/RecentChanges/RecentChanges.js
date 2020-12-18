@@ -1,6 +1,5 @@
 import React from 'react'
 import cloneDeep from 'lodash.clonedeep'
-import PropTypes from 'prop-types'
 
 import { useScrollNearEnd } from '../../hooks'
 import SkeletonChangeSet from './SkeletonChangeSet'
@@ -43,7 +42,7 @@ function groupHistory(changeSets) {
   return changes
 }
 
-function RecentChanges(props) {
+function RecentChanges() {
   const [changeSets, setChangeSets] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
   const [earliest, setEarliest] = React.useState(null)
@@ -108,12 +107,8 @@ function RecentChanges(props) {
   }
 
   return Object.entries(changeSets).map(([key, changeSet]) => (
-    <ChangeSet changeSet={changeSet} key={key} isTime12={props.isTime12} />
+    <ChangeSet changeSet={changeSet} key={key} />
   ))
-}
-
-RecentChanges.propTypes = {
-  isTime12: PropTypes.bool.isRequired,
 }
 
 export default RecentChanges

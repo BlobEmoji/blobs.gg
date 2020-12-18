@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-import { getDefaultHourFormat, getHourFormat, getKeyWrapper, setKeyWrapper, storageAvailable, warn } from '../utils'
+import { getDefaultHourFormat, getKeyWrapper, setKeyWrapper, storageAvailable } from '../utils'
 import useTheme from '@material-ui/core/styles/useTheme'
 import Box from '@material-ui/core/Box'
 import DialogContentText from '@material-ui/core/DialogContentText'
@@ -34,53 +34,46 @@ const oppositeTheme = {
   dark: false,
 }
 
-function themeIconHandler(theme) {
+function themeIconHandler(defaultTheme) {
   const disabled = !storageAvailable('localStorage')
+  let theme = getKeyWrapper('darkTheme', defaultTheme)
   let icon
-
-  if (disabled === true) {
+  if (theme[1] === false || disabled) {
     icon = themeIcons.automated
   } else {
-    let automated = localStorage.getItem('automated')
-    if (automated === null) {
-      warn('automated was null. Setting automated')
-      localStorage.setItem('automated', 'true')
-      automated = true
-    } else {
-      automated = automated === 'true'
-    }
-
-    if (automated === true) {
+    switch (theme[0]) {
+    case false:
+      icon = themeIcons.light
+      break
+    case true:
+      icon = themeIcons.dark
+      break
+    default:
       icon = themeIcons.automated
-    } else {
-      icon = themeIcons[theme.palette.type]
+      break
     }
   }
 
   return { themeIcon: icon, disabled: disabled }
 }
 
-//TODO - Separate automated from the hour format
-function hourFormatIconHandler() {
+function hourFormatIconHandler(defaultFormat) {
   const disabled = !storageAvailable('localStorage')
+  let theme = getKeyWrapper('prefers12Hour', defaultFormat)
   let icon
-
-  if (disabled === true) {
+  if (theme[1] === false || disabled) {
     icon = hourFormatIcons.automated
   } else {
-    let automated = localStorage.getItem('automated')
-    if (automated === null) {
-      warn('automated was null. Setting automated')
-      localStorage.setItem('automated', 'true')
-      automated = true
-    } else {
-      automated = automated === 'true'
-    }
-
-    if (automated === true) {
+    switch (theme[0]) {
+    case false:
+      icon = hourFormatIcons.full
+      break
+    case true:
+      icon = hourFormatIcons.half
+      break
+    default:
       icon = hourFormatIcons.automated
-    } else {
-      icon = getHourFormat() ? hourFormatIcons.half : hourFormatIcons.full
+      break
     }
   }
 
@@ -118,7 +111,7 @@ export default function SettingsDialog(props) {
   const classes = useStyles()
   const theme = useTheme()
   const { themeIcon, isThemeDisabled } = themeIconHandler(theme)
-  const { hourFormatIcon, isHourFormatDisabled } = hourFormatIconHandler()
+  const { hourFormatIcon, isHourFormatDisabled } = hourFormatIconHandler(getDefaultHourFormat())
 
   function toggleTheme() {
     if (isThemeDisabled) {
@@ -132,10 +125,8 @@ export default function SettingsDialog(props) {
     if (isHourFormatDisabled) {
       return
     }
-    const defaultHoursFormat = getDefaultHourFormat()
-    const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
+    const [resIsTime12] = getKeyWrapper('prefers12Hour', getDefaultHourFormat())
     setKeyWrapper('prefers12Hour', !resIsTime12)
-    props.setIsTime12(!resIsTime12)
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
 
@@ -192,5 +183,4 @@ SettingsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   handleReload: PropTypes.func.isRequired,
-  setIsTime12: PropTypes.func.isRequired
 }

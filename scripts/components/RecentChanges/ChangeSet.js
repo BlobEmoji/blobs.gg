@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 const DEFAULT_MAXIMUM = 10
 
 function ChangeSet(props) {
-  let { changeSet, isTime12 } = props
+  let { changeSet } = props
 
   const date = new Date(changeSet[0].changed_at)
   const classes = useStyles()
@@ -63,7 +63,6 @@ function ChangeSet(props) {
         action={action}
         afterEmoji={afterEmoji}
         changedAt={change.changed_at}
-        isTime12={isTime12}
       />
     )
   }
@@ -83,7 +82,7 @@ function ChangeSet(props) {
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
-          subheader={getDateTimeFormatter(isTime12).format(date)}
+          subheader={getDateTimeFormatter().format(date)}
         />
         {blobs}
         {hasMore && (
@@ -106,7 +105,6 @@ function ChangeSet(props) {
 
 ChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
-  isTime12: PropTypes.bool.isRequired
 }
 
 export default ChangeSet
