@@ -62,6 +62,7 @@ export default function ChangeSet(props) {
         emoji={emoji}
         action={action}
         afterEmoji={afterEmoji}
+        changedAt={change.changed_at}
       />
     )
   }

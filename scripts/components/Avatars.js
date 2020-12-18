@@ -37,22 +37,18 @@ const useStyles = makeStyles({
   delete: {
     color: red[500],
     verticalAlign: 'middle',
-    margin: '0.5rem',
   },
   create: {
     color: green[500],
     verticalAlign: 'middle',
-    margin: '0.5rem',
   },
   rename: {
     color: lightBlue[500],
     verticalAlign: 'middle',
-    margin: '0.5rem',
   },
   update: {
     color: indigo[400],
     verticalAlign: 'middle',
-    margin: '0.5rem',
   },
 })
 
