@@ -64,6 +64,35 @@ function iconHandler(key, icons) {
   return icon
 }
 
+function getTooltipString(key) {
+  const value = localStorage.getItem(key)
+  let string = 'Toggle to '
+  
+  if (key === 'darkTheme') {
+    switch (value) {
+    case '2':
+      return string + 'Dark Theme'
+    case '1':
+      return string + 'Light Theme'
+    default:
+      return 'Toggle Theme'
+    }
+  }
+
+  if (key === 'prefers12Hour') {
+    switch (value) {
+    case '2':
+      return string + '12h Format'
+    case '1':
+      return string + '24h Format'
+    default:
+      return 'Toggle Hour Format'
+    }
+  }
+
+  return ''
+}
+
 const useStyles = makeStyles((theme) => ({
   closeIcon: {
     position: 'absolute',
@@ -96,6 +125,8 @@ export default function SettingsDialog(props) {
   const theme = useTheme()
   const themeIcon = iconHandler('darkTheme', themeIcons)
   const hourFormatIcon = iconHandler('prefers12Hour', hourFormatIcons)
+  const themeTooltip = getTooltipString('darkTheme')
+  const hourFormatTooltip = getTooltipString('prefers12Hour')
 
   function toggleTheme() {
     setKeyWrapper('darkTheme', oppositeTheme[theme.palette.type])
@@ -131,9 +162,9 @@ export default function SettingsDialog(props) {
           <DialogContentText className={classes.optionText}>
             Toggle Theme
           </DialogContentText>
-          <Tooltip title="Toggle Theme" arrow>
+          <Tooltip title={themeTooltip} arrow>
             <IconButton
-              aria-label="Toggle Theme"
+              aria-label={themeTooltip}
               className={classes.optionButton}
               onClick={toggleTheme}
             >
@@ -145,9 +176,9 @@ export default function SettingsDialog(props) {
           <DialogContentText className={classes.optionText}>
             Toggle Hour Format
           </DialogContentText>
-          <Tooltip title="Toggle Hour Format" arrow>
+          <Tooltip title={hourFormatTooltip} arrow>
             <IconButton
-              aria-label="Toggle Hour Format"
+              aria-label={hourFormatTooltip}
               className={classes.optionButton}
               onClick={toggleHourFormat}
             >
