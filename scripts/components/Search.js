@@ -97,9 +97,8 @@ class Search extends React.Component {
   calculateResultsDebounced = debounce(this.calculateResults, 150)
 
   handlePageChange = (event, newPage) => {
-    this.setState(({ query }) => {
-      this.handleQueryChange(event, query, newPage)
-    })
+    const { query } = this.state
+    this.handleQueryChange(event, query, newPage)
   }
 
   handleQueryChange = (event, querySearch, newPage) => {
