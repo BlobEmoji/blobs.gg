@@ -8,6 +8,7 @@ import MaterialEmoji from './material/MaterialEmoji'
 import Guilds from './material/guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
+import Pagination from '@material-ui/lab/Pagination'
 
 const useStyles = makeStyles({
   noResults: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles({
   },
   guilds: {
     marginTop: '1rem',
+  },
+  paginationNav: {
+    justifyContent: 'center',
+    marginTop: '1rem'
   },
 })
 
@@ -32,6 +37,14 @@ function Contents(props) {
         {props.filteredBlobs.map((blob) => (
           <MaterialEmoji key={blob.id} invite showGuild {...blob} />
         ))}
+        {(props.totalPages > 1) &&
+          <Pagination
+            className={classes.paginationNav}
+            count={props.totalPages}
+            page={props.page}
+            onChange={props.onPageChange}
+          />
+        }
       </>
     )
   }
@@ -51,6 +64,9 @@ Contents.propTypes = {
   filteredBlobs: PropTypes.array.isRequired,
   hideNoResults: PropTypes.bool.isRequired,
   sadBlob: PropTypes.object.isRequired,
+  page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
 }
 
 class Search extends React.Component {
@@ -59,6 +75,8 @@ class Search extends React.Component {
 
     this.state = {
       query: '',
+      page: 1,
+      totalPages: 1,
       isDebouncing: false,
       filteredBlobs: [],
       filteredGuilds: [],
@@ -78,11 +96,20 @@ class Search extends React.Component {
 
   calculateResultsDebounced = debounce(this.calculateResults, 150)
 
-  handleQueryChange = (event, querySearch) => {
+  handlePageChange = (event, newPage) => {
+    this.setState(({ query }) => {
+      this.handleQueryChange(event, query, newPage)
+    })
+  }
+
+  handleQueryChange = (event, querySearch, newPage) => {
     const value = querySearch ? querySearch : event.currentTarget.value
+    const page = newPage ? newPage : 1
 
     this.setState({
       query: value,
+      page: page,
+      totalPages: 1,
       isDebouncing: true,
     })
 
@@ -94,30 +121,41 @@ class Search extends React.Component {
   }
 
   calculateResults() {
-    this.setState(({ query }) => {
+    this.setState(({ query, page }) => {
       if (query === '') {
-        return { filteredBlobs: [], filteredGuilds: {}, isDebouncing: false }
+        return { page: 1, totalPages: 1, filteredBlobs: [], filteredGuilds: {}, isDebouncing: false }
       }
 
       return {
-        filteredBlobs: this.filterBlobs(query),
-        filteredGuilds: this.filterGuilds(query),
+        filteredBlobs: this.filterBlobs(query, page),
+        filteredGuilds: this.filterGuilds(query, page),
+        totalPages: this.getTotalPages(query),
         isDebouncing: false,
       }
     })
   }
 
-  filterBlobs(query) {
+  filterBlobs(query, page) {
     return this.state.allEmoji
       .filter((blob) => insensitiveIncludes(blob.name, query))
       .sort(({ name: a }, { name: b }) => a.length - b.length)
-      .slice(0, 8 * 5)
+      .slice(8 * 5 * (page - 1), 8 * 5 * page)
   }
 
-  filterGuilds(query) {
+  filterGuilds(query, page) {
     return this.state.allGuilds
       .filter((guild) => insensitiveIncludes(guild.name, query))
-      .slice(0, 3)
+      .slice(3 * (page - 1), 3 * page)
+  }
+
+  getTotalPages(query) {
+    const totalEmojiPages = Math.ceil((this.state.allEmoji)
+      .filter((blob) => insensitiveIncludes(blob.name, query))
+      .length / 40);
+    const totalGuildPages = Math.ceil((this.state.allGuilds)
+      .filter((guild) => insensitiveIncludes(guild.name, query))
+      .length / 3);
+    return Math.max(totalEmojiPages, totalGuildPages);
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -144,9 +182,10 @@ class Search extends React.Component {
   }
 
   render() {
-    const { query, filteredBlobs, filteredGuilds, isDebouncing } = this.state
+    const { query, page, totalPages, filteredBlobs, filteredGuilds, isDebouncing } = this.state
 
     const hasResults =
+      totalPages !== 0 &&
       filteredBlobs != null &&
       filteredGuilds != null &&
       (filteredBlobs.length !== 0 || Object.keys(filteredGuilds).length !== 0)
@@ -176,6 +215,9 @@ class Search extends React.Component {
             filteredGuilds={filteredGuilds}
             hideNoResults={hideNoResults}
             sadBlob={this.getSadBlob()}
+            page={page}
+            totalPages={totalPages}
+            onPageChange={this.handlePageChange}
           />}
         </Box>
       </>
