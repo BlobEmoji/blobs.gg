@@ -109,7 +109,6 @@ class Search extends React.Component {
     this.setState({
       query: value,
       page: page,
-      totalPages: 1,
       isDebouncing: true,
     })
 
