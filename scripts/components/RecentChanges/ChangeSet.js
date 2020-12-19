@@ -9,7 +9,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-import { DateTimeFormatter } from '../../utils'
+import { getDateTimeFormatter } from '../../utils'
 import ChangeRow from './ChangeRow'
 import Grid from '@material-ui/core/Grid'
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 const DEFAULT_MAXIMUM = 10
 
-export default function ChangeSet(props) {
+function ChangeSet(props) {
   let { changeSet } = props
 
   const date = new Date(changeSet[0].changed_at)
@@ -62,6 +62,7 @@ export default function ChangeSet(props) {
         emoji={emoji}
         action={action}
         afterEmoji={afterEmoji}
+        changedAt={change.changed_at}
       />
     )
   }
@@ -76,12 +77,12 @@ export default function ChangeSet(props) {
   const blobs = changeSet.map(rows)
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} sm={6}>
       <Card className={classes.card}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
-          subheader={DateTimeFormatter.format(date)}
+          subheader={getDateTimeFormatter().format(date)}
         />
         {blobs}
         {hasMore && (
@@ -105,3 +106,5 @@ export default function ChangeSet(props) {
 ChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
 }
+
+export default ChangeSet

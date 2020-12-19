@@ -4,7 +4,7 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount, log, storageAvailable, warn } from './utils'
+import { calculateEmojiCount, getDefaultHourFormat, getKeyWrapper, log } from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -16,33 +16,14 @@ import green from '@material-ui/core/colors/green'
 import ReactGA from 'react-ga'
 import { createBrowserHistory } from 'history'
 
-function storageHandler() {
+function getConfig() {
   let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
     noSsr: true,
   })
-
-  if (storageAvailable('localStorage')) {
-    log('Fetching Automatic check')
-    const localStorageAutomatic = localStorage.getItem('automated')
-    if (localStorageAutomatic === 'false') {
-      log('Is not automated. Fetching local storage')
-      const localStorageTheme = localStorage.getItem('theme')
-      if (localStorageTheme === null) {
-        log('No theme detected. Using automatic')
-        localStorage.setItem('theme', prefersDarkMode.toString())
-        localStorage.setItem('automatic', 'true')
-      } else {
-        log('Using theme in local storage')
-        prefersDarkMode = localStorageTheme === 'true'
-      }
-    } else {
-      log('Is automated. Using user preference')
-    }
-  } else {
-    warn('Local Storage unsupported. Using automatic detection fallback')
-  }
-
-  return prefersDarkMode
+  const defaultHoursFormat = getDefaultHourFormat()
+  const [resPDM, resPDMLS] = getKeyWrapper('darkTheme', prefersDarkMode)
+  const [resHF, resHFLS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
+  return { prefersDarkMode: resPDM, prefersHour12: resHF }
 }
 
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
@@ -62,7 +43,7 @@ function App() {
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
   const [, handleReload] = useState(0)
-  const prefersDarkMode = storageHandler()
+  const { prefersDarkMode } = getConfig()
 
   useEffect(() => {
     if (formattedCount === '0') {
@@ -161,7 +142,11 @@ function App() {
     },
     breakpoints: {
       values: {
+        xs: 0,
+        sm: 750,
         md: 1100,
+        lg: 1280,
+        xl: 1920,
       },
     },
   }), [prefersDarkMode])

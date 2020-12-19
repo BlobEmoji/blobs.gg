@@ -49,6 +49,21 @@ export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   minute: 'numeric',
 })
 
+export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: false,
+})
+
+export function getDefaultHourFormat() {
+  const date = new Intl.DateTimeFormat('default', { hour: 'numeric', minute: 'numeric' }).resolvedOptions()
+  return date.hour12
+}
+
 export function storageAvailable(type) {
   let storage
   try {
@@ -97,7 +112,7 @@ export function calculateEmojiCount(data) {
  * @param {Number} chunkSize The size of the chunk
  * @returns {Array} The chunked array
  */
-export function chunker(inputArray, chunkSize= 6) {
+export function chunker(inputArray, chunkSize = 6) {
   return inputArray.reduce((resultArray, item, index) => {
     const chunkIndex = Math.floor(index / chunkSize)
 
@@ -109,4 +124,68 @@ export function chunker(inputArray, chunkSize= 6) {
 
     return resultArray
   }, [])
+}
+
+/**
+ * @param {String} key The key to check with
+ * @param {boolean} value The value to set
+ * @returns {boolean} If it was successful
+ */
+export function setKeyWrapper(key, value) {
+  const trans = {
+    true: 1,
+    false: 2,
+  }
+
+  if (storageAvailable('localStorage')) {
+    localStorage.setItem(key, trans[value])
+    return true
+  }
+  return false
+}
+
+/**
+ * @param {String} key The key to check with
+ * @param {Boolean} value The value in case there isn't a key/LS
+ * @returns {[Boolean, Boolean]} Returns Value & if it used the LS
+ */
+export function getKeyWrapper(key, value) {
+  const trans = {
+    1: true,
+    2: false,
+    3: 'automated',
+  }
+
+  // If I can use LS then use it
+  if (storageAvailable('localStorage')) {
+    const keyCheck = localStorage.getItem(key)
+    // If it is automated
+    if (keyCheck === '3') {
+      return [value, false]
+    } else if (Object.keys(trans).includes(keyCheck)) {
+      // Return the fetched value as something useful
+      return [trans[keyCheck], true]
+    }
+    // If key not in DB
+    warn(`Setting key for ${key}`)
+    setKeyWrapper(key, value)
+    return [value, false]
+  }
+  // Can't use LS, have whatever I'm given
+  return [value, false]
+}
+
+export function getHourFormat() {
+  return getKeyWrapper('prefers12Hour', getDefaultHourFormat())[0]
+}
+
+/**
+ * @returns {Intl.DateTimeFormat} Date formatter
+ */
+export function getDateTimeFormatter() {
+  if (getHourFormat()) {
+    return DateTimeFormatter
+  }
+
+  return DateTimeFormatter24
 }
