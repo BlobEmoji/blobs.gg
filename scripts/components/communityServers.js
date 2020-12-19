@@ -15,6 +15,12 @@ const useStyles = makeStyles({
   h5Margin: {
     margin: '0 0 1rem 0',
   },
+  inlineIcon: {
+    height: '0.8em',
+    width: 'auto',
+    margin: '0 0.05em 0 0.05em',
+  },
+
 })
 
 function CommunityServers(props) {
@@ -34,7 +40,7 @@ function CommunityServers(props) {
           In order to use custom emoji in other Discord Servers you need an
           active
           <img
-            className="inline-icon"
+            className={classes.inlineIcon}
             src={nitro}
             alt="Discord Nitro icon"
           />

@@ -139,6 +139,7 @@ function App() {
         margin: '2rem 0',
         fontWeight: 'bold',
       },
+      fontSize: '18',
     },
     breakpoints: {
       values: {
