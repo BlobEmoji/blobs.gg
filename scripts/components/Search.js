@@ -79,6 +79,7 @@ class Search extends React.Component {
   calculateResultsDebounced = debounce(this.calculateResults, 150)
 
   handleQueryChange = (event, querySearch) => {
+    console.log(this.state.allEmoji, this.state.allGuilds)
     const value = querySearch ? querySearch : event.currentTarget.value
 
     this.setState({
@@ -126,15 +127,16 @@ class Search extends React.Component {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
       const allGuilds = this.props.emojis.getAllGuilds()
-      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false })
+      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false }, () => {
+        let search = new URL(window.location).searchParams
+        if (search.has('name')) {
+          this.handleQueryChange(null, search.get('name'))
+        }
+      })
     }
   }
 
   componentDidMount() {
-    let search = new URL(window.location).searchParams
-    if (search.has('name')) {
-      this.handleQueryChange(null, search.get('name'))
-    }
     if (this.props.emojis.groups.blobs.guilds.length > 0) {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
