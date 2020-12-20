@@ -19,6 +19,8 @@ const useStyles = makeStyles({
     marginTop: '1rem',
   },
   paginationNav: {
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: '1rem'
   },
