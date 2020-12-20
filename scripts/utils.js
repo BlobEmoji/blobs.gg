@@ -40,24 +40,18 @@ export function titleCase(sourceString) {
   return sourceString[0].toUpperCase() + sourceString.slice(1).toLowerCase()
 }
 
-export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+const hour12Format = {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
   year: 'numeric',
   hour: 'numeric',
   minute: 'numeric',
-})
+}
 
-export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', {
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  hour12: false,
-})
+export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', hour12Format)
+
+export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', Object.assign(hour12Format, { hour12: false }))
 
 export function getDefaultHourFormat() {
   const date = new Intl.DateTimeFormat('default', { hour: 'numeric', minute: 'numeric' }).resolvedOptions()

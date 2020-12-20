@@ -1,6 +1,5 @@
 import React from 'react'
 import cloneDeep from 'lodash.clonedeep'
-
 import { useScrollNearEnd } from '../../hooks'
 import SkeletonChangeSet from './SkeletonChangeSet'
 import ChangeSet from './ChangeSet'

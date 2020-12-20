@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
 import { getDateTimeFormatter, titleCase } from '../../utils'
 import MaterialEmoji from '../material/MaterialEmoji'
 import Box from '@material-ui/core/Box'
@@ -22,14 +21,15 @@ const useStyles = makeStyles({
   },
 })
 
-function ChangeRow({
-  eventIcon,
-  eventName,
-  emoji,
-  action,
-  afterEmoji,
-  changedAt,
-}) {
+function ChangeRow(
+  {
+    eventIcon,
+    eventName,
+    emoji,
+    action,
+    afterEmoji,
+    changedAt,
+  }) {
   const classes = useStyles()
 
   return (
@@ -43,18 +43,15 @@ function ChangeRow({
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
       <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
-      {!afterEmoji &&
-        <Box className={classes.text}>{emoji.name}</Box>
-      }
+      {!afterEmoji && <Box className={classes.text}>{emoji.name}</Box>}
       <Box className={classes.to}>{action}</Box>
-      {afterEmoji && (
-        <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
-      )}
       {afterEmoji &&
+      <>
+        <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
         <Box className={classes.text}>
           {afterEmoji.name}
         </Box>
-      }
+      </>}
     </Box>
   )
 }

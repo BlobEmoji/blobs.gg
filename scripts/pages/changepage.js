@@ -8,10 +8,10 @@ function ChangePage() {
   return (
     <Container maxWidth="md">
       <Typography variant="h4">Global Blob Changelog</Typography>
-      <p>
+      <Typography variant="body1">
         This page tracks the changes of all blobs in any of our partnered
         servers.
-      </p>
+      </Typography>
       <Grid container spacing={3}>
         <RecentChangesWrapper />
       </Grid>
