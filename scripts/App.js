@@ -119,6 +119,11 @@ function App() {
           margin: '6px 0',
         },
       },
+      MuiAppBar: {
+        positionStatic: {
+          margin: '2em 0',
+        },
+      },
     },
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
@@ -139,7 +144,6 @@ function App() {
         margin: '2rem 0',
         fontWeight: 'bold',
       },
-      fontSize: '18',
     },
     breakpoints: {
       values: {
