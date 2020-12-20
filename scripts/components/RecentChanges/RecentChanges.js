@@ -42,7 +42,7 @@ function groupHistory(changeSets) {
   return changes
 }
 
-export default function RecentChanges() {
+function RecentChanges() {
   const [changeSets, setChangeSets] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
   const [earliest, setEarliest] = React.useState(null)
@@ -110,3 +110,5 @@ export default function RecentChanges() {
     <ChangeSet changeSet={changeSet} key={key} />
   ))
 }
+
+export default RecentChanges

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { titleCase } from '../../utils'
+import { getDateTimeFormatter, titleCase } from '../../utils'
 import MaterialEmoji from '../material/MaterialEmoji'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import clsx from 'clsx'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles({
   changelogBox: {
@@ -21,19 +22,24 @@ const useStyles = makeStyles({
   },
 })
 
-export default function ChangeRow({
+function ChangeRow({
   eventIcon,
   eventName,
   emoji,
   action,
   afterEmoji,
+  changedAt,
 }) {
   const classes = useStyles()
-  
+
   return (
     <Box display="flex" alignItems="center">
       <Box display="flex" alignItems="center" minWidth="7.1rem">
-        {eventIcon}
+        <Box margin="0.5rem">
+          <Tooltip title={getDateTimeFormatter().format(new Date(changedAt))} arrow>
+            <div>{eventIcon}</div>
+          </Tooltip>
+        </Box>
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
       <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
@@ -59,4 +65,7 @@ ChangeRow.propTypes = {
   emoji: PropTypes.object.isRequired,
   action: PropTypes.string.isRequired,
   afterEmoji: PropTypes.object,
+  changedAt: PropTypes.string.isRequired,
 }
+
+export default ChangeRow
