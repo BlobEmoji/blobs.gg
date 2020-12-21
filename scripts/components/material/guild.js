@@ -122,7 +122,7 @@ class Guild extends Component {
     const { guild } = this.props
 
     return (
-      <Grid item xs={4}>
+      <Grid item xs={12} sm={6} md={4}>
         <Card>
           <CardHeader
             avatar={<GuildAvatar name={guild.name} src={guild} />}
