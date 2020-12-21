@@ -40,7 +40,7 @@ function Contents(props) {
     return (
       <>
         <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
+        <Box display="grid" justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 96px)">
           {props.filteredBlobs.map((blob) => (
             <MaterialEmoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
           ))}
