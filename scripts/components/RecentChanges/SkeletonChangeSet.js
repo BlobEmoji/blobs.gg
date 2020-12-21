@@ -1,18 +1,19 @@
 import React from 'react'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
+import Box from '@material-ui/core/Box'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
-import TableContainer from '@material-ui/core/TableContainer'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   card: {
     marginBottom: '2rem',
+  },
+  text: {
+    padding: '0.25rem',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 })
 
@@ -27,23 +28,22 @@ export default function SkeletonChangeSet() {
     const simple = Math.random() > 0.8
 
     return (
-      <TableRow key={index}>
-        <TableCell>
+      <Box display="flex" alignItems="center" key={index}>
+        <Box display="flex" alignItems="center" minWidth="7.1rem" margin="0.5rem">
           <Skeleton variant="circle" width={40} height={40} />
-        </TableCell>
-        <TableCell>
-          <Skeleton height={39} width={80} />
-        </TableCell>
-        <TableCell>
+        </Box>
+        <Box margin="0.5rem">
           <Skeleton variant="rect" width={32} height={32} />
-        </TableCell>
-        <TableCell>
-          {simple ? <Skeleton height={39} width="100%" /> : null}
-        </TableCell>
-        <TableCell>
-          {simple ? <Skeleton variant="circle" width={40} height={40} /> : null}
-        </TableCell>
-      </TableRow>
+        </Box>
+        <Skeleton height={39} width={80} margin="0.25rem" />
+        {simple &&
+          <Box display="flex" alignItems="center" minWidth="7.1rem" marginLeft="2.5rem">
+            <Box margin="0.5rem">
+              <Skeleton variant="rect" width={32} height={32} />
+            </Box>
+            <Skeleton height={39} width={80} margin="0.25rem" />
+          </Box>}
+      </Box>
     )
   })
 
@@ -55,11 +55,7 @@ export default function SkeletonChangeSet() {
           title={<Skeleton height={22} width="80%" />}
           subheader={<Skeleton height={22} width="60%" />}
         />
-        <TableContainer>
-          <Table>
-            <TableBody>{skeletons}</TableBody>
-          </Table>
-        </TableContainer>
+        {skeletons}
       </Card>
     </Grid>
   )
