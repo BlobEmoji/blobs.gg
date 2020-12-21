@@ -40,9 +40,11 @@ function Contents(props) {
     return (
       <>
         <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
-        {props.filteredBlobs.map((blob) => (
-          <MaterialEmoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
-        ))}
+        <Box display="flex" flexWrap="wrap" justifyContent="center">
+          {props.filteredBlobs.map((blob) => (
+            <MaterialEmoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
+          ))}
+        </Box>
         {(props.totalPages > 1) &&
           <Pagination
             className={classes.paginationNav}
