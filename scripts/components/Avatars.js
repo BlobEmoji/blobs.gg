@@ -8,7 +8,6 @@ import green from '@material-ui/core/colors/green'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import BrushIcon from '@material-ui/icons/Brush'
-import indigo from '@material-ui/core/colors/indigo'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Tooltip from '@material-ui/core/Tooltip'
 
@@ -44,10 +43,6 @@ const useStyles = makeStyles({
   },
   rename: {
     color: lightBlue[500],
-    verticalAlign: 'middle',
-  },
-  update: {
-    color: indigo[400],
     verticalAlign: 'middle',
   },
 })

@@ -11,7 +11,7 @@ import useTheme from '@material-ui/core/styles/useTheme'
 
 const useStyles = makeStyles((theme) => ({
   boxMargin: {
-    margin: '2rem 0',
+    margin: '2rem 0 1rem 0',
   },
   h5Margin: {
     margin: '0 0 1rem 0',

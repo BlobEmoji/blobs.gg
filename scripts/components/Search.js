@@ -20,7 +20,6 @@ const useStyles = makeStyles({
   },
   paginationNav: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
     marginTop: '1rem',
   },
