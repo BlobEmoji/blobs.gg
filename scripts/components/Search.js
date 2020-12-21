@@ -22,11 +22,11 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '1rem'
+    marginTop: '1rem',
   },
   blobSearchResult: {
     height: '64px',
-    width: '64px'
+    width: '64px',
   },
 })
 
@@ -46,12 +46,12 @@ function Contents(props) {
           ))}
         </Box>
         {(props.totalPages > 1) &&
-          <Pagination
-            className={classes.paginationNav}
-            count={props.totalPages}
-            page={props.page}
-            onChange={props.onPageChange}
-          />
+        <Pagination
+          className={classes.paginationNav}
+          count={props.totalPages}
+          page={props.page}
+          onChange={props.onPageChange}
+        />
         }
       </>
     )
@@ -157,11 +157,11 @@ class Search extends React.Component {
   getTotalPages(query) {
     const totalEmojiPages = Math.ceil((this.state.allEmoji)
       .filter((blob) => insensitiveIncludes(blob.name, query))
-      .length / 40);
+      .length / 40)
     const totalGuildPages = Math.ceil((this.state.allGuilds)
       .filter((guild) => insensitiveIncludes(guild.name, query))
-      .length / 3);
-    return Math.max(totalEmojiPages, totalGuildPages);
+      .length / 3)
+    return Math.max(totalEmojiPages, totalGuildPages)
   }
 
   // eslint-disable-next-line no-unused-vars

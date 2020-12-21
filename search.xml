@@ -3,13 +3,14 @@
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
     <ShortName>blobs.gg</ShortName>
     <Description>Use blobs.gg to search for blob emoji on Discord</Description>
-    <Tags>blob emoji discord server invite servers blobs emojis invites google emotes emote nitro</Tags>
     <InputEncoding>UTF-8</InputEncoding>
     <Image width="16" height="16" type="image/x-icon">https://blobs.gg/favicon.ico</Image>
-    <Url type="text/html"
-        template="https://blobs.gg/?name={searchTerms}"/>
+    <Url type="text/html" method="get" template="https://blobs.gg/">
+        <Param name="name" value="{searchTerms}"/>
+    </Url>
     <Developer>blobs.gg Developer Team</Developer>
     <Attribution>Search Data Copyright 2020, blobs.gg</Attribution>
+    <AdultContent>false</AdultContent>
     <Language>en-us</Language>
     <moz:SearchForm>https://blobs.gg/</moz:SearchForm>
 </OpenSearchDescription>
