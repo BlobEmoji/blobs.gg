@@ -36,7 +36,7 @@ const DEFAULT_MAXIMUM = 10
 function ChangeSet(props) {
   let { changeSet } = props
 
-  const date = new Date(changeSet[0].changed_at)
+  const date = Date.parse(changeSet[0].changed_at + '+00:00')
   const classes = useStyles()
 
   let guild = changeSet[0].guild
@@ -61,7 +61,7 @@ function ChangeSet(props) {
         emoji={emoji}
         action={action}
         afterEmoji={afterEmoji}
-        changedAt={change.changed_at}
+        changedAt={change.changed_at + '+00:00'}
       />
     )
   }
