@@ -7,8 +7,9 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import useTheme from '@material-ui/core/styles/useTheme'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   boxMargin: {
     margin: '2rem 0',
   },
@@ -18,13 +19,14 @@ const useStyles = makeStyles({
   inlineIcon: {
     height: '0.8em',
     width: 'auto',
-    margin: '0 0.05em 0 0.05em',
+    margin: '0 0.25em',
+    filter: theme.palette.type === 'light' && 'invert(1)',
   },
-
-})
+}))
 
 function CommunityServers(props) {
-  const classes = useStyles()
+  const theme = useTheme()
+  const classes = useStyles(theme)
   let shuffled = props.waiting ? [] : shuffleArray(props.emojis.guilds)
 
   return (
