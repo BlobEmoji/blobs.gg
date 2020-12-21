@@ -29,7 +29,7 @@ export default function SkeletonChangeSet() {
 
     return (
       <Box display="flex" alignItems="center" key={index}>
-        <Box display="flex" alignItems="center" minWidth="7.1rem" margin="0.5rem">
+        <Box display="flex" alignItems="center" minWidth="5rem" margin="0.5rem">
           <Skeleton variant="circle" width={40} height={40} />
         </Box>
         <Box margin="0.5rem">
@@ -37,7 +37,7 @@ export default function SkeletonChangeSet() {
         </Box>
         <Skeleton height={39} width={80} margin="0.25rem" />
         {simple &&
-          <Box display="flex" alignItems="center" minWidth="7.1rem" marginLeft="2.5rem">
+          <Box display="flex" alignItems="center" minWidth="5rem" marginLeft="2.5rem">
             <Box margin="0.5rem">
               <Skeleton variant="rect" width={32} height={32} />
             </Box>
@@ -48,7 +48,7 @@ export default function SkeletonChangeSet() {
   })
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12} sm={6}>
       <Card className={classes.card}>
         <CardHeader
           avatar={<Skeleton variant="circle" width={40} height={40} />}
