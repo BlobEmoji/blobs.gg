@@ -117,8 +117,8 @@ function SettingsDialog(props) {
   }
 
   function toggleHourFormat() {
-    const defaultHoursFormat = getDefaultHourFormat()
-    const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
+    const defaultHourFormat = getDefaultHourFormat()
+    const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHourFormat)
     setKeyWrapper('prefers12Hour', !resIsTime12)
     handleReloadWrapper(Math.round(Math.random() * 100))
   }
