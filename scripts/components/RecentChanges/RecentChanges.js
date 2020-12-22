@@ -21,6 +21,7 @@ function groupHistory(changeSets) {
       continue
     }
 
+    changeSet.changed_at += '+00:00'
     const date = new Date(changeSet.changed_at)
 
     const key = [
@@ -86,7 +87,7 @@ function RecentChanges() {
       setChangeSets(groupHistory(json))
     }
 
-    setEarliest(json[json.length - 1].changed_at)
+    setEarliest(json[json.length - 1].changed_at.replace('+00:00', ''))
   }
 
   React.useEffect(() => {
