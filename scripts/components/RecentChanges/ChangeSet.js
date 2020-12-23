@@ -20,6 +20,9 @@ const emojiAction = {
 }
 
 const useStyles = makeStyles({
+  card: {
+    paddingBottom: '4px'
+  },
   panelDetails: {
     padding: 0,
   },
@@ -74,7 +77,7 @@ function ChangeSet(props) {
 
   return (
     <Grid item xs={12} sm={6}>
-      <Card>
+      <Card className={classes.card}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}

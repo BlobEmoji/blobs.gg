@@ -7,7 +7,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
   description: {
-    margin: '1rem 0',
+    margin: '0.5rem 0 1rem 0',
   },
 })
 
