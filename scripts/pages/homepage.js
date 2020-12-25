@@ -4,7 +4,7 @@ import CommunityServers from '../components/Home/CommunityServers'
 import PropTypes from 'prop-types'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import Search from '../components/Search'
+import Search from '../components/Home/Search'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
