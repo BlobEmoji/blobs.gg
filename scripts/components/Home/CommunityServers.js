@@ -1,5 +1,5 @@
 import React from 'react'
-import nitro from 'url:../../assets/discord/nitro.png'
+import nitro from 'url:../../../assets/discord/nitro.png'
 import PropTypes from 'prop-types'
 import Guilds from './Guilds'
 import { shuffleArray } from '../../utils'
