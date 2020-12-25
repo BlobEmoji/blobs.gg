@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { getDateTimeFormatter, titleCase } from '../../utils'
-import MaterialEmoji from '../material/MaterialEmoji'
+import Emoji from '../Emoji'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import clsx from 'clsx'
@@ -42,12 +42,12 @@ function ChangeRow(
         </Box>
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
-      <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
+      <Emoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
       {!afterEmoji && <Box className={classes.text}>{emoji.name}</Box>}
       <Box className={classes.to}>{action}</Box>
       {afterEmoji &&
       <>
-        <MaterialEmoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
+        <Emoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
         <Box className={classes.text}>
           {afterEmoji.name}
         </Box>

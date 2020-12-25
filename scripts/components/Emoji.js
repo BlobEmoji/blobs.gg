@@ -37,7 +37,7 @@ ConditionalLink.propTypes = {
   wrapper: PropTypes.any.isRequired,
 }
 
-function MaterialEmoji(props) {
+function Emoji(props) {
   const {
     id,
     animated,
@@ -86,7 +86,7 @@ function MaterialEmoji(props) {
   )
 }
 
-MaterialEmoji.propTypes = {
+Emoji.propTypes = {
   id: PropTypes.string.isRequired,
   animated: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
@@ -98,11 +98,11 @@ MaterialEmoji.propTypes = {
   boxClassName: PropTypes.string,
 }
 
-MaterialEmoji.defaultProps = {
+Emoji.defaultProps = {
   invite: false,
   baseSize: 64,
   showGuild: false,
   boxClassName: '',
 }
 
-export default MaterialEmoji
+export default Emoji

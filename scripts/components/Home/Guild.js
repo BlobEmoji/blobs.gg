@@ -7,7 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import CardContent from '@material-ui/core/CardContent'
-import MaterialEmoji from './MaterialEmoji'
+import Emoji from '../Emoji'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import CardActions from '@material-ui/core/CardActions'
@@ -43,7 +43,7 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <MaterialEmoji
+      <Emoji
         baseSize={32} key={emoji.id} {...emoji} boxClassName={clsx(classes.cell)} />
     ))
   )

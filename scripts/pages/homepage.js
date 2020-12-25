@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import OfficialServers from '../components/officialServers'
-import CommunityServers from '../components/communityServers'
+import OfficialServers from '../components/Home/OfficialServers'
+import CommunityServers from '../components/Home/CommunityServers'
 import PropTypes from 'prop-types'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'

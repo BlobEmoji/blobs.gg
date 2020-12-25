@@ -4,8 +4,8 @@ import debounce from 'lodash.debounce'
 import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import MaterialEmoji from './material/MaterialEmoji'
-import Guilds from './material/guilds'
+import Emoji from './Emoji'
+import Guilds from './Home/Guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
 import Pagination from '@material-ui/lab/Pagination'
@@ -41,7 +41,7 @@ function Contents(props) {
         <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
         <Box display="grid" justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 96px)">
           {props.filteredBlobs.map((blob) => (
-            <MaterialEmoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
+            <Emoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
           ))}
         </Box>
         {(props.totalPages > 1) &&
@@ -61,7 +61,7 @@ function Contents(props) {
   }
 
   return (
-    <Box className={classes.noResults}>No results. {<MaterialEmoji baseSize={32} {...props.sadBlob} />}</Box>
+    <Box className={classes.noResults}>No results. {<Emoji baseSize={32} {...props.sadBlob} />}</Box>
   )
 }
 
