@@ -2,12 +2,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { getDateTimeFormatter, titleCase } from '../../utils'
 import Emoji from '../Emoji'
-import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles({
-  changelogBox: {
+  iconContainer: {
     margin: '0.5rem',
   },
   text: {
@@ -18,6 +17,15 @@ const useStyles = makeStyles({
   to: {
     padding: '0.25rem',
   },
+  rowDiv: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  actionDiv: {
+    display: 'flex',
+    alignItems: 'center',
+    minWidth: '7.1rem',
+  }
 })
 
 function ChangeRow(
@@ -32,26 +40,26 @@ function ChangeRow(
   const classes = useStyles()
 
   return (
-    <Box display="flex" alignItems="center">
-      <Box display="flex" alignItems="center" minWidth="7.1rem">
-        <Box margin="0.5rem">
+    <div className={classes.rowDiv}>
+      <div className={classes.actionDiv}>
+        <div className={classes.iconContainer}>
           <Tooltip title={getDateTimeFormatter().format(new Date(changedAt))} arrow>
             <div>{eventIcon}</div>
           </Tooltip>
-        </Box>
+        </div>
         <span>{`${titleCase(eventName)}d`}</span>
-      </Box>
-      <Emoji baseSize={32} boxClassName={classes.changelogBox} {...emoji} />
-      {!afterEmoji && <Box className={classes.text}>{emoji.name}</Box>}
+      </div>
+      <Emoji baseSize={32} containerClassName={classes.iconContainer} {...emoji} />
+      {!afterEmoji && <div className={classes.text}>{emoji.name}</div>}
       <div className={classes.to}>{action}</div>
       {afterEmoji &&
       <>
-        <Emoji baseSize={32} boxClassName={classes.changelogBox} {...afterEmoji} />
+        <Emoji baseSize={32} containerClassName={classes.iconContainer} {...afterEmoji} />
         <div className={classes.text}>
           {afterEmoji.name}
         </div>
       </>}
-    </Box>
+    </div>
   )
 }
 

@@ -23,10 +23,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     marginTop: '1rem',
   },
-  blobSearchResult: {
-    height: '64px',
-    width: '64px',
-  },
 })
 
 function insensitiveIncludes(haystack, needle) {
@@ -41,7 +37,7 @@ function Contents(props) {
         <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
         <Box display="grid" justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 96px)">
           {props.filteredBlobs.map((blob) => (
-            <Emoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
+            <Emoji key={blob.id} invite showGuild {...blob} />
           ))}
         </Box>
         {(props.totalPages > 1) &&

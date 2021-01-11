@@ -5,9 +5,13 @@ import Tooltip from '@material-ui/core/Tooltip'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
-import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
+  container: {
+    width: props => props.baseSize,
+    height: props => props.baseSize,
+    display: 'inline-block',
+  },
   div: {
     width: 'inherit',
     height: 'inherit',
@@ -17,9 +21,13 @@ const useStyles = makeStyles({
   emoji: {
     objectFit: 'contain',
   },
-  box: {
+  inviteContainer: {
     margin: '1rem',
   },
+  link: {
+    width: 'inherit',
+    height: 'inherit',
+  }
 })
 
 function emojiUrl(id, extension, size) {
@@ -48,7 +56,7 @@ function Emoji(props) {
     className,
   } = props
   const extension = animated ? 'gif' : 'png'
-  const classes = useStyles()
+  const classes = useStyles(props)
   let alt = `:${name}:`
 
   if (guild != null && showGuild) {
@@ -61,13 +69,11 @@ function Emoji(props) {
   `
 
   function wrapper(children) {
-    return <Link href={guild.invite}>{children}</Link>
+    return <Link className={classes.link} href={guild.invite}>{children}</Link>
   }
 
   return (
-    <Box
-      display="inline-block" width={baseSize} height={baseSize}
-      className={clsx(props.invite && classes.box, props.boxClassName)}>
+    <div className={clsx(classes.container, props.invite && classes.inviteContainer, props.containerClassName)}>
       <ConditionalLink link={props.invite} wrapper={wrapper}>
         <Tooltip title={alt} arrow>
           <Avatar
@@ -82,7 +88,7 @@ function Emoji(props) {
           />
         </Tooltip>
       </ConditionalLink>
-    </Box>
+    </div>
   )
 }
 
@@ -95,14 +101,14 @@ Emoji.propTypes = {
   showGuild: PropTypes.bool,
   className: PropTypes.string,
   invite: PropTypes.bool,
-  boxClassName: PropTypes.string,
+  containerClassName: PropTypes.string,
 }
 
 Emoji.defaultProps = {
   invite: false,
   baseSize: 64,
   showGuild: false,
-  boxClassName: '',
+  containerClassName: '',
 }
 
 export default Emoji
