@@ -24,6 +24,7 @@ const useStyles = makeStyles({
   inviteContainer: {
     margin: '1rem',
   },
+  // The Link component must inherit the size, or else its children won't have the correct size
   link: {
     width: 'inherit',
     height: 'inherit',
