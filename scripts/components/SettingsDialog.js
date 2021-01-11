@@ -122,6 +122,7 @@ function SettingsDialog(props) {
 
   function toggleHourFormat() {
     const defaultHourFormat = getDefaultHourFormat()
+    // eslint-disable-next-line no-unused-vars
     const [resIsTime12, resIsTime12LS] = getKeyWrapper(
       'prefers12Hour',
       defaultHourFormat

@@ -26,7 +26,10 @@ function getConfig() {
     noSsr: true,
   })
   const defaultHoursFormat = getDefaultHourFormat()
+  
+  // eslint-disable-next-line no-unused-vars
   const [resPDM, resPDMLS] = getKeyWrapper('darkTheme', prefersDarkMode)
+  // eslint-disable-next-line no-unused-vars
   const [resHF, resHFLS] = getKeyWrapper('prefers12Hour', defaultHoursFormat)
   return { prefersDarkMode: resPDM, prefersHour12: resHF }
 }
