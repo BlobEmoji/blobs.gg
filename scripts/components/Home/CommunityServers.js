@@ -9,11 +9,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import useTheme from '@material-ui/core/styles/useTheme'
 
 const useStyles = makeStyles((theme) => ({
-  divMargin: {
-    margin: '2rem 0 1rem 0',
-  },
-  h5Margin: {
-    margin: '0 0 1rem 0',
+  margin: {
+    marginBottom: '1rem',
   },
   inlineIcon: {
     height: '0.8em',
@@ -30,8 +27,8 @@ function CommunityServers(props) {
 
   return (
     <>
-      <div className={classes.divMargin}>
-        <Typography variant="h5" className={classes.h5Margin}>Community Blob Servers</Typography>
+      <div className={classes.margin}>
+        <Typography variant="h5" className={classes.margin}>Community Blob Servers</Typography>
         <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
           official <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">Blob Emoji server</Link> and message
