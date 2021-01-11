@@ -50,7 +50,6 @@ function ChangeSet(props) {
     const EventIcon = emojiAction[change.event]
 
     const emoji = change.emoji || change.before
-    const action = change.after ? 'to' : ''
     const afterEmoji = change.after || null
 
     return (
@@ -59,7 +58,6 @@ function ChangeSet(props) {
         eventIcon={EventIcon}
         eventName={change.event.split('_')[1]}
         emoji={emoji}
-        action={action}
         afterEmoji={afterEmoji}
         changedAt={change.changed_at}
       />

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
   },
-  actionDiv: {
+  eventDiv: {
     display: 'flex',
     alignItems: 'center',
     minWidth: '7.1rem',
@@ -33,7 +33,6 @@ function ChangeRow(
     eventIcon,
     eventName,
     emoji,
-    action,
     afterEmoji,
     changedAt,
   }) {
@@ -41,7 +40,7 @@ function ChangeRow(
 
   return (
     <div className={classes.rowDiv}>
-      <div className={classes.actionDiv}>
+      <div className={classes.eventDiv}>
         <div className={classes.iconContainer}>
           <Tooltip title={getDateTimeFormatter().format(new Date(changedAt))} arrow>
             <div>{eventIcon}</div>
@@ -50,15 +49,12 @@ function ChangeRow(
         <span>{`${titleCase(eventName)}d`}</span>
       </div>
       <Emoji baseSize={32} containerClassName={classes.iconContainer} {...emoji} />
-      {!afterEmoji && <div className={classes.text}>{emoji.name}</div>}
-      <div className={classes.to}>{action}</div>
-      {afterEmoji &&
+      {afterEmoji ?
       <>
+        <div className={classes.to}>to</div>
         <Emoji baseSize={32} containerClassName={classes.iconContainer} {...afterEmoji} />
-        <div className={classes.text}>
-          {afterEmoji.name}
-        </div>
-      </>}
+        <div className={classes.text}>{afterEmoji.name}</div>
+      </> : <div className={classes.text}>{emoji.name}</div>}
     </div>
   )
 }
@@ -67,7 +63,6 @@ ChangeRow.propTypes = {
   eventIcon: PropTypes.object.isRequired,
   eventName: PropTypes.string.isRequired,
   emoji: PropTypes.object.isRequired,
-  action: PropTypes.string.isRequired,
   afterEmoji: PropTypes.object,
   changedAt: PropTypes.string.isRequired,
 }
