@@ -4,7 +4,12 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount, getDefaultHourFormat, getKeyWrapper, log } from './utils'
+import {
+  calculateEmojiCount,
+  getDefaultHourFormat,
+  getKeyWrapper,
+  log,
+} from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -39,7 +44,9 @@ history.listen((location) => {
 
 function App() {
   const [formattedCount, setFormattedCount] = useState('0')
-  const [emojis, setEmojis] = useState({ groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } } })
+  const [emojis, setEmojis] = useState({
+    groups: { blobs: { guilds: [] }, 'community-blobs': { guilds: [] } },
+  })
   const [apiData, setApiData] = useState({})
   const [settingsOpen, toggleSettingsOpen] = useState(false)
   const [, handleReload] = useState(0)
@@ -76,85 +83,89 @@ function App() {
     setEmojis(newEmojis)
   }, [apiData])
 
-  const theme = useMemo(() => createMuiTheme({
-    overrides: {
-      MuiAccordion: {
-        root: {
-          '&:before': {
-            display: 'none',
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiAccordion: {
+            root: {
+              '&:before': {
+                display: 'none',
+              },
+              '&$expanded': {
+                marginTop: '0',
+              },
+            },
           },
-          '&$expanded': {
-            marginTop: '0',
+          MuiAccordionSummary: {
+            root: {
+              borderBottom: '1px solid rgba(224, 224, 224, 1)',
+            },
+          },
+          MuiLink: {
+            root: {
+              color: prefersDarkMode ? 'white' : 'black',
+            },
+          },
+          MuiFilledInput: {
+            input: {
+              paddingTop: '19px',
+              paddingBottom: '18px',
+            },
+          },
+          MuiCardHeader: {
+            content: {
+              maxWidth: 'calc(100% - 99px)',
+            },
+            title: {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            },
+          },
+          MuiTooltip: {
+            tooltipPlacementBottom: {
+              margin: '6px 0',
+            },
+          },
+          MuiAppBar: {
+            positionStatic: {
+              margin: '2em 0',
+            },
           },
         },
-      },
-      MuiAccordionSummary: {
-        root: {
-          borderBottom: '1px solid rgba(224, 224, 224, 1)',
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+          background: {
+            paper: prefersDarkMode ? grey[800] : grey[100],
+            default: prefersDarkMode ? grey[900] : grey[50],
+          },
+          primary: green,
+          secondary: {
+            main: '#FCC21B',
+          },
         },
-      },
-      MuiLink: {
-        root: {
-          color: prefersDarkMode ? 'white' : 'black',
+        typography: {
+          body2: {
+            color: prefersDarkMode ? '#CCC' : 'rgba(0, 0, 0, 0.85)',
+          },
+          h5: {
+            margin: '2rem 0',
+            fontWeight: 'bold',
+          },
         },
-      },
-      MuiFilledInput: {
-        input: {
-          paddingTop: '19px',
-          paddingBottom: '18px',
+        breakpoints: {
+          values: {
+            xs: 0,
+            sm: 750,
+            md: 1100,
+            lg: 1280,
+            xl: 1920,
+          },
         },
-      },
-      MuiCardHeader: {
-        content: {
-          maxWidth: 'calc(100% - 99px)',
-        },
-        title: {
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        },
-      },
-      MuiTooltip: {
-        tooltipPlacementBottom: {
-          margin: '6px 0',
-        },
-      },
-      MuiAppBar: {
-        positionStatic: {
-          margin: '2em 0',
-        },
-      },
-    },
-    palette: {
-      type: prefersDarkMode ? 'dark' : 'light',
-      background: {
-        paper: prefersDarkMode ? grey[800] : grey[100],
-        default: prefersDarkMode ? grey[900] : grey[50],
-      },
-      primary: green,
-      secondary: {
-        main: '#FCC21B',
-      },
-    },
-    typography: {
-      body2: {
-        color: prefersDarkMode ? '#CCC' : 'rgba(0, 0, 0, 0.85)',
-      },
-      h5: {
-        margin: '2rem 0',
-        fontWeight: 'bold',
-      },
-    },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 750,
-        md: 1100,
-        lg: 1280,
-        xl: 1920,
-      },
-    },
-  }), [prefersDarkMode])
+      }),
+    [prefersDarkMode]
+  )
 
   return (
     <ThemeProvider theme={theme}>
@@ -167,7 +178,10 @@ function App() {
           <Route path="/changes" children={<Changepage />} />
           <Route
             exact-path="/"
-            children={<Homepage formattedCount={formattedCount} emojis={emojis} />} />
+            children={
+              <Homepage formattedCount={formattedCount} emojis={emojis} />
+            }
+          />
         </Switch>
         <SettingsDialog
           open={settingsOpen}

@@ -8,8 +8,8 @@ import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles({
   container: {
-    width: props => props.baseSize,
-    height: props => props.baseSize,
+    width: (props) => props.baseSize,
+    height: (props) => props.baseSize,
     display: 'inline-block',
   },
   div: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   link: {
     width: 'inherit',
     height: 'inherit',
-  }
+  },
 })
 
 function emojiUrl(id, extension, size) {
@@ -46,15 +46,7 @@ ConditionalLink.propTypes = {
 }
 
 function Emoji(props) {
-  const {
-    id,
-    animated,
-    name,
-    guild,
-    baseSize,
-    showGuild,
-    className,
-  } = props
+  const { id, animated, name, guild, baseSize, showGuild, className } = props
   const extension = animated ? 'gif' : 'png'
   const classes = useStyles(props)
   let alt = `:${name}:`
@@ -69,11 +61,21 @@ function Emoji(props) {
   `
 
   function wrapper(children) {
-    return <Link className={classes.link} href={guild.invite}>{children}</Link>
+    return (
+      <Link className={classes.link} href={guild.invite}>
+        {children}
+      </Link>
+    )
   }
 
   return (
-    <div className={clsx(classes.container, props.invite && classes.inviteContainer, props.containerClassName)}>
+    <div
+      className={clsx(
+        classes.container,
+        props.invite && classes.inviteContainer,
+        props.containerClassName
+      )}
+    >
       <ConditionalLink link={props.invite} wrapper={wrapper}>
         <Tooltip title={alt} arrow>
           <Avatar

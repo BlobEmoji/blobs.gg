@@ -9,7 +9,12 @@ import DialogContent from '@material-ui/core/DialogContent'
 import BrightnessLowIcon from '@material-ui/icons/BrightnessLow'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
-import { getDefaultHourFormat, getKeyWrapper, setKeyWrapper, storageAvailable } from '../utils'
+import {
+  getDefaultHourFormat,
+  getKeyWrapper,
+  setKeyWrapper,
+  storageAvailable,
+} from '../utils'
 import useTheme from '@material-ui/core/styles/useTheme'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
@@ -43,20 +48,21 @@ function iconHandler(key, icons) {
   } else {
     const value = localStorage.getItem(key)
     switch (value) {
-    case '3': {
-      icon = icons.automated
-      break
-    }
-    case '2': {
-      icon = icons.false
-      break
-    }
-    case '1': {
-      icon = icons.true
-      break
-    }
-    // eslint-disable-next-line no-empty
-    default: {}
+      case '3': {
+        icon = icons.automated
+        break
+      }
+      case '2': {
+        icon = icons.false
+        break
+      }
+      case '1': {
+        icon = icons.true
+        break
+      }
+      // eslint-disable-next-line no-empty
+      default: {
+      }
     }
   }
   return icon
@@ -72,7 +78,6 @@ function getTooltipString(key) {
     return `${string}${value === '2' ? '12h' : '24h'} Theme`
   }
   return `${string}${key}`
-
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -101,7 +106,7 @@ function SettingsDialog(props) {
   const onCloseWrapper = useCallback(() => onClose(false), [onClose])
   const handleReloadWrapper = useCallback(
     (randomInt) => handleReload(randomInt),
-    [handleReload],
+    [handleReload]
   )
   const classes = useStyles()
   const theme = useTheme()
@@ -117,7 +122,10 @@ function SettingsDialog(props) {
 
   function toggleHourFormat() {
     const defaultHourFormat = getDefaultHourFormat()
-    const [resIsTime12, resIsTime12LS] = getKeyWrapper('prefers12Hour', defaultHourFormat)
+    const [resIsTime12, resIsTime12LS] = getKeyWrapper(
+      'prefers12Hour',
+      defaultHourFormat
+    )
     setKeyWrapper('prefers12Hour', !resIsTime12)
     handleReloadWrapper(Math.round(Math.random() * 100))
   }

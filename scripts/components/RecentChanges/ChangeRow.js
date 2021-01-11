@@ -25,36 +25,43 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     minWidth: '7.1rem',
-  }
+  },
 })
 
-function ChangeRow(
-  {
-    eventIcon,
-    eventName,
-    emoji,
-    afterEmoji,
-    changedAt,
-  }) {
+function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
   const classes = useStyles()
 
   return (
     <div className={classes.rowDiv}>
       <div className={classes.eventDiv}>
         <div className={classes.iconContainer}>
-          <Tooltip title={getDateTimeFormatter().format(new Date(changedAt))} arrow>
+          <Tooltip
+            title={getDateTimeFormatter().format(new Date(changedAt))}
+            arrow
+          >
             <div>{eventIcon}</div>
           </Tooltip>
         </div>
         <span>{`${titleCase(eventName)}d`}</span>
       </div>
-      <Emoji baseSize={32} containerClassName={classes.iconContainer} {...emoji} />
-      {afterEmoji ?
-      <>
-        <div className={classes.to}>to</div>
-        <Emoji baseSize={32} containerClassName={classes.iconContainer} {...afterEmoji} />
-        <div className={classes.text}>{afterEmoji.name}</div>
-      </> : <div className={classes.text}>{emoji.name}</div>}
+      <Emoji
+        baseSize={32}
+        containerClassName={classes.iconContainer}
+        {...emoji}
+      />
+      {afterEmoji ? (
+        <>
+          <div className={classes.to}>to</div>
+          <Emoji
+            baseSize={32}
+            containerClassName={classes.iconContainer}
+            {...afterEmoji}
+          />
+          <div className={classes.text}>{afterEmoji.name}</div>
+        </>
+      ) : (
+        <div className={classes.text}>{emoji.name}</div>
+      )}
     </div>
   )
 }

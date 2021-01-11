@@ -21,7 +21,7 @@ module.exports = {
   },
 
   rules: {
-    indent: [WARN, 2],
+    indent: [WARN, 2, { SwitchCase: 1 }],
     'arrow-parens': [WARN, 'always'],
     'no-async-promise-executor': ERROR,
     'no-await-in-loop': WARN,

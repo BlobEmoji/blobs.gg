@@ -2,7 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
-import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from '../Avatars'
+import {
+  CreateAvatar,
+  GuildAvatar,
+  RemoveAvatar,
+  RenameAvatar,
+  UpdateAvatar,
+} from '../Avatars'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
@@ -21,14 +27,14 @@ const emojiAction = {
 
 const useStyles = makeStyles({
   card: {
-    paddingBottom: '4px'
+    paddingBottom: '4px',
   },
   panelDetails: {
     padding: 0,
   },
   accordionDetails: {
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 })
 
 const DEFAULT_MAXIMUM = 10

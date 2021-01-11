@@ -31,7 +31,10 @@ function Homepage(props) {
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
       <Search emojis={emojis} />
-      <OfficialServers emojis={officialEmojis} communityRender={communityRender} />
+      <OfficialServers
+        emojis={officialEmojis}
+        communityRender={communityRender}
+      />
       <CommunityServers emojis={communityEmojis} waiting={waiting} />
     </Container>
   )
