@@ -21,7 +21,7 @@ function OfficialServers(props) {
       <div className={classes.licenceContainer}>
         <Typography variant="body2">
           All blobs that are uploaded to official Blob Emoji servers are
-          licensed under the <Link href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License
+          licensed under the <Link href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache License
           2.0</Link>
           , the same license that <Link href="https://www.google.com/get/noto/help/emoji/">Noto
           Emoji</Link> by Google are licensed under.
