@@ -61,7 +61,7 @@ function Contents(props) {
   }
 
   return (
-    <Box className={classes.noResults}>No results. {<Emoji baseSize={32} {...props.sadBlob} />}</Box>
+    <div className={classes.noResults}>No results. {<Emoji baseSize={32} {...props.sadBlob} />}</div>
   )
 }
 
@@ -214,7 +214,7 @@ class Search extends React.Component {
             }}
           />
         </Tooltip>
-        <Box>
+        <div>
           {!this.state.loading && <Contents
             hasResults={hasResults}
             filteredBlobs={filteredBlobs}
@@ -225,7 +225,7 @@ class Search extends React.Component {
             totalPages={totalPages}
             onPageChange={this.handlePageChange}
           />}
-        </Box>
+        </div>
       </>
     )
   }

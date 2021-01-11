@@ -3,14 +3,13 @@ import nitro from 'url:../../../assets/discord/nitro.png'
 import PropTypes from 'prop-types'
 import Guilds from './Guilds'
 import { shuffleArray } from '../../utils'
-import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import useTheme from '@material-ui/core/styles/useTheme'
 
 const useStyles = makeStyles((theme) => ({
-  boxMargin: {
+  divMargin: {
     margin: '2rem 0 1rem 0',
   },
   h5Margin: {
@@ -31,7 +30,7 @@ function CommunityServers(props) {
 
   return (
     <>
-      <Box className={classes.boxMargin}>
+      <div className={classes.divMargin}>
         <Typography variant="h5" className={classes.h5Margin}>Community Blob Servers</Typography>
         <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
@@ -48,7 +47,7 @@ function CommunityServers(props) {
           />
           <Link href="https://discord.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
         </Typography>
-      </Box>
+      </div>
       <Guilds guilds={shuffled} slice skeletonCount={9} />
     </>
   )

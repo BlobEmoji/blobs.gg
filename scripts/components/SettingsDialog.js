@@ -11,7 +11,6 @@ import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import { getDefaultHourFormat, getKeyWrapper, setKeyWrapper, storageAvailable } from '../utils'
 import useTheme from '@material-ui/core/styles/useTheme'
-import Box from '@material-ui/core/Box'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm'
 import AccessTimeIcon from '@material-ui/icons/AccessTime'
@@ -141,7 +140,7 @@ function SettingsDialog(props) {
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Box display="flex" alignItems="center" alignContent="space-around">
+        <div className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
             Toggle Theme
           </DialogContentText>
@@ -154,8 +153,8 @@ function SettingsDialog(props) {
               {themeIcon}
             </IconButton>
           </Tooltip>
-        </Box>
-        <Box className={classes.optionContainer}>
+        </div>
+        <div className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
             Toggle Hour Format
           </DialogContentText>
@@ -168,7 +167,7 @@ function SettingsDialog(props) {
               {hourFormatIcon}
             </IconButton>
           </Tooltip>
-        </Box>
+        </div>
       </DialogContent>
     </Dialog>
   )

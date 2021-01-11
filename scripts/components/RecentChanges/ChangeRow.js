@@ -4,7 +4,6 @@ import { getDateTimeFormatter, titleCase } from '../../utils'
 import Emoji from '../Emoji'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import clsx from 'clsx'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles({
@@ -42,15 +41,15 @@ function ChangeRow(
         </Box>
         <span>{`${titleCase(eventName)}d`}</span>
       </Box>
-      <Emoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...emoji} />
+      <Emoji baseSize={32} boxClassName={classes.changelogBox} {...emoji} />
       {!afterEmoji && <Box className={classes.text}>{emoji.name}</Box>}
-      <Box className={classes.to}>{action}</Box>
+      <div className={classes.to}>{action}</div>
       {afterEmoji &&
       <>
-        <Emoji baseSize={32} boxClassName={clsx(classes.changelogBox)} {...afterEmoji} />
-        <Box className={classes.text}>
+        <Emoji baseSize={32} boxClassName={classes.changelogBox} {...afterEmoji} />
+        <div className={classes.text}>
           {afterEmoji.name}
-        </Box>
+        </div>
       </>}
     </Box>
   )
