@@ -4,7 +4,7 @@ import { useScrollNearEnd } from '../../hooks'
 import SkeletonChangeSet from './SkeletonChangeSet'
 import ChangeSet from './ChangeSet'
 
-const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes'
+const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes?count=50'
 
 const HISTORY_EVENTS = [
   'EMOJI_CREATE',
@@ -56,7 +56,7 @@ function RecentChanges() {
 
     if (earliest) {
       // If we've already loaded changes before, only load earlier ones.
-      endpoint += `?before=${earliest}`
+      endpoint += `&before=${earliest}`
     }
 
     const response = await fetch(endpoint)
