@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Box from '@material-ui/core/Box'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Grid from '@material-ui/core/Grid'
 
-function SkeletonChangeSet() {
+const SkeletonChangeSet = memo(function SkeletonChangeSet() {
   const amounts = [3, 4, 5, 6, 7]
   const [length] = React.useState(
     amounts[Math.floor(Math.random() * amounts.length)],
@@ -46,6 +46,6 @@ function SkeletonChangeSet() {
       </Card>
     </Grid>
   )
-}
+})
 
 export default SkeletonChangeSet
