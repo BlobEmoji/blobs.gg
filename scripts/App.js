@@ -4,12 +4,7 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import {
-  calculateEmojiCount,
-  getDefaultHourFormat,
-  getKeyWrapper,
-  log,
-} from './utils'
+import { calculateEmojiCount, getDefaultHourFormat, getKeyWrapper, log } from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -26,7 +21,7 @@ function getConfig() {
     noSsr: true,
   })
   const defaultHoursFormat = getDefaultHourFormat()
-  
+
   // eslint-disable-next-line no-unused-vars
   const [resPDM, resPDMLS] = getKeyWrapper('darkTheme', prefersDarkMode)
   // eslint-disable-next-line no-unused-vars
@@ -108,6 +103,7 @@ function App() {
           MuiLink: {
             root: {
               color: prefersDarkMode ? 'white' : 'black',
+              fontWeight: prefersDarkMode ? 'normal' : 'bold',
             },
           },
           MuiFilledInput: {
@@ -167,7 +163,7 @@ function App() {
           },
         },
       }),
-    [prefersDarkMode]
+    [prefersDarkMode],
   )
 
   return (
