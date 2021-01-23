@@ -128,6 +128,9 @@ function App() {
             },
           },
           MuiAppBar: {
+            root: {
+              boxShadow: "none",
+            },
             positionStatic: {
               margin: '2em 0',
             },

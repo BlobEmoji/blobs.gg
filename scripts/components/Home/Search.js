@@ -206,8 +206,7 @@ class Search extends React.Component {
             variant="filled"
             color="secondary"
             InputProps={{
-              endAdornment: this.state.loading ? <CircularProgress /> : null,
-              disableUnderline: true
+              endAdornment: this.state.loading ? <CircularProgress /> : null
             }}
           />
         </Tooltip>

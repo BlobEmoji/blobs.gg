@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-  },
-  appbar: {
-    boxShadow: "none"
   }
 }))
 
@@ -33,7 +30,7 @@ const Header = memo(function Header(props) {
   }
 
   return (
-    <AppBar position="static" color="transparent" className={classes.appbar}>
+    <AppBar position="static" color="transparent">
       <Toolbar>
         <Avatar
           src={server1}

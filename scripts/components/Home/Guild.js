@@ -134,7 +134,7 @@ class Guild extends Component {
                 emojiCount={guild.emoji.length}
               />
             }
-            titleTypographyProps={{ style: { fontWeight: 'bold', fontSize: '1.17em' } }}
+            titleTypographyProps={{ style: { fontSize: '1.17em' } }}
           />
           <CardContent>
             <Box
