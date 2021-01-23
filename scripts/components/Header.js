@@ -31,7 +31,7 @@ const Header = memo(function Header(props) {
 
   return (
     <AppBar position="static" color="transparent">
-      <Toolbar>
+      <Toolbar disableGutters={true}>
         <Avatar
           src={server1}
           className={classes.mainIcon}
