@@ -126,7 +126,14 @@ class Guild extends Component {
           <CardHeader
             avatar={<GuildAvatar name={guild.name} src={guild} />}
             title={guild.name}
-            action={<ShowMore handleClick={this.handleClick} expanded={this.state.expanded} emojiCount={guild.emoji.length}/>}
+            action={
+              <ShowMore
+                handleClick={this.handleClick}
+                expanded={this.state.expanded}
+                emojiCount={guild.emoji.length}
+              />
+            }
+            titleTypographyProps={{ style: { fontWeight: 'bold', fontSize: '1.17em' } }}
           />
           <CardContent>
             <Box
