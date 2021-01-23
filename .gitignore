@@ -17,3 +17,5 @@ yarn.lock
 # IDEs
 **.idea
 .vscode
+
+*.trace
