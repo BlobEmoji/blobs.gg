@@ -3,7 +3,7 @@ export function log(...info) {
     '%c[blobs.gg]%c',
     'color: lightgreen; font-weight: bold',
     'color: inherit; font-weight: inherit',
-    ...info,
+    ...info
   )
 }
 
@@ -12,7 +12,7 @@ export function warn(...info) {
     '%c[blobs.gg]%c',
     'color: red; font-weight: bold',
     'color: inherit; font-weight: inherit',
-    ...info,
+    ...info
   )
 }
 
@@ -51,10 +51,16 @@ const hour12Format = {
 
 export const DateTimeFormatter = new Intl.DateTimeFormat('en-US', hour12Format)
 
-export const DateTimeFormatter24 = new Intl.DateTimeFormat('en-US', Object.assign(hour12Format, { hour12: false }))
+export const DateTimeFormatter24 = new Intl.DateTimeFormat(
+  'en-US',
+  Object.assign(hour12Format, { hour12: false })
+)
 
 export function getDefaultHourFormat() {
-  const date = new Intl.DateTimeFormat('default', { hour: 'numeric', minute: 'numeric' }).resolvedOptions()
+  const date = new Intl.DateTimeFormat('default', {
+    hour: 'numeric',
+    minute: 'numeric',
+  }).resolvedOptions()
   return date.hour12
 }
 

@@ -7,7 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import CardContent from '@material-ui/core/CardContent'
-import MaterialEmoji from './MaterialEmoji'
+import Emoji from '../Emoji'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import CardActions from '@material-ui/core/CardActions'
@@ -19,7 +19,6 @@ import Box from '@material-ui/core/Box'
 const RANDOM_SAMPLE_SIZE = 7
 const useStyles = makeStyles((theme) => ({
   cell: {
-    borderBottom: 0,
     margin: '0.3rem',
   },
   joinServer: {
@@ -43,8 +42,8 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <MaterialEmoji
-        baseSize={32} key={emoji.id} {...emoji} boxClassName={clsx(classes.cell)} />
+      <Emoji
+        baseSize={32} key={emoji.id} {...emoji} containerClassName={classes.cell} />
     ))
   )
 }

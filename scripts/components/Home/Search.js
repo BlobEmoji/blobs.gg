@@ -4,8 +4,8 @@ import debounce from 'lodash.debounce'
 import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import MaterialEmoji from './material/MaterialEmoji'
-import Guilds from './material/guilds'
+import Emoji from '../Emoji'
+import Guilds from './Guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
 import Pagination from '@material-ui/lab/Pagination'
@@ -23,10 +23,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     marginTop: '1rem',
   },
-  blobSearchResult: {
-    height: '64px',
-    width: '64px',
-  },
 })
 
 function insensitiveIncludes(haystack, needle) {
@@ -41,7 +37,7 @@ function Contents(props) {
         <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
         <Box display="grid" justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 96px)">
           {props.filteredBlobs.map((blob) => (
-            <MaterialEmoji className={classes.blobSearchResult} key={blob.id} invite showGuild {...blob} />
+            <Emoji key={blob.id} invite showGuild {...blob} />
           ))}
         </Box>
         {(props.totalPages > 1) &&
@@ -61,7 +57,7 @@ function Contents(props) {
   }
 
   return (
-    <Box className={classes.noResults}>No results. {<MaterialEmoji baseSize={32} {...props.sadBlob} />}</Box>
+    <div className={classes.noResults}>No results. {<Emoji baseSize={32} {...props.sadBlob} />}</div>
   )
 }
 
@@ -214,7 +210,7 @@ class Search extends React.Component {
             }}
           />
         </Tooltip>
-        <Box>
+        <div>
           {!this.state.loading && <Contents
             hasResults={hasResults}
             filteredBlobs={filteredBlobs}
@@ -225,7 +221,7 @@ class Search extends React.Component {
             totalPages={totalPages}
             onPageChange={this.handlePageChange}
           />}
-        </Box>
+        </div>
       </>
     )
   }

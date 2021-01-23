@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Guild from './guild'
+import Guild from './Guild'
 import Grid from '@material-ui/core/Grid'
 import { useScrollNearEnd } from '../../hooks'
-import SkeletonGuild from './skeletonGuild'
+import SkeletonGuild from './SkeletonGuild'
 
 function Guilds(props) {
   const { guilds, perPage, slice, className } = props

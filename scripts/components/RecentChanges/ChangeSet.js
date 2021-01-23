@@ -2,7 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
-import { CreateAvatar, GuildAvatar, RemoveAvatar, RenameAvatar, UpdateAvatar } from '../Avatars'
+import {
+  CreateAvatar,
+  GuildAvatar,
+  RemoveAvatar,
+  RenameAvatar,
+  UpdateAvatar,
+} from '../Avatars'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
@@ -24,8 +30,8 @@ const useStyles = makeStyles({
     padding: 0,
   },
   accordionDetails: {
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 })
 
 const DEFAULT_MAXIMUM = 10
@@ -47,7 +53,6 @@ function ChangeSet(props) {
     const EventIcon = emojiAction[change.event]
 
     const emoji = change.emoji || change.before
-    const action = change.after ? 'to' : ''
     const afterEmoji = change.after || null
 
     return (
@@ -56,7 +61,6 @@ function ChangeSet(props) {
         eventIcon={EventIcon}
         eventName={change.event.split('_')[1]}
         emoji={emoji}
-        action={action}
         afterEmoji={afterEmoji}
         changedAt={change.changed_at}
       />

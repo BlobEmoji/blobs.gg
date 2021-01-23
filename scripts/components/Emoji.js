@@ -5,9 +5,13 @@ import Tooltip from '@material-ui/core/Tooltip'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import clsx from 'clsx'
 import Link from '@material-ui/core/Link'
-import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
+  container: {
+    width: (props) => props.baseSize,
+    height: (props) => props.baseSize,
+    display: 'inline-block',
+  },
   div: {
     width: 'inherit',
     height: 'inherit',
@@ -17,8 +21,13 @@ const useStyles = makeStyles({
   emoji: {
     objectFit: 'contain',
   },
-  box: {
+  inviteContainer: {
     margin: '1rem',
+  },
+  // The Link component must inherit the size, or else its children won't have the correct size
+  link: {
+    width: 'inherit',
+    height: 'inherit',
   },
 })
 
@@ -37,18 +46,10 @@ ConditionalLink.propTypes = {
   wrapper: PropTypes.any.isRequired,
 }
 
-function MaterialEmoji(props) {
-  const {
-    id,
-    animated,
-    name,
-    guild,
-    baseSize,
-    showGuild,
-    className,
-  } = props
+function Emoji(props) {
+  const { id, animated, name, guild, baseSize, showGuild, className } = props
   const extension = animated ? 'gif' : 'png'
-  const classes = useStyles()
+  const classes = useStyles(props)
   let alt = `:${name}:`
 
   if (guild != null && showGuild) {
@@ -61,13 +62,21 @@ function MaterialEmoji(props) {
   `
 
   function wrapper(children) {
-    return <Link href={guild.invite}>{children}</Link>
+    return (
+      <Link className={classes.link} href={guild.invite}>
+        {children}
+      </Link>
+    )
   }
 
   return (
-    <Box
-      display="inline-block" width={baseSize} height={baseSize}
-      className={clsx(props.invite && classes.box, props.boxClassName)}>
+    <div
+      className={clsx(
+        classes.container,
+        props.invite && classes.inviteContainer,
+        props.containerClassName
+      )}
+    >
       <ConditionalLink link={props.invite} wrapper={wrapper}>
         <Tooltip title={alt} arrow>
           <Avatar
@@ -82,11 +91,11 @@ function MaterialEmoji(props) {
           />
         </Tooltip>
       </ConditionalLink>
-    </Box>
+    </div>
   )
 }
 
-MaterialEmoji.propTypes = {
+Emoji.propTypes = {
   id: PropTypes.string.isRequired,
   animated: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
@@ -95,14 +104,14 @@ MaterialEmoji.propTypes = {
   showGuild: PropTypes.bool,
   className: PropTypes.string,
   invite: PropTypes.bool,
-  boxClassName: PropTypes.string,
+  containerClassName: PropTypes.string,
 }
 
-MaterialEmoji.defaultProps = {
+Emoji.defaultProps = {
   invite: false,
   baseSize: 64,
   showGuild: false,
-  boxClassName: '',
+  containerClassName: '',
 }
 
-export default MaterialEmoji
+export default Emoji

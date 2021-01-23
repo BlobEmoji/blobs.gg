@@ -1,20 +1,16 @@
 import React from 'react'
-import nitro from 'url:../../assets/discord/nitro.png'
+import nitro from 'url:../../../assets/discord/nitro.png'
 import PropTypes from 'prop-types'
-import Guilds from './material/guilds'
-import { shuffleArray } from '../utils'
-import Box from '@material-ui/core/Box'
+import Guilds from './Guilds'
+import { shuffleArray } from '../../utils'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import useTheme from '@material-ui/core/styles/useTheme'
 
 const useStyles = makeStyles((theme) => ({
-  boxMargin: {
-    margin: '2rem 0 1rem 0',
-  },
-  h5Margin: {
-    margin: '0 0 1rem 0',
+  margin: {
+    marginBottom: '1rem',
   },
   inlineIcon: {
     height: '0.8em',
@@ -31,8 +27,8 @@ function CommunityServers(props) {
 
   return (
     <>
-      <Box className={classes.boxMargin}>
-        <Typography variant="h5" className={classes.h5Margin}>Community Blob Servers</Typography>
+      <div className={classes.margin}>
+        <Typography variant="h5" className={classes.margin}>Community Blob Servers</Typography>
         <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
           official <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">Blob Emoji server</Link> and message
@@ -48,7 +44,7 @@ function CommunityServers(props) {
           />
           <Link href="https://discord.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
         </Typography>
-      </Box>
+      </div>
       <Guilds guilds={shuffled} slice skeletonCount={9} />
     </>
   )
