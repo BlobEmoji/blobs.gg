@@ -2,6 +2,7 @@
   "name": "blobs.gg",
   "private": true,
   "version": "0.0.1",
+  "description": "Now with pages!",
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
