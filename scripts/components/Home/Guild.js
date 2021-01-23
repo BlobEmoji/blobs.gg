@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   joinServer: {
     textTransform: 'none',
     color: 'white',
-    backgroundColor: '#43b581',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -58,7 +57,7 @@ function JoinServer(props) {
 
   return (
     <Button
-      size="small" variant="contained" className={classes.joinServer} component={Link}
+      size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
       href={props.invite} target="_blank">
       Join Server
     </Button>

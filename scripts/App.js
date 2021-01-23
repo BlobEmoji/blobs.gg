@@ -142,7 +142,9 @@ function App() {
             paper: prefersDarkMode ? grey[800] : grey[100],
             default: prefersDarkMode ? grey[900] : grey[50],
           },
-          primary: green,
+          primary: {
+            main: '#43B581'
+          },
           secondary: {
             main: '#FCC21B',
           },
