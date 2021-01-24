@@ -34,20 +34,28 @@ function Contents(props) {
   if (props.hasResults) {
     return (
       <>
-        <Guilds guilds={props.filteredGuilds} className={classes.guilds} skeletonCount={0} />
-        <Box display="grid" justifyContent="space-between" gridTemplateColumns="repeat(auto-fill, 96px)">
+        <Guilds
+          guilds={props.filteredGuilds}
+          className={classes.guilds}
+          skeletonCount={0}
+        />
+        <Box
+          display="grid"
+          justifyContent="space-between"
+          gridTemplateColumns="repeat(auto-fill, 96px)"
+        >
           {props.filteredBlobs.map((blob) => (
             <Emoji key={blob.id} invite showGuild {...blob} />
           ))}
         </Box>
-        {(props.totalPages > 1) &&
-        <Pagination
-          className={classes.paginationNav}
-          count={props.totalPages}
-          page={props.page}
-          onChange={props.onPageChange}
-        />
-        }
+        {props.totalPages > 1 && (
+          <Pagination
+            className={classes.paginationNav}
+            count={props.totalPages}
+            page={props.page}
+            onChange={props.onPageChange}
+          />
+        )}
       </>
     )
   }
@@ -57,7 +65,9 @@ function Contents(props) {
   }
 
   return (
-    <div className={classes.noResults}>No results. {<Emoji baseSize={32} {...props.sadBlob} />}</div>
+    <div className={classes.noResults}>
+      No results. {<Emoji baseSize={32} {...props.sadBlob} />}
+    </div>
   )
 }
 
@@ -92,7 +102,7 @@ class Search extends React.Component {
   getSadBlob() {
     const sadBlob = this.state.allEmoji.find(
       (emoji) =>
-        emoji.guild.id === '272885620769161216' && emoji.name === 'blobsad',
+        emoji.guild.id === '272885620769161216' && emoji.name === 'blobsad'
     )
     return sadBlob == null ? null : sadBlob
   }
@@ -124,7 +134,13 @@ class Search extends React.Component {
   calculateResults() {
     this.setState(({ query, page }) => {
       if (query === '') {
-        return { page: 1, totalPages: 1, filteredBlobs: [], filteredGuilds: {}, isDebouncing: false }
+        return {
+          page: 1,
+          totalPages: 1,
+          filteredBlobs: [],
+          filteredGuilds: {},
+          isDebouncing: false,
+        }
       }
 
       return {
@@ -150,12 +166,16 @@ class Search extends React.Component {
   }
 
   getTotalPages(query) {
-    const totalEmojiPages = Math.ceil((this.state.allEmoji)
-      .filter((blob) => insensitiveIncludes(blob.name, query))
-      .length / 40)
-    const totalGuildPages = Math.ceil((this.state.allGuilds)
-      .filter((guild) => insensitiveIncludes(guild.name, query))
-      .length / 3)
+    const totalEmojiPages = Math.ceil(
+      this.state.allEmoji.filter((blob) =>
+        insensitiveIncludes(blob.name, query)
+      ).length / 40
+    )
+    const totalGuildPages = Math.ceil(
+      this.state.allGuilds.filter((guild) =>
+        insensitiveIncludes(guild.name, query)
+      ).length / 3
+    )
     return Math.max(totalEmojiPages, totalGuildPages)
   }
 
@@ -165,12 +185,15 @@ class Search extends React.Component {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
       const allGuilds = this.props.emojis.getAllGuilds()
-      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false }, () => {
-        let search = new URL(window.location).searchParams
-        if (search.has('name')) {
-          this.handleQueryChange(null, search.get('name'))
+      this.setState(
+        { allEmoji: allEmoji, allGuilds: allGuilds, loading: false },
+        () => {
+          let search = new URL(window.location).searchParams
+          if (search.has('name')) {
+            this.handleQueryChange(null, search.get('name'))
+          }
         }
-      })
+      )
     }
   }
 
@@ -179,12 +202,23 @@ class Search extends React.Component {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
       const allGuilds = this.props.emojis.getAllGuilds()
-      this.setState({ allEmoji: allEmoji, allGuilds: allGuilds, loading: false })
+      this.setState({
+        allEmoji: allEmoji,
+        allGuilds: allGuilds,
+        loading: false,
+      })
     }
   }
 
   render() {
-    const { query, page, totalPages, filteredBlobs, filteredGuilds, isDebouncing } = this.state
+    const {
+      query,
+      page,
+      totalPages,
+      filteredBlobs,
+      filteredGuilds,
+      isDebouncing,
+    } = this.state
 
     const hasResults =
       totalPages !== 0 &&
@@ -207,21 +241,23 @@ class Search extends React.Component {
             color="secondary"
             InputProps={{
               endAdornment: this.state.loading ? <CircularProgress /> : null,
-              disableUnderline: true
+              disableUnderline: true,
             }}
           />
         </Tooltip>
         <div>
-          {!this.state.loading && <Contents
-            hasResults={hasResults}
-            filteredBlobs={filteredBlobs}
-            filteredGuilds={filteredGuilds}
-            hideNoResults={hideNoResults}
-            sadBlob={this.getSadBlob()}
-            page={page}
-            totalPages={totalPages}
-            onPageChange={this.handlePageChange}
-          />}
+          {!this.state.loading && (
+            <Contents
+              hasResults={hasResults}
+              filteredBlobs={filteredBlobs}
+              filteredGuilds={filteredGuilds}
+              hideNoResults={hideNoResults}
+              sadBlob={this.getSadBlob()}
+              page={page}
+              totalPages={totalPages}
+              onPageChange={this.handlePageChange}
+            />
+          )}
         </div>
       </>
     )

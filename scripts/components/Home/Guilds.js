@@ -36,7 +36,11 @@ function Guilds(props) {
   return (
     <Grid container spacing={3} className={className}>
       {newGuilds.map((guild) => (
-        <Guild key={guild.id} guild={guild} communityRender={props.communityRender} />
+        <Guild
+          key={guild.id}
+          guild={guild}
+          communityRender={props.communityRender}
+        />
       ))}
     </Grid>
   )
@@ -53,7 +57,7 @@ Guilds.propTypes = {
   perPage: PropTypes.number,
   className: PropTypes.string,
   skeletonCount: PropTypes.number.isRequired,
-  communityRender: PropTypes.func
+  communityRender: PropTypes.func,
 }
 
 export default Guilds

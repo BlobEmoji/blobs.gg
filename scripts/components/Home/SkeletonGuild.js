@@ -15,10 +15,18 @@ const SkeletonGuild = memo(function SkeletonGuild() {
         <CardHeader
           avatar={<Skeleton variant="circle" width={40} height={40} />}
           title={<Skeleton height={22} width="80%" />}
-          action={<IconButton disabled><Skeleton variant="circle" width={32} height={32} /></IconButton>}
+          action={
+            <IconButton disabled>
+              <Skeleton variant="circle" width={32} height={32} />
+            </IconButton>
+          }
         />
         <CardContent>
-          <Box display="flex" justifyContent="space-around" margin="-0.3rem 0px">
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            margin="-0.3rem 0px"
+          >
             {Array.from({ length: 7 }, (_, index) => (
               <Skeleton key={index} variant="circle" width={32} height={32} />
             ))}
