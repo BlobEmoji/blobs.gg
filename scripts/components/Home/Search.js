@@ -9,6 +9,10 @@ import Guilds from './Guilds'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
 import Pagination from '@material-ui/lab/Pagination'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
 
 const useStyles = makeStyles({
   noResults: {
@@ -22,6 +26,13 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     marginTop: '1rem',
+  },
+  filterContainer: {
+    marginTop: '0.5rem',
+  },
+  formControl: {
+    minWidth: '12.5rem',
+    marginRight: '1rem'
   },
 })
 
@@ -82,6 +93,54 @@ Contents.propTypes = {
   onPageChange: PropTypes.func.isRequired,
 }
 
+function Filters(props) {
+  const classes = useStyles()
+  if (props.hasQuery) {
+    return (
+      <div className={classes.filterContainer}>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Filter emojis by format</InputLabel>
+          <Select defaultValue='all' onChange={props.onFilterChange}>
+            <MenuItem value='all'>
+                All
+            </MenuItem>
+            <MenuItem value='static'>
+                Static
+            </MenuItem>
+            <MenuItem value='animated'>
+                Animated
+            </MenuItem>
+            <MenuItem value='none'>
+                None
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Filter servers by type</InputLabel>
+          <Select defaultValue='all'>
+            <MenuItem value='all'>
+                All
+            </MenuItem>
+            <MenuItem value='official'>
+                Official
+            </MenuItem>
+            <MenuItem value='community'>
+                Community
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+    )
+  } 
+  
+  return null;
+}
+
+Filters.propTypes = {
+  onFilterChange: PropTypes.func.isRequired,
+  hasQuery: PropTypes.bool.isRequired,
+}
+
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -90,6 +149,10 @@ class Search extends React.Component {
       query: '',
       page: 1,
       totalPages: 1,
+      filters: {
+        format: 'all',
+        guild: 'all',
+      },
       isDebouncing: false,
       filteredBlobs: [],
       filteredGuilds: [],
@@ -114,6 +177,17 @@ class Search extends React.Component {
     this.handleQueryChange(event, query, newPage)
   }
 
+  handleFilter = (event, key) => {
+    const { query, page } = this.state
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        [key]: event.target.value
+      }
+    })
+    this.handleQueryChange(null, query, page)
+  }
+
   handleQueryChange = (event, querySearch, newPage) => {
     const value = querySearch ? querySearch : event.currentTarget.value
     const page = newPage ? newPage : 1
@@ -132,7 +206,7 @@ class Search extends React.Component {
   }
 
   calculateResults() {
-    this.setState(({ query, page }) => {
+    this.setState(({ query, page, filters }) => {
       if (query === '') {
         return {
           page: 1,
@@ -144,31 +218,59 @@ class Search extends React.Component {
       }
 
       return {
-        filteredBlobs: this.filterBlobs(query, page),
-        filteredGuilds: this.filterGuilds(query, page),
-        totalPages: this.getTotalPages(query),
+        filteredBlobs: this.filterBlobs(query, page, filters),
+        filteredGuilds: this.filterGuilds(query, page, filters),
+        totalPages: this.getTotalPages(query, filters),
         isDebouncing: false,
       }
     })
   }
 
-  filterBlobs(query, page) {
+  filterBlobs(query, page, filters) {
+    const filterFormat = (blob) => {
+      if (filters.format === 'static') {
+        return blob.animated === false
+      } else if (filters.format === 'animated') {
+        return blob.animated === true
+      } else if (filters.format === 'none') {
+        return false
+      }
+
+      return true
+    }
+    
     return this.state.allEmoji
-      .filter((blob) => insensitiveIncludes(blob.name, query))
+      .filter((blob) => insensitiveIncludes(blob.name, query) && filterFormat(blob))
       .sort(({ name: a }, { name: b }) => a.length - b.length)
       .slice(8 * 5 * (page - 1), 8 * 5 * page)
   }
 
-  filterGuilds(query, page) {
+  filterGuilds(query, page, filters) {
+    /*
+    const filterGuildType = (guild) => {
+      return true
+    }
+    */
+
     return this.state.allGuilds
       .filter((guild) => insensitiveIncludes(guild.name, query))
       .slice(3 * (page - 1), 3 * page)
   }
 
-  getTotalPages(query) {
+  getTotalPages(query, filters) {
+    const filterFormat = (blob) => {
+      if (filters.format === 'static') {
+        return blob.animated === false
+      } else if (filters.format === 'animated') {
+        return blob.animated === true
+      } 
+
+      return true
+    }
+
     const totalEmojiPages = Math.ceil(
       this.state.allEmoji.filter((blob) =>
-        insensitiveIncludes(blob.name, query)
+        insensitiveIncludes(blob.name, query) && filterFormat(blob)
       ).length / 40
     )
     const totalGuildPages = Math.ceil(
@@ -202,6 +304,7 @@ class Search extends React.Component {
       // Calculate these values once, as they are fairly large.
       const allEmoji = this.props.emojis.getAllEmoji()
       const allGuilds = this.props.emojis.getAllGuilds()
+      console.log(allGuilds);
       this.setState({
         allEmoji: allEmoji,
         allGuilds: allGuilds,
@@ -247,16 +350,22 @@ class Search extends React.Component {
         </Tooltip>
         <div>
           {!this.state.loading && (
-            <Contents
-              hasResults={hasResults}
-              filteredBlobs={filteredBlobs}
-              filteredGuilds={filteredGuilds}
-              hideNoResults={hideNoResults}
-              sadBlob={this.getSadBlob()}
-              page={page}
-              totalPages={totalPages}
-              onPageChange={this.handlePageChange}
-            />
+            <>
+              <Filters
+                onFilterChange={(e) => this.handleFilter(e, 'format')}
+                hasQuery={this.state.query !== ''}
+              />
+              <Contents
+                hasResults={hasResults}
+                filteredBlobs={filteredBlobs}
+                filteredGuilds={filteredGuilds}
+                hideNoResults={hideNoResults}
+                sadBlob={this.getSadBlob()}
+                page={page}
+                totalPages={totalPages}
+                onPageChange={this.handlePageChange}
+              />
+            </>
           )}
         </div>
       </>
