@@ -4,7 +4,8 @@ import { useScrollNearEnd } from '../../hooks'
 import SkeletonChangeSet from './SkeletonChangeSet'
 import ChangeSet from './ChangeSet'
 
-const HISTORY_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs/changes?count=50'
+const HISTORY_LIMIT = 50
+const HISTORY_ENDPOINT = `https://api.mousey.app/v3/emoji/blobs+community-blobs/changes?count=${HISTORY_LIMIT}`
 
 const HISTORY_EVENTS = [
   'EMOJI_CREATE',
@@ -62,7 +63,7 @@ function RecentChanges() {
     const response = await fetch(endpoint)
     const json = await response.json()
 
-    if (json.length === 0) {
+    if (json.length < HISTORY_LIMIT) {
       setReachedEnd(true)
       return
     }
