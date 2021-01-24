@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
     textDecoration: 'none',
   },
+  divider: {
+    marginLeft: '0.25rem',
+    marginRight: '0.25rem',
+  },
 }))
 
 const Header = memo(function Header(props) {
@@ -60,7 +64,7 @@ const Header = memo(function Header(props) {
             <ListIcon />
           </IconButton>
         </Tooltip>
-        <Divider orientation="vertical" flexItem />
+        <Divider className={classes.divider} orientation="vertical" flexItem />
         <Tooltip title="Settings" arrow>
           <IconButton onClick={handleOpen}>
             <SettingsIcon />
