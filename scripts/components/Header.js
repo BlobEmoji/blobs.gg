@@ -36,6 +36,8 @@ const Header = memo(function Header(props) {
           src={server1}
           className={classes.mainIcon}
           alt="Blob Emoji Server Icon"
+          component={Link}
+          to="/"
         />
         <Typography variant="h6" className={classes.title}>
           Blob Emoji
