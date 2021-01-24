@@ -66,6 +66,7 @@ function JoinServer(props) {
       component={Link}
       href={props.invite}
       target="_blank"
+      rel="noopener"
     >
       Join Server
     </Button>
