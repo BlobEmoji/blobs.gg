@@ -65,7 +65,6 @@ function RecentChanges() {
 
     if (json.length < HISTORY_LIMIT) {
       setReachedEnd(true)
-      return
     }
 
     setLoading(false)
