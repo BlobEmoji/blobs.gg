@@ -4,7 +4,12 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import { calculateEmojiCount, getDefaultHourFormat, getKeyWrapper, log } from './utils'
+import {
+  calculateEmojiCount,
+  getDefaultHourFormat,
+  getKeyWrapper,
+  log,
+} from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -107,7 +112,7 @@ function App() {
           },
           MuiFilledInput: {
             root: {
-              borderRadius: '4px'
+              borderRadius: '4px',
             },
             input: {
               paddingTop: '19px',
@@ -177,7 +182,7 @@ function App() {
           },
         },
       }),
-    [prefersDarkMode],
+    [prefersDarkMode]
   )
 
   return (

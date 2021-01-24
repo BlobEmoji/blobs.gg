@@ -28,11 +28,16 @@ function CommunityServers(props) {
   return (
     <>
       <div className={classes.margin}>
-        <Typography variant="h5" className={classes.margin}>Community Blob Servers</Typography>
+        <Typography variant="h5" className={classes.margin}>
+          Community Blob Servers
+        </Typography>
         <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
-          official <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">Blob Emoji server</Link> and message
-          our Blob Mail bot.
+          official{' '}
+          <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">
+            Blob Emoji server
+          </Link>{' '}
+          and message our Blob Mail bot.
         </Typography>
         <Typography variant="body2">
           In order to use custom emoji in other Discord Servers you need an
@@ -42,7 +47,10 @@ function CommunityServers(props) {
             src={nitro}
             alt="Discord Nitro icon"
           />
-          <Link href="https://discord.com/nitro" target="_blank" rel="noopener">Discord Nitro</Link> subscription.
+          <Link href="https://discord.com/nitro" target="_blank" rel="noopener">
+            Discord Nitro
+          </Link>{' '}
+          subscription.
         </Typography>
       </div>
       <Guilds guilds={shuffled} slice skeletonCount={9} />

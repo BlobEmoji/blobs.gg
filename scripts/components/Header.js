@@ -42,7 +42,12 @@ const Header = memo(function Header(props) {
           component={Link}
           to="/"
         />
-        <Typography variant="h6" className={classes.title} component={Link} to="/">
+        <Typography
+          variant="h6"
+          className={classes.title}
+          component={Link}
+          to="/"
+        >
           Blob Emoji
         </Typography>
         <Tooltip title="Home" arrow>
@@ -55,7 +60,7 @@ const Header = memo(function Header(props) {
             <ListIcon />
           </IconButton>
         </Tooltip>
-        <Divider orientation="vertical" flexItem/>
+        <Divider orientation="vertical" flexItem />
         <Tooltip title="Settings" arrow>
           <IconButton onClick={handleOpen}>
             <SettingsIcon />

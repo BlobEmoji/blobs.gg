@@ -40,11 +40,14 @@ const useStyles = makeStyles((theme) => ({
 function EmojiRow(props) {
   const classes = useStyles()
 
-  return (
-    props.emoji.map((emoji) => (
-      <Emoji baseSize={emoji.animated ? 64 : 32} key={emoji.id} {...emoji} containerClassName={classes.cell} />
-    ))
-  )
+  return props.emoji.map((emoji) => (
+    <Emoji
+      baseSize={emoji.animated ? 64 : 32}
+      key={emoji.id}
+      {...emoji}
+      containerClassName={classes.cell}
+    />
+  ))
 }
 
 EmojiRow.propTypes = {
@@ -56,8 +59,14 @@ function JoinServer(props) {
 
   return (
     <Button
-      size="small" color="primary" variant="contained" className={classes.joinServer} component={Link}
-      href={props.invite} target="_blank">
+      size="small"
+      color="primary"
+      variant="contained"
+      className={classes.joinServer}
+      component={Link}
+      href={props.invite}
+      target="_blank"
+    >
       Join Server
     </Button>
   )
@@ -76,7 +85,10 @@ function ShowMore(props) {
   }
 
   return (
-    <IconButton onClick={props.handleClick} className={clsx(classes.expand, { [classes.expandOpen]: expanded })}>
+    <IconButton
+      onClick={props.handleClick}
+      className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
+    >
       <KeyboardArrowDownIcon />
     </IconButton>
   )
@@ -112,7 +124,6 @@ class Guild extends Component {
   // eslint-disable-next-line no-unused-vars
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return nextProps.communityRender === this.props.communityRender
-
   }
 
   render() {
@@ -136,9 +147,14 @@ class Guild extends Component {
           />
           <CardContent>
             <Box
-              display="grid" gridTemplateColumns="repeat(7, 1fr)"
-              margin="-0.3rem 0" padding="0 0.1rem">
-              <EmojiRow emoji={expanded ? guild.emoji : this.state.randomSample} />
+              display="grid"
+              gridTemplateColumns="repeat(7, 1fr)"
+              margin="-0.3rem 0"
+              padding="0 0.1rem"
+            >
+              <EmojiRow
+                emoji={expanded ? guild.emoji : this.state.randomSample}
+              />
             </Box>
           </CardContent>
           <CardActions>
