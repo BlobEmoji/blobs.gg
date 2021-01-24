@@ -8,8 +8,8 @@ import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles({
   container: {
-    width: 32,
-    height: 32,
+    width: (props) => (props.enlarge ? 64 : 32),
+    height: (props) => (props.enlarge ? 64 : 32),
     display: 'inline-block',
   },
   div: {
@@ -47,9 +47,18 @@ ConditionalLink.propTypes = {
 }
 
 function Emoji(props) {
-  const { id, animated, name, guild, baseSize, showGuild, className } = props
+  const {
+    id,
+    animated,
+    name,
+    guild,
+    baseSize,
+    showGuild,
+    className,
+    enlarge,
+  } = props
   const extension = animated ? 'gif' : 'png'
-  const classes = useStyles()
+  const classes = useStyles(props)
   let alt = `:${name}:`
 
   if (guild != null && showGuild) {
@@ -105,6 +114,7 @@ Emoji.propTypes = {
   className: PropTypes.string,
   invite: PropTypes.bool,
   containerClassName: PropTypes.string,
+  enlarge: PropTypes.bool,
 }
 
 Emoji.defaultProps = {
@@ -112,6 +122,7 @@ Emoji.defaultProps = {
   baseSize: 64,
   showGuild: false,
   containerClassName: '',
+  enlarge: false,
 }
 
 export default Emoji
