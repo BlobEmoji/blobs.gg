@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
@@ -54,6 +55,7 @@ const Header = memo(function Header(props) {
             <ListIcon />
           </IconButton>
         </Tooltip>
+        <Divider orientation="vertical" flexItem/>
         <Tooltip title="Settings" arrow>
           <IconButton onClick={handleOpen}>
             <SettingsIcon />

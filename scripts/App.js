@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container'
 import grey from '@material-ui/core/colors/grey'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SettingsDialog from './components/SettingsDialog'
-import green from '@material-ui/core/colors/green'
 import ReactGA from 'react-ga'
 import { createBrowserHistory } from 'history'
 
@@ -129,10 +128,17 @@ function App() {
           },
           MuiAppBar: {
             root: {
-              boxShadow: "none",
+              boxShadow: 'none',
             },
             positionStatic: {
               margin: '2em 0',
+            },
+          },
+          MuiToolbar: {
+            regular: {
+              '@media (min-width:750px)': {
+                minHeight: '48px',
+              },
             },
           },
         },
@@ -143,7 +149,7 @@ function App() {
             default: prefersDarkMode ? grey[900] : grey[50],
           },
           primary: {
-            main: '#43B581'
+            main: '#43B581',
           },
           secondary: {
             main: '#FCC21B',
