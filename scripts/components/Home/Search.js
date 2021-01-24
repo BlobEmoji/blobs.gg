@@ -45,7 +45,7 @@ function Contents(props) {
           gridTemplateColumns="repeat(auto-fill, 96px)"
         >
           {props.filteredBlobs.map((blob) => (
-            <Emoji key={blob.id} invite showGuild {...blob} />
+            <Emoji key={blob.id} invite showGuild {...blob} enlarge/>
           ))}
         </Box>
         {props.totalPages > 1 && (
