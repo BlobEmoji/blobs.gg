@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: 'white',
+    color: 'inherit',
     textDecoration: 'none',
   },
 }))
