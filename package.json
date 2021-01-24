@@ -2,16 +2,24 @@
   "name": "blobs.gg",
   "private": true,
   "version": "0.0.1",
+  "description": "Now with pages!",
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^1.19.1",
-    "sass": "^1.26.5"
+    "@babel/core": "^7.12.10",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "^4.11.2",
+    "@svgr/parcel-plugin-svgr": "^5.5.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "parcel": "2.0.0-beta.1",
+    "prettier": "^2.2.1"
   },
   "prettier": {
     "semi": false,
@@ -22,19 +30,32 @@
     "proseWrap": "always"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html --detailed-report 20"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
+    "clsx": "^1.1.1",
+    "history": "^4.10.1",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-ga": "^3.3.0",
+    "react-router-dom": "^5.2.0"
   },
   "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "regenerator": true
+        }
+      ]
     ]
   }
 }
