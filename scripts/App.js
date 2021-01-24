@@ -106,6 +106,9 @@ function App() {
             },
           },
           MuiFilledInput: {
+            root: {
+              borderRadius: '4px'
+            },
             input: {
               paddingTop: '19px',
               paddingBottom: '18px',
