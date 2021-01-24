@@ -245,7 +245,7 @@ class Search extends React.Component {
               disableUnderline: true,
             }}
             inputProps={{
-              'aria-label': 'Search for blobs and servers'
+              'aria-label': 'Search for blobs and servers',
             }}
           />
         </Tooltip>

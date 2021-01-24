@@ -137,12 +137,7 @@ class Guild extends Component {
       <Grid item xs={12} sm={6} md={4}>
         <Card>
           <CardHeader
-            avatar={
-              <GuildAvatar
-                name={guild.name}
-                src={guild}
-              />
-            }
+            avatar={<GuildAvatar name={guild.name} src={guild} />}
             title={guild.name}
             action={
               <ShowMore
