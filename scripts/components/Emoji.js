@@ -97,6 +97,7 @@ function Emoji(props) {
             src={emojiUrl(id, extension, baseSize)}
             variant="square"
             className={clsx(classes.div, className)}
+            imgProps={{ width: enlarge ? 64 : 32, height: enlarge ? 64 : 32 }}
           />
         </Tooltip>
       </ConditionalLink>
