@@ -4,12 +4,7 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Homepage from './pages/homepage'
-import {
-  calculateEmojiCount,
-  getDefaultHourFormat,
-  getKeyWrapper,
-  log,
-} from './utils'
+import { calculateEmojiCount, getDefaultHourFormat, getKeyWrapper, log, } from './utils'
 import { Emojis } from './emojis'
 import Changepage from './pages/changepage'
 import Header from './components/Header'
@@ -35,6 +30,12 @@ function getConfig() {
 
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 const history = createBrowserHistory()
+
+// Taken from https://github.com/mui-org/material-ui/blob/27471b4564eb40ff769352d73a29938d25804e45/packages/material-ui/src/styles/createTypography.js#L45
+const htmlFontSize = 16;
+const fontSize = 14;
+const coef = fontSize / 14;
+const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`;
 
 ReactGA.initialize('UA-124174886-4')
 ReactGA.pageview(window.location.pathname + window.location.search)
@@ -133,6 +134,9 @@ function App() {
             tooltipPlacementBottom: {
               margin: '6px 0',
             },
+            tooltip: {
+              fontSize: pxToRem(12)
+            }
           },
           MuiAppBar: {
             root: {
@@ -187,17 +191,17 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CssBaseline/>
       <Router history={history}>
         <Container maxWidth="md">
-          <Header handleOpen={toggleSettingsOpen} />
+          <Header handleOpen={toggleSettingsOpen}/>
         </Container>
         <Switch>
-          <Route path="/changes" children={<Changepage />} />
+          <Route path="/changes" children={<Changepage/>}/>
           <Route
             exact-path="/"
             children={
-              <Homepage formattedCount={formattedCount} emojis={emojis} />
+              <Homepage formattedCount={formattedCount} emojis={emojis}/>
             }
           />
         </Switch>
