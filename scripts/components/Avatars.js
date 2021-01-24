@@ -20,6 +20,7 @@ export function GuildAvatar(props) {
       <Avatar
         alt={name}
         src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
+        imgProps={{ height: 40, width: 40 }}
       >
         {name}
       </Avatar>
