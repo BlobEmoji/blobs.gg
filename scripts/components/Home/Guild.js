@@ -42,8 +42,7 @@ function EmojiRow(props) {
 
   return (
     props.emoji.map((emoji) => (
-      <Emoji
-        baseSize={32} key={emoji.id} {...emoji} containerClassName={classes.cell} />
+      <Emoji baseSize={emoji.animated ? 64 : 32} key={emoji.id} {...emoji} containerClassName={classes.cell} />
     ))
   )
 }
