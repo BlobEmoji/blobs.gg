@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-  }
+    color: 'white',
+    textDecoration: 'none',
+  },
 }))
 
 const Header = memo(function Header(props) {
@@ -39,7 +41,7 @@ const Header = memo(function Header(props) {
           component={Link}
           to="/"
         />
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" className={classes.title} component={Link} to="/">
           Blob Emoji
         </Typography>
         <Tooltip title="Home" arrow>
@@ -60,7 +62,7 @@ const Header = memo(function Header(props) {
       </Toolbar>
     </AppBar>
   )
-});
+})
 
 Header.propTypes = {
   handleOpen: PropTypes.func.isRequired,
