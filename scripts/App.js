@@ -36,6 +36,12 @@ function getConfig() {
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
 const history = createBrowserHistory()
 
+// Taken from https://github.com/mui-org/material-ui/blob/27471b4564eb40ff769352d73a29938d25804e45/packages/material-ui/src/styles/createTypography.js#L45
+const htmlFontSize = 16
+const fontSize = 14
+const coef = fontSize / 14
+const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`
+
 ReactGA.initialize('UA-124174886-4')
 ReactGA.pageview(window.location.pathname + window.location.search)
 
@@ -132,6 +138,9 @@ function App() {
           MuiTooltip: {
             tooltipPlacementBottom: {
               margin: '6px 0',
+            },
+            tooltip: {
+              fontSize: pxToRem(12),
             },
           },
           MuiAppBar: {
