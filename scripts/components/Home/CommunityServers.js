@@ -46,6 +46,8 @@ function CommunityServers(props) {
             className={classes.inlineIcon}
             src={nitro}
             alt="Discord Nitro icon"
+            height={11}
+            width={16}
           />
           <Link href="https://discord.com/nitro" target="_blank" rel="noopener">
             Discord Nitro
