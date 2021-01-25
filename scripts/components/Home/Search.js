@@ -334,6 +334,7 @@ class Search extends React.Component {
       <>
         <Tooltip title={this.state.loading ? 'Loading' : ''} arrow>
           <TextField
+            name="Search for blobs and servers"
             disabled={this.state.loading}
             type="text"
             placeholder="Search for blobs and servers"
@@ -345,6 +346,9 @@ class Search extends React.Component {
             InputProps={{
               endAdornment: this.state.loading ? <CircularProgress /> : null,
               disableUnderline: true,
+            }}
+            inputProps={{
+              'aria-label': 'Search for blobs and servers',
             }}
           />
         </Tooltip>

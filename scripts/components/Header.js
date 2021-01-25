@@ -45,6 +45,7 @@ const Header = memo(function Header(props) {
           alt="Blob Emoji Server Icon"
           component={Link}
           to="/"
+          imgProps={{ height: 40, width: 40 }}
         />
         <Typography
           variant="h6"

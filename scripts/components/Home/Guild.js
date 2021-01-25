@@ -66,6 +66,7 @@ function JoinServer(props) {
       component={Link}
       href={props.invite}
       target="_blank"
+      rel="noopener"
     >
       Join Server
     </Button>
@@ -88,6 +89,8 @@ function ShowMore(props) {
     <IconButton
       onClick={props.handleClick}
       className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
+      name="Show More Emoji"
+      aria-label="Show More Emoji"
     >
       <KeyboardArrowDownIcon />
     </IconButton>
