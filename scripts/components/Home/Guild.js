@@ -137,7 +137,7 @@ function Guild({ guild, communityRender }) {
       <Card>
         <CardHeader
           avatar={
-            <GuildAvatar name={guild.name} src={guild} onClick={handleClick} />
+            <GuildAvatar name={guild.name} src={guild} />
           }
           title={guild.name}
           onClick={handleClick}
