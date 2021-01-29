@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { GuildAvatar } from '../Avatars'
 import { shuffleArray } from '../../utils'
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)',
+  },
+  header: {
+    cursor: 'pointer',
   },
 }))
 
@@ -104,6 +107,7 @@ ShowMore.propTypes = {
 }
 
 function Guild({ guild, communityRender }) {
+  const classes = useStyles()
   const [randomSample, setRandomSample] = useState([])
   const [expanded, setExpanded] = useState(false)
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false)
@@ -133,6 +137,8 @@ function Guild({ guild, communityRender }) {
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
+          onClick={handleClick}
+          className={classes.header}
           action={
             <ShowMore
               handleClick={handleClick}
