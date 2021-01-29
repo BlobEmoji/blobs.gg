@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { GuildAvatar } from '../Avatars'
 import { shuffleArray } from '../../utils'
@@ -103,70 +103,61 @@ ShowMore.propTypes = {
   handleClick: PropTypes.func.isRequired,
 }
 
-class Guild extends Component {
-  constructor(props) {
-    super(props)
-    const { guild } = this.props
+function Guild({ guild, communityRender }) {
+  const [randomSample, setRandomSample] = useState([])
+  const [expanded, setExpanded] = useState(false)
+  const [checkedCommunityRender, setCheckedCommunityRender] = useState(false)
 
-    this.state = {
-      randomSample: shuffleArray(guild.emoji).slice(0, RANDOM_SAMPLE_SIZE),
-      expanded: false,
+  useEffect(() => {
+    if (randomSample.length === 0) {
+      setRandomSample(shuffleArray(guild.emoji).slice(0, RANDOM_SAMPLE_SIZE))
     }
+  })
+
+  const handleClick = () => {
+    setExpanded(!expanded)
   }
 
-  handleClick = () => {
-    this.setState({ expanded: !this.state.expanded })
-  }
-
-  componentDidMount() {
-    if (this.props.communityRender) {
-      this.props.communityRender()
+  useEffect(() => {
+    if (!checkedCommunityRender) {
+      if (communityRender) {
+        communityRender()
+      }
+      setCheckedCommunityRender(true)
     }
-  }
+  })
 
-  // eslint-disable-next-line no-unused-vars
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.communityRender === this.props.communityRender
-  }
-
-  render() {
-    const { expanded } = this.state
-    const { guild } = this.props
-
-    return (
-      <Grid item xs={12} sm={6} md={4}>
-        <Card>
-          <CardHeader
-            avatar={<GuildAvatar name={guild.name} src={guild} />}
-            title={guild.name}
-            action={
-              <ShowMore
-                handleClick={this.handleClick}
-                expanded={this.state.expanded}
-                emojiCount={guild.emoji.length}
-              />
-            }
-            titleTypographyProps={{ style: { fontSize: '1.17em' } }}
-          />
-          <CardContent>
-            <Box
-              display="grid"
-              gridTemplateColumns="repeat(7, 1fr)"
-              margin="-0.3rem 0"
-              padding="0 0.1rem"
-            >
-              <EmojiRow
-                emoji={expanded ? guild.emoji : this.state.randomSample}
-              />
-            </Box>
-          </CardContent>
-          <CardActions>
-            <JoinServer invite={guild.invite} />
-          </CardActions>
-        </Card>
-      </Grid>
-    )
-  }
+  return (
+    <Grid item xs={12} sm={6} md={4}>
+      <Card>
+        <CardHeader
+          avatar={<GuildAvatar name={guild.name} src={guild} />}
+          title={guild.name}
+          action={
+            <ShowMore
+              handleClick={handleClick}
+              expanded={expanded}
+              emojiCount={guild.emoji.length}
+            />
+          }
+          titleTypographyProps={{ style: { fontSize: '1.17em' } }}
+        />
+        <CardContent>
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(7, 1fr)"
+            margin="-0.3rem 0"
+            padding="0 0.1rem"
+          >
+            <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
+          </Box>
+        </CardContent>
+        <CardActions>
+          <JoinServer invite={guild.invite} />
+        </CardActions>
+      </Card>
+    </Grid>
+  )
 }
 
 Guild.propTypes = {
