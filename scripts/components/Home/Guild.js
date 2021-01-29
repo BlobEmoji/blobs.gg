@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     cursor: 'pointer',
+    userSelect: 'none',
   },
 }))
 
