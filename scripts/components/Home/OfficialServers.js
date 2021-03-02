@@ -37,8 +37,8 @@ function OfficialServers(props) {
         </Typography>
         <Typography variant="body2">
           All blobs from the official servers can be downloaded{' '}
-          <Link href="https://blobs.gg/blobs.zip">here</Link>. Make sure to
-          follow the license.
+          <Link href="https://files.snowyluma.dev/blobs.zip">here</Link>. Make
+          sure to follow the license.
         </Typography>
       </div>
     </>
