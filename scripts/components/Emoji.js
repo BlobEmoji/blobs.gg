@@ -72,7 +72,12 @@ function Emoji(props) {
 
   function wrapper(children) {
     return (
-      <Link className={classes.link} href={guild.invite}>
+      <Link
+        className={classes.link}
+        href={guild.invite}
+        target="_blank"
+        rel="noopener"
+      >
         {children}
       </Link>
     )
