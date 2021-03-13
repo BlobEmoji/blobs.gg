@@ -36,13 +36,11 @@
   "dependencies": {
     "@fontsource/roboto": "^4.2.2",
     "clsx": "^1.1.1",
-    "history": "^4.10.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-ga": "^3.3.0",
     "react-router-dom": "^5.2.0"
   },
   "babel": {
