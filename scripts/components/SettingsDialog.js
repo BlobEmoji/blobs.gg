@@ -33,11 +33,16 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
   },
+  dialogContent: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem 0"
+  },
   optionContainer: {
     display: "flex",
     alignItems: "center",
   },
-  optionText: {
+  optionLabel: {
     marginRight: "2.5rem",
     marginBottom: 0,
   },
@@ -82,9 +87,9 @@ function SettingsDialog(props) {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent dividers className={classes.dialogContent}>
         <div className={classes.optionContainer}>
-          <DialogContentText className={classes.optionText}>
+          <DialogContentText className={classes.optionLabel}>
             Theme
           </DialogContentText>
 
@@ -107,7 +112,7 @@ function SettingsDialog(props) {
           </ToggleButtonGroup>
         </div>
         <div className={classes.optionContainer}>
-          <DialogContentText className={classes.optionText}>
+          <DialogContentText className={classes.optionLabel}>
             Hour Format
           </DialogContentText>
 
