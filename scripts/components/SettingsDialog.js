@@ -8,6 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import DialogContent from "@material-ui/core/DialogContent";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import {
   getDefaultHourFormat,
@@ -19,8 +20,13 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import TwelveHoursIcon from "../../assets/icons/12h.svg";
+import TwentyFourHoursIcon from "../../assets/icons/24h.svg";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
+import SvgIcon from '@material-ui/core/SvgIcon';
 import Tooltip from "@material-ui/core/Tooltip";
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 const themeIcons = {
   false: <BrightnessLowIcon fontSize="small" />,
@@ -94,10 +100,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "2.5rem",
     marginBottom: 0,
   },
-  optionButton: {
-    marginLeft: "auto",
-    marginRight: "-12px",
-    display: "block",
+  optionButtons: {
+    marginLeft: "auto"
   },
 }));
 
@@ -151,31 +155,47 @@ function SettingsDialog(props) {
       <DialogContent dividers>
         <div className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
-            Toggle Theme
+            Theme
           </DialogContentText>
-          <Tooltip title={themeTooltip} arrow>
-            <IconButton
-              aria-label={themeTooltip}
-              className={classes.optionButton}
-              onClick={toggleTheme}
-            >
-              {themeIcon}
-            </IconButton>
-          </Tooltip>
+          <ToggleButtonGroup className={classes.optionButtons}>
+            <Tooltip title="Light Theme" arrow>
+              <ToggleButton value="">
+                <BrightnessHighIcon/>
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip title="Dark Theme" arrow>
+              <ToggleButton value="">
+                <Brightness2Icon/>
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip title="Automatic" arrow>
+              <ToggleButton value="">
+                <Brightness4Icon/>
+              </ToggleButton>
+            </Tooltip>
+          </ToggleButtonGroup>
         </div>
         <div className={classes.optionContainer}>
           <DialogContentText className={classes.optionText}>
-            Toggle Hour Format
+            Hour Format
           </DialogContentText>
-          <Tooltip title={hourFormatTooltip} arrow>
-            <IconButton
-              aria-label={hourFormatTooltip}
-              className={classes.optionButton}
-              onClick={toggleHourFormat}
-            >
-              {hourFormatIcon}
-            </IconButton>
-          </Tooltip>
+          <ToggleButtonGroup className={classes.optionButtons}>
+            <Tooltip title="12 Hour Format" arrow>
+              <ToggleButton value="">
+                <SvgIcon component={TwelveHoursIcon}/>
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip title="24 Hour Format" arrow>
+              <ToggleButton value="">
+                <SvgIcon component={TwentyFourHoursIcon}/>
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip title="Automatic" arrow>
+              <ToggleButton value="">
+                <AvTimerIcon/>
+              </ToggleButton>
+            </Tooltip>
+          </ToggleButtonGroup>
         </div>
       </DialogContent>
     </Dialog>
