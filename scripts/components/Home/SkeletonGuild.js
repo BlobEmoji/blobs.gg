@@ -1,12 +1,12 @@
-import React, { memo } from 'react'
-import Grid from '@material-ui/core/Grid'
-import CardHeader from '@material-ui/core/CardHeader'
-import Card from '@material-ui/core/Card'
-import Skeleton from '@material-ui/lab/Skeleton'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import IconButton from '@material-ui/core/IconButton'
-import Box from '@material-ui/core/Box'
+import React, { memo } from "react";
+import Grid from "@material-ui/core/Grid";
+import CardHeader from "@material-ui/core/CardHeader";
+import Card from "@material-ui/core/Card";
+import Skeleton from "@material-ui/lab/Skeleton";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
 
 const SkeletonGuild = memo(function SkeletonGuild() {
   return (
@@ -37,7 +37,7 @@ const SkeletonGuild = memo(function SkeletonGuild() {
         </CardActions>
       </Card>
     </Grid>
-  )
-})
+  );
+});
 
-export default SkeletonGuild
+export default SkeletonGuild;

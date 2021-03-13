@@ -1,35 +1,35 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { getDateTimeFormatter, titleCase } from '../../utils'
-import Emoji from '../Emoji'
-import makeStyles from '@material-ui/core/styles/makeStyles'
-import Tooltip from '@material-ui/core/Tooltip'
+import PropTypes from "prop-types";
+import React from "react";
+import { getDateTimeFormatter, titleCase } from "../../utils";
+import Emoji from "../Emoji";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles({
   iconContainer: {
-    margin: '0.5rem',
+    margin: "0.5rem",
   },
   text: {
-    padding: '0.25rem',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    padding: "0.25rem",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   to: {
-    padding: '0.25rem',
+    padding: "0.25rem",
   },
   rowDiv: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   eventDiv: {
-    display: 'flex',
-    alignItems: 'center',
-    minWidth: '7.1rem',
+    display: "flex",
+    alignItems: "center",
+    minWidth: "7.1rem",
   },
-})
+});
 
 function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.rowDiv}>
@@ -63,7 +63,7 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
         <div className={classes.text}>{emoji.name}</div>
       )}
     </div>
-  )
+  );
 }
 
 ChangeRow.propTypes = {
@@ -72,6 +72,6 @@ ChangeRow.propTypes = {
   emoji: PropTypes.object.isRequired,
   afterEmoji: PropTypes.object,
   changedAt: PropTypes.string.isRequired,
-}
+};
 
-export default ChangeRow
+export default ChangeRow;
