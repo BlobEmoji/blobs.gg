@@ -16,10 +16,10 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import TwelveHoursIcon from "../../assets/icons/12h.svg";
 import TwentyFourHoursIcon from "../../assets/icons/24h.svg";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from "@material-ui/core/SvgIcon";
 import Tooltip from "@material-ui/core/Tooltip";
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 function changeItem(event, value, key, reloadWrapper) {
   if (value == null) return;
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   dialogContent: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.5rem 0"
+    gap: "0.5rem 0",
   },
   optionContainer: {
     display: "flex",
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 0,
   },
   optionButtons: {
-    marginLeft: "auto"
+    marginLeft: "auto",
   },
 }));
 
@@ -93,20 +93,25 @@ function SettingsDialog(props) {
             Theme
           </DialogContentText>
 
-          <ToggleButtonGroup value={themeChoice} exclusive onChange={onThemeChange} className={classes.optionButtons}>
+          <ToggleButtonGroup
+            value={themeChoice}
+            exclusive
+            onChange={onThemeChange}
+            className={classes.optionButtons}
+          >
             <Tooltip value="1" title="Dark Theme" arrow>
               <ToggleButton>
-                <Brightness2Icon/>
+                <Brightness2Icon />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="2" title="Light Theme" arrow>
               <ToggleButton>
-                <BrightnessHighIcon/>
+                <BrightnessHighIcon />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="3" title="Automatic" arrow>
               <ToggleButton>
-                <Brightness4Icon/>
+                <Brightness4Icon />
               </ToggleButton>
             </Tooltip>
           </ToggleButtonGroup>
@@ -116,20 +121,25 @@ function SettingsDialog(props) {
             Hour Format
           </DialogContentText>
 
-          <ToggleButtonGroup value={hourFormatChoice} exclusive onChange={onHourFormatChange} className={classes.optionButtons}>
+          <ToggleButtonGroup
+            value={hourFormatChoice}
+            exclusive
+            onChange={onHourFormatChange}
+            className={classes.optionButtons}
+          >
             <Tooltip value="1" title="12 Hour Format" arrow>
               <ToggleButton>
-                <SvgIcon component={TwelveHoursIcon}/>
+                <SvgIcon component={TwelveHoursIcon} />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="2" title="24 Hour Format" arrow>
               <ToggleButton>
-                <SvgIcon component={TwentyFourHoursIcon}/>
+                <SvgIcon component={TwentyFourHoursIcon} />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="3" title="Automatic" arrow>
               <ToggleButton>
-                <AvTimerIcon/>
+                <AvTimerIcon />
               </ToggleButton>
             </Tooltip>
           </ToggleButtonGroup>

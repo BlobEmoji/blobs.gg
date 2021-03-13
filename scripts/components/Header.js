@@ -13,7 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from "@material-ui/core/SvgIcon";
 
 const useStyles = makeStyles((theme) => ({
   mainIcon: {
