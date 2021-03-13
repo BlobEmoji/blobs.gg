@@ -1,28 +1,28 @@
-import React, { useState } from 'react'
-import OfficialServers from '../components/Home/OfficialServers'
-import CommunityServers from '../components/Home/CommunityServers'
-import PropTypes from 'prop-types'
-import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-import Search from '../components/Home/Search'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import React, { useState } from "react";
+import OfficialServers from "../components/Home/OfficialServers";
+import CommunityServers from "../components/Home/CommunityServers";
+import PropTypes from "prop-types";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Search from "../components/Home/Search";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles({
   overHeader: {
-    textAlign: 'center',
-    margin: '2em 0',
+    textAlign: "center",
+    margin: "2em 0",
   },
-})
+});
 
 function Homepage(props) {
-  const { emojis, formattedCount } = props
-  const [waiting, setWaiting] = useState(true)
-  const officialEmojis = emojis.groups.blobs
-  const communityEmojis = emojis.groups['community-blobs']
-  const classes = useStyles()
+  const { emojis, formattedCount } = props;
+  const [waiting, setWaiting] = useState(true);
+  const officialEmojis = emojis.groups.blobs;
+  const communityEmojis = emojis.groups["community-blobs"];
+  const classes = useStyles();
 
   function communityRender() {
-    setWaiting(false)
+    setWaiting(false);
   }
 
   return (
@@ -37,12 +37,12 @@ function Homepage(props) {
       />
       <CommunityServers emojis={communityEmojis} waiting={waiting} />
     </Container>
-  )
+  );
 }
 
 Homepage.propTypes = {
   formattedCount: PropTypes.string.isRequired,
   emojis: PropTypes.object.isRequired,
-}
+};
 
-export default Homepage
+export default Homepage;
