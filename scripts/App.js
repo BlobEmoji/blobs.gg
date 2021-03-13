@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Route, Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -17,8 +17,6 @@ import Container from '@material-ui/core/Container'
 import grey from '@material-ui/core/colors/grey'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SettingsDialog from './components/SettingsDialog'
-import ReactGA from 'react-ga'
-import { createBrowserHistory } from 'history'
 
 function getConfig() {
   let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', {
@@ -34,21 +32,12 @@ function getConfig() {
 }
 
 const BLOBS_ENDPOINT = 'https://api.mousey.app/v3/emoji/blobs+community-blobs'
-const history = createBrowserHistory()
 
 // Taken from https://github.com/mui-org/material-ui/blob/27471b4564eb40ff769352d73a29938d25804e45/packages/material-ui/src/styles/createTypography.js#L45
 const htmlFontSize = 16
 const fontSize = 14
 const coef = fontSize / 14
 const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`
-
-ReactGA.initialize('UA-124174886-4')
-ReactGA.pageview(window.location.pathname + window.location.search)
-
-history.listen((location) => {
-  ReactGA.set({ page: location.pathname })
-  ReactGA.pageview(location.pathname)
-})
 
 function App() {
   const [formattedCount, setFormattedCount] = useState('0')
@@ -197,7 +186,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router history={history}>
+      <Router>
         <Container maxWidth="md">
           <Header handleOpen={toggleSettingsOpen} />
         </Container>
