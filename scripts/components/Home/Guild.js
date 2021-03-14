@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
-import {useInView} from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 
 const RANDOM_SAMPLE_SIZE = 7;
 const useStyles = makeStyles((theme) => ({
@@ -137,7 +137,7 @@ function Guild({ guild, communityRender }) {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card ref={ref} style={{height: "182px"}}>
+      <Card ref={ref} style={{ height: "182px" }}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
@@ -159,7 +159,9 @@ function Guild({ guild, communityRender }) {
             margin="-0.3rem 0"
             padding="0 0.1rem"
           >
-            {inView && <EmojiRow emoji={expanded ? guild.emoji : randomSample} />}
+            {inView && (
+              <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
+            )}
           </Box>
         </CardContent>
         <CardActions>
