@@ -137,7 +137,7 @@ function Guild({ guild, communityRender }) {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card ref={ref} style={{ height: "182px" }}>
+      <Card ref={ref}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
@@ -158,6 +158,7 @@ function Guild({ guild, communityRender }) {
             gridTemplateColumns="repeat(7, 1fr)"
             margin="-0.3rem 0"
             padding="0 0.1rem"
+            style={{ height: "42px" }}
           >
             {inView && (
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
