@@ -6,11 +6,16 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Search from "../components/Home/Search";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
   overHeader: {
     textAlign: "center",
-    margin: "2em 0",
+    margin: "2em 0 0 0",
+  },
+  subHeader: {
+    textAlign: "center",
+    margin: "0 0 2em 0",
   },
 });
 
@@ -29,6 +34,16 @@ function Homepage(props) {
     <Container maxWidth="md">
       <Typography variant="h5" className={classes.overHeader}>
         {formattedCount} fun and playful Blob Emoji for Discord
+      </Typography>
+      <Typography variant="h6" className={classes.subHeader}>
+        Powered by the Blob Emoji community.&nbsp;
+        <Link
+          href="https://1.blobs.gg/"
+          target="_blank"
+          rel="noopener"
+        >
+          Come join us!
+        </Link>
       </Typography>
       <Search emojis={emojis} />
       <OfficialServers
