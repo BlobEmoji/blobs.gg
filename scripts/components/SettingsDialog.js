@@ -19,7 +19,9 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 function changeItem(event, value, key, reloadWrapper) {
-  if (value == null) { return }
+  if (value == null) {
+    return;
+  }
   localStorage.setItem(key, value);
   reloadWrapper(Math.round(Math.random() * 100));
 }
