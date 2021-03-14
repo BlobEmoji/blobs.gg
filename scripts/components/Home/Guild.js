@@ -159,10 +159,11 @@ function Guild({ guild, communityRender }) {
             margin="-0.3rem 0"
             padding="0 0.1rem"
           >
-            {inView
-              ? <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-              : <Box margin="0.3rem" height="32px" />
-            }
+            {inView ? (
+              <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
+            ) : (
+              <Box margin="0.3rem" height="32px" />
+            )}
           </Box>
         </CardContent>
         <CardActions>
