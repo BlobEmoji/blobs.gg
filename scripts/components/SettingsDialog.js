@@ -6,13 +6,10 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DialogContent from "@material-ui/core/DialogContent";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import TwelveHoursIcon from "../../assets/icons/12h.svg";
 import TwentyFourHoursIcon from "../../assets/icons/24h.svg";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
@@ -22,7 +19,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 function changeItem(event, value, key, reloadWrapper) {
-  if (value == null) return;
+  if (value == null) { return }
   localStorage.setItem(key, value);
   reloadWrapper(Math.round(Math.random() * 100));
 }
