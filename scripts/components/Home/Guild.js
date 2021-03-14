@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
-import { useInView } from "react-intersection-observer";
+import {useInView} from "react-intersection-observer";
 
 const RANDOM_SAMPLE_SIZE = 7;
 const useStyles = makeStyles((theme) => ({
@@ -114,6 +114,7 @@ function Guild({ guild, communityRender }) {
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
   const [ref, inView, entry] = useInView();
+  // console.log(guild, inView);
 
   useEffect(() => {
     if (randomSample.length === 0) {
@@ -136,38 +137,34 @@ function Guild({ guild, communityRender }) {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card ref={ref} style={{ height: "182px" }}>
-        {inView ? (
-          <>
-            <CardHeader
-              avatar={<GuildAvatar name={guild.name} src={guild} />}
-              title={guild.name}
-              onClick={handleClick}
-              className={classes.header}
-              action={
-                <ShowMore
-                  handleClick={handleClick}
-                  expanded={expanded}
-                  emojiCount={guild.emoji.length}
-                />
-              }
-              titleTypographyProps={{ style: { fontSize: "1.17em" } }}
+      <Card ref={ref} style={{height: "182px"}}>
+        <CardHeader
+          avatar={<GuildAvatar name={guild.name} src={guild} />}
+          title={guild.name}
+          onClick={handleClick}
+          className={classes.header}
+          action={
+            <ShowMore
+              handleClick={handleClick}
+              expanded={expanded}
+              emojiCount={guild.emoji.length}
             />
-            <CardContent>
-              <Box
-                display="grid"
-                gridTemplateColumns="repeat(7, 1fr)"
-                margin="-0.3rem 0"
-                padding="0 0.1rem"
-              >
-                <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-              </Box>
-            </CardContent>
-            <CardActions>
-              <JoinServer invite={guild.invite} />
-            </CardActions>
-          </>
-        ) : null}
+          }
+          titleTypographyProps={{ style: { fontSize: "1.17em" } }}
+        />
+        <CardContent>
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(7, 1fr)"
+            margin="-0.3rem 0"
+            padding="0 0.1rem"
+          >
+            {inView && <EmojiRow emoji={expanded ? guild.emoji : randomSample} />}
+          </Box>
+        </CardContent>
+        <CardActions>
+          <JoinServer invite={guild.invite} />
+        </CardActions>
       </Card>
     </Grid>
   );
