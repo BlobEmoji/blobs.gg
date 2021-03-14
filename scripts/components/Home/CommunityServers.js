@@ -1,29 +1,29 @@
-import React from 'react'
-import nitro from 'url:../../../assets/discord/nitro.png'
-import PropTypes from 'prop-types'
-import Guilds from './Guilds'
-import { shuffleArray } from '../../utils'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
-import makeStyles from '@material-ui/core/styles/makeStyles'
-import useTheme from '@material-ui/core/styles/useTheme'
+import React from "react";
+import nitro from "url:../../../assets/discord/nitro.png";
+import PropTypes from "prop-types";
+import Guilds from "./Guilds";
+import { shuffleArray } from "../../utils";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    marginBottom: '1rem',
+    marginBottom: "1rem",
   },
   inlineIcon: {
-    height: '0.8em',
-    width: 'auto',
-    margin: '0 0.25em',
-    filter: theme.palette.type === 'light' && 'invert(1)',
+    height: "0.8em",
+    width: "auto",
+    margin: "0 0.25em",
+    filter: theme.palette.type === "light" && "invert(1)",
   },
-}))
+}));
 
 function CommunityServers(props) {
-  const theme = useTheme()
-  const classes = useStyles(theme)
-  let shuffled = props.waiting ? [] : shuffleArray(props.emojis.guilds)
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  let shuffled = props.waiting ? [] : shuffleArray(props.emojis.guilds);
 
   return (
     <>
@@ -33,10 +33,10 @@ function CommunityServers(props) {
         </Typography>
         <Typography variant="body2">
           To add your Blob Server to our Community Servers section, join the
-          official{' '}
+          official{" "}
           <Link href="https://1.blobs.gg" target="_blank" rel="noreferrer">
             Blob Emoji server
-          </Link>{' '}
+          </Link>{" "}
           and message our Blob Mail bot.
         </Typography>
         <Typography variant="body2">
@@ -51,18 +51,18 @@ function CommunityServers(props) {
           />
           <Link href="https://discord.com/nitro" target="_blank" rel="noopener">
             Discord Nitro
-          </Link>{' '}
+          </Link>{" "}
           subscription.
         </Typography>
       </div>
       <Guilds guilds={shuffled} slice skeletonCount={9} />
     </>
-  )
+  );
 }
 
 CommunityServers.propTypes = {
   emojis: PropTypes.object.isRequired,
   waiting: PropTypes.bool.isRequired,
-}
+};
 
-export default CommunityServers
+export default CommunityServers;

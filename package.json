@@ -3,6 +3,25 @@
   "private": true,
   "version": "0.0.1",
   "description": "Now with pages!",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html --detailed-report 20",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^4.2.2",
+    "@material-ui/core": "^4.11.3-deprecations.0",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "^4.11.3-deprecations.0",
+    "clsx": "^1.1.1",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/eslint-parser": "^7.13.8",
@@ -10,53 +29,11 @@
     "@babel/plugin-transform-runtime": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
     "@babel/runtime": "^7.13.9",
-    "@material-ui/core": "^4.11.3-deprecations.0",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.57",
-    "@material-ui/styles": "^4.11.3-deprecations.0",
     "@parcel/transformer-image": "2.0.0-nightly.2243",
     "eslint": "^7.19.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "parcel": "2.0.0-nightly.619",
     "prettier": "^2.2.1"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "trailingComma": "es5",
-    "arrowParens": "always",
-    "proseWrap": "always"
-  },
-  "scripts": {
-    "start": "parcel serve index.html",
-    "build": "parcel build index.html --detailed-report 20"
-  },
-  "dependencies": {
-    "@fontsource/roboto": "^4.2.2",
-    "clsx": "^1.1.1",
-    "history": "^4.10.1",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.debounce": "^4.0.8",
-    "prop-types": "^15.7.2",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-ga": "^3.3.0",
-    "react-router-dom": "^5.2.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      [
-        "@babel/plugin-transform-runtime",
-        {
-          "regenerator": true
-        }
-      ]
-    ]
   }
 }
