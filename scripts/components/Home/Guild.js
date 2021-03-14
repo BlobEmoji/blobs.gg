@@ -158,11 +158,11 @@ function Guild({ guild, communityRender }) {
             gridTemplateColumns="repeat(7, 1fr)"
             margin="-0.3rem 0"
             padding="0 0.1rem"
-            style={{ height: "42px" }}
           >
-            {inView && (
-              <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-            )}
+            {inView
+              ? <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
+              : <Box margin="0.3rem" height="32px" />
+            }
           </Box>
         </CardContent>
         <CardActions>
