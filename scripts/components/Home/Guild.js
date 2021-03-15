@@ -114,8 +114,10 @@ function Guild({ guild, communityRender }) {
   const [randomSample, setRandomSample] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
+  const quarterScreenHeightInPx = window.innerHeight * 25 / 100;
   const [ref, inView, entry] = useInView({
     triggerOnce: true,
+    rootMargin: `0px 0px ${quarterScreenHeightInPx}px 0px`
   });
 
   useEffect(() => {
