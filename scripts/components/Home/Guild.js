@@ -156,7 +156,7 @@ function Guild({ guild, communityRender }) {
               display="grid"
               gridTemplateColumns="repeat(7, 1fr)"
               margin="0 0.3rem"
-              gridGap="0.3rem"
+              gridGap="0.6rem 0.3rem"
               justifyItems="center"
             >
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />

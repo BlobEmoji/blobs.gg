@@ -14,7 +14,7 @@ export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
       display="grid"
       gridTemplateColumns="repeat(7, 1fr)"
       margin="0 0.3rem"
-      gridGap="0.3rem"
+      gridGap="0.6rem 0.3rem"
       justifyItems="center"
     >
       {Array.from({ length: 7 }, (_, index) => (
