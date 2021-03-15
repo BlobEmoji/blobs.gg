@@ -10,7 +10,12 @@ import Box from "@material-ui/core/Box";
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
   return (
-    <Box display="flex" justifyContent="space-around" margin="-0.3rem 0px">
+    <Box
+      display="flex"
+      justifyContent="space-around"
+      margin="0.3rem 0px"
+      padding="0 0.1rem"
+    >
       {Array.from({ length: 7 }, (_, index) => (
         <Skeleton key={index} variant="circle" width={32} height={32} />
       ))}
