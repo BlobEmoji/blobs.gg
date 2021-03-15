@@ -18,12 +18,7 @@ export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
       justifyItems="center"
     >
       {Array.from({ length: 7 }, (_, index) => (
-        <Skeleton
-          key={index}
-          variant="circle"
-          width={32}
-          height={32}
-        />
+        <Skeleton key={index} variant="circle" width={32} height={32} />
       ))}
     </Box>
   );

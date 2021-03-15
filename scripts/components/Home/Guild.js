@@ -42,11 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 function EmojiRow(props) {
   return props.emoji.map((emoji) => (
-    <Emoji
-      baseSize={emoji.animated ? 64 : 32}
-      key={emoji.id}
-      {...emoji}
-    />
+    <Emoji baseSize={emoji.animated ? 64 : 32} key={emoji.id} {...emoji} />
   ));
 }
 
