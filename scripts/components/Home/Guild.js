@@ -159,8 +159,8 @@ function Guild({ guild, communityRender }) {
         <CardContent>
           {inView ? (
             <Box
-              display="flex"
-              justifyContent="space-around"
+              display="grid"
+              gridTemplateColumns="repeat(7, 1fr)"
               margin="-0.3rem 0"
               padding="0 0.1rem"
             >
