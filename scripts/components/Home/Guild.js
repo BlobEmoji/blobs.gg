@@ -114,8 +114,9 @@ function Guild({ guild, communityRender }) {
   const [randomSample, setRandomSample] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
-  const [ref, inView, entry] = useInView();
-  // console.log(guild, inView);
+  const [ref, inView, entry] = useInView({
+    triggerOnce: true
+  });
 
   useEffect(() => {
     if (randomSample.length === 0) {
