@@ -7,17 +7,25 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles({
+  cell: {
+    margin: "0.3rem",
+  },
+});
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
+  const classes = useStyles();
   return (
     <Box
       display="flex"
       justifyContent="space-around"
-      margin="0.3rem 0px"
+      margin="-0.3rem 0px"
       padding="0 0.1rem"
     >
       {Array.from({ length: 7 }, (_, index) => (
-        <Skeleton key={index} variant="circle" width={32} height={32} />
+        <Skeleton key={index} variant="circle" width={32} height={32} className={classes.cell} />
       ))}
     </Box>
   );
@@ -32,7 +40,7 @@ const SkeletonGuild = memo(function SkeletonGuild() {
           title={<Skeleton height={22} width="80%" />}
           action={
             <IconButton disabled>
-              <Skeleton variant="circle" width={32} height={32} />
+              <Skeleton variant="circle" width={24} height={24} />
             </IconButton>
           }
         />
@@ -40,7 +48,7 @@ const SkeletonGuild = memo(function SkeletonGuild() {
           <SkeletonEmojiRow />
         </CardContent>
         <CardActions>
-          <Skeleton height={33} width="25%" />
+          <Skeleton height={31} width="25%" />
         </CardActions>
       </Card>
     </Grid>
