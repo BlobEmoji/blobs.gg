@@ -115,7 +115,7 @@ function Guild({ guild, communityRender }) {
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
   const [ref, inView, entry] = useInView({
-    triggerOnce: true
+    triggerOnce: true,
   });
 
   useEffect(() => {
