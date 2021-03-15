@@ -25,7 +25,13 @@ export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
       padding="0 0.1rem"
     >
       {Array.from({ length: 7 }, (_, index) => (
-        <Skeleton key={index} variant="circle" width={32} height={32} className={classes.cell} />
+        <Skeleton
+          key={index}
+          variant="circle"
+          width={32}
+          height={32}
+          className={classes.cell}
+        />
       ))}
     </Box>
   );
