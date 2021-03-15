@@ -8,6 +8,16 @@ import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
 
+export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
+  return (
+    <Box display="flex" justifyContent="space-around" margin="-0.3rem 0px">
+      {Array.from({ length: 7 }, (_, index) => (
+        <Skeleton key={index} variant="circle" width={32} height={32} />
+      ))}
+    </Box>
+  );
+});
+
 const SkeletonGuild = memo(function SkeletonGuild() {
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -22,15 +32,7 @@ const SkeletonGuild = memo(function SkeletonGuild() {
           }
         />
         <CardContent>
-          <Box
-            display="flex"
-            justifyContent="space-around"
-            margin="-0.3rem 0px"
-          >
-            {Array.from({ length: 7 }, (_, index) => (
-              <Skeleton key={index} variant="circle" width={32} height={32} />
-            ))}
-          </Box>
+          <SkeletonEmojiRow />
         </CardContent>
         <CardActions>
           <Skeleton height={33} width="25%" />

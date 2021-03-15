@@ -16,6 +16,7 @@ import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import { useInView } from "react-intersection-observer";
+import { SkeletonEmojiRow } from "./SkeletonGuild";
 
 const RANDOM_SAMPLE_SIZE = 7;
 const useStyles = makeStyles((theme) => ({
@@ -153,18 +154,18 @@ function Guild({ guild, communityRender }) {
           titleTypographyProps={{ style: { fontSize: "1.17em" } }}
         />
         <CardContent>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(7, 1fr)"
-            margin="-0.3rem 0"
-            padding="0 0.1rem"
-          >
-            {inView ? (
+          {inView ? (
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(7, 1fr)"
+              margin="-0.3rem 0"
+              padding="0 0.1rem"
+            >
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-            ) : (
-              <Box margin="0.3rem" height="32px" />
-            )}
-          </Box>
+            </Box>
+          ) : (
+            <SkeletonEmojiRow />
+          )}
         </CardContent>
         <CardActions>
           <JoinServer invite={guild.invite} />
