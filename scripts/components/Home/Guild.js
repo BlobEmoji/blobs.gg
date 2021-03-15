@@ -20,9 +20,6 @@ import { SkeletonEmojiRow } from "./SkeletonGuild";
 
 const RANDOM_SAMPLE_SIZE = 7;
 const useStyles = makeStyles((theme) => ({
-  cell: {
-    margin: "0.3rem",
-  },
   joinServer: {
     textTransform: "none",
     color: "white",
@@ -44,14 +41,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EmojiRow(props) {
-  const classes = useStyles();
-
   return props.emoji.map((emoji) => (
     <Emoji
       baseSize={emoji.animated ? 64 : 32}
       key={emoji.id}
       {...emoji}
-      containerClassName={classes.cell}
     />
   ));
 }
@@ -161,8 +155,9 @@ function Guild({ guild, communityRender }) {
             <Box
               display="grid"
               gridTemplateColumns="repeat(7, 1fr)"
-              margin="-0.3rem 0"
-              padding="0 0.1rem"
+              margin="0 0.3rem"
+              gridGap="0.3rem"
+              justifyItems="center"
             >
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
             </Box>

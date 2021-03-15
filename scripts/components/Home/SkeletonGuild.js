@@ -7,22 +7,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-
-const useStyles = makeStyles({
-  cell: {
-    margin: "0.3rem",
-  },
-});
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
-  const classes = useStyles();
   return (
     <Box
-      display="flex"
-      justifyContent="space-around"
-      margin="-0.3rem 0px"
-      padding="0 0.1rem"
+      display="grid"
+      gridTemplateColumns="repeat(7, 1fr)"
+      margin="0 0.3rem"
+      gridGap="0.3rem"
+      justifyItems="center"
     >
       {Array.from({ length: 7 }, (_, index) => (
         <Skeleton
@@ -30,7 +23,6 @@ export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
           variant="circle"
           width={32}
           height={32}
-          className={classes.cell}
         />
       ))}
     </Box>
