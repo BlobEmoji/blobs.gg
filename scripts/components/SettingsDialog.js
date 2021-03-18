@@ -6,78 +6,24 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DialogContent from "@material-ui/core/DialogContent";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import {
-  getDefaultHourFormat,
-  getKeyWrapper,
-  setKeyWrapper,
-  storageAvailable,
-} from "../utils";
-import useTheme from "@material-ui/core/styles/useTheme";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import TwelveHoursIcon from "../../assets/icons/12h.svg";
+import TwentyFourHoursIcon from "../../assets/icons/24h.svg";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
+import SvgIcon from "@material-ui/core/SvgIcon";
 import Tooltip from "@material-ui/core/Tooltip";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
-const themeIcons = {
-  false: <BrightnessLowIcon fontSize="small" />,
-  true: <BrightnessHighIcon fontSize="small" />,
-  automated: <Brightness4Icon fontSize="small" />,
-};
-
-const hourFormatIcons = {
-  true: <AccessAlarmIcon fontSize="small" />,
-  false: <AccessTimeIcon fontSize="small" />,
-  automated: <AvTimerIcon fontSize="small" />,
-};
-
-const oppositeTheme = {
-  light: true,
-  dark: false,
-};
-
-function iconHandler(key, icons) {
-  const disabled = !storageAvailable("localStorage");
-  let icon;
-
-  if (disabled === true) {
-    icon = icons.automated;
-  } else {
-    const value = localStorage.getItem(key);
-    switch (value) {
-      case "3": {
-        icon = icons.automated;
-        break;
-      }
-      case "2": {
-        icon = icons.false;
-        break;
-      }
-      case "1": {
-        icon = icons.true;
-        break;
-      }
-      // eslint-disable-next-line no-empty
-      default: {
-      }
-    }
+function changeItem(event, value, key, reloadWrapper) {
+  if (value == null) {
+    return;
   }
-  return icon;
-}
-
-function getTooltipString(key) {
-  const value = localStorage.getItem(key);
-  let string = "Toggle to ";
-
-  if (key === "darkTheme") {
-    return `${string}${value === "2" ? "Dark" : "Light"} Theme`;
-  } else if (key === "prefers12Hour") {
-    return `${string}${value === "2" ? "12h" : "24h"} Theme`;
-  }
-  return `${string}${key}`;
+  localStorage.setItem(key, value);
+  reloadWrapper(Math.round(Math.random() * 100));
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -86,18 +32,21 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
   },
+  dialogContent: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem 0",
+  },
   optionContainer: {
     display: "flex",
     alignItems: "center",
   },
-  optionText: {
+  optionLabel: {
     marginRight: "2.5rem",
     marginBottom: 0,
   },
-  optionButton: {
+  optionButtons: {
     marginLeft: "auto",
-    marginRight: "-12px",
-    display: "block",
   },
 }));
 
@@ -109,26 +58,15 @@ function SettingsDialog(props) {
     [handleReload]
   );
   const classes = useStyles();
-  const theme = useTheme();
-  const themeIcon = iconHandler("darkTheme", themeIcons);
-  const hourFormatIcon = iconHandler("prefers12Hour", hourFormatIcons);
-  const themeTooltip = getTooltipString("darkTheme");
-  const hourFormatTooltip = getTooltipString("prefers12Hour");
+  const themeChoice = localStorage.getItem("darkTheme");
+  const hourFormatChoice = localStorage.getItem("prefers12Hour");
 
-  function toggleTheme() {
-    setKeyWrapper("darkTheme", oppositeTheme[theme.palette.type]);
-    handleReloadWrapper(Math.round(Math.random() * 100));
+  function onThemeChange(event, value) {
+    changeItem(event, value, "darkTheme", handleReloadWrapper);
   }
 
-  function toggleHourFormat() {
-    const defaultHourFormat = getDefaultHourFormat();
-    // eslint-disable-next-line no-unused-vars
-    const [resIsTime12, resIsTime12LS] = getKeyWrapper(
-      "prefers12Hour",
-      defaultHourFormat
-    );
-    setKeyWrapper("prefers12Hour", !resIsTime12);
-    handleReloadWrapper(Math.round(Math.random() * 100));
+  function onHourFormatChange(event, value) {
+    changeItem(event, value, "prefers12Hour", handleReloadWrapper);
   }
 
   return (
@@ -148,34 +86,62 @@ function SettingsDialog(props) {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent dividers className={classes.dialogContent}>
         <div className={classes.optionContainer}>
-          <DialogContentText className={classes.optionText}>
-            Toggle Theme
+          <DialogContentText className={classes.optionLabel}>
+            Theme
           </DialogContentText>
-          <Tooltip title={themeTooltip} arrow>
-            <IconButton
-              aria-label={themeTooltip}
-              className={classes.optionButton}
-              onClick={toggleTheme}
-            >
-              {themeIcon}
-            </IconButton>
-          </Tooltip>
+
+          <ToggleButtonGroup
+            value={themeChoice}
+            exclusive
+            onChange={onThemeChange}
+            className={classes.optionButtons}
+          >
+            <Tooltip value="1" title="Dark Theme" arrow>
+              <ToggleButton>
+                <Brightness2Icon />
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip value="2" title="Light Theme" arrow>
+              <ToggleButton>
+                <BrightnessHighIcon />
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip value="3" title="Automatic" arrow>
+              <ToggleButton>
+                <Brightness4Icon />
+              </ToggleButton>
+            </Tooltip>
+          </ToggleButtonGroup>
         </div>
         <div className={classes.optionContainer}>
-          <DialogContentText className={classes.optionText}>
-            Toggle Hour Format
+          <DialogContentText className={classes.optionLabel}>
+            Hour Format
           </DialogContentText>
-          <Tooltip title={hourFormatTooltip} arrow>
-            <IconButton
-              aria-label={hourFormatTooltip}
-              className={classes.optionButton}
-              onClick={toggleHourFormat}
-            >
-              {hourFormatIcon}
-            </IconButton>
-          </Tooltip>
+
+          <ToggleButtonGroup
+            value={hourFormatChoice}
+            exclusive
+            onChange={onHourFormatChange}
+            className={classes.optionButtons}
+          >
+            <Tooltip value="1" title="12 Hour Format" arrow>
+              <ToggleButton>
+                <SvgIcon component={TwelveHoursIcon} />
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip value="2" title="24 Hour Format" arrow>
+              <ToggleButton>
+                <SvgIcon component={TwentyFourHoursIcon} />
+              </ToggleButton>
+            </Tooltip>
+            <Tooltip value="3" title="Automatic" arrow>
+              <ToggleButton>
+                <AvTimerIcon />
+              </ToggleButton>
+            </Tooltip>
+          </ToggleButtonGroup>
         </div>
       </DialogContent>
     </Dialog>

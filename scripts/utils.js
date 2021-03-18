@@ -128,24 +128,6 @@ export function chunker(inputArray, chunkSize = 6) {
 
 /**
  * @param {String} key The key to check with
- * @param {boolean} value The value to set
- * @returns {boolean} If it was successful
- */
-export function setKeyWrapper(key, value) {
-  const trans = {
-    true: 1,
-    false: 2,
-  };
-
-  if (storageAvailable("localStorage")) {
-    localStorage.setItem(key, trans[value]);
-    return true;
-  }
-  return false;
-}
-
-/**
- * @param {String} key The key to check with
  * @param {Boolean} value The value in case there isn't a key/LS
  * @returns {[Boolean, Boolean]} Returns Value & if it used the LS
  */
@@ -168,7 +150,9 @@ export function getKeyWrapper(key, value) {
     }
     // If key not in DB
     warn(`Setting key for ${key}`);
-    setKeyWrapper(key, value);
+    if (storageAvailable("localStorage")) {
+      localStorage.setItem(key, "3");
+    }
     return [value, false];
   }
   // Can't use LS, have whatever I'm given

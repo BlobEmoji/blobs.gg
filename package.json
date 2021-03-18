@@ -20,6 +20,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-intersection-observer": "^8.31.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
@@ -29,11 +30,13 @@
     "@babel/plugin-transform-runtime": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
     "@babel/runtime": "^7.13.9",
-    "@parcel/transformer-image": "2.0.0-nightly.2243",
+    "@parcel/config-default": "2.0.0-nightly.627",
+    "@parcel/transformer-raw": "2.0.0-nightly.627",
+    "@parcel/transformer-svg-react": "2.0.0-nightly.2249",
     "eslint": "^7.19.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
-    "parcel": "2.0.0-nightly.619",
+    "parcel": "2.0.0-nightly.625",
     "prettier": "^2.2.1"
   }
 }
