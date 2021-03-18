@@ -37,11 +37,7 @@ function Homepage(props) {
       </Typography>
       <Typography variant="h6" className={classes.subHeader}>
         Created by the Blob Emoji community.&nbsp;
-        <Link
-          href="https://1.blobs.gg/"
-          target="_blank"
-          rel="noopener"
-        >
+        <Link href="https://1.blobs.gg/" target="_blank" rel="noopener">
           Come join us!
         </Link>
       </Typography>
