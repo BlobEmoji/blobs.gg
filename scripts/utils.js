@@ -105,6 +105,10 @@ export function calculateEmojiCount(data) {
   return count;
 }
 
+export function formatEmojiCount(count) {
+  return new Intl.NumberFormat().format(count);
+}
+
 /**
  * Splits a input array into chunks
  *
