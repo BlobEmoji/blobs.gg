@@ -36,7 +36,7 @@ function Homepage(props) {
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
       <Typography variant="h6" className={classes.subHeader}>
-        Powered by the Blob Emoji community.&nbsp;
+        Created by the Blob Emoji community.&nbsp;
         <Link
           href="https://1.blobs.gg/"
           target="_blank"
