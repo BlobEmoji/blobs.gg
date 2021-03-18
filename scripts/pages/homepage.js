@@ -11,7 +11,7 @@ import Link from "@material-ui/core/Link";
 const useStyles = makeStyles({
   overHeader: {
     textAlign: "center",
-    margin: "2em 0 0 0",
+    margin: "2em 0 0.125em 0",
   },
   subHeader: {
     textAlign: "center",
@@ -35,7 +35,7 @@ function Homepage(props) {
       <Typography variant="h5" className={classes.overHeader}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
-      <Typography variant="h6" className={classes.subHeader}>
+      <Typography className={classes.subHeader}>
         Created by the Blob Emoji community.&nbsp;
         <Link href="https://1.blobs.gg/" target="_blank" rel="noopener">
           Come join us!
