@@ -15,12 +15,11 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
+import { useInView } from "react-intersection-observer";
+import { SkeletonEmojiRow } from "./SkeletonGuild";
 
 const RANDOM_SAMPLE_SIZE = 7;
 const useStyles = makeStyles((theme) => ({
-  cell: {
-    margin: "0.3rem",
-  },
   joinServer: {
     textTransform: "none",
     color: "white",
@@ -42,15 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EmojiRow(props) {
-  const classes = useStyles();
-
   return props.emoji.map((emoji) => (
-    <Emoji
-      baseSize={emoji.animated ? 64 : 32}
-      key={emoji.id}
-      {...emoji}
-      containerClassName={classes.cell}
-    />
+    <Emoji baseSize={emoji.animated ? 64 : 32} key={emoji.id} {...emoji} />
   ));
 }
 
@@ -112,6 +104,11 @@ function Guild({ guild, communityRender }) {
   const [randomSample, setRandomSample] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
+  const quarterScreenHeightInPx = (window.innerHeight * 25) / 100;
+  const [ref, inView, entry] = useInView({
+    triggerOnce: true,
+    rootMargin: `0px 0px ${quarterScreenHeightInPx}px 0px`,
+  });
 
   useEffect(() => {
     if (randomSample.length === 0) {
@@ -134,7 +131,7 @@ function Guild({ guild, communityRender }) {
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card>
+      <Card ref={ref}>
         <CardHeader
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
@@ -150,14 +147,19 @@ function Guild({ guild, communityRender }) {
           titleTypographyProps={{ style: { fontSize: "1.17em" } }}
         />
         <CardContent>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(7, 1fr)"
-            margin="-0.3rem 0"
-            padding="0 0.1rem"
-          >
-            <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-          </Box>
+          {inView ? (
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(7, 1fr)"
+              margin="0 0.3rem"
+              gridGap="0.6rem 0.3rem"
+              justifyItems="center"
+            >
+              <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
+            </Box>
+          ) : (
+            <SkeletonEmojiRow />
+          )}
         </CardContent>
         <CardActions>
           <JoinServer invite={guild.invite} />
