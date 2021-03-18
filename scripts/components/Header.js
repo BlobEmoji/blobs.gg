@@ -1,4 +1,4 @@
-import server1 from "url:../../assets/server_icons/server1.svg";
+import Server1 from "../../assets/server_icons/server1.svg";
 import React, { memo } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -40,13 +40,14 @@ const Header = memo(function Header(props) {
     <AppBar position="static" color="transparent">
       <Toolbar disableGutters>
         <Avatar
-          src={server1}
           className={classes.mainIcon}
           alt="Blob Emoji Server Icon"
           component={Link}
           to="/"
           imgProps={{ height: 40, width: 40 }}
-        />
+        >
+          <Server1 />
+        </Avatar>
         <Typography
           variant="h6"
           className={classes.title}
