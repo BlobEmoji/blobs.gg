@@ -102,7 +102,7 @@ ShowMore.propTypes = {
 class GuildWrapper extends PureComponent {
   static whyDidYouRender = true;
   render() {
-    return <Guild {...this.props}/>;
+    return <Guild {...this.props} />;
   }
 }
 
