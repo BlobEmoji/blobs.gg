@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OfficialServers from "../components/Home/OfficialServers";
 import CommunityServers from "../components/Home/CommunityServers";
-import PropTypes from "prop-types";
+import { Emojis } from "../emojis";
+import { calculateEmojiCount, formatEmojiCount, log } from "../utils";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Search from "../components/Home/Search";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const INITIAL_EMOJI_COUNT = 4400;
+const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
 const useStyles = makeStyles({
   overHeader: {
@@ -14,16 +18,51 @@ const useStyles = makeStyles({
   },
 });
 
-function Homepage(props) {
-  const { emojis, formattedCount } = props;
+function Homepage() {
+  const [apiData, setApiData] = useState({});
+  const [emojis, setEmojis] = useState({
+    groups: { blobs: { guilds: [] }, "community-blobs": { guilds: [] } },
+  });
+  const [formattedCount, setFormattedCount] = useState(
+    `Over ${formatEmojiCount(INITIAL_EMOJI_COUNT)}`
+  );
+
+  useEffect(() => {
+    if (apiData.hasOwnProperty("blobs")) {
+      return;
+    }
+
+    const fetchData = async () => {
+      const resp = await fetch(BLOBS_ENDPOINT);
+      const data = await resp.json();
+      setApiData(data);
+    };
+    fetchData();
+  }, [apiData]);
+
+  useEffect(() => {
+    if (!apiData.hasOwnProperty("blobs")) {
+      return;
+    }
+
+    const newEmojis = new Emojis(apiData);
+    const count = calculateEmojiCount(apiData);
+
+    log("Emojis:", newEmojis);
+
+    setEmojis(newEmojis);
+    setFormattedCount(formatEmojiCount(count));
+  }, [apiData]);
+
   const [waiting, setWaiting] = useState(true);
-  const officialEmojis = emojis.groups.blobs;
-  const communityEmojis = emojis.groups["community-blobs"];
-  const classes = useStyles();
 
   function communityRender() {
     setWaiting(false);
   }
+
+  const classes = useStyles();
+  const officialEmojis = emojis.groups.blobs;
+  const communityEmojis = emojis.groups["community-blobs"];
 
   return (
     <Container maxWidth="md">
@@ -39,10 +78,5 @@ function Homepage(props) {
     </Container>
   );
 }
-
-Homepage.propTypes = {
-  formattedCount: PropTypes.string.isRequired,
-  emojis: PropTypes.object.isRequired,
-};
 
 export default Homepage;
