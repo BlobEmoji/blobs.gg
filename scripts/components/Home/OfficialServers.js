@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
 class OfficialServers extends PureComponent {
+  static whyDidYouRender = true;
   render() {
     const { emojis, classes, communityRender } = this.props;
     return (

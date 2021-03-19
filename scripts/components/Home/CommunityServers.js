@@ -14,6 +14,7 @@ class CommunityServers extends PureComponent {
       shuffledGuilds: [],
     };
   }
+  static whyDidYouRender = true;
 
   componentDidMount() {
     const { shuffledGuilds } = this.state;
