@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component, PureComponent } from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -35,16 +35,6 @@ const useStyles = makeStyles({
 });
 
 const DEFAULT_MAXIMUM = 10;
-
-class ChangeSetWrapper extends PureComponent {
-  render() {
-    return <ChangeSet {...this.props} />;
-  }
-}
-
-ChangeSetWrapper.propTypes = {
-  changeSet: PropTypes.array.isRequired,
-}
 
 function ChangeSet({ changeSet }) {
   const date = new Date(changeSet[0].changed_at);
@@ -116,5 +106,18 @@ ChangeSet.propTypes = {
 };
 
 ChangeSet.whyDidYouRender = true;
+
+class ChangeSetWrapper extends Component {
+  // eslint-disable-next-line no-unused-vars
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return nextProps.changeSet.length !== this.props.changeSet.length;
+  }
+
+  render() {
+    return <ChangeSet {...this.props} />;
+  }
+}
+
+ChangeSetWrapper.propTypes = ChangeSet.propTypes;
 
 export default ChangeSetWrapper;
