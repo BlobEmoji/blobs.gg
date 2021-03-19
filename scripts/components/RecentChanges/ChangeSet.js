@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -36,9 +36,17 @@ const useStyles = makeStyles({
 
 const DEFAULT_MAXIMUM = 10;
 
-function ChangeSet(props) {
-  let { changeSet } = props;
+class ChangeSetWrapper extends PureComponent {
+  render() {
+    return <ChangeSet {...this.props} />;
+  }
+}
 
+ChangeSetWrapper.propTypes = {
+  changeSet: PropTypes.array.isRequired,
+}
+
+function ChangeSet({ changeSet }) {
   const date = new Date(changeSet[0].changed_at);
   const classes = useStyles();
 
@@ -107,4 +115,6 @@ ChangeSet.propTypes = {
   changeSet: PropTypes.array.isRequired,
 };
 
-export default ChangeSet;
+ChangeSet.whyDidYouRender = true;
+
+export default ChangeSetWrapper;

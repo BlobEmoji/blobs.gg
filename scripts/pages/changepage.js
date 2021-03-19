@@ -27,4 +27,6 @@ function ChangePage() {
   );
 }
 
+ChangePage.whyDidYouRender = true;
+
 export default ChangePage;

@@ -96,4 +96,6 @@ function Homepage() {
   );
 }
 
+Homepage.whyDidYouRender = true;
+
 export default Homepage;
