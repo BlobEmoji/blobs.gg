@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import nitro from "url:../../../assets/discord/nitro.png";
 import PropTypes from "prop-types";
 import Guilds from "./Guilds";
@@ -23,7 +23,15 @@ const useStyles = makeStyles((theme) => ({
 function CommunityServers(props) {
   const theme = useTheme();
   const classes = useStyles(theme);
-  let shuffled = props.waiting ? [] : shuffleArray(props.emojis.guilds);
+  const [shuffledGuilds, setShuffledGuilds] = useState([]);
+
+  useEffect(() => {
+    if (shuffledGuilds.length === 0) {
+      if (!props.waiting) {
+        setShuffledGuilds(shuffleArray(props.emojis.guilds));
+      }
+    }
+  });
 
   return (
     <>
@@ -55,7 +63,7 @@ function CommunityServers(props) {
           subscription.
         </Typography>
       </div>
-      <Guilds guilds={shuffled} slice skeletonCount={9} />
+      <Guilds guilds={shuffledGuilds} slice skeletonCount={9} />
     </>
   );
 }

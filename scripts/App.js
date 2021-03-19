@@ -1,16 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Homepage from "./pages/homepage";
-import {
-  calculateEmojiCount,
-  getDefaultHourFormat,
-  getKeyWrapper,
-  log,
-} from "./utils";
-import { Emojis } from "./emojis";
+import { getDefaultHourFormat, getKeyWrapper } from "./utils";
 import Changepage from "./pages/changepage";
 import Header from "./components/Header";
 import Container from "@material-ui/core/Container";
@@ -31,8 +30,6 @@ function getConfig() {
   return { prefersDarkMode: resPDM, prefersHour12: resHF };
 }
 
-const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
-
 // Taken from https://github.com/mui-org/material-ui/blob/27471b4564eb40ff769352d73a29938d25804e45/packages/material-ui/src/styles/createTypography.js#L45
 const htmlFontSize = 16;
 const fontSize = 14;
@@ -40,45 +37,9 @@ const coef = fontSize / 14;
 const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`;
 
 function App() {
-  const [formattedCount, setFormattedCount] = useState("0");
-  const [emojis, setEmojis] = useState({
-    groups: { blobs: { guilds: [] }, "community-blobs": { guilds: [] } },
-  });
-  const [apiData, setApiData] = useState({});
   const [settingsOpen, toggleSettingsOpen] = useState(false);
   const [, handleReload] = useState(0);
   const { prefersDarkMode } = getConfig();
-
-  useEffect(() => {
-    if (formattedCount === "0") {
-      const newFormattedCount = new Intl.NumberFormat().format(4400);
-      setFormattedCount(`Over ${newFormattedCount}`);
-    }
-  }, [formattedCount]);
-
-  useEffect(() => {
-    if (apiData.hasOwnProperty("blobs")) {
-      return;
-    }
-    const fetchData = async () => {
-      const resp = await fetch(BLOBS_ENDPOINT);
-      const data = await resp.json();
-      setApiData(data);
-    };
-    fetchData();
-  }, [apiData]);
-
-  useEffect(() => {
-    if (!apiData.hasOwnProperty("blobs")) {
-      return;
-    }
-    const count = calculateEmojiCount(apiData);
-    const newFormattedCount = new Intl.NumberFormat().format(count);
-    const newEmojis = new Emojis(apiData);
-    log("Emojis:", newEmojis);
-    setFormattedCount(newFormattedCount);
-    setEmojis(newEmojis);
-  }, [apiData]);
 
   const theme = useMemo(
     () =>
@@ -191,13 +152,15 @@ function App() {
           <Header handleOpen={toggleSettingsOpen} />
         </Container>
         <Switch>
-          <Route path="/changes" children={<Changepage />} />
-          <Route
-            exact-path="/"
-            children={
-              <Homepage formattedCount={formattedCount} emojis={emojis} />
-            }
-          />
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route path="/changes">
+            <Changepage />
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
         </Switch>
         <SettingsDialog
           open={settingsOpen}
