@@ -11,12 +11,24 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 const INITIAL_EMOJI_COUNT = 4400;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overHeader: {
     textAlign: "center",
     margin: "2em 0",
   },
-});
+  licenceContainer: {
+    margin: "2rem 0",
+  },
+  margin: {
+    marginBottom: "1rem",
+  },
+  inlineIcon: {
+    height: "0.8em",
+    width: "auto",
+    margin: "0 0.25em",
+    filter: theme.palette.type === "light" && "invert(1)",
+  }
+}));
 
 function Homepage() {
   const [apiData, setApiData] = useState({});
@@ -73,8 +85,13 @@ function Homepage() {
       <OfficialServers
         emojis={officialEmojis}
         communityRender={communityRender}
+        classes={classes}
       />
-      <CommunityServers emojis={communityEmojis} waiting={waiting} />
+      <CommunityServers
+        emojis={communityEmojis}
+        waiting={waiting}
+        classes={classes}
+      />
     </Container>
   );
 }
