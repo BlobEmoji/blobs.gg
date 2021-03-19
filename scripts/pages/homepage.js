@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import OfficialServers from "../components/Home/OfficialServers";
 import CommunityServers from "../components/Home/CommunityServers";
 import { Emojis } from "../emojis";
@@ -56,9 +56,9 @@ function Homepage() {
 
   const [waiting, setWaiting] = useState(true);
 
-  function communityRender() {
+  const communityRender = useCallback(function communityRender() {
     setWaiting(false);
-  }
+  }, []);
 
   const classes = useStyles();
   const officialEmojis = emojis.groups.blobs;
