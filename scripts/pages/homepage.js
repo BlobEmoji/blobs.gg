@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     margin: "0 0.25em",
     filter: theme.palette.type === "light" && "invert(1)",
-  }
+  },
 }));
 
 function Homepage() {
