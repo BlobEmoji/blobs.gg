@@ -50,4 +50,6 @@ OfficialServers.propTypes = {
   communityRender: PropTypes.func.isRequired,
 };
 
+OfficialServers.whyDidYouRender = true;
+
 export default OfficialServers;

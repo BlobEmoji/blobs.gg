@@ -60,4 +60,6 @@ Guilds.propTypes = {
   communityRender: PropTypes.func,
 };
 
+Guilds.whyDidYouRender = true;
+
 export default Guilds;
