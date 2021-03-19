@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { PureComponent, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { GuildAvatar } from "../Avatars";
 import { shuffleArray } from "../../utils";
@@ -99,6 +99,18 @@ ShowMore.propTypes = {
   handleClick: PropTypes.func.isRequired,
 };
 
+class GuildWrapper extends PureComponent {
+  static whyDidYouRender = true;
+  render() {
+    return <Guild {...this.props} />;
+  }
+}
+
+GuildWrapper.propTypes = {
+  guild: PropTypes.object.isRequired,
+  communityRender: PropTypes.func,
+};
+
 function Guild({ guild, communityRender }) {
   const classes = useStyles();
   const [randomSample, setRandomSample] = useState([]);
@@ -174,4 +186,6 @@ Guild.propTypes = {
   communityRender: PropTypes.func,
 };
 
-export default Guild;
+Guild.whyDidYouRender = true;
+
+export default GuildWrapper;

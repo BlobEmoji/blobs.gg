@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import OfficialServers from "../components/Home/OfficialServers";
 import CommunityServers from "../components/Home/CommunityServers";
 import { Emojis } from "../emojis";
@@ -12,7 +12,7 @@ import Link from "@material-ui/core/Link";
 const INITIAL_EMOJI_COUNT = 4400;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overHeader: {
     textAlign: "center",
     margin: "2em 0 0.125em 0",
@@ -21,7 +21,19 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "0 0 2em 0",
   },
-});
+  licenceContainer: {
+    margin: "2rem 0",
+  },
+  margin: {
+    marginBottom: "1rem",
+  },
+  inlineIcon: {
+    height: "0.8em",
+    width: "auto",
+    margin: "0 0.25em",
+    filter: theme.palette.type === "light" && "invert(1)",
+  },
+}));
 
 function Homepage() {
   const [apiData, setApiData] = useState({});
@@ -61,9 +73,9 @@ function Homepage() {
 
   const [waiting, setWaiting] = useState(true);
 
-  function communityRender() {
+  const communityRender = useCallback(function communityRender() {
     setWaiting(false);
-  }
+  }, []);
 
   const classes = useStyles();
   const officialEmojis = emojis.groups.blobs;
@@ -84,10 +96,17 @@ function Homepage() {
       <OfficialServers
         emojis={officialEmojis}
         communityRender={communityRender}
+        classes={classes}
       />
-      <CommunityServers emojis={communityEmojis} waiting={waiting} />
+      <CommunityServers
+        emojis={communityEmojis}
+        waiting={waiting}
+        classes={classes}
+      />
     </Container>
   );
 }
+
+Homepage.whyDidYouRender = true;
 
 export default Homepage;

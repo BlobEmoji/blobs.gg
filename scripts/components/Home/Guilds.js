@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Guild from "./Guild";
+import GuildWrapper from "./Guild";
 import Grid from "@material-ui/core/Grid";
 import { useScrollNearEnd } from "../../hooks";
 import SkeletonGuild from "./SkeletonGuild";
@@ -36,7 +36,7 @@ function Guilds(props) {
   return (
     <Grid container spacing={3} className={className}>
       {newGuilds.map((guild) => (
-        <Guild
+        <GuildWrapper
           key={guild.id}
           guild={guild}
           communityRender={props.communityRender}
@@ -59,5 +59,7 @@ Guilds.propTypes = {
   skeletonCount: PropTypes.number.isRequired,
   communityRender: PropTypes.func,
 };
+
+Guilds.whyDidYouRender = true;
 
 export default Guilds;
