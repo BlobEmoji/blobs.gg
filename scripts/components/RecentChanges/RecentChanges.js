@@ -2,7 +2,7 @@ import React from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useScrollNearEnd } from "../../hooks";
 import SkeletonChangeSet from "./SkeletonChangeSet";
-import ChangeSet from "./ChangeSet";
+import ChangeSetWrapper from "./ChangeSet";
 
 const HISTORY_LIMIT = 50;
 const HISTORY_ENDPOINT = `https://api.mousey.app/v3/emoji/blobs+community-blobs/changes?count=${HISTORY_LIMIT}`;
@@ -107,8 +107,10 @@ function RecentChanges() {
   }
 
   return Object.entries(changeSets).map(([key, changeSet]) => (
-    <ChangeSet changeSet={changeSet} key={key} />
+    <ChangeSetWrapper changeSet={changeSet} key={key} />
   ));
 }
+
+RecentChanges.whyDidYouRender = true;
 
 export default RecentChanges;
