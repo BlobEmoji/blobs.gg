@@ -141,6 +141,54 @@ Filters.propTypes = {
   hasQuery: PropTypes.bool.isRequired,
 }
 
+function Filters(props) {
+  const classes = useStyles()
+  if (props.hasQuery) {
+    return (
+      <div className={classes.filterContainer}>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Filter emojis by format</InputLabel>
+          <Select defaultValue='all' onChange={props.onFilterChange}>
+            <MenuItem value='all'>
+                All
+            </MenuItem>
+            <MenuItem value='static'>
+                Static
+            </MenuItem>
+            <MenuItem value='animated'>
+                Animated
+            </MenuItem>
+            <MenuItem value='none'>
+                None
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel>Filter servers by type</InputLabel>
+          <Select defaultValue='all'>
+            <MenuItem value='all'>
+                All
+            </MenuItem>
+            <MenuItem value='official'>
+                Official
+            </MenuItem>
+            <MenuItem value='community'>
+                Community
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+    )
+  } 
+  
+  return null;
+}
+
+Filters.propTypes = {
+  onFilterChange: PropTypes.func.isRequired,
+  hasQuery: PropTypes.bool.isRequired,
+}
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -186,6 +234,17 @@ class Search extends React.Component {
       }
     })
     this.handleQueryChange(null, query, page);
+  }
+
+  handleFilter = (event, key) => {
+    const { query, page } = this.state
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        [key]: event.target.value
+      }
+    })
+    this.handleQueryChange(null, query, page)
   }
 
   handleQueryChange = (event, querySearch, newPage) => {
