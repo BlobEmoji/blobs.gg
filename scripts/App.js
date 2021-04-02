@@ -39,7 +39,7 @@ const pxToRem = (size) => `${(size / htmlFontSize) * coef}rem`;
 function App() {
   const [settingsOpen, toggleSettingsOpen] = useState(false);
   const [, handleReload] = useState(0);
-  const { prefersDarkMode } = getConfig();
+  const { prefersDarkMode, prefersHour12 } = getConfig();
 
   const theme = useMemo(
     () =>
@@ -141,7 +141,7 @@ function App() {
           },
         },
       }),
-    [prefersDarkMode]
+    [prefersDarkMode, prefersHour12]
   );
 
   return (
