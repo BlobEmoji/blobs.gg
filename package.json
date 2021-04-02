@@ -8,6 +8,21 @@
     "build": "parcel build index.html --detailed-report 20",
     "format": "prettier --write ."
   },
+  "pwaManifest": {
+    "name": "My Awesome PWA",
+    "shortName": "My PWA",
+    "startURL": "./",
+    "theme": "#add8e6",
+    "generateIconOptions": {
+      "baseIcon": "./assets/blobs/blobowo.png",
+      "sizes": [
+        192,
+        384,
+        512
+      ],
+      "genFavicons": true
+    }
+  },
   "dependencies": {
     "@fontsource/roboto": "^4.2.2",
     "@material-ui/core": "^4.11.3-deprecations.0",
@@ -17,6 +32,7 @@
     "clsx": "^1.1.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
+    "parcel-config-pwa-manifest": "^0.0.9",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -31,6 +47,7 @@
     "@babel/preset-react": "^7.12.13",
     "@babel/runtime": "^7.13.9",
     "@parcel/config-default": "2.0.0-beta.2",
+    "@parcel/packager-raw-url": "^2.0.0-beta.2",
     "@parcel/transformer-raw": "2.0.0-beta.2",
     "@parcel/transformer-svg-react": "2.0.0-beta.2",
     "@welldone-software/why-did-you-render": "^6.1.1",

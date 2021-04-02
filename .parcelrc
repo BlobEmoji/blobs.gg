@@ -1,7 +1,7 @@
 {
-  "extends": "@parcel/config-default",
+  "extends": ["@parcel/config-default", "parcel-config-pwa-manifest"],
   "transformers": {
-    "url:*.{png,jpg,jpeg,webp}": ["@parcel/transformer-raw"],
+    "url:*.{png,jpg,jpeg,webp,webmanifest}": ["@parcel/transformer-raw"],
     "*.svg": ["@parcel/transformer-svg-react"]
   }
 }
