@@ -1,0 +1,16 @@
+version: 2
+
+updates:
+  - directory: "/"
+    package-ecosystem: "npm"
+    schedule:
+      interval: "monthly"
+    reviewers:
+      - "BlobEmoji/website"
+
+  - directory: "/"
+    package-ecosystem: "github-actions"
+    schedule:
+      interval: "monthly"
+    reviewers:
+      - "BlobEmoji/website"
