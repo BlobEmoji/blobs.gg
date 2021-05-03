@@ -17,9 +17,7 @@ const useStyles = makeStyles({
     height: "inherit",
     verticalAlign: "middle",
     display: "inline-block",
-  },
-  emoji: {
-    objectFit: "contain",
+    backgroundColor: "transparent",
   },
   inviteContainer: {
     margin: "1rem",
@@ -31,9 +29,11 @@ const useStyles = makeStyles({
   },
 });
 
-function emojiUrl(id, extension, size) {
+function emojiUrl(id, extension, size, webpTest = false) {
   const sizeParam = size == null ? "" : `?size=${size}`;
-  return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`;
+  return `https://cdn.discordapp.com/emojis/${id}.${
+    webpTest && extension !== "gif" ? "webp" : extension
+  }${sizeParam}`;
 }
 
 const ConditionalLink = forwardRef(function ConditionalLink(props, ref) {
@@ -65,11 +65,6 @@ function Emoji(props) {
     alt += ` (${guild.name})`;
   }
 
-  const srcSet = `
-    ${emojiUrl(id, extension, baseSize)},
-    ${emojiUrl(id, extension, baseSize * 2)} 2x
-  `;
-
   function wrapper(children) {
     return (
       <Link
@@ -95,15 +90,21 @@ function Emoji(props) {
         <Tooltip title={alt} arrow>
           <Avatar
             alt={name}
-            classes={{
-              img: classes.emoji,
-            }}
-            srcSet={srcSet}
-            src={emojiUrl(id, extension, baseSize)}
             variant="square"
             className={clsx(classes.div, className)}
-            imgProps={{ width: enlarge ? 64 : 32, height: enlarge ? 64 : 32 }}
-          />
+          >
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={emojiUrl(id, extension, baseSize, true)}
+              />
+              <img
+                src={emojiUrl(id, extension, baseSize)}
+                alt={name}
+                style={{ width: enlarge ? 64 : 32, height: enlarge ? 64 : 32 }}
+              />
+            </picture>
+          </Avatar>
         </Tooltip>
       </ConditionalLink>
     </div>
