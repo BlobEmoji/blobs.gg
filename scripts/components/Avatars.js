@@ -19,10 +19,11 @@ export function GuildAvatar(props) {
     <Tooltip title={name} arrow>
       <Avatar
         alt={name}
-        src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
-        imgProps={{ height: 40, width: 40 }}
       >
-        {name}
+        <picture>
+          <source type="image/webp" srcSet={`https://cdn.discordapp.com/icons/${id}/${icon}.webp?size=64`}/>
+          <img src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`} alt={name} style={{ height: 40, width: 40 }}/>
+        </picture>
       </Avatar>
     </Tooltip>
   );
