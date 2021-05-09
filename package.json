@@ -29,7 +29,7 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
-    "@babel/runtime": "^7.13.9",
+    "@babel/runtime": "^7.14.0",
     "@parcel/config-default": "2.0.0-beta.2",
     "@parcel/transformer-raw": "2.0.0-beta.2",
     "@parcel/transformer-svg-react": "2.0.0-beta.2",
