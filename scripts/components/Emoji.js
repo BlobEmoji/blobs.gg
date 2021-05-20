@@ -47,16 +47,8 @@ ConditionalLink.propTypes = {
 };
 
 function Emoji(props) {
-  const {
-    id,
-    animated,
-    name,
-    guild,
-    baseSize,
-    showGuild,
-    className,
-    enlarge,
-  } = props;
+  const { id, animated, name, guild, baseSize, showGuild, className, enlarge } =
+    props;
   const extension = animated ? "gif" : "png";
   const classes = useStyles(props);
   let alt = `:${name}:`;
