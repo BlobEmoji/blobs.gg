@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import DialogContent from "@material-ui/core/DialogContent";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
@@ -15,8 +15,8 @@ import TwentyFourHoursIcon from "../../assets/icons/24h.svg";
 import AvTimerIcon from "@material-ui/icons/AvTimer";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Tooltip from "@material-ui/core/Tooltip";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import ToggleButton from "@material-ui/core/ToggleButton";
+import ToggleButtonGroup from "@material-ui/core/ToggleButtonGroup";
 
 function changeItem(event, value, key, reloadWrapper) {
   if (value == null) {

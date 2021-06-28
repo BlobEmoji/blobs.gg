@@ -13,7 +13,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import { getDateTimeFormatter } from "../../utils";
 import ChangeRow from "./ChangeRow";
 import Grid from "@material-ui/core/Grid";

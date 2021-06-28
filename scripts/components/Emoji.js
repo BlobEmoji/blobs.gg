@@ -2,32 +2,16 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
-  container: {
-    width: (props) => (props.enlarge ? 64 : 32),
-    height: (props) => (props.enlarge ? 64 : 32),
-    display: "inline-block",
-  },
-  div: {
-    width: "inherit",
-    height: "inherit",
-    verticalAlign: "middle",
-    display: "inline-block",
-  },
   emoji: {
     objectFit: "contain",
   },
   inviteContainer: {
     margin: "1rem",
-  },
-  // The Link component must inherit the size, or else its children won't have the correct size
-  link: {
-    width: "inherit",
-    height: "inherit",
   },
 });
 
@@ -47,8 +31,7 @@ ConditionalLink.propTypes = {
 };
 
 function Emoji(props) {
-  const { id, animated, name, guild, baseSize, showGuild, className, enlarge } =
-    props;
+  const { id, animated, name, guild, baseSize, showGuild, invite, containerClassName, enlarge } = props;
   const extension = animated ? "gif" : "png";
   const classes = useStyles(props);
   let alt = `:${name}:`;
@@ -65,7 +48,6 @@ function Emoji(props) {
   function wrapper(children) {
     return (
       <Link
-        className={classes.link}
         href={guild.invite}
         target="_blank"
         rel="noopener"
@@ -78,12 +60,11 @@ function Emoji(props) {
   return (
     <div
       className={clsx(
-        classes.container,
-        props.invite && classes.inviteContainer,
-        props.containerClassName
+        invite && classes.inviteContainer,
+        containerClassName
       )}
     >
-      <ConditionalLink link={props.invite} wrapper={wrapper}>
+      <ConditionalLink link={invite} wrapper={wrapper}>
         <Tooltip title={alt} arrow>
           <Avatar
             alt={name}
@@ -92,9 +73,11 @@ function Emoji(props) {
             }}
             srcSet={srcSet}
             src={emojiUrl(id, extension, baseSize)}
+            sx={{
+              width: enlarge ? 64 : 32,
+              height: enlarge ? 64 : 32,
+            }}
             variant="square"
-            className={clsx(classes.div, className)}
-            imgProps={{ width: enlarge ? 64 : 32, height: enlarge ? 64 : 32 }}
           />
         </Tooltip>
       </ConditionalLink>
@@ -109,7 +92,6 @@ Emoji.propTypes = {
   guild: PropTypes.object,
   baseSize: PropTypes.number,
   showGuild: PropTypes.bool,
-  className: PropTypes.string,
   invite: PropTypes.bool,
   containerClassName: PropTypes.string,
   enlarge: PropTypes.bool,

@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
@@ -44,7 +44,6 @@ const Header = memo(function Header(props) {
           alt="Blob Emoji Server Icon"
           component={Link}
           to="/"
-          imgProps={{ height: 40, width: 40 }}
         >
           <Server1 />
         </Avatar>

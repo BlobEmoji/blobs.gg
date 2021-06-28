@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CardContent from "@material-ui/core/CardContent";
 import Emoji from "../Emoji";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
@@ -56,7 +56,6 @@ function JoinServer(props) {
   return (
     <Button
       size="small"
-      color="primary"
       variant="contained"
       className={classes.joinServer}
       component={Link}
@@ -160,13 +159,13 @@ function Guild({ guild, communityRender }) {
         />
         <CardContent>
           {inView ? (
-            <Box
-              display="grid"
-              gridTemplateColumns="repeat(7, 1fr)"
-              margin="0 0.3rem"
-              gridGap="0.6rem 0.3rem"
-              justifyItems="center"
-            >
+            <Box sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(7, 1fr)",
+              margin: "0 0.3rem",
+              gap: "0.6rem 0.3rem",
+              justifyItems: "center"
+            }}>
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
             </Box>
           ) : (
