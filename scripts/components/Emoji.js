@@ -7,6 +7,10 @@ import clsx from "clsx";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
+  container: {
+    display: "inline-block",
+    verticalAlign: "middle",
+  },
   emoji: {
     objectFit: "contain",
   },
@@ -60,6 +64,7 @@ function Emoji(props) {
   return (
     <div
       className={clsx(
+        classes.container,
         invite && classes.inviteContainer,
         containerClassName
       )}
