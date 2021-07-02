@@ -109,6 +109,8 @@ function App() {
             styleOverrides: {
               root: {
                 boxShadow: "none",
+                backgroundColor: "transparent",
+                backgroundImage: "none"
               },
               positionStatic: {
                 margin: "2em 0",
