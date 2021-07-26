@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   divider: {
-    marginLeft: "0.25rem",
-    marginRight: "0.25rem",
+    margin: "0 0.25rem",
   },
 }));
 

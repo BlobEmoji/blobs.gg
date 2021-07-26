@@ -155,7 +155,7 @@ function Guild({ guild, communityRender }) {
               emojiCount={guild.emoji.length}
             />
           }
-          titleTypographyProps={{ style: { fontSize: "1.17em" } }}
+          titleTypographyProps={{ style: { fontSize: "1em" } }}
         />
         <CardContent>
           {inView ? (

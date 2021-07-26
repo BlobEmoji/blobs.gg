@@ -65,6 +65,9 @@ function App() {
             },
           },
           MuiLink: {
+            defaultProps: {
+              underline: "hover"
+            },
             styleOverrides: {
               root: {
                 color: prefersDarkMode ? "white" : "black",
@@ -141,9 +144,6 @@ function App() {
           },
         },
         typography: {
-          body1: {
-            fontSize: "0.875rem",
-          },
           body2: {
             color: prefersDarkMode ? "#CCC" : "rgba(0, 0, 0, 0.85)",
           },

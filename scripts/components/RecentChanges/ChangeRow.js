@@ -20,6 +20,7 @@ const useStyles = makeStyles({
   rowDiv: {
     display: "flex",
     alignItems: "center",
+    fontSize: "0.875rem",
   },
   eventDiv: {
     display: "flex",
