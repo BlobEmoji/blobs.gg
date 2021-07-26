@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -28,6 +28,9 @@ const emojiAction = {
 const useStyles = makeStyles({
   panelDetails: {
     padding: 0,
+  },
+  accordionSummary: {
+    fontSize: "0.875rem",
   },
   accordionDetails: {
     flexDirection: "column",
@@ -86,6 +89,7 @@ function ChangeSet({ changeSet }) {
         {hasMore && (
           <Accordion>
             <AccordionSummary
+              className={classes.accordionSummary}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >

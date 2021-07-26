@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
   licenseContainer: {
     margin: "2rem 0",
   },
-  margin: {
-    marginBottom: "1rem",
-  },
   inlineIcon: {
     height: "0.8em",
     width: "auto",
     margin: "0 0.25em",
     filter: theme.palette.mode === "light" && "invert(1)",
+  },
+  bottomMargin: {
+    paddingBottom: "24px",
   },
 }));
 
@@ -82,7 +82,7 @@ function Homepage() {
   const communityEmojis = emojis.groups["community-blobs"];
 
   return (
-    <Container maxWidth="md">
+    <Container className={classes.bottomMargin} maxWidth="md">
       <Typography variant="h5" className={classes.overHeader}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>

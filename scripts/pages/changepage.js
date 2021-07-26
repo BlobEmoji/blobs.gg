@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 
 function ChangePage() {
   return (
-    <Container maxWidth="md">
+    <Container sx={{ paddingBottom: "24px" }} maxWidth="md">
       <Typography variant="h4">Global Blob Changelog</Typography>
       <Typography sx={{ margin: "0.5rem 0 1rem 0" }} variant="body1">
         This page tracks the changes of all blobs in any of our partnered
