@@ -99,17 +99,17 @@ function SettingsDialog(props) {
             className={classes.optionButtons}
           >
             <Tooltip value="1" title="Dark Theme" arrow>
-              <ToggleButton>
+              <ToggleButton value="1">
                 <Brightness2Icon />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="2" title="Light Theme" arrow>
-              <ToggleButton>
+              <ToggleButton value="2">
                 <BrightnessHighIcon />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="3" title="Automatic" arrow>
-              <ToggleButton>
+              <ToggleButton value="3">
                 <Brightness4Icon />
               </ToggleButton>
             </Tooltip>
@@ -127,17 +127,17 @@ function SettingsDialog(props) {
             className={classes.optionButtons}
           >
             <Tooltip value="1" title="12 Hour Format" arrow>
-              <ToggleButton>
+              <ToggleButton value="1">
                 <SvgIcon component={TwelveHoursIcon} />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="2" title="24 Hour Format" arrow>
-              <ToggleButton>
+              <ToggleButton value="2">
                 <SvgIcon component={TwentyFourHoursIcon} />
               </ToggleButton>
             </Tooltip>
             <Tooltip value="3" title="Automatic" arrow>
-              <ToggleButton>
+              <ToggleButton value="3">
                 <AvTimerIcon />
               </ToggleButton>
             </Tooltip>
