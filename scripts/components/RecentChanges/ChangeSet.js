@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -13,7 +13,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import { getDateTimeFormatter } from "../../utils";
 import ChangeRow from "./ChangeRow";
 import Grid from "@material-ui/core/Grid";
@@ -28,6 +28,9 @@ const emojiAction = {
 const useStyles = makeStyles({
   panelDetails: {
     padding: 0,
+  },
+  accordionSummary: {
+    fontSize: "0.875rem",
   },
   accordionDetails: {
     flexDirection: "column",
@@ -86,6 +89,7 @@ function ChangeSet({ changeSet }) {
         {hasMore && (
           <Accordion>
             <AccordionSummary
+              className={classes.accordionSummary}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >

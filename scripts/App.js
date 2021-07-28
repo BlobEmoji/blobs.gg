@@ -5,8 +5,8 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { ThemeProvider, StyledEngineProvider } from "@material-ui/core/styles";
+import createTheme from "@material-ui/core/styles/createTheme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Homepage from "./pages/homepage";
 import { getDefaultHourFormat, getKeyWrapper } from "./utils";
@@ -43,74 +43,95 @@ function App() {
 
   const theme = useMemo(
     () =>
-      createMuiTheme({
-        overrides: {
+      createTheme({
+        components: {
           MuiAccordion: {
-            root: {
-              "&:before": {
-                display: "none",
-              },
-              "&$expanded": {
-                marginTop: "0",
+            styleOverrides: {
+              root: {
+                "&:before": {
+                  display: "none",
+                },
+                "&$expanded": {
+                  marginTop: "0",
+                },
               },
             },
           },
           MuiAccordionSummary: {
-            root: {
-              borderBottom: "1px solid rgba(224, 224, 224, 1)",
+            styleOverrides: {
+              root: {
+                borderBottom: "1px solid rgba(224, 224, 224, 1)",
+              },
             },
           },
           MuiLink: {
-            root: {
-              color: prefersDarkMode ? "white" : "black",
-              fontWeight: prefersDarkMode ? "normal" : "bold",
+            defaultProps: {
+              underline: "hover"
+            },
+            styleOverrides: {
+              root: {
+                color: prefersDarkMode ? "white" : "black",
+                fontWeight: prefersDarkMode ? "normal" : "bold",
+              },
             },
           },
           MuiFilledInput: {
-            root: {
-              borderRadius: "4px",
-            },
-            input: {
-              paddingTop: "19px",
-              paddingBottom: "18px",
+            styleOverrides: {
+              root: {
+                borderRadius: "4px",
+              },
+              input: {
+                paddingTop: "19px",
+                paddingBottom: "18px",
+              },
             },
           },
           MuiCardHeader: {
-            content: {
-              maxWidth: "calc(100% - 99px)",
-            },
-            title: {
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
+            styleOverrides: {
+              content: {
+                maxWidth: "calc(100% - 99px)",
+              },
+              title: {
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              },
             },
           },
           MuiTooltip: {
-            tooltipPlacementBottom: {
-              margin: "6px 0",
-            },
-            tooltip: {
-              fontSize: pxToRem(12),
+            styleOverrides: {
+              tooltipPlacementBottom: {
+                margin: "6px 0",
+              },
+              tooltip: {
+                fontSize: pxToRem(12),
+              },
             },
           },
           MuiAppBar: {
-            root: {
-              boxShadow: "none",
-            },
-            positionStatic: {
-              margin: "2em 0",
+            styleOverrides: {
+              root: {
+                boxShadow: "none",
+                backgroundColor: "transparent",
+                backgroundImage: "none"
+              },
+              positionStatic: {
+                margin: "2em 0",
+              },
             },
           },
           MuiToolbar: {
-            regular: {
-              "@media (min-width:750px)": {
-                minHeight: "48px",
+            styleOverrides: {
+              regular: {
+                "@media (min-width:750px)": {
+                  minHeight: "48px",
+                },
               },
             },
           },
         },
         palette: {
-          type: prefersDarkMode ? "dark" : "light",
+          mode: prefersDarkMode ? "dark" : "light",
           background: {
             paper: prefersDarkMode ? grey[800] : grey[100],
             default: prefersDarkMode ? grey[900] : grey[50],
@@ -136,8 +157,8 @@ function App() {
             xs: 0,
             sm: 750,
             md: 1100,
-            lg: 1280,
-            xl: 1920,
+            lg: 1200,
+            xl: 1536,
           },
         },
       }),
@@ -145,30 +166,32 @@ function App() {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Container maxWidth="md">
-          <Header handleOpen={toggleSettingsOpen} />
-        </Container>
-        <Switch>
-          <Route exact path="/">
-            <Homepage />
-          </Route>
-          <Route path="/changes">
-            <Changepage />
-          </Route>
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-        <SettingsDialog
-          open={settingsOpen}
-          onClose={toggleSettingsOpen}
-          handleReload={handleReload}
-        />
-      </Router>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Container maxWidth="md">
+            <Header handleOpen={toggleSettingsOpen} />
+          </Container>
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route path="/changes">
+              <Changepage />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+          <SettingsDialog
+            open={settingsOpen}
+            onClose={toggleSettingsOpen}
+            handleReload={handleReload}
+          />
+        </Router>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

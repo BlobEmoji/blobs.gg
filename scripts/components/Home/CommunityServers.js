@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import nitro from "url:../../../assets/discord/nitro.png";
 import PropTypes from "prop-types";
-import Guilds from "./Guilds";
 import { shuffleArray } from "../../utils";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import GuildsWrapper from "./Guilds";
+import Box from "@material-ui/core/Box";
 
 class CommunityServers extends PureComponent {
   constructor(props) {
@@ -41,8 +42,8 @@ class CommunityServers extends PureComponent {
     const { shuffledGuilds } = this.state;
     return (
       <>
-        <div className={classes.margin}>
-          <Typography variant="h5" className={classes.margin}>
+        <Box sx={{ marginBottom: "1rem" }}>
+          <Typography variant="h5">
             Community Blob Servers
           </Typography>
           <Typography variant="body2">
@@ -72,8 +73,8 @@ class CommunityServers extends PureComponent {
             </Link>{" "}
             subscription.
           </Typography>
-        </div>
-        <Guilds guilds={shuffledGuilds} slice skeletonCount={9} />
+        </Box>
+        <GuildsWrapper guilds={shuffledGuilds} slice skeletonCount={9} />
       </>
     );
   }

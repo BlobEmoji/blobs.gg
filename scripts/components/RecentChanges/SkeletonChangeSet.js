@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import Box from "@material-ui/core/Box";
-import Skeleton from "@material-ui/lab/Skeleton";
+import Skeleton from "@material-ui/core/Skeleton";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
@@ -15,25 +15,17 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
     const simple = Math.random() > 0.8;
 
     return (
-      <Box display="flex" alignItems="center" key={index}>
-        <Box display="flex" alignItems="center" minWidth="7.1rem">
-          <Box margin="0.5rem">
-            <Skeleton variant="circle" width={35} height={35} />
-          </Box>
-          <Box margin="0.5rem">
-            <Skeleton variant="text" width={50} />
-          </Box>
+      <Box sx={{ display: "flex", alignItems: "center", key: { index } }}>
+        <Box sx={{ display: "flex", alignItems: "center", minWidth: "7.1rem" }}>
+          <Skeleton sx={{ margin: "0.5rem" }} variant="circular" width={35} height={35} />
+          <Skeleton sx={{ margin: "0.5rem" }} variant="text" width={50} />
         </Box>
-        <Box margin="0.5rem">
-          <Skeleton variant="rect" width={32} height={32} />
-        </Box>
+        <Skeleton sx={{ margin: "0.5rem" }} variant="rectangular" width={32} height={32} />
         {simple ? (
           <>
             <Skeleton variant="text" width={20} />
-            <Box display="flex" alignItems="center">
-              <Box margin="0.5rem">
-                <Skeleton variant="rect" width={32} height={32} />
-              </Box>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Skeleton sx={{ margin: "0.5rem" }} variant="rectangular" width={32} height={32} />
               <Skeleton variant="text" width={80} />
             </Box>
           </>
@@ -48,7 +40,7 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
     <Grid item xs={12} sm={6}>
       <Card>
         <CardHeader
-          avatar={<Skeleton variant="circle" width={40} height={40} />}
+          avatar={<Skeleton variant="circular" width={40} height={40} />}
           title={<Skeleton variant="text" width="40%" />}
           subheader={<Skeleton variant="text" width="50%" />}
         />

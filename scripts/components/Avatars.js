@@ -8,7 +8,7 @@ import green from "@material-ui/core/colors/green";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import lightBlue from "@material-ui/core/colors/lightBlue";
 import BrushIcon from "@material-ui/icons/Brush";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 
 export function GuildAvatar(props) {
@@ -20,7 +20,6 @@ export function GuildAvatar(props) {
       <Avatar
         alt={name}
         src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
-        imgProps={{ height: 40, width: 40 }}
       >
         {name}
       </Avatar>

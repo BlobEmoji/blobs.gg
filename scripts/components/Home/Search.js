@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import Emoji from "../Emoji";
 import Guilds from "./Guilds";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Tooltip from "@material-ui/core/Tooltip";
-import Pagination from "@material-ui/lab/Pagination";
+import Pagination from "@material-ui/core/Pagination";
 
 const useStyles = makeStyles({
   noResults: {
@@ -39,11 +39,11 @@ function Contents(props) {
           className={classes.guilds}
           skeletonCount={0}
         />
-        <Box
-          display="grid"
-          justifyContent="space-between"
-          gridTemplateColumns="repeat(auto-fill, 96px)"
-        >
+        <Box sx={{
+          display: "grid",
+          justifyContent: "space-between",
+          gridTemplateColumns: "repeat(auto-fill, 96px)"
+        }}>
           {props.filteredBlobs.map((blob) => (
             <Emoji key={blob.id} invite showGuild {...blob} enlarge />
           ))}
@@ -138,7 +138,7 @@ class Search extends React.Component {
           page: 1,
           totalPages: 1,
           filteredBlobs: [],
-          filteredGuilds: {},
+          filteredGuilds: [],
           isDebouncing: false,
         };
       }

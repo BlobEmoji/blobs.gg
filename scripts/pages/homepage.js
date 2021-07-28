@@ -6,7 +6,7 @@ import { calculateEmojiCount, formatEmojiCount, log } from "../utils";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Search from "../components/Home/Search";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import Link from "@material-ui/core/Link";
 
 const INITIAL_EMOJI_COUNT = 4400;
@@ -21,17 +21,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "0 0 2em 0",
   },
-  licenceContainer: {
+  licenseContainer: {
     margin: "2rem 0",
-  },
-  margin: {
-    marginBottom: "1rem",
   },
   inlineIcon: {
     height: "0.8em",
     width: "auto",
     margin: "0 0.25em",
-    filter: theme.palette.type === "light" && "invert(1)",
+    filter: theme.palette.mode === "light" && "invert(1)",
+  },
+  bottomMargin: {
+    paddingBottom: "24px",
   },
 }));
 
@@ -82,13 +82,13 @@ function Homepage() {
   const communityEmojis = emojis.groups["community-blobs"];
 
   return (
-    <Container maxWidth="md">
+    <Container className={classes.bottomMargin} maxWidth="md">
       <Typography variant="h5" className={classes.overHeader}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
       <Typography className={classes.subHeader}>
         Created by the Blob Emoji community.&nbsp;
-        <Link href="https://1.blobs.gg/" target="_blank" rel="noopener">
+        <Link underline="hover" href="https://1.blobs.gg/" target="_blank" rel="noopener">
           Come join us!
         </Link>
       </Typography>
@@ -96,7 +96,6 @@ function Homepage() {
       <OfficialServers
         emojis={officialEmojis}
         communityRender={communityRender}
-        classes={classes}
       />
       <CommunityServers
         emojis={communityEmojis}

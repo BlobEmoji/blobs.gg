@@ -1,22 +1,23 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Guilds from "./Guilds";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import Box from "@material-ui/core/Box";
+import GuildsWrapper from "./Guilds";
 
 class OfficialServers extends PureComponent {
   static whyDidYouRender = true;
   render() {
-    const { emojis, classes, communityRender } = this.props;
+    const { emojis, communityRender } = this.props;
     return (
       <>
         <Typography variant="h5">The Official Blob Emoji Servers</Typography>
-        <Guilds
+        <GuildsWrapper
           guilds={emojis.guilds}
           skeletonCount={6}
           communityRender={communityRender}
         />
-        <div className={classes.licenceContainer}>
+        <Box sx={{ margin: "2rem 0" }}>
           <Typography variant="body2">
             All blobs that are uploaded to official Blob Emoji servers are
             licensed under the{" "}
@@ -34,7 +35,7 @@ class OfficialServers extends PureComponent {
             <Link href="https://files.lostluma.dev/blobs.zip">here</Link>. Make
             sure to follow the license.
           </Typography>
-        </div>
+        </Box>
       </>
     );
   }
@@ -43,7 +44,6 @@ class OfficialServers extends PureComponent {
 OfficialServers.propTypes = {
   emojis: PropTypes.object.isRequired,
   communityRender: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
 OfficialServers.whyDidYouRender = true;
