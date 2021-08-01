@@ -43,9 +43,7 @@ class CommunityServers extends PureComponent {
     return (
       <>
         <Box sx={{ marginBottom: "1rem" }}>
-          <Typography variant="h5">
-            Community Blob Servers
-          </Typography>
+          <Typography variant="h5">Community Blob Servers</Typography>
           <Typography variant="body2">
             To add your Blob Server to our Community Servers section, join the
             official{" "}

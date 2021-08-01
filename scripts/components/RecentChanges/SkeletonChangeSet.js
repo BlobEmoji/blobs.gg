@@ -17,15 +17,30 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
     return (
       <Box sx={{ display: "flex", alignItems: "center", key: { index } }}>
         <Box sx={{ display: "flex", alignItems: "center", minWidth: "7.1rem" }}>
-          <Skeleton sx={{ margin: "0.5rem" }} variant="circular" width={35} height={35} />
+          <Skeleton
+            sx={{ margin: "0.5rem" }}
+            variant="circular"
+            width={35}
+            height={35}
+          />
           <Skeleton sx={{ margin: "0.5rem" }} variant="text" width={50} />
         </Box>
-        <Skeleton sx={{ margin: "0.5rem" }} variant="rectangular" width={32} height={32} />
+        <Skeleton
+          sx={{ margin: "0.5rem" }}
+          variant="rectangular"
+          width={32}
+          height={32}
+        />
         {simple ? (
           <>
             <Skeleton variant="text" width={20} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Skeleton sx={{ margin: "0.5rem" }} variant="rectangular" width={32} height={32} />
+              <Skeleton
+                sx={{ margin: "0.5rem" }}
+                variant="rectangular"
+                width={32}
+                height={32}
+              />
               <Skeleton variant="text" width={80} />
             </Box>
           </>

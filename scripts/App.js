@@ -66,7 +66,7 @@ function App() {
           },
           MuiLink: {
             defaultProps: {
-              underline: "hover"
+              underline: "hover",
             },
             styleOverrides: {
               root: {
@@ -113,7 +113,7 @@ function App() {
               root: {
                 boxShadow: "none",
                 backgroundColor: "transparent",
-                backgroundImage: "none"
+                backgroundImage: "none",
               },
               positionStatic: {
                 margin: "2em 0",
