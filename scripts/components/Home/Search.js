@@ -39,11 +39,13 @@ function Contents(props) {
           className={classes.guilds}
           skeletonCount={0}
         />
-        <Box sx={{
-          display: "grid",
-          justifyContent: "space-between",
-          gridTemplateColumns: "repeat(auto-fill, 96px)"
-        }}>
+        <Box
+          sx={{
+            display: "grid",
+            justifyContent: "space-between",
+            gridTemplateColumns: "repeat(auto-fill, 96px)",
+          }}
+        >
           {props.filteredBlobs.map((blob) => (
             <Emoji key={blob.id} invite showGuild {...blob} enlarge />
           ))}

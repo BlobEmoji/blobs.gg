@@ -35,7 +35,17 @@ ConditionalLink.propTypes = {
 };
 
 function Emoji(props) {
-  const { id, animated, name, guild, baseSize, showGuild, invite, containerClassName, enlarge } = props;
+  const {
+    id,
+    animated,
+    name,
+    guild,
+    baseSize,
+    showGuild,
+    invite,
+    containerClassName,
+    enlarge,
+  } = props;
   const extension = animated ? "gif" : "png";
   const classes = useStyles(props);
   let alt = `:${name}:`;
@@ -51,11 +61,7 @@ function Emoji(props) {
 
   function wrapper(children) {
     return (
-      <Link
-        href={guild.invite}
-        target="_blank"
-        rel="noopener"
-      >
+      <Link href={guild.invite} target="_blank" rel="noopener">
         {children}
       </Link>
     );

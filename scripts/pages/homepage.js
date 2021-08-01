@@ -88,7 +88,12 @@ function Homepage() {
       </Typography>
       <Typography className={classes.subHeader}>
         Created by the Blob Emoji community.&nbsp;
-        <Link underline="hover" href="https://1.blobs.gg/" target="_blank" rel="noopener">
+        <Link
+          underline="hover"
+          href="https://1.blobs.gg/"
+          target="_blank"
+          rel="noopener"
+        >
           Come join us!
         </Link>
       </Typography>

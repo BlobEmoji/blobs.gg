@@ -10,13 +10,15 @@ import Box from "@material-ui/core/Box";
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
   return (
-    <Box sx={{
-      display: "grid",
-      gridTemplateColumns: "repeat(7, 1fr)",
-      margin: "0 0.3rem",
-      gap: "0.6rem 0.3rem",
-      justifyItems: "center"
-    }}>
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(7, 1fr)",
+        margin: "0 0.3rem",
+        gap: "0.6rem 0.3rem",
+        justifyItems: "center",
+      }}
+    >
       {Array.from({ length: 7 }, (_, index) => (
         <Skeleton key={index} variant="circular" width={32} height={32} />
       ))}
