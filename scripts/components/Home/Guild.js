@@ -159,13 +159,15 @@ function Guild({ guild, communityRender }) {
         />
         <CardContent>
           {inView ? (
-            <Box sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(7, 1fr)",
-              margin: "0 0.3rem",
-              gap: "0.6rem 0.3rem",
-              justifyItems: "center"
-            }}>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(7, 1fr)",
+                margin: "0 0.3rem",
+                gap: "0.6rem 0.3rem",
+                justifyItems: "center",
+              }}
+            >
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
             </Box>
           ) : (
