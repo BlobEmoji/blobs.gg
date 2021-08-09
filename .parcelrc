@@ -7,7 +7,12 @@
       "@parcel/transformer-babel",
       "@parcel/transformer-js",
       "@parcel/transformer-react-refresh-wrap"
-    ],
-    "react:*": ["@parcel/transformer-raw"]
+    ]
+  },
+  "optimizers": {
+    "react:*.{js,mjs,cjs}": ["@parcel/optimizer-terser"]
+  },
+  "packagers": {
+    "react:*.{js,mjs,cjs}": "@parcel/packager-js"
   }
 }
