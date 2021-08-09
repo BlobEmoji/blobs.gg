@@ -1,4 +1,4 @@
-import Server1 from "../../assets/server_icons/server1.svg";
+import Server1 from "react:../../assets/server_icons/server1.svg";
 import React, { memo } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";

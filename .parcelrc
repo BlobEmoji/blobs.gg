@@ -2,6 +2,12 @@
   "extends": "@parcel/config-default",
   "transformers": {
     "*.{png,jpg,jpeg,webp}": ["@parcel/transformer-raw"],
-    "*.svg": ["@parcel/transformer-svg-react"]
+    "react:*.svg": ["@parcel/transformer-svg-react"],
+    "react:*.{js,mjs,jsm,jsx,es6,cjs,ts,tsx}": [
+      "@parcel/transformer-babel",
+      "@parcel/transformer-js",
+      "@parcel/transformer-react-refresh-wrap"
+    ],
+    "react:*": ["@parcel/transformer-raw"]
   }
 }
