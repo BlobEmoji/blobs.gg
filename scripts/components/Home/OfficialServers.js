@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
 import GuildsWrapper from "./Guilds";
 
 class OfficialServers extends PureComponent {

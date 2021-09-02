@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
+import Avatar from "@mui/material/Avatar";
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import red from "@material-ui/core/colors/red";
-import AddIcon from "@material-ui/icons/Add";
-import green from "@material-ui/core/colors/green";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-import lightBlue from "@material-ui/core/colors/lightBlue";
-import BrushIcon from "@material-ui/icons/Brush";
-import makeStyles from "@material-ui/styles/makeStyles";
-import Tooltip from "@material-ui/core/Tooltip";
+import DeleteIcon from "@mui/icons-material/Delete";
+import red from "@mui/material/colors/red";
+import AddIcon from "@mui/icons-material/Add";
+import green from "@mui/material/colors/green";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import lightBlue from "@mui/material/colors/lightBlue";
+import BrushIcon from "@mui/icons-material/Brush";
+import makeStyles from "@mui/styles/makeStyles";
+import Tooltip from "@mui/material/Tooltip";
 
 export function GuildAvatar(props) {
   const { name, src } = props;

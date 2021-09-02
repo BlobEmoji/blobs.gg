@@ -1,22 +1,22 @@
-import Dialog from "@material-ui/core/Dialog";
+import Dialog from "@mui/material/Dialog";
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import makeStyles from "@material-ui/styles/makeStyles";
-import DialogContent from "@material-ui/core/DialogContent";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import Brightness2Icon from "@material-ui/icons/Brightness2";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import makeStyles from "@mui/styles/makeStyles";
+import DialogContent from "@mui/material/DialogContent";
+import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
+import Brightness2Icon from "@mui/icons-material/Brightness2";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import DialogContentText from "@mui/material/DialogContentText";
 import TwelveHoursIcon from "react:../../assets/icons/12h.svg";
 import TwentyFourHoursIcon from "react:../../assets/icons/24h.svg";
-import AvTimerIcon from "@material-ui/icons/AvTimer";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Tooltip from "@material-ui/core/Tooltip";
-import ToggleButton from "@material-ui/core/ToggleButton";
-import ToggleButtonGroup from "@material-ui/core/ToggleButtonGroup";
+import AvTimerIcon from "@mui/icons-material/AvTimer";
+import SvgIcon from "@mui/material/SvgIcon";
+import Tooltip from "@mui/material/Tooltip";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 function changeItem(event, value, key, reloadWrapper) {
   if (value == null) {

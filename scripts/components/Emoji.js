@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
-import Tooltip from "@material-ui/core/Tooltip";
-import makeStyles from "@material-ui/styles/makeStyles";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import makeStyles from "@mui/styles/makeStyles";
 import clsx from "clsx";
-import Link from "@material-ui/core/Link";
+import Link from "@mui/material/Link";
 
 const useStyles = makeStyles({
   container: {

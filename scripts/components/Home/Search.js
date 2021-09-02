@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import makeStyles from "@material-ui/styles/makeStyles";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import makeStyles from "@mui/styles/makeStyles";
 import Emoji from "../Emoji";
 import Guilds from "./Guilds";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Tooltip from "@material-ui/core/Tooltip";
-import Pagination from "@material-ui/core/Pagination";
+import CircularProgress from "@mui/material/CircularProgress";
+import Tooltip from "@mui/material/Tooltip";
+import Pagination from "@mui/material/Pagination";
 
 const useStyles = makeStyles({
   noResults: {

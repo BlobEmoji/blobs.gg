@@ -1,12 +1,12 @@
 import React, { memo } from "react";
-import Grid from "@material-ui/core/Grid";
-import CardHeader from "@material-ui/core/CardHeader";
-import Card from "@material-ui/core/Card";
-import Skeleton from "@material-ui/core/Skeleton";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import Box from "@material-ui/core/Box";
+import Grid from "@mui/material/Grid";
+import CardHeader from "@mui/material/CardHeader";
+import Card from "@mui/material/Card";
+import Skeleton from "@mui/material/Skeleton";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
   return (
