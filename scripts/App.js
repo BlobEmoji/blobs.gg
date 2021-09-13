@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
-  Navigate,
+  Redirect,
   Route,
-  Routes,
+  Switch,
 } from "react-router-dom";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import createTheme from "@mui/material/styles/createTheme";
@@ -173,11 +173,17 @@ function App() {
           <Container maxWidth="md">
             <Header handleOpen={toggleSettingsOpen} />
           </Container>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/changes" element={<Changepage />} />
-            <Route path="/*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route path="/changes">
+              <Changepage />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
           <SettingsDialog
             open={settingsOpen}
             onClose={toggleSettingsOpen}
