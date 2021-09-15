@@ -10,6 +10,7 @@ yarn.lock
 # parcel
 /.parcel-cache
 /dist
+/parcel-bundle-reports
 
 # macOS
 .DS_Store
