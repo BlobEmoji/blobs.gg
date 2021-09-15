@@ -6,14 +6,17 @@ const fs = require("fs");
  * @returns {*}
  */
 function endsWithANy(suffixes, string) {
-  return suffixes.some(function(suffix) {
+  return suffixes.some(function (suffix) {
     return string.endsWith(suffix);
   });
 }
 
 try {
   // Get original file
-  const fileData = fs.readFileSync("./parcel-bundle-reports/default.html", "utf8");
+  const fileData = fs.readFileSync(
+    "./parcel-bundle-reports/default.html",
+    "utf8"
+  );
   const fileLines = fileData.split("\n");
 
   let jsonStartLine = 0;
