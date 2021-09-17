@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import React from "react";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
 import makeStyles from "@mui/styles/makeStyles";

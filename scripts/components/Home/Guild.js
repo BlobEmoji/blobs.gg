@@ -1,4 +1,4 @@
-import React, { PureComponent, useEffect, useState } from "react";
+import { PureComponent, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { GuildAvatar } from "../Avatars";
 import { shuffleArray } from "../../utils";

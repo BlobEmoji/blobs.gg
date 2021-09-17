@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import Avatar from "@mui/material/Avatar";
-import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import red from "@mui/material/colors/red";
 import AddIcon from "@mui/icons-material/Add";

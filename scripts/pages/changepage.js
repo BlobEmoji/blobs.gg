@@ -1,4 +1,3 @@
-import React from "react";
 import Typography from "@mui/material/Typography";
 import RecentChangesWrapper from "../components/RecentChanges/RecentChanges";
 import Container from "@mui/material/Container";

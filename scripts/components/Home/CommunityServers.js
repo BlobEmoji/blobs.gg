@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import nitro from "../../../assets/discord/nitro.png";
 import PropTypes from "prop-types";
 import { shuffleArray } from "../../utils";

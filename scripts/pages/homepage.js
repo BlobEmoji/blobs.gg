@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import OfficialServers from "../components/Home/OfficialServers";
 import CommunityServers from "../components/Home/CommunityServers";
 import { Emojis } from "../emojis";

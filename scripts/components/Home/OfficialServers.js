@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
