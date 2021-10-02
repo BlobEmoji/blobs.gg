@@ -36,9 +36,9 @@ function DrawfestSubmissionsHead() {
   return (
     <TableHead>
       <TableRow>
-        <TableCell width={64}>User</TableCell>
-        <TableCell />
-        <TableCell align="right">Approved Submissions</TableCell>
+        <TableCell width={64} />
+        <TableCell>User</TableCell>
+        <TableCell>Approved Submissions</TableCell>
       </TableRow>
     </TableHead>
   );
@@ -47,14 +47,14 @@ function DrawfestSubmissionsHead() {
 function ApprovedCell({ approvedSubmissions }) {
   approvedSubmissions = approvedSubmissions.map((submission) => ++submission);
   return (
-    <TableCell align="right">
+    <TableCell>
       {approvedSubmissions.map((submission) => {
         const submissionMapping = chunkedDays.indexOf(
           chunkedDays.filter((dayChunk) => dayChunk.includes(submission))[0]
         );
         return (
           <Tooltip title={mappings[submissionMapping]} key={submission} arrow>
-            <Chip label={submission} sx={{ marginRight: 1 }} />
+            <Chip label={submission} sx={{ marginRight: 1 }} clickable />
           </Tooltip>
         );
       })}
@@ -74,8 +74,8 @@ function DrawfestSubmissionsBody({ submissions }) {
           <TableCell>
             <Avatar
               alt={row.name}
-              src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.png?size=48`}
-              sx={{ width: 40, height: 40 }}
+              src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.webp?size=64`}
+              sx={{ width: 64, height: 64 }}
             />
           </TableCell>
           <TableCell>{`${row.name}#${row.discriminator}`}</TableCell>

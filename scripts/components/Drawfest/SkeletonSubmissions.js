@@ -10,7 +10,7 @@ function SkeletonApprovedSubmissions() {
     amounts[Math.floor(Math.random() * amounts.length)]
   );
   return (
-    <TableCell align="right">
+    <TableCell>
       {Array.from({ length }, (_, index) => (
         <Skeleton
           variant="circular"
@@ -46,7 +46,7 @@ const SkeletonSubmissions = memo(function SkeletonSubmissions() {
     return (
       <TableRow key={index}>
         <TableCell>
-          <Skeleton variant="circular" width={40} height={40} />
+          <Skeleton variant="circular" width={64} height={64} />
         </TableCell>
         <SkeletonNames />
         <SkeletonApprovedSubmissions />
