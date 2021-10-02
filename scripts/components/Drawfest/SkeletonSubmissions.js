@@ -4,18 +4,18 @@ import TableBody from "@material-ui/core/TableBody";
 import { arrayRange } from "../../utils";
 import { TableCell, TableRow } from "@material-ui/core";
 
-function SkeletonSubmissions() {
+function SkeletonApprovedSubmissions() {
   const amounts = arrayRange(3, 8);
   const [length] = React.useState(
     amounts[Math.floor(Math.random() * amounts.length)]
   );
   return (
-    <TableCell>
+    <TableCell align="right">
       {Array.from({ length }, (_, index) => (
         <Skeleton
           variant="circular"
-          width={35}
-          height={35}
+          width={32}
+          height={32}
           key={index}
           sx={{ display: "inline-block", marginRight: 1 }}
         />
@@ -36,7 +36,7 @@ function SkeletonNames() {
   );
 }
 
-const SkeletonSubs = memo(function SkeletonSubs() {
+const SkeletonSubmissions = memo(function SkeletonSubmissions() {
   const amounts = arrayRange(8, 14);
   const [length] = React.useState(
     amounts[Math.floor(Math.random() * amounts.length)]
@@ -46,10 +46,10 @@ const SkeletonSubs = memo(function SkeletonSubs() {
     return (
       <TableRow key={index}>
         <TableCell>
-          <Skeleton variant="circular" width={64} height={64} />
+          <Skeleton variant="circular" width={40} height={40} />
         </TableCell>
         <SkeletonNames />
-        <SkeletonSubmissions />
+        <SkeletonApprovedSubmissions />
       </TableRow>
     );
   });
@@ -57,4 +57,4 @@ const SkeletonSubs = memo(function SkeletonSubs() {
   return <TableBody>{skeletons}</TableBody>;
 });
 
-export default SkeletonSubs;
+export default SkeletonSubmissions;

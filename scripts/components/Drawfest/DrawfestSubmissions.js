@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SkeletonSubs from "./SkeletonSubs";
+import SkeletonSubmissions from "./SkeletonSubmissions";
 import {
   Chip,
   TableCell,
@@ -36,25 +36,25 @@ function DrawfestSubmissionsHead() {
   return (
     <TableHead>
       <TableRow>
-        <TableCell width={64} />
-        <TableCell>Name</TableCell>
-        <TableCell>Approved Submissions</TableCell>
+        <TableCell width={64} >User</TableCell>
+        <TableCell />
+        <TableCell align="right">Approved Submissions</TableCell>
       </TableRow>
     </TableHead>
   );
 }
 
-function ApprovedCell({ approved_submissions }) {
-  approved_submissions = approved_submissions.map((submission) => ++submission);
+function ApprovedCell({ approvedSubmissions }) {
+  approvedSubmissions = approvedSubmissions.map((submission) => ++submission);
   return (
-    <TableCell>
-      {approved_submissions.map((submission) => {
+    <TableCell align="right">
+      {approvedSubmissions.map((submission) => {
         const submissionMapping = chunkedDays.indexOf(
           chunkedDays.filter((dayChunk) => dayChunk.includes(submission))[0]
         );
         return (
           <Tooltip title={mappings[submissionMapping]} key={submission} arrow>
-            <Chip label={submission} sx={{ marginRight: 1 }} clickable />
+            <Chip label={submission} sx={{ marginRight: 1 }} />
           </Tooltip>
         );
       })}
@@ -63,7 +63,7 @@ function ApprovedCell({ approved_submissions }) {
 }
 
 ApprovedCell.propTypes = {
-  approved_submissions: PropTypes.arrayOf(PropTypes.number).isRequired,
+  approvedSubmissions: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 function DrawfestSubmissionsBody({ submissions }) {
@@ -74,12 +74,12 @@ function DrawfestSubmissionsBody({ submissions }) {
           <TableCell>
             <Avatar
               alt={row.name}
-              src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.webp?size=64`}
-              sx={{ width: 64, height: 64 }}
+              src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.png?size=48`}
+              sx={{ width: 40, height: 40 }}
             />
           </TableCell>
           <TableCell>{`${row.name}#${row.discriminator}`}</TableCell>
-          <ApprovedCell approved_submissions={row.approved_submissions} />
+          <ApprovedCell approvedSubmissions={row.approved_submissions} />
         </TableRow>
       ))}
     </TableBody>
@@ -104,7 +104,7 @@ function DrawfestSubmissions({ submissions }) {
       <Table aria-label="Drawfest Submissions">
         <DrawfestSubmissionsHead />
         {submissions.length === 0 ? (
-          <SkeletonSubs />
+          <SkeletonSubmissions />
         ) : (
           <DrawfestSubmissionsBody submissions={submissions} />
         )}
