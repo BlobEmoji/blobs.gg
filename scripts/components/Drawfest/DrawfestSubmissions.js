@@ -38,7 +38,7 @@ function DrawfestSubmissionsHead() {
       <TableRow>
         <TableCell width={64} />
         <TableCell>User</TableCell>
-        <TableCell>Approved Submissions</TableCell>
+        <TableCell width={64 * 11}>Approved Submissions</TableCell>
       </TableRow>
     </TableHead>
   );

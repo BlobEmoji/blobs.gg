@@ -10,7 +10,7 @@ function SkeletonApprovedSubmissions() {
     amounts[Math.floor(Math.random() * amounts.length)]
   );
   return (
-    <TableCell>
+    <TableCell width={64 * 11}>
       {Array.from({ length }, (_, index) => (
         <Skeleton
           variant="circular"
