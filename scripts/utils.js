@@ -177,3 +177,39 @@ export function getDateTimeFormatter() {
 
   return DateTimeFormatter24;
 }
+
+/**
+ * Returns the given amount of days in a month of a year
+ * @param {Number} month
+ * @param {Number} year
+ * @returns {Number}
+ */
+export function daysInMonth(month, year = 0) {
+  year = year !== 0 ? year : new Date().getFullYear();
+  return new Date(year, month, 0).getDate();
+}
+
+/**
+ * Returns a array from smallest to biggest value
+ * @param {Number} min
+ * @param {Number} max
+ * @returns {Number[]}
+ */
+export function arrayRange(min, max) {
+  return [...Array(max - min + 1).keys()].map((i) => i + min);
+}
+
+/**
+ * Splits an array into chunks, X size
+ * @param {Array} arr
+ * @param {Number} size
+ * @returns {[[]]}
+ */
+export function chunk(arr, size) {
+  return arr.reduce(
+    (acc, e, i) => (
+      i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc
+    ),
+    []
+  );
+}

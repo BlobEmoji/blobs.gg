@@ -8,6 +8,7 @@ import makeStyles from "@material-ui/styles/makeStyles";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ListIcon from "@material-ui/icons/List";
 import HomeIcon from "@material-ui/icons/Home";
+import GestureIcon from "@material-ui/icons/Gesture";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import PropTypes from "prop-types";
@@ -62,6 +63,11 @@ const Header = memo(function Header(props) {
         <Tooltip title="Emoji Changelog" arrow>
           <IconButton component={Link} to="/changes">
             <ListIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Drawfest" arrow>
+          <IconButton component={Link} to="/drawfest">
+            <GestureIcon />
           </IconButton>
         </Tooltip>
         <Divider className={classes.divider} orientation="vertical" flexItem />
