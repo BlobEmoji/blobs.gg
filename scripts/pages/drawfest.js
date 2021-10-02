@@ -10,7 +10,7 @@ const DRAWFEST_ENDPOINT = "https://files.lostluma.dev/drawtober-2021.json";
 const useStyles = makeStyles({
   overHeader: {
     textAlign: "center",
-    margin: "2em 0 0.125em 0"
+    margin: "2em 0 0.125em 0",
   },
   subHeader: {
     textAlign: "center",
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     paddingBottom: "24px",
   },
   emojiContainer: {
-    margin: "0 0.25rem"
+    margin: "0 0.25rem",
   },
 });
 
