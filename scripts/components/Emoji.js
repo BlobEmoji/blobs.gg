@@ -45,7 +45,7 @@ function Emoji(props) {
     invite,
     containerClassName,
     enlarge,
-    tooltipDisabled,
+    disableTooltip,
   } = props;
   const extension = animated ? "gif" : "png";
   const classes = useStyles(props);
@@ -77,7 +77,7 @@ function Emoji(props) {
       )}
     >
       <ConditionalLink link={invite} wrapper={wrapper}>
-        <Tooltip title={tooltipDisabled ? "" : alt} arrow>
+        <Tooltip title={disableTooltip ? "" : alt} arrow>
           <Avatar
             alt={name}
             classes={{
@@ -107,7 +107,7 @@ Emoji.propTypes = {
   invite: PropTypes.bool,
   containerClassName: PropTypes.string,
   enlarge: PropTypes.bool,
-  tooltipDisabled: PropTypes.bool,
+  disableTooltip: PropTypes.bool,
 };
 
 Emoji.defaultProps = {
@@ -116,7 +116,7 @@ Emoji.defaultProps = {
   showGuild: false,
   containerClassName: "",
   enlarge: false,
-  tooltipDisabled: false,
+  disableTooltip: false,
 };
 
 export default Emoji;
