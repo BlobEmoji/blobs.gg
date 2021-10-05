@@ -33,6 +33,7 @@ function PumpkinBlobEmoji() {
       name="ablobpumpkin"
       animated={true}
       containerClassName={classes.emojiContainer}
+      tooltipDisabled
     />
   );
 }
