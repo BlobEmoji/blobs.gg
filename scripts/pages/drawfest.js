@@ -31,8 +31,9 @@ function PumpkinBlobEmoji() {
     <Emoji
       id="850869054046732289"
       name="ablobpumpkin"
-      animated={true}
+      animated
       containerClassName={classes.emojiContainer}
+      disableTooltip
     />
   );
 }
