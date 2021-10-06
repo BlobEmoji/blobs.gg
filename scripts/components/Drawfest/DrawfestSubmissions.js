@@ -13,7 +13,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
-import { arrayRange, chunk, daysInMonth } from "../../utils";
 
 const mappings = {
   0: "Coffee Nightmare",
@@ -29,9 +28,6 @@ const mappings = {
   10: "Collage",
 };
 
-const days = arrayRange(1, daysInMonth(10));
-const chunkedDays = chunk(days, 3);
-
 function DrawfestSubmissionsHead() {
   return (
     <TableHead>
@@ -45,16 +41,12 @@ function DrawfestSubmissionsHead() {
 }
 
 function ApprovedCell({ approvedSubmissions }) {
-  approvedSubmissions = approvedSubmissions.map((submission) => ++submission);
   return (
     <TableCell>
       {approvedSubmissions.map((submission) => {
-        const submissionMapping = chunkedDays.indexOf(
-          chunkedDays.filter((dayChunk) => dayChunk.includes(submission))[0]
-        );
         return (
-          <Tooltip title={mappings[submissionMapping]} key={submission} arrow>
-            <Chip label={submission} sx={{ marginRight: 1 }} clickable />
+          <Tooltip title={mappings[submission]} key={submission} arrow>
+            <Chip label={submission + 1} sx={{ marginRight: 1 }} clickable />
           </Tooltip>
         );
       })}
