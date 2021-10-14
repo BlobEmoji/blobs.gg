@@ -11,6 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Homepage from "./pages/homepage";
 import { getDefaultHourFormat, getKeyWrapper } from "./utils";
 import Changepage from "./pages/changepage";
+import Drawfest from "./pages/drawfest";
 import Header from "./components/Header";
 import Container from "@mui/material/Container";
 import grey from "@mui/material/colors/grey";
@@ -179,6 +180,9 @@ function App() {
             </Route>
             <Route path="/changes">
               <Changepage />
+            </Route>
+            <Route path="/drawfest">
+              <Drawfest />
             </Route>
             <Route path="*">
               <Redirect to="/" />

@@ -177,3 +177,13 @@ export function getDateTimeFormatter() {
 
   return DateTimeFormatter24;
 }
+
+/**
+ * Returns a array from smallest to biggest value
+ * @param {Number} min
+ * @param {Number} max
+ * @returns {Number[]}
+ */
+export function arrayRange(min, max) {
+  return [...Array(max - min + 1).keys()].map((i) => i + min);
+}
