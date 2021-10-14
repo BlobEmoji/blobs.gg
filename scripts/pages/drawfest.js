@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import makeStyles from "@material-ui/styles/makeStyles";
+import { useEffect, useState } from "react";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import makeStyles from "@mui/styles/makeStyles";
 import DrawfestSubmissions from "../components/Drawfest/DrawfestSubmissions";
 import Emoji from "../components/Emoji";
 

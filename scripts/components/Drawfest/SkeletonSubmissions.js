@@ -1,8 +1,9 @@
 import React, { memo } from "react";
-import Skeleton from "@material-ui/core/Skeleton";
-import TableBody from "@material-ui/core/TableBody";
+import Skeleton from "@mui/material/Skeleton";
+import TableBody from "@mui/material/TableBody";
 import { arrayRange } from "../../utils";
-import { TableCell, TableRow } from "@material-ui/core";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 
 function SkeletonApprovedSubmissions() {
   const amounts = arrayRange(3, 8);
