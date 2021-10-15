@@ -46,9 +46,12 @@ function DrawfestPage() {
       return;
     }
 
-    const resp = await fetch(DRAWFEST_ENDPOINT);
-    const data = await resp.json();
-    setApiData(data);
+    const fetchData = async () => {
+      const resp = await fetch(DRAWFEST_ENDPOINT);
+      const data = await resp.json();
+      setApiData(data);
+    };
+    fetchData();
   }, [apiData]);
 
   const classes = useStyles();
