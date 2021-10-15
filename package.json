@@ -11,35 +11,34 @@
     "analyzer": "npm run -s analyzer-build && node analyzer.js && parcel serve parcel-bundle-reports/filtered.html --open"
   },
   "dependencies": {
-    "@emotion/react": "^11.4.0",
+    "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@fontsource/roboto": "^4.5.0",
-    "@material-ui/core": "^5.0.0-beta.0",
-    "@material-ui/icons": "^5.0.0-beta.1",
-    "@material-ui/styles": "^5.0.0-beta.0",
+    "@fontsource/roboto": "^4.5.1",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.2",
+    "@mui/styles": "^5.0.1",
     "clsx": "^1.1.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-intersection-observer": "^8.32.0",
-    "react-router-dom": "^5.2.0"
+    "react-intersection-observer": "^8.32.1",
+    "react-router-dom": "^5.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/eslint-parser": "^7.14.7",
-    "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/runtime": "^7.14.8",
-    "@parcel/reporter-bundle-analyzer": "^2.0.0-beta.3.1",
-    "@parcel/transformer-svg-react": "2.0.0-beta.3.1",
-    "@welldone-software/why-did-you-render": "^6.2.0",
-    "eslint": "^7.32.0",
+    "@parcel/config-default": "^2.0.0",
+    "@parcel/packager-xml": "^2.0.0",
+    "@parcel/reporter-bundle-analyzer": "^2.0.0",
+    "@parcel/transformer-svg-react": "^2.0.0",
+    "@parcel/transformer-xml": "^2.0.0",
+    "@welldone-software/why-did-you-render": "^6.2.1",
+    "eslint": "^8.0.1",
+    "eslint-plugin-jsdoc": "^36.1.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.24.0",
-    "parcel": "2.0.0-beta.3.1",
-    "prettier": "^2.3.2"
-  }
+    "eslint-plugin-react": "^7.26.1",
+    "parcel": "^2.0.0",
+    "prettier": "^2.4.1"
+  },
+  "browserslist": "defaults and supports es6 and not IE 11"
 }
