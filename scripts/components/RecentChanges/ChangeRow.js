@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
-import makeStyles from "@material-ui/styles/makeStyles";
-import Tooltip from "@material-ui/core/Tooltip";
+import makeStyles from "@mui/styles/makeStyles";
+import Tooltip from "@mui/material/Tooltip";
 
 const useStyles = makeStyles({
   iconContainer: {

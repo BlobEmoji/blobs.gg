@@ -4,7 +4,7 @@ node_modules
 # yarn
 .yarn
 .yarnrc.yml
-.pnp.js
+.pnp.cjs
 yarn.lock
 
 # parcel

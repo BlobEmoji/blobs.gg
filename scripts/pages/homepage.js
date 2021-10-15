@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import OfficialServers from "../components/Home/OfficialServers";
 import CommunityServers from "../components/Home/CommunityServers";
 import { Emojis } from "../emojis";
 import { calculateEmojiCount, formatEmojiCount, log } from "../utils";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import Search from "../components/Home/Search";
-import makeStyles from "@material-ui/styles/makeStyles";
-import Link from "@material-ui/core/Link";
+import makeStyles from "@mui/styles/makeStyles";
+import Link from "@mui/material/Link";
 
-const INITIAL_EMOJI_COUNT = 4400;
+const INITIAL_EMOJI_COUNT = 4800;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
 const useStyles = makeStyles((theme) => ({

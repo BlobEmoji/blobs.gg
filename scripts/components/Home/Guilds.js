@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import { useScrollNearEnd } from "../../hooks";
 import SkeletonGuild from "./SkeletonGuild";
 import GuildWrapper from "./Guild";

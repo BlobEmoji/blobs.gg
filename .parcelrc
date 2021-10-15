@@ -1,7 +1,17 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "url:*.{png,jpg,jpeg,webp}": ["@parcel/transformer-raw"],
-    "*.svg": ["@parcel/transformer-svg-react"]
+    "react:*.svg": ["@parcel/transformer-svg-react"],
+    "react:*.{js,mjs,jsm,jsx,es6,cjs,ts,tsx}": [
+      "@parcel/transformer-babel",
+      "@parcel/transformer-js",
+      "@parcel/transformer-react-refresh-wrap"
+    ]
+  },
+  "optimizers": {
+    "react:*.{js,mjs,cjs}": ["@parcel/optimizer-terser"]
+  },
+  "packagers": {
+    "react:*.{js,mjs,cjs}": "@parcel/packager-js"
   }
 }

@@ -1,21 +1,21 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
-import { ThemeProvider, StyledEngineProvider } from "@material-ui/core/styles";
-import createTheme from "@material-ui/core/styles/createTheme";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import createTheme from "@mui/material/styles/createTheme";
+import CssBaseline from "@mui/material/CssBaseline";
 import Homepage from "./pages/homepage";
 import { getDefaultHourFormat, getKeyWrapper } from "./utils";
 import Changepage from "./pages/changepage";
 import Drawfest from "./pages/drawfest";
 import Header from "./components/Header";
-import Container from "@material-ui/core/Container";
-import grey from "@material-ui/core/colors/grey";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Container from "@mui/material/Container";
+import grey from "@mui/material/colors/grey";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import SettingsDialog from "./components/SettingsDialog";
 
 function getConfig() {

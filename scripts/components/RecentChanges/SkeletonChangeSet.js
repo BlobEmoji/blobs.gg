@@ -1,9 +1,9 @@
 import React, { memo } from "react";
-import Box from "@material-ui/core/Box";
-import Skeleton from "@material-ui/core/Skeleton";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import Grid from "@material-ui/core/Grid";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Grid from "@mui/material/Grid";
 
 const SkeletonChangeSet = memo(function SkeletonChangeSet() {
   const amounts = [3, 4, 5, 6, 7];

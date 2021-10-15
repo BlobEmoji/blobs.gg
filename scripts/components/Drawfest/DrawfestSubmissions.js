@@ -1,18 +1,15 @@
-import React from "react";
 import PropTypes from "prop-types";
 import SkeletonSubmissions from "./SkeletonSubmissions";
-import {
-  Chip,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import Avatar from "@material-ui/core/Avatar";
-import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@mui/material/Chip";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
 
 const mappings = {
   0: "Coffee Nightmare",

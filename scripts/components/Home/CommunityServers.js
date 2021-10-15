@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
-import nitro from "url:../../../assets/discord/nitro.png";
+import { PureComponent } from "react";
+import nitro from "../../../assets/discord/nitro.png";
 import PropTypes from "prop-types";
 import { shuffleArray } from "../../utils";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
 class CommunityServers extends PureComponent {
   constructor(props) {

@@ -1,8 +1,7 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import RecentChangesWrapper from "../components/RecentChanges/RecentChanges";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 function ChangePage() {
   return (
