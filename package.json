@@ -2,7 +2,7 @@
   "name": "blobs.gg",
   "private": true,
   "version": "0.0.1",
-  "description": "Now with pages!",
+  "description": "Now with Parcel 2.0.0!",
   "scripts": {
     "start": "parcel serve index.html",
     "build": "parcel build index.html --detailed-report 20",
