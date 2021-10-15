@@ -9,7 +9,7 @@ import Search from "../components/Home/Search";
 import makeStyles from "@mui/styles/makeStyles";
 import Link from "@mui/material/Link";
 
-const INITIAL_EMOJI_COUNT = 4400;
+const INITIAL_EMOJI_COUNT = 4800;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
 const useStyles = makeStyles((theme) => ({
