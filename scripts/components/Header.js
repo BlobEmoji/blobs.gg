@@ -4,7 +4,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import makeStyles from "@mui/styles/makeStyles";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ListIcon from "@mui/icons-material/List";
 import HomeIcon from "@mui/icons-material/Home";
@@ -13,24 +12,9 @@ import Tooltip from "@mui/material/Tooltip";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
-
-const useStyles = makeStyles((theme) => ({
-  mainIcon: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    color: "inherit",
-    textDecoration: "none",
-  },
-  divider: {
-    margin: "0 0.25rem",
-  },
-}));
+import { css } from "@emotion/react";
 
 const Header = memo(function Header(props) {
-  const classes = useStyles();
-
   function handleOpen() {
     props.handleOpen(true);
   }
@@ -39,7 +23,9 @@ const Header = memo(function Header(props) {
     <AppBar position="static" color="transparent">
       <Toolbar disableGutters>
         <Avatar
-          className={classes.mainIcon}
+          css={(theme) => css`
+            margin-right: ${theme.spacing(2)};
+          `}
           alt="Blob Emoji Server Icon"
           component={Link}
           to="/"
@@ -48,7 +34,11 @@ const Header = memo(function Header(props) {
         </Avatar>
         <Typography
           variant="h6"
-          className={classes.title}
+          css={css`
+            flex-grow: 1;
+            color: inherit;
+            text-decoration: none;
+          `}
           component={Link}
           to="/"
         >
@@ -64,7 +54,13 @@ const Header = memo(function Header(props) {
             <ListIcon />
           </IconButton>
         </Tooltip>
-        <Divider className={classes.divider} orientation="vertical" flexItem />
+        <Divider
+          css={css`
+            margin: 0 0.25rem;
+          `}
+          orientation="vertical"
+          flexItem
+        />
         <Tooltip title="Settings" arrow>
           <IconButton onClick={handleOpen}>
             <SettingsIcon />

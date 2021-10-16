@@ -8,37 +8,32 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CardContent from "@mui/material/CardContent";
 import Emoji from "../Emoji";
-import makeStyles from "@mui/styles/makeStyles";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import clsx from "clsx";
 import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
 import { useInView } from "react-intersection-observer";
 import { SkeletonEmojiRow } from "./SkeletonGuild";
+import { css } from "@emotion/react";
 
 const RANDOM_SAMPLE_SIZE = 7;
-const useStyles = makeStyles((theme) => ({
-  joinServer: {
-    textTransform: "none",
-    color: "white",
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  header: {
-    cursor: "pointer",
-    userSelect: "none",
-  },
-}));
+
+const joinServerStyle = css`
+  text-transform: none;
+  color: white;
+`;
+
+const expandStyle = (theme) => css`
+  transform: rotate(0deg);
+  margin-left: auto;
+  transition: ${theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  })};
+`;
+
+const expandOpenStyle = css`
+  transform: rotate(180deg);
+`;
 
 function EmojiRow(props) {
   return props.emoji.map((emoji) => (
@@ -51,13 +46,11 @@ EmojiRow.propTypes = {
 };
 
 function JoinServer(props) {
-  const classes = useStyles();
-
   return (
     <Button
       size="small"
       variant="contained"
-      className={classes.joinServer}
+      css={joinServerStyle}
       component={Link}
       href={props.invite}
       target="_blank"
@@ -73,7 +66,6 @@ JoinServer.propTypes = {
 };
 
 function ShowMore(props) {
-  const classes = useStyles();
   const { expanded, emojiCount } = props;
 
   if (emojiCount <= RANDOM_SAMPLE_SIZE) {
@@ -83,7 +75,7 @@ function ShowMore(props) {
   return (
     <IconButton
       onClick={props.handleClick}
-      className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
+      css={[(theme) => expandStyle(theme), expanded && expandOpenStyle]}
       name="Show More Emoji"
       aria-label="Show More Emoji"
     >
@@ -111,7 +103,6 @@ GuildWrapper.propTypes = {
 };
 
 function Guild({ guild, communityRender }) {
-  const classes = useStyles();
   const [randomSample, setRandomSample] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [checkedCommunityRender, setCheckedCommunityRender] = useState(false);
@@ -147,7 +138,10 @@ function Guild({ guild, communityRender }) {
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
           onClick={handleClick}
-          className={classes.header}
+          css={css`
+            cursor: pointer;
+            user-select: none;
+          `}
           action={
             <ShowMore
               handleClick={handleClick}
@@ -159,17 +153,17 @@ function Guild({ guild, communityRender }) {
         />
         <CardContent>
           {inView ? (
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(7, 1fr)",
-                margin: "0 0.3rem",
-                gap: "0.6rem 0.3rem",
-                justifyItems: "center",
-              }}
+            <div
+              css={css`
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                margin: 0 0.3rem;
+                gap: 0.6rem 0.3rem;
+                justify-items: center;
+              `}
             >
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-            </Box>
+            </div>
           ) : (
             <SkeletonEmojiRow />
           )}

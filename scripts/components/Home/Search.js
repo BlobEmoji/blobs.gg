@@ -3,40 +3,24 @@ import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import makeStyles from "@mui/styles/makeStyles";
 import Emoji from "../Emoji";
 import Guilds from "./Guilds";
 import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Pagination from "@mui/material/Pagination";
-
-const useStyles = makeStyles({
-  noResults: {
-    margin: "3rem 0",
-    textAlign: "center",
-  },
-  guilds: {
-    marginTop: "1rem",
-  },
-  paginationNav: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "1rem",
-  },
-});
+import { css } from "@emotion/react";
 
 function insensitiveIncludes(haystack, needle) {
   return haystack.toLowerCase().includes(needle.toLowerCase());
 }
 
 function Contents(props) {
-  const classes = useStyles();
   if (props.hasResults) {
     return (
       <>
         <Guilds
           guilds={props.filteredGuilds}
-          className={classes.guilds}
+          css={css`margin-top: 1rem;`}
           skeletonCount={0}
         />
         <Box
@@ -52,7 +36,11 @@ function Contents(props) {
         </Box>
         {props.totalPages > 1 && (
           <Pagination
-            className={classes.paginationNav}
+            css={css`
+              display: flex;
+              justify-content: center;
+              margin-top: 1rem;
+            `}
             count={props.totalPages}
             page={props.page}
             onChange={props.onPageChange}
@@ -67,7 +55,10 @@ function Contents(props) {
   }
 
   return (
-    <div className={classes.noResults}>
+    <div css={css`
+      margin: 3rem 0;
+      text-align: center;
+    `}>
       No results. {<Emoji baseSize={32} {...props.sadBlob} />}
     </div>
   );

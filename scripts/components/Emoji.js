@@ -2,22 +2,8 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
-import makeStyles from "@mui/styles/makeStyles";
-import clsx from "clsx";
 import Link from "@mui/material/Link";
-
-const useStyles = makeStyles({
-  container: {
-    display: "inline-block",
-    verticalAlign: "middle",
-  },
-  emoji: {
-    objectFit: "contain",
-  },
-  inviteContainer: {
-    margin: "1rem",
-  },
-});
+import { css } from "@emotion/react";
 
 function emojiUrl(id, extension, size) {
   const sizeParam = size == null ? "" : `?size=${size}`;
@@ -43,12 +29,11 @@ function Emoji(props) {
     baseSize,
     showGuild,
     invite,
-    containerClassName,
+    externalContainerStyle,
     enlarge,
     disableTooltip,
   } = props;
   const extension = animated ? "gif" : "png";
-  const classes = useStyles(props);
   let alt = `:${name}:`;
 
   if (guild != null && showGuild) {
@@ -70,18 +55,26 @@ function Emoji(props) {
 
   return (
     <div
-      className={clsx(
-        classes.container,
-        invite && classes.inviteContainer,
-        containerClassName
-      )}
+      css={[
+        css`
+          display: inline-block;
+          vertical-align: middle;
+        `,
+        invite &&
+          css`
+            margin: 1rem;
+          `,
+        externalContainerStyle,
+      ]}
     >
       <ConditionalLink link={invite} wrapper={wrapper}>
         <Tooltip title={disableTooltip ? "" : alt} arrow>
           <Avatar
             alt={name}
-            classes={{
-              img: classes.emoji,
+            css={{
+              img: css`
+                object-fit: contain;
+              `,
             }}
             srcSet={srcSet}
             src={emojiUrl(id, extension, baseSize)}
@@ -105,7 +98,7 @@ Emoji.propTypes = {
   baseSize: PropTypes.number,
   showGuild: PropTypes.bool,
   invite: PropTypes.bool,
-  containerClassName: PropTypes.string,
+  externalContainerStyle: PropTypes.object,
   enlarge: PropTypes.bool,
   disableTooltip: PropTypes.bool,
 };
@@ -114,7 +107,6 @@ Emoji.defaultProps = {
   invite: false,
   baseSize: 64,
   showGuild: false,
-  containerClassName: "",
   enlarge: false,
   disableTooltip: false,
 };

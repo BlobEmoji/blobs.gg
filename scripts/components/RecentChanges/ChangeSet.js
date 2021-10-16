@@ -13,10 +13,10 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import makeStyles from "@mui/styles/makeStyles";
 import { getDateTimeFormatter } from "../../utils";
 import ChangeRow from "./ChangeRow";
 import Grid from "@mui/material/Grid";
+import { css } from "@emotion/react";
 
 const emojiAction = {
   EMOJI_REMOVE: <RemoveAvatar />,
@@ -25,24 +25,18 @@ const emojiAction = {
   EMOJI_UPDATE: <UpdateAvatar />,
 };
 
-const useStyles = makeStyles({
-  panelDetails: {
-    padding: 0,
-  },
-  accordionSummary: {
-    fontSize: "0.875rem",
-  },
-  accordionDetails: {
-    flexDirection: "column",
-  },
-});
+const accordionSummaryStyle = css`
+  font-size: 0.875rem;
+`;
+
+const accordionDetailsStyle = css`
+  flex-direction: column;
+`;
 
 const DEFAULT_MAXIMUM = 10;
 
 function ChangeSet({ changeSet }) {
   const date = new Date(changeSet[0].changed_at);
-  const classes = useStyles();
-
   let guild = changeSet[0].guild;
   guild.id = guild.id.toString();
 
@@ -89,13 +83,13 @@ function ChangeSet({ changeSet }) {
         {hasMore && (
           <Accordion>
             <AccordionSummary
-              className={classes.accordionSummary}
+              css={accordionSummaryStyle}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >
               {`See ${collapsedChangeSet.length} more changes`}
             </AccordionSummary>
-            <AccordionDetails className={classes.accordionDetails}>
+            <AccordionDetails css={accordionDetailsStyle}>
               {collapsedRows}
             </AccordionDetails>
           </Accordion>
