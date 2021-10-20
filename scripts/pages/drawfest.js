@@ -47,7 +47,7 @@ function DrawfestPage() {
   }, [apiData]);
 
   return (
-    <Container css={{ paddingBottom: "24px" }} maxWidth="md">
+    <Container css={{ paddingBottom: 24 }} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
         <PumpkinBlobEmoji />
         We are currently running Drawfest 2021!

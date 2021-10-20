@@ -49,7 +49,7 @@ class CommunityServers extends PureComponent {
     const { shuffledGuilds } = this.state;
     return (
       <>
-        <div sx={{ marginBottom: "1rem" }}>
+        <div css={{ marginBottom: "1rem" }}>
           <Typography variant="h5">Community Blob Servers</Typography>
           <Typography variant="body2">
             To add your Blob Server to our Community Servers section, join the

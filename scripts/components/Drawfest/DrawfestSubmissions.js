@@ -43,7 +43,7 @@ function ApprovedCell({ approvedSubmissions }) {
       {approvedSubmissions.map((submission) => {
         return (
           <Tooltip title={mappings[submission]} key={submission} arrow>
-            <Chip label={submission + 1} sx={{ marginRight: 1 }} clickable />
+            <Chip label={submission + 1} css={{ marginRight: 1 }} clickable />
           </Tooltip>
         );
       })}
@@ -64,7 +64,7 @@ function DrawfestSubmissionsBody({ submissions }) {
             <Avatar
               alt={row.name}
               src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.webp?size=64`}
-              sx={{ width: 64, height: 64 }}
+              css={{ width: 64, height: 64 }}
             />
           </TableCell>
           <TableCell>{`${row.name}#${row.discriminator}`}</TableCell>
