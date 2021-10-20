@@ -7,12 +7,13 @@ import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
 import { css } from "@emotion/react";
 
-const inlineIconStyle = (theme) => css({
-  height: "0.8em",
-  width: "auto",
-  margin: "0 0.25em",
-  filter: theme.palette.mode === "light" && "invert(1)",
-});
+const inlineIconStyle = (theme) =>
+  css({
+    height: "0.8em",
+    width: "auto",
+    margin: "0 0.25em",
+    filter: theme.palette.mode === "light" && "invert(1)",
+  });
 
 class CommunityServers extends PureComponent {
   constructor(props) {

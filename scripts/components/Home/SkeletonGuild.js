@@ -16,7 +16,7 @@ export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
     gap: "0.6rem 0.3rem",
     justifyItems: "center",
   });
-  
+
   return (
     <SkeletonEmojiRowContainer>
       {Array.from({ length: 7 }, (_, index) => (

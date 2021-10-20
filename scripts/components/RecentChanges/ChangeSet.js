@@ -88,9 +88,7 @@ function ChangeSet({ changeSet }) {
             >
               {`See ${collapsedChangeSet.length} more changes`}
             </StyledAccordionSummary>
-            <StyledAccordionDetails>
-              {collapsedRows}
-            </StyledAccordionDetails>
+            <StyledAccordionDetails>{collapsedRows}</StyledAccordionDetails>
           </Accordion>
         )}
       </Card>

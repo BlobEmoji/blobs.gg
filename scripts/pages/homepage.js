@@ -67,7 +67,7 @@ function Homepage() {
   const communityEmojis = emojis.groups["community-blobs"];
 
   return (
-    <Container css={{marginBottom: 24}} maxWidth="md">
+    <Container css={{ marginBottom: 24 }} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
@@ -87,10 +87,7 @@ function Homepage() {
         emojis={officialEmojis}
         communityRender={communityRender}
       />
-      <CommunityServers
-        emojis={communityEmojis}
-        waiting={waiting}
-      />
+      <CommunityServers emojis={communityEmojis} waiting={waiting} />
     </Container>
   );
 }
