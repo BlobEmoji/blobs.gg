@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
-import { css } from "@emotion/react";
 
 function emojiUrl(id, extension, size) {
   const sizeParam = size == null ? "" : `?size=${size}`;
@@ -56,32 +55,29 @@ function Emoji(props) {
   return (
     <div
       css={[
-        css`
-          display: inline-block;
-          vertical-align: middle;
-        `,
-        invite &&
-          css`
-            margin: 1rem;
-          `,
+        {
+          display: "inline-block",
+          verticalAlign: "middle",
+        },
+        invite && {
+          margin: "1rem",
+        },
         externalContainerStyle,
       ]}
     >
       <ConditionalLink link={invite} wrapper={wrapper}>
-        <Tooltip title={disableTooltip ? "" : alt} arrow>
+        <Tooltip title={!disableTooltip && alt} arrow>
           <Avatar
             alt={name}
             css={{
-              img: css`
-                object-fit: contain;
-              `,
+              width: enlarge ? 64 : 32,
+              height: enlarge ? 64 : 32,
+              img: {
+                objectFit: "contain",
+              },
             }}
             srcSet={srcSet}
             src={emojiUrl(id, extension, baseSize)}
-            sx={{
-              width: enlarge ? 64 : 32,
-              height: enlarge ? 64 : 32,
-            }}
             variant="square"
           />
         </Tooltip>

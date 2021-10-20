@@ -2,38 +2,38 @@ import PropTypes from "prop-types";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
 import Tooltip from "@mui/material/Tooltip";
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
-const rowDivStytle = css`
-  display: flex;
-  align-items: center;
-  font-size: 0.875rem;
-`;
+const RowDiv = styled.div({
+  display: "flex",
+  alignItems: "center",
+  fontSize: "0.875rem",
+});
 
-const eventDivStytle = css`
-  display: flex;
-  align-items: center;
-  font-size: 0.875rem;
-`;
+const EventDiv = styled.div({
+  display: "flex",
+  alignItems: "center",
+  minWidth: "7.1rem",
+});
 
-const iconContainerStyle = css`
-  margin: 0.5rem;
-`;
+const iconContainerStyle = {
+  margin: "0.5rem",
+};
 
-const toStyle = css`
-  padding: 0.25rem;
-`;
+const ToDiv = styled.div({
+  padding: "0.25rem",
+});
 
-const textStyle = css`
-  padding: 0.25rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+const TextDiv = styled.div({
+  padding: "0.25rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+});
 
 function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
   return (
-    <div css={rowDivStytle}>
-      <div css={eventDivStytle}>
+    <RowDiv>
+      <EventDiv>
         <div css={iconContainerStyle}>
           <Tooltip
             title={getDateTimeFormatter().format(new Date(changedAt))}
@@ -43,7 +43,7 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
           </Tooltip>
         </div>
         <span>{`${titleCase(eventName)}d`}</span>
-      </div>
+      </EventDiv>
       <Emoji
         baseSize={32}
         externalContainerStyle={iconContainerStyle}
@@ -51,18 +51,18 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
       />
       {afterEmoji ? (
         <>
-          <div css={toStyle}>to</div>
+          <ToDiv>to</ToDiv>
           <Emoji
             baseSize={32}
             externalContainerStyle={iconContainerStyle}
             {...afterEmoji}
           />
-          <div css={textStyle}>{afterEmoji.name}</div>
+          <TextDiv>{afterEmoji.name}</TextDiv>
         </>
       ) : (
-        <div css={textStyle}>{emoji.name}</div>
+        <TextDiv>{emoji.name}</TextDiv>
       )}
-    </div>
+    </RowDiv>
   );
 }
 

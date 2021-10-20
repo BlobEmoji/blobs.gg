@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import Emoji from "../Emoji";
 import Guilds from "./Guilds";
 import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Pagination from "@mui/material/Pagination";
-import { css } from "@emotion/react";
 
 function insensitiveIncludes(haystack, needle) {
   return haystack.toLowerCase().includes(needle.toLowerCase());
@@ -20,11 +18,11 @@ function Contents(props) {
       <>
         <Guilds
           guilds={props.filteredGuilds}
-          css={css`margin-top: 1rem;`}
+          css={{ marginTop: "1rem" }}
           skeletonCount={0}
         />
-        <Box
-          sx={{
+        <div
+          css={{
             display: "grid",
             justifyContent: "space-between",
             gridTemplateColumns: "repeat(auto-fill, 96px)",
@@ -33,14 +31,14 @@ function Contents(props) {
           {props.filteredBlobs.map((blob) => (
             <Emoji key={blob.id} invite showGuild {...blob} enlarge />
           ))}
-        </Box>
+        </div>
         {props.totalPages > 1 && (
           <Pagination
-            css={css`
-              display: flex;
-              justify-content: center;
-              margin-top: 1rem;
-            `}
+            css={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
             count={props.totalPages}
             page={props.page}
             onChange={props.onPageChange}
@@ -55,10 +53,12 @@ function Contents(props) {
   }
 
   return (
-    <div css={css`
-      margin: 3rem 0;
-      text-align: center;
-    `}>
+    <div
+      css={{
+        margin: "3rem 0",
+        textAlign: "center",
+      }}
+    >
       No results. {<Emoji baseSize={32} {...props.sadBlob} />}
     </div>
   );

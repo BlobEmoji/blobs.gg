@@ -15,25 +15,22 @@ import Link from "@mui/material/Link";
 import { useInView } from "react-intersection-observer";
 import { SkeletonEmojiRow } from "./SkeletonGuild";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const RANDOM_SAMPLE_SIZE = 7;
 
-const joinServerStyle = css`
-  text-transform: none;
-  color: white;
-`;
+const expandStyle = (theme) =>
+  css({
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  });
 
-const expandStyle = (theme) => css`
-  transform: rotate(0deg);
-  margin-left: auto;
-  transition: ${theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  })};
-`;
-
-const expandOpenStyle = css`
-  transform: rotate(180deg);
-`;
+const expandOpenStyle = {
+  transform: "rotate(180deg)",
+};
 
 function EmojiRow(props) {
   return props.emoji.map((emoji) => (
@@ -50,7 +47,10 @@ function JoinServer(props) {
     <Button
       size="small"
       variant="contained"
-      css={joinServerStyle}
+      css={{
+        textTransform: "none",
+        color: "white",
+      }}
       component={Link}
       href={props.invite}
       target="_blank"
@@ -112,6 +112,14 @@ function Guild({ guild, communityRender }) {
     rootMargin: `0px 0px ${quarterScreenHeightInPx}px 0px`,
   });
 
+  const EmojiRowContainer = styled.div({
+    display: "grid",
+    gridTemplateColumns: "repeat(7, 1fr)",
+    margin: "0 0.3rem",
+    gap: "0.6rem 0.3rem",
+    justifyItems: "center",
+  });
+
   useEffect(() => {
     if (randomSample.length === 0) {
       setRandomSample(shuffleArray(guild.emoji).slice(0, RANDOM_SAMPLE_SIZE));
@@ -138,10 +146,10 @@ function Guild({ guild, communityRender }) {
           avatar={<GuildAvatar name={guild.name} src={guild} />}
           title={guild.name}
           onClick={handleClick}
-          css={css`
-            cursor: pointer;
-            user-select: none;
-          `}
+          css={{
+            cursor: "pointer",
+            userSelect: "none",
+          }}
           action={
             <ShowMore
               handleClick={handleClick}
@@ -153,17 +161,9 @@ function Guild({ guild, communityRender }) {
         />
         <CardContent>
           {inView ? (
-            <div
-              css={css`
-                display: grid;
-                grid-template-columns: repeat(7, 1fr);
-                margin: 0 0.3rem;
-                gap: 0.6rem 0.3rem;
-                justify-items: center;
-              `}
-            >
+            <EmojiRowContainer>
               <EmojiRow emoji={expanded ? guild.emoji : randomSample} />
-            </div>
+            </EmojiRowContainer>
           ) : (
             <SkeletonEmojiRow />
           )}

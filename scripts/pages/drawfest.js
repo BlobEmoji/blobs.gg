@@ -3,19 +3,18 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import DrawfestSubmissions from "../components/Drawfest/DrawfestSubmissions";
 import Emoji from "../components/Emoji";
-import { css } from "@emotion/react";
 
 const DRAWFEST_ENDPOINT = "https://files.lostluma.dev/drawtober-2021.json";
 
-const overHeader = css`
-  text-align: center;
-  margin: 2em 0 0.125em 0;
-`;
+const overHeaderStyle = {
+  textAlign: "center",
+  margin: "2em 0 0.125em 0",
+};
 
-const subHeader = css`
-  text-align: center;
-  margin: 0 0 2em 0;
-`;
+const subHeaderStyle = {
+  textAlign: "center",
+  marginBottom: "2em",
+};
 
 function PumpkinBlobEmoji() {
   return (
@@ -23,9 +22,9 @@ function PumpkinBlobEmoji() {
       id="850869054046732289"
       name="ablobpumpkin"
       animated
-      externalContainerStyle={css`
-        margin: 0 0.25rem;
-      `}
+      externalContainerStyle={{
+        margin: "0 0.25rem",
+      }}
       disableTooltip
     />
   );
@@ -48,18 +47,13 @@ function DrawfestPage() {
   }, [apiData]);
 
   return (
-    <Container
-      css={css`
-        padding-bottom: 24px;
-      `}
-      maxWidth="md"
-    >
-      <Typography variant="h5" css={overHeader}>
+    <Container css={{ paddingBottom: "24px" }} maxWidth="md">
+      <Typography variant="h5" css={overHeaderStyle}>
         <PumpkinBlobEmoji />
         We are currently running Drawfest 2021!
         <PumpkinBlobEmoji />
       </Typography>
-      <Typography css={subHeader}>
+      <Typography css={subHeaderStyle}>
         You may view how many approved submissions you have here.
       </Typography>
       <DrawfestSubmissions submissions={apiData} />

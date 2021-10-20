@@ -5,15 +5,14 @@ import { shuffleArray } from "../../utils";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
-import Box from "@mui/material/Box";
 import { css } from "@emotion/react";
 
-const inlineIconStyle = (theme) => css`
-  height: 0.8em;
-  width: auto;
-  margin: 0 0.25em;
-  filter: ${theme.palette.mode === "light" && "invert(1)"};
-`;
+const inlineIconStyle = (theme) => css({
+  height: "0.8em",
+  width: "auto",
+  margin: "0 0.25em",
+  filter: theme.palette.mode === "light" && "invert(1)",
+});
 
 class CommunityServers extends PureComponent {
   constructor(props) {
@@ -50,7 +49,7 @@ class CommunityServers extends PureComponent {
     const { shuffledGuilds } = this.state;
     return (
       <>
-        <Box sx={{ marginBottom: "1rem" }}>
+        <div sx={{ marginBottom: "1rem" }}>
           <Typography variant="h5">Community Blob Servers</Typography>
           <Typography variant="body2">
             To add your Blob Server to our Community Servers section, join the
@@ -79,7 +78,7 @@ class CommunityServers extends PureComponent {
             </Link>{" "}
             subscription.
           </Typography>
-        </Box>
+        </div>
         <GuildsWrapper guilds={shuffledGuilds} slice skeletonCount={9} />
       </>
     );

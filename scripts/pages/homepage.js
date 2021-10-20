@@ -7,20 +7,19 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Search from "../components/Home/Search";
 import Link from "@mui/material/Link";
-import { css } from "@emotion/react";
 
 const INITIAL_EMOJI_COUNT = 4800;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
-const overHeaderStyle = css`
-  text-align: center;
-  margin: 2em 0 0.125em 0;
-`;
+const overHeaderStyle = {
+  textAlign: "center",
+  margin: "2em 0 0.125em 0",
+};
 
-const subHeaderStyle = css`
-  text-align: center;
-  margin: 0 0 2em 0;
-`;
+const subHeaderStyle = {
+  textAlign: "center",
+  marginBottom: "2em",
+};
 
 function Homepage() {
   const [apiData, setApiData] = useState({});
@@ -68,7 +67,7 @@ function Homepage() {
   const communityEmojis = emojis.groups["community-blobs"];
 
   return (
-    <Container css={css`margin-bottom: 24px;`} maxWidth="md">
+    <Container css={{marginBottom: "24px"}} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>

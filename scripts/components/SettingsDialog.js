@@ -17,6 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 function changeItem(event, value, key, reloadWrapper) {
   if (value == null) {
@@ -26,19 +27,19 @@ function changeItem(event, value, key, reloadWrapper) {
   reloadWrapper(Math.round(Math.random() * 100));
 }
 
-const optionContainerStyle = css`
-  display: flex;
-  align-items: center;
-`;
+const DialogOptionContainer = styled.div({
+  display: "flex",
+  alignItems: "center",
+});
 
-const optionLabelStyle = css`
-  margin-right: 2.5rem;
-  margin-bottom: 0;
-`;
+const DialogOptionLabel = styled(DialogContentText)({
+  marginRight: "2.5rem",
+  marginBottom: "0",
+});
 
-const optionButtonsStyle = css`
-  margin-left: auto;
-`;
+const toggleButtonGroupStyle = {
+  marginLeft: "auto",
+};
 
 function SettingsDialog(props) {
   const { open, onClose, handleReload } = props;
@@ -70,33 +71,33 @@ function SettingsDialog(props) {
         <IconButton
           aria-label="close"
           onClick={onCloseWrapper}
-          css={(theme) => css`
-            position: absolute;
-            right: ${theme.spacing(1)};
-            top: ${theme.spacing(1)};
-          `}
+          css={(theme) =>
+            css({
+              position: "absolute",
+              right: theme.spacing(1),
+              top: theme.spacing(1),
+            })
+          }
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
       <DialogContent
         dividers
-        css={css`
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem 0;
-        `}
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem 0",
+        }}
       >
-        <div css={optionContainerStyle}>
-          <DialogContentText css={optionLabelStyle}>
-            Theme
-          </DialogContentText>
+        <DialogOptionContainer>
+          <DialogOptionLabel>Theme</DialogOptionLabel>
 
           <ToggleButtonGroup
             value={themeChoice}
             exclusive
             onChange={onThemeChange}
-            css={optionButtonsStyle}
+            css={toggleButtonGroupStyle}
           >
             <Tooltip value="1" title="Dark Theme" arrow>
               <ToggleButton value="1">
@@ -114,17 +115,15 @@ function SettingsDialog(props) {
               </ToggleButton>
             </Tooltip>
           </ToggleButtonGroup>
-        </div>
-        <div css={optionContainerStyle}>
-          <DialogContentText css={optionLabelStyle}>
-            Hour Format
-          </DialogContentText>
+        </DialogOptionContainer>
+        <DialogOptionContainer>
+          <DialogOptionLabel>Hour Format</DialogOptionLabel>
 
           <ToggleButtonGroup
             value={hourFormatChoice}
             exclusive
             onChange={onHourFormatChange}
-            css={optionButtonsStyle}
+            css={toggleButtonGroupStyle}
           >
             <Tooltip value="1" title="12 Hour Format" arrow>
               <ToggleButton value="1">
@@ -142,7 +141,7 @@ function SettingsDialog(props) {
               </ToggleButton>
             </Tooltip>
           </ToggleButtonGroup>
-        </div>
+        </DialogOptionContainer>
       </DialogContent>
     </Dialog>
   );

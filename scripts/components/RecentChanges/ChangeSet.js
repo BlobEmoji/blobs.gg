@@ -17,6 +17,7 @@ import { getDateTimeFormatter } from "../../utils";
 import ChangeRow from "./ChangeRow";
 import Grid from "@mui/material/Grid";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const emojiAction = {
   EMOJI_REMOVE: <RemoveAvatar />,
@@ -25,13 +26,13 @@ const emojiAction = {
   EMOJI_UPDATE: <UpdateAvatar />,
 };
 
-const accordionSummaryStyle = css`
-  font-size: 0.875rem;
-`;
+const StyledAccordionSummary = styled(AccordionSummary)({
+  fontSize: "0.875rem",
+});
 
-const accordionDetailsStyle = css`
-  flex-direction: column;
-`;
+const StyledAccordionDetails = styled(AccordionDetails)({
+  flexDirection: "column",
+});
 
 const DEFAULT_MAXIMUM = 10;
 
@@ -82,16 +83,16 @@ function ChangeSet({ changeSet }) {
         {blobs}
         {hasMore && (
           <Accordion>
-            <AccordionSummary
+            <StyledAccordionSummary
               css={accordionSummaryStyle}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >
               {`See ${collapsedChangeSet.length} more changes`}
-            </AccordionSummary>
-            <AccordionDetails css={accordionDetailsStyle}>
+            </StyledAccordionSummary>
+            <StyledAccordionDetails>
               {collapsedRows}
-            </AccordionDetails>
+            </StyledAccordionDetails>
           </Accordion>
         )}
       </Card>

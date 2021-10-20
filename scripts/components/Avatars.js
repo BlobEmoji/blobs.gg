@@ -8,7 +8,6 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import lightBlue from "@mui/material/colors/lightBlue";
 import BrushIcon from "@mui/icons-material/Brush";
 import Tooltip from "@mui/material/Tooltip";
-import { css } from "@emotion/react";
 
 export function GuildAvatar(props) {
   const { name, src } = props;
@@ -29,18 +28,18 @@ GuildAvatar.propTypes = {
   src: PropTypes.object.isRequired,
 };
 
-const changelogAvatarStyle = css`
-  vertical-align: middle;
-`;
+const changelogAvatarStyle = {
+  verticalAlign: "middle",
+};
 
 export function RemoveAvatar() {
   return (
     <DeleteIcon
       fontSize="large"
       css={[
-        css`
-          color: ${red[500]};
-        `,
+        {
+          color: red[500],
+        },
         changelogAvatarStyle,
       ]}
     />
@@ -52,9 +51,9 @@ export function CreateAvatar() {
     <AddIcon
       fontSize="large"
       css={[
-        css`
-          color: ${green[500]};
-        `,
+        {
+          color: green[500],
+        },
         changelogAvatarStyle,
       ]}
     />
@@ -66,9 +65,9 @@ export function RenameAvatar() {
     <EditOutlinedIcon
       fontSize="large"
       css={[
-        css`
-          color: ${lightBlue[500]};
-        `,
+        {
+          color: lightBlue[500],
+        },
         changelogAvatarStyle,
       ]}
     />
@@ -80,9 +79,9 @@ export function UpdateAvatar() {
     <BrushIcon
       fontSize="large"
       css={[
-        css`
-          color: ${lightBlue[500]};
-        `,
+        {
+          color: lightBlue[500],
+        },
         changelogAvatarStyle,
       ]}
     />

@@ -23,9 +23,11 @@ const Header = memo(function Header(props) {
     <AppBar position="static" color="transparent">
       <Toolbar disableGutters>
         <Avatar
-          css={(theme) => css`
-            margin-right: ${theme.spacing(2)};
-          `}
+          css={(theme) =>
+            css({
+              marginRight: theme.spacing(2),
+            })
+          }
           alt="Blob Emoji Server Icon"
           component={Link}
           to="/"
@@ -34,11 +36,11 @@ const Header = memo(function Header(props) {
         </Avatar>
         <Typography
           variant="h6"
-          css={css`
-            flex-grow: 1;
-            color: inherit;
-            text-decoration: none;
-          `}
+          css={{
+            flexGrow: 1,
+            color: "inherit",
+            textDecoration: "none",
+          }}
           component={Link}
           to="/"
         >
@@ -55,9 +57,9 @@ const Header = memo(function Header(props) {
           </IconButton>
         </Tooltip>
         <Divider
-          css={css`
-            margin: 0 0.25rem;
-          `}
+          css={{
+            margin: "0 0.25rem",
+          }}
           orientation="vertical"
           flexItem
         />
