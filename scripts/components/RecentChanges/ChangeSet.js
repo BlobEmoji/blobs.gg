@@ -83,7 +83,6 @@ function ChangeSet({ changeSet }) {
         {hasMore && (
           <Accordion>
             <StyledAccordionSummary
-              css={accordionSummaryStyle}
               expandIcon={<ExpandMoreIcon />}
               aria-controls="Panel Controls"
             >
