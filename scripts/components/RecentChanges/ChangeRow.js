@@ -1,40 +1,40 @@
 import PropTypes from "prop-types";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
-import makeStyles from "@mui/styles/makeStyles";
 import Tooltip from "@mui/material/Tooltip";
+import { css } from "@emotion/react";
 
-const useStyles = makeStyles({
-  iconContainer: {
-    margin: "0.5rem",
-  },
-  text: {
-    padding: "0.25rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  to: {
-    padding: "0.25rem",
-  },
-  rowDiv: {
-    display: "flex",
-    alignItems: "center",
-    fontSize: "0.875rem",
-  },
-  eventDiv: {
-    display: "flex",
-    alignItems: "center",
-    minWidth: "7.1rem",
-  },
-});
+const rowDivStytle = css`
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+`;
+
+const eventDivStytle = css`
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+`;
+
+const iconContainerStyle = css`
+  margin: 0.5rem;
+`;
+
+const toStyle = css`
+  padding: 0.25rem;
+`;
+
+const textStyle = css`
+  padding: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
-  const classes = useStyles();
-
   return (
-    <div className={classes.rowDiv}>
-      <div className={classes.eventDiv}>
-        <div className={classes.iconContainer}>
+    <div css={rowDivStytle}>
+      <div css={eventDivStytle}>
+        <div css={iconContainerStyle}>
           <Tooltip
             title={getDateTimeFormatter().format(new Date(changedAt))}
             arrow
@@ -46,21 +46,21 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
       </div>
       <Emoji
         baseSize={32}
-        containerClassName={classes.iconContainer}
+        externalContainerStyle={iconContainerStyle}
         {...emoji}
       />
       {afterEmoji ? (
         <>
-          <div className={classes.to}>to</div>
+          <div css={toStyle}>to</div>
           <Emoji
             baseSize={32}
-            containerClassName={classes.iconContainer}
+            externalContainerStyle={iconContainerStyle}
             {...afterEmoji}
           />
-          <div className={classes.text}>{afterEmoji.name}</div>
+          <div css={textStyle}>{afterEmoji.name}</div>
         </>
       ) : (
-        <div className={classes.text}>{emoji.name}</div>
+        <div css={textStyle}>{emoji.name}</div>
       )}
     </div>
   );

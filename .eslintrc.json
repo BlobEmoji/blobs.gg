@@ -72,6 +72,6 @@
         "react/prop-types": "warn",
         "react/jsx-no-target-blank": ["warn", { "allowReferrer": true }],
         "react/no-children-prop": "off",
-        "@emotion/syntax-preference": ["error", "string"]
+        "@emotion/syntax-preference": ["error", "object"]
     }
 }

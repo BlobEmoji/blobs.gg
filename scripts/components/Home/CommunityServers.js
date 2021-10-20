@@ -6,6 +6,14 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
 import Box from "@mui/material/Box";
+import { css } from "@emotion/react";
+
+const inlineIconStyle = (theme) => css`
+  height: 0.8em;
+  width: auto;
+  margin: 0 0.25em;
+  filter: ${theme.palette.mode === "light" && "invert(1)"};
+`;
 
 class CommunityServers extends PureComponent {
   constructor(props) {
@@ -38,7 +46,7 @@ class CommunityServers extends PureComponent {
   }
 
   render() {
-    const { classes, emojis, waiting } = this.props;
+    const { emojis, waiting } = this.props;
     const { shuffledGuilds } = this.state;
     return (
       <>
@@ -56,7 +64,7 @@ class CommunityServers extends PureComponent {
             In order to use custom emoji in other Discord Servers you need an
             active
             <img
-              className={classes.inlineIcon}
+              css={inlineIconStyle}
               src={nitro}
               alt="Discord Nitro icon"
               height={11}
@@ -81,7 +89,6 @@ class CommunityServers extends PureComponent {
 CommunityServers.propTypes = {
   emojis: PropTypes.object.isRequired,
   waiting: PropTypes.bool.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
 export default CommunityServers;

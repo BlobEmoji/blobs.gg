@@ -15,7 +15,7 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
     const simple = Math.random() > 0.8;
 
     return (
-      <Box sx={{ display: "flex", alignItems: "center", key: { index } }}>
+      <Box sx={{ display: "flex", alignItems: "center" }} key={index}>
         <Box sx={{ display: "flex", alignItems: "center", minWidth: "7.1rem" }}>
           <Skeleton
             sx={{ margin: "0.5rem" }}
