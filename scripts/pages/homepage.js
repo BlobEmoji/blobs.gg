@@ -6,34 +6,20 @@ import { calculateEmojiCount, formatEmojiCount, log } from "../utils";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Search from "../components/Home/Search";
-import makeStyles from "@mui/styles/makeStyles";
 import Link from "@mui/material/Link";
 
 const INITIAL_EMOJI_COUNT = 4800;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
 
-const useStyles = makeStyles((theme) => ({
-  overHeader: {
-    textAlign: "center",
-    margin: "2em 0 0.125em 0",
-  },
-  subHeader: {
-    textAlign: "center",
-    margin: "0 0 2em 0",
-  },
-  licenseContainer: {
-    margin: "2rem 0",
-  },
-  inlineIcon: {
-    height: "0.8em",
-    width: "auto",
-    margin: "0 0.25em",
-    filter: theme.palette.mode === "light" && "invert(1)",
-  },
-  bottomMargin: {
-    paddingBottom: "24px",
-  },
-}));
+const overHeaderStyle = {
+  textAlign: "center",
+  margin: "2em 0 0.125em 0",
+};
+
+const subHeaderStyle = {
+  textAlign: "center",
+  marginBottom: "2em",
+};
 
 function Homepage() {
   const [apiData, setApiData] = useState({});
@@ -77,16 +63,15 @@ function Homepage() {
     setWaiting(false);
   }, []);
 
-  const classes = useStyles();
   const officialEmojis = emojis.groups.blobs;
   const communityEmojis = emojis.groups["community-blobs"];
 
   return (
-    <Container className={classes.bottomMargin} maxWidth="md">
-      <Typography variant="h5" className={classes.overHeader}>
+    <Container css={{ marginBottom: 24 }} maxWidth="md">
+      <Typography variant="h5" css={overHeaderStyle}>
         {formattedCount} fun and playful Blob Emoji for Discord
       </Typography>
-      <Typography className={classes.subHeader}>
+      <Typography css={subHeaderStyle}>
         Created by the Blob Emoji community.&nbsp;
         <Link
           underline="hover"
@@ -102,11 +87,7 @@ function Homepage() {
         emojis={officialEmojis}
         communityRender={communityRender}
       />
-      <CommunityServers
-        emojis={communityEmojis}
-        waiting={waiting}
-        classes={classes}
-      />
+      <CommunityServers emojis={communityEmojis} waiting={waiting} />
     </Container>
   );
 }

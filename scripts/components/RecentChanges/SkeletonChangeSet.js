@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,18 +14,20 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
     const simple = Math.random() > 0.8;
 
     return (
-      <Box sx={{ display: "flex", alignItems: "center", key: { index } }}>
-        <Box sx={{ display: "flex", alignItems: "center", minWidth: "7.1rem" }}>
+      <div css={{ display: "flex", alignItems: "center" }} key={index}>
+        <div
+          css={{ display: "flex", alignItems: "center", minWidth: "7.1rem" }}
+        >
           <Skeleton
-            sx={{ margin: "0.5rem" }}
+            css={{ margin: "0.5rem" }}
             variant="circular"
             width={35}
             height={35}
           />
-          <Skeleton sx={{ margin: "0.5rem" }} variant="text" width={50} />
-        </Box>
+          <Skeleton css={{ margin: "0.5rem" }} variant="text" width={50} />
+        </div>
         <Skeleton
-          sx={{ margin: "0.5rem" }}
+          css={{ margin: "0.5rem" }}
           variant="rectangular"
           width={32}
           height={32}
@@ -34,20 +35,20 @@ const SkeletonChangeSet = memo(function SkeletonChangeSet() {
         {simple ? (
           <>
             <Skeleton variant="text" width={20} />
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <div css={{ display: "flex", alignItems: "center" }}>
               <Skeleton
-                sx={{ margin: "0.5rem" }}
+                css={{ margin: "0.5rem" }}
                 variant="rectangular"
                 width={32}
                 height={32}
               />
               <Skeleton variant="text" width={80} />
-            </Box>
+            </div>
           </>
         ) : (
           <Skeleton variant="text" width={80} />
         )}
-      </Box>
+      </div>
     );
   });
 

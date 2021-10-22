@@ -18,7 +18,7 @@ function SkeletonApprovedSubmissions() {
           width={32}
           height={32}
           key={index}
-          sx={{ display: "inline-block", marginRight: 1 }}
+          css={{ display: "inline-block", marginRight: 1 }}
         />
       ))}
     </TableCell>

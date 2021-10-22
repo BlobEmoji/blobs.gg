@@ -1,40 +1,40 @@
 import PropTypes from "prop-types";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
-import makeStyles from "@mui/styles/makeStyles";
 import Tooltip from "@mui/material/Tooltip";
+import styled from "@emotion/styled";
 
-const useStyles = makeStyles({
-  iconContainer: {
-    margin: "0.5rem",
-  },
-  text: {
-    padding: "0.25rem",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  to: {
-    padding: "0.25rem",
-  },
-  rowDiv: {
-    display: "flex",
-    alignItems: "center",
-    fontSize: "0.875rem",
-  },
-  eventDiv: {
-    display: "flex",
-    alignItems: "center",
-    minWidth: "7.1rem",
-  },
+const RowDiv = styled.div({
+  display: "flex",
+  alignItems: "center",
+  fontSize: "0.875rem",
+});
+
+const EventDiv = styled.div({
+  display: "flex",
+  alignItems: "center",
+  minWidth: "7.1rem",
+});
+
+const iconContainerStyle = {
+  margin: "0.5rem",
+};
+
+const ToDiv = styled.div({
+  padding: "0.25rem",
+});
+
+const TextDiv = styled.div({
+  padding: "0.25rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
-  const classes = useStyles();
-
   return (
-    <div className={classes.rowDiv}>
-      <div className={classes.eventDiv}>
-        <div className={classes.iconContainer}>
+    <RowDiv>
+      <EventDiv>
+        <div css={iconContainerStyle}>
           <Tooltip
             title={getDateTimeFormatter().format(new Date(changedAt))}
             arrow
@@ -43,26 +43,26 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
           </Tooltip>
         </div>
         <span>{`${titleCase(eventName)}d`}</span>
-      </div>
+      </EventDiv>
       <Emoji
         baseSize={32}
-        containerClassName={classes.iconContainer}
+        externalContainerStyle={iconContainerStyle}
         {...emoji}
       />
       {afterEmoji ? (
         <>
-          <div className={classes.to}>to</div>
+          <ToDiv>to</ToDiv>
           <Emoji
             baseSize={32}
-            containerClassName={classes.iconContainer}
+            externalContainerStyle={iconContainerStyle}
             {...afterEmoji}
           />
-          <div className={classes.text}>{afterEmoji.name}</div>
+          <TextDiv>{afterEmoji.name}</TextDiv>
         </>
       ) : (
-        <div className={classes.text}>{emoji.name}</div>
+        <TextDiv>{emoji.name}</TextDiv>
       )}
-    </div>
+    </RowDiv>
   );
 }
 

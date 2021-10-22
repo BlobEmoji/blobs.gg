@@ -11,13 +11,14 @@
     "analyzer": "npm run -s analyzer-build && node analyzer.js && parcel serve parcel-bundle-reports/filtered.html --open"
   },
   "dependencies": {
+    "@babel/core": "^7.15.8",
+    "@emotion/babel-plugin": "^11.3.0",
+    "@emotion/eslint-plugin": "^11.5.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fontsource/roboto": "^4.5.1",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
-    "@mui/styles": "^5.0.1",
-    "clsx": "^1.1.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",

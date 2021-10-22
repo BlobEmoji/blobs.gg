@@ -2,7 +2,6 @@ import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
 import GuildsWrapper from "./Guilds";
 
 class OfficialServers extends PureComponent {
@@ -17,7 +16,7 @@ class OfficialServers extends PureComponent {
           skeletonCount={6}
           communityRender={communityRender}
         />
-        <Box sx={{ margin: "2rem 0" }}>
+        <div css={{ margin: "2rem 0" }}>
           <Typography variant="body2">
             All blobs that are uploaded to official Blob Emoji servers are
             licensed under the{" "}
@@ -35,7 +34,7 @@ class OfficialServers extends PureComponent {
             <Link href="https://files.lostluma.dev/blobs.zip">here</Link>. Make
             sure to follow the license.
           </Typography>
-        </Box>
+        </div>
       </>
     );
   }

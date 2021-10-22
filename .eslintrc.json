@@ -5,6 +5,7 @@
         "plugin:react/jsx-runtime",
         "plugin:jsx-a11y/recommended"
     ],
+    "plugins": ["@emotion"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -70,6 +71,7 @@
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "warn",
         "react/jsx-no-target-blank": ["warn", { "allowReferrer": true }],
-        "react/no-children-prop": "off"
+        "react/no-children-prop": "off",
+        "@emotion/syntax-preference": ["error", "object"]
     }
 }

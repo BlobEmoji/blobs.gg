@@ -6,23 +6,23 @@ import Skeleton from "@mui/material/Skeleton";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
+import styled from "@emotion/styled";
 
 export const SkeletonEmojiRow = memo(function SkeletonEmojiRow() {
+  const SkeletonEmojiRowContainer = styled.div({
+    display: "grid",
+    gridTemplateColumns: "repeat(7, 1fr)",
+    margin: "0 0.3rem",
+    gap: "0.6rem 0.3rem",
+    justifyItems: "center",
+  });
+
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(7, 1fr)",
-        margin: "0 0.3rem",
-        gap: "0.6rem 0.3rem",
-        justifyItems: "center",
-      }}
-    >
+    <SkeletonEmojiRowContainer>
       {Array.from({ length: 7 }, (_, index) => (
         <Skeleton key={index} variant="circular" width={32} height={32} />
       ))}
-    </Box>
+    </SkeletonEmojiRowContainer>
   );
 });
 

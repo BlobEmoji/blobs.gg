@@ -2,45 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import makeStyles from "@mui/styles/makeStyles";
 import Emoji from "../Emoji";
 import Guilds from "./Guilds";
 import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Pagination from "@mui/material/Pagination";
 
-const useStyles = makeStyles({
-  noResults: {
-    margin: "3rem 0",
-    textAlign: "center",
-  },
-  guilds: {
-    marginTop: "1rem",
-  },
-  paginationNav: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "1rem",
-  },
-});
-
 function insensitiveIncludes(haystack, needle) {
   return haystack.toLowerCase().includes(needle.toLowerCase());
 }
 
 function Contents(props) {
-  const classes = useStyles();
   if (props.hasResults) {
     return (
       <>
         <Guilds
           guilds={props.filteredGuilds}
-          className={classes.guilds}
+          css={{ marginTop: "1rem" }}
           skeletonCount={0}
         />
-        <Box
-          sx={{
+        <div
+          css={{
             display: "grid",
             justifyContent: "space-between",
             gridTemplateColumns: "repeat(auto-fill, 96px)",
@@ -49,10 +31,14 @@ function Contents(props) {
           {props.filteredBlobs.map((blob) => (
             <Emoji key={blob.id} invite showGuild {...blob} enlarge />
           ))}
-        </Box>
+        </div>
         {props.totalPages > 1 && (
           <Pagination
-            className={classes.paginationNav}
+            css={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
             count={props.totalPages}
             page={props.page}
             onChange={props.onPageChange}
@@ -67,7 +53,12 @@ function Contents(props) {
   }
 
   return (
-    <div className={classes.noResults}>
+    <div
+      css={{
+        margin: "3rem 0",
+        textAlign: "center",
+      }}
+    >
       No results. {<Emoji baseSize={32} {...props.sadBlob} />}
     </div>
   );

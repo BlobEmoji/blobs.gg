@@ -7,7 +7,6 @@ import green from "@mui/material/colors/green";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import lightBlue from "@mui/material/colors/lightBlue";
 import BrushIcon from "@mui/icons-material/Brush";
-import makeStyles from "@mui/styles/makeStyles";
 import Tooltip from "@mui/material/Tooltip";
 
 export function GuildAvatar(props) {
@@ -29,41 +28,62 @@ GuildAvatar.propTypes = {
   src: PropTypes.object.isRequired,
 };
 
-const useStyles = makeStyles({
-  delete: {
-    color: red[500],
-    verticalAlign: "middle",
-  },
-  create: {
-    color: green[500],
-    verticalAlign: "middle",
-  },
-  rename: {
-    color: lightBlue[500],
-    verticalAlign: "middle",
-  },
-});
+const changelogAvatarStyle = {
+  verticalAlign: "middle",
+};
 
 export function RemoveAvatar() {
-  const classes = useStyles();
-
-  return <DeleteIcon fontSize="large" className={classes.delete} />;
+  return (
+    <DeleteIcon
+      fontSize="large"
+      css={[
+        {
+          color: red[500],
+        },
+        changelogAvatarStyle,
+      ]}
+    />
+  );
 }
 
 export function CreateAvatar() {
-  const classes = useStyles();
-
-  return <AddIcon fontSize="large" className={classes.create} />;
+  return (
+    <AddIcon
+      fontSize="large"
+      css={[
+        {
+          color: green[500],
+        },
+        changelogAvatarStyle,
+      ]}
+    />
+  );
 }
 
 export function RenameAvatar() {
-  const classes = useStyles();
-
-  return <EditOutlinedIcon fontSize="large" className={classes.rename} />;
+  return (
+    <EditOutlinedIcon
+      fontSize="large"
+      css={[
+        {
+          color: lightBlue[500],
+        },
+        changelogAvatarStyle,
+      ]}
+    />
+  );
 }
 
 export function UpdateAvatar() {
-  const classes = useStyles();
-
-  return <BrushIcon fontSize="large" className={classes.rename} />;
+  return (
+    <BrushIcon
+      fontSize="large"
+      css={[
+        {
+          color: lightBlue[500],
+        },
+        changelogAvatarStyle,
+      ]}
+    />
+  );
 }
