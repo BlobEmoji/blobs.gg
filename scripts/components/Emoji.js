@@ -66,7 +66,7 @@ function Emoji(props) {
       ]}
     >
       <ConditionalLink link={invite} wrapper={wrapper}>
-        <Tooltip title={!disableTooltip && alt} arrow>
+        <Tooltip title={disableTooltip ? "" : alt} arrow>
           <Avatar
             alt={name}
             css={{
