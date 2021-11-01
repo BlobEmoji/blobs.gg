@@ -17,7 +17,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fontsource/roboto": "^4.5.1",
-    "@mui/icons-material": "^5.0.4",
+    "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.4",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
