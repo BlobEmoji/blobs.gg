@@ -10,10 +10,11 @@
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-        }
+        },
+        "ecmaVersion": 2022
     },
     "env": {
-        "es2022": true,
+        "es2021": true,
         "node": true,
         "browser": true
     },
@@ -71,7 +72,6 @@
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "warn",
         "react/jsx-no-target-blank": ["warn", { "allowReferrer": true }],
-        "react/no-children-prop": "off",
-        "@emotion/syntax-preference": ["error", "object"]
+        "react/no-children-prop": "off"
     }
 }
