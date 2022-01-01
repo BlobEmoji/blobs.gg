@@ -11,20 +11,20 @@
     "analyzer": "npm run -s analyzer-build && node analyzer.js && parcel serve parcel-bundle-reports/filtered.html --open"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
-    "@emotion/babel-plugin": "^11.3.0",
-    "@emotion/eslint-plugin": "^11.5.0",
-    "@emotion/react": "^11.6.0",
+    "@babel/core": "^7.16.7",
+    "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/eslint-plugin": "^11.7.0",
+    "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto": "^4.5.1",
-    "@mui/icons-material": "^5.1.0",
-    "@mui/material": "^5.1.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.6",
     "lodash.clonedeep": "^4.5.0",
     "lodash.debounce": "^4.0.8",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-intersection-observer": "^8.32.2",
+    "react-intersection-observer": "^8.33.1",
     "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
@@ -34,12 +34,12 @@
     "@parcel/transformer-svg-react": "^2.0.1",
     "@parcel/transformer-xml": "^2.0.1",
     "@welldone-software/why-did-you-render": "^6.2.3",
-    "eslint": "^8.2.0",
-    "eslint-plugin-jsdoc": "^37.0.3",
+    "eslint": "^8.6.0",
+    "eslint-plugin-jsdoc": "^37.5.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react": "^7.28.0",
     "parcel": "^2.0.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.5.1"
   },
   "browserslist": "defaults and supports es6 and not IE 11"
 }
