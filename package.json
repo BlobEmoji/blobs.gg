@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@parcel/config-default": "^2.0.0",
-    "@parcel/packager-xml": "^2.0.0",
+    "@parcel/packager-xml": "^2.0.1",
     "@parcel/reporter-bundle-analyzer": "^2.0.0",
     "@parcel/transformer-svg-react": "^2.0.0",
     "@parcel/transformer-xml": "^2.0.0",
