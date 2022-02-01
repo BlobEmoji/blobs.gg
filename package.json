@@ -35,7 +35,7 @@
     "@parcel/transformer-xml": "^2.0.1",
     "@welldone-software/why-did-you-render": "^6.2.3",
     "eslint": "^8.8.0",
-    "eslint-plugin-jsdoc": "^37.5.0",
+    "eslint-plugin-jsdoc": "^37.7.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "parcel": "^2.0.1",
