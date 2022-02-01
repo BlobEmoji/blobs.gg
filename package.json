@@ -28,7 +28,7 @@
     "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.0.1",
+    "@parcel/config-default": "^2.2.1",
     "@parcel/packager-xml": "^2.2.1",
     "@parcel/reporter-bundle-analyzer": "^2.0.1",
     "@parcel/transformer-svg-react": "^2.0.1",
