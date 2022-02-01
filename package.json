@@ -38,7 +38,7 @@
     "eslint-plugin-jsdoc": "^37.7.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
-    "parcel": "^2.0.1",
+    "parcel": "^2.2.1",
     "prettier": "^2.5.1"
   },
   "browserslist": "defaults and supports es6 and not IE 11"
