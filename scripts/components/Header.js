@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ListIcon from "@mui/icons-material/List";
 import HomeIcon from "@mui/icons-material/Home";
+import PaletteIcon from "@mui/icons-material/Palette";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import PropTypes from "prop-types";
@@ -54,6 +55,11 @@ const Header = memo(function Header(props) {
         <Tooltip title="Emoji Changelog" arrow>
           <IconButton component={Link} to="/changes">
             <ListIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Blob Community" arrow>
+          <IconButton component={Link} to="/community">
+            <PaletteIcon />
           </IconButton>
         </Tooltip>
         <Divider
