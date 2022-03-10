@@ -11,6 +11,7 @@ import BlobBanSpace from "../../../assets/communityArt/223161712092774402_blob_b
 import BlobNomTower from "../../../assets/communityArt/157185490204884992_blobnomtower.png";
 import BlobOnHorse from "../../../assets/communityArt/448512617913253899_cowblobhorse.png";
 import BBS from "../../../assets/communityArt/123879073972748290_bbs.png";
+import { shuffleArray } from "../../utils";
 
 const itemCss = {
   borderBottomRadius: 4,
@@ -131,10 +132,11 @@ const Label = styled(Paper)(({ theme }) => ({
 }));
 
 function CommunityWrapper() {
+  const shuffledArray = shuffleArray(communityData);
   return (
     <>
       {
-        communityData.map((item, index) => (
+        shuffledArray.map((item, index) => (
           <div key={index}>
             <Label>{`${item.author.name}#${item.author.discriminator}`}</Label>
             {item.type === "image" ? (
