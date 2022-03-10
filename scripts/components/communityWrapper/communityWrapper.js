@@ -8,6 +8,9 @@ import PizzaServingBlob from "../../../assets/communityArt/152172291122266112_pi
 import PlantBlob from "../../../assets/communityArt/152172291122266112_plant_blob.png";
 import LinkBlob from "../../../assets/communityArt/415288962387542046_linkholdupblobhug.png";
 import BlobBanSpace from "../../../assets/communityArt/223161712092774402_blob_ban_space.mp4";
+import BlobNomTower from "../../../assets/communityArt/157185490204884992_blobnomtower.png";
+import BlobOnHorse from "../../../assets/communityArt/448512617913253899_cowblobhorse.png";
+import BBS from "../../../assets/communityArt/123879073972748290_bbs.png";
 
 const itemCss = {
   borderBottomRadius: 4,
@@ -87,6 +90,33 @@ const communityData = [
       id: "223161712092774402"
     },
     type: "video"
+  },
+  {
+    image: BlobNomTower,
+    author: {
+      name: "CrashGordon94",
+      discriminator: "1188",
+      id: "157185490204884992"
+    },
+    type: "image"
+  },
+  {
+    image: BlobOnHorse,
+    author: {
+      name: "DEspite",
+      discriminator: "5714",
+      id: "448512617913253899"
+    },
+    type: "image"
+  },
+  {
+    image: BBS,
+    author: {
+      name: "Lyrus",
+      discriminator: "0001",
+      id: "123879073972748290"
+    },
+    type: "image"
   }
 ];
 
