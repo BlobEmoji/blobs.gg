@@ -13,7 +13,8 @@ function Community() {
     <Container css={{ paddingBottom: 24 }} maxWidth="md">
       <Typography variant="h4">Blob Community</Typography>
       <Typography css={{ margin: "0.5rem 0 1rem 0" }} variant="body1">
-        This page shows all the projects that have been created on the Blob Network.
+        This page shows all the projects that have been created on the Blob
+        Network.
       </Typography>
       <Masonry columns={columns} spacing={3} css={{ minHeight: 900 }}>
         <CommunityWrapper />

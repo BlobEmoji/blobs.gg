@@ -7,7 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ListIcon from "@mui/icons-material/List";
 import HomeIcon from "@mui/icons-material/Home";
-import PaletteIcon from '@mui/icons-material/Palette';
+import PaletteIcon from "@mui/icons-material/Palette";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import PropTypes from "prop-types";
