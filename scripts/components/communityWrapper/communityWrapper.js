@@ -1,5 +1,13 @@
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import BlobAngel from "../../../assets/communityArt/167557771724587008_blob_angel.png";
+import UnderWater from "../../../assets/communityArt/167557771724587008_under_water.png";
+import BlobSnowFight from "../../../assets/communityArt/168141641973104641_blobsnowfight.gif";
+import LinkHoldUpBlobHug from "../../../assets/communityArt/415288962387542046_linkholdupblobhug.png";
+import PizzaServingBlob from "../../../assets/communityArt/152172291122266112_pizza_serving_blob.png"
+import PlantBlob from "../../../assets/communityArt/152172291122266112_plant_blob.png";
+import LinkBlob from "../../../assets/communityArt/415288962387542046_linkholdupblobhug.png";
+import BlobBanSpace from "../../../assets/communityArt/223161712092774402_blob_ban_space.mp4";
 
 const itemCss = {
   borderBottomRadius: 4,
@@ -9,7 +17,7 @@ const itemCss = {
 
 const communityData = [
   {
-    image: "https://cdn.discordapp.com/attachments/900292457370095656/900292521496821820/unknown.png",
+    image: BlobAngel,
     author: {
       name: "Itaywex",
       discriminator: "0001",
@@ -18,7 +26,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://cdn.discordapp.com/attachments/900292457370095656/905023050246942720/image0.png",
+    image: UnderWater,
     author: {
       name: "Itaywex",
       discriminator: "0001",
@@ -27,7 +35,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://cdn.discordapp.com/attachments/900292457370095656/913399559676370944/blobsnowfight.gif",
+    image: BlobSnowFight,
     author: {
       name: "Super from NonDescript™",
       discriminator: "5419",
@@ -36,7 +44,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://cdn.discordapp.com/attachments/900292457370095656/911560865176752138/linkholdupblobhug.png",
+    image: LinkHoldUpBlobHug,
     author: {
       name: "Nebuleon",
       discriminator: "7553",
@@ -45,7 +53,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://cdn.discordapp.com/attachments/900292457370095656/910468779283214336/unknown-28.png",
+    image: PizzaServingBlob,
     author: {
       name: "Sei",
       discriminator: "0006",
@@ -54,7 +62,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://cdn.discordapp.com/attachments/289482554250100736/944783079766118420/unknown.png",
+    image: PlantBlob,
     author: {
       name: "Sei",
       discriminator: "0006",
@@ -63,7 +71,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://media.discordapp.net/attachments/427569822075846658/951048024933670912/blobs.png",
+    image: LinkBlob,
     author: {
       name: "Itaywex",
       discriminator: "0001",
@@ -72,7 +80,7 @@ const communityData = [
     type: "image"
   },
   {
-    image: "https://i.imgur.com/V4TVpbC.mp4",
+    image: BlobBanSpace,
     author: {
       name: "StahlFerro",
       discriminator: "0055",

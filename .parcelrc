@@ -6,7 +6,9 @@
       "@parcel/transformer-babel",
       "@parcel/transformer-js",
       "@parcel/transformer-react-refresh-wrap"
-    ]
+    ],
+    "*.gif": ["@parcel/transformer-raw"],
+    "*.mp4": ["@parcel/transformer-raw"]
   },
   "optimizers": {
     "react:*.{js,mjs,cjs}": ["@parcel/optimizer-terser"]
