@@ -5,6 +5,7 @@ import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
 
 const overHeaderStyle = {
   textAlign: "center",
@@ -35,11 +36,11 @@ const heresyCharacters = {
   C: ["Ç"],
 };
 
-function PoliceEmoji() {
+function MoneyBagEmoji() {
   return (
     <Emoji
-      id="530278197305278495"
-      name="BlobPolice"
+      id="959232720314200134"
+      name="googlemoneybag"
       animated={false}
       externalContainerStyle={{
         margin: "0 0.25rem",
@@ -55,9 +56,6 @@ function ClipboardBlobEmoji() {
       id="696784715428004001"
       name="blobclipboard"
       animated={false}
-      externalContainerStyle={{
-        margin: "0 0.25rem",
-      }}
       disableTooltip
     />
   );
@@ -94,9 +92,9 @@ function AprilTranslate() {
   return (
     <Container css={{ paddingBottom: 24 }} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
-        <PoliceEmoji />
-        We are currently running Downsizing 2022!
-        <PoliceEmoji />
+        <MoneyBagEmoji />
+        Meet the limited budget with our Message Cheapifier!
+        <MoneyBagEmoji />
       </Typography>
       <Typography css={subHeaderStyle}>
         Unfortunately, we couldn't afford to use Cs, Es, Gs and Ws on this
@@ -107,38 +105,40 @@ function AprilTranslate() {
         still available ones!
       </Typography>
       <TextField
-        name="Type in your heresy blob text"
+        name="Type in the message to be cheapified"
         type="text"
-        placeholder="Type in your heresy blob text"
+        placeholder="Type in the message to be cheapified"
         value={value}
         onChange={translateText}
         fullWidth
         variant="filled"
         color="secondary"
         inputProps={{
-          "aria-label": "Type in your heresy blob text",
+          "aria-label": "Type in the message to be cheapified",
         }}
       />
       <Divider css={dividerStyle} />
       <TextField
-        name="Your translated heresy blob text"
+        name="Your cheapified message"
         type="text"
-        placeholder="Your translated heresy blob text"
+        placeholder="Your cheapified message"
         value={heresyText}
         fullWidth
         variant="filled"
         color="secondary"
         inputProps={{
-          "aria-label": "Your translated heresy blob text",
+          "aria-label": "Your cheapified message",
         }}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end" onClick={clipboard}>
-              <ClipboardBlobEmoji />
+            <InputAdornment position="end">
+              <IconButton onClick={clipboard}>
+                <ClipboardBlobEmoji />
+              </IconButton>
             </InputAdornment>
           ),
+          disableUnderline: true,
         }}
-        disabled
       />
     </Container>
   );
