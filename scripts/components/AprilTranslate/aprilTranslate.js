@@ -99,10 +99,12 @@ function AprilTranslate() {
         <PoliceEmoji />
       </Typography>
       <Typography css={subHeaderStyle}>
-        Unfortunately, we couldn't afford to use Cs, Es, Gs and Ws on this server anymore.
+        Unfortunately, we couldn't afford to use Cs, Es, Gs and Ws on this
+        server anymore.
       </Typography>
       <Typography css={subSubHeaderStyle}>
-        As such, we have this service for replacing the scarce letters with still available ones!
+        As such, we have this service for replacing the scarce letters with
+        still available ones!
       </Typography>
       <TextField
         name="Type in your heresy blob text"
