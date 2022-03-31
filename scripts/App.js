@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import grey from "@mui/material/colors/grey";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SettingsDialog from "./components/SettingsDialog";
+import AprilTranslate from "./components/AprilTranslate/aprilTranslate";
 
 function getConfig() {
   let prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
@@ -178,6 +179,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/changes" element={<Changepage />} />
             <Route path="/drawfest" element={<Drawfest />} />
+            <Route path="/aprilTranslate" element={<AprilTranslate />} />
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Routes>
           <SettingsDialog
