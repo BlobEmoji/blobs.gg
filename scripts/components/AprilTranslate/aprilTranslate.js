@@ -35,11 +35,11 @@ const heresyCharacters = {
   C: ["Ç"],
 };
 
-function BolbEmoji() {
+function PoliceEmoji() {
   return (
     <Emoji
-      id="453933426555486208"
-      name="bolb"
+      id="530278197305278495"
+      name="BlobPolice"
       animated={false}
       externalContainerStyle={{
         margin: "0 0.25rem",
@@ -94,16 +94,15 @@ function AprilTranslate() {
   return (
     <Container css={{ paddingBottom: 24 }} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
-        <BolbEmoji />
-        We are currently running April Fools 2022!
-        <BolbEmoji />
+        <PoliceEmoji />
+        We are currently running Downsizing 2022!
+        <PoliceEmoji />
       </Typography>
       <Typography css={subHeaderStyle}>
-        As part of this event, some characters are just too expensive to render.
+        Unfortunately, we couldn't afford to use Cs, Es, Gs and Ws on this server anymore.
       </Typography>
       <Typography css={subSubHeaderStyle}>
-        As such, we are running a translation service to translate the 💰
-        characters into more affordable ones
+        As such, we have this service for replacing the scarce letters with still available ones!
       </Typography>
       <TextField
         name="Type in your heresy blob text"
