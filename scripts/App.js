@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import grey from "@mui/material/colors/grey";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SettingsDialog from "./components/SettingsDialog";
+import MessageCheapifier from "./components/MessageCheapifier/MessageCheapifier";
 
 function getConfig() {
   let prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)", {
@@ -178,6 +179,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/changes" element={<Changepage />} />
             <Route path="/drawfest" element={<Drawfest />} />
+            <Route path="/message_cheapifier" element={<MessageCheapifier />} />
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Routes>
           <SettingsDialog
