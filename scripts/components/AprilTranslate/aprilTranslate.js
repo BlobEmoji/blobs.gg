@@ -18,22 +18,22 @@ const subHeaderStyle = {
 const subSubHeaderStyle = {
   textAlign: "center",
   marginBottom: "2em",
-}
+};
 
 const dividerStyle = {
   margin: "1em 0",
-}
+};
 
 const heresyCharacters = {
   e: ["é", "è", "ê", "ë"],
   g: ["ğ", "ĝ", "ġ", "ģ"],
   w: ["ŵ"],
-  c : ["ç"],
+  c: ["ç"],
   E: ["É", "È", "Ê", "Ë"],
   G: ["Ğ", "Ĝ", "Ġ", "Ģ"],
   W: ["Ŵ"],
   C: ["Ç"],
-}
+};
 
 function BolbEmoji() {
   return (
@@ -60,7 +60,7 @@ function ClipboardBlobEmoji() {
       }}
       disableTooltip
     />
-  )
+  );
 }
 
 function AprilTranslate() {
@@ -72,7 +72,10 @@ function AprilTranslate() {
     let newText = "";
     for (const character of event.target.value) {
       if (Object.keys(heresyCharacters).includes(character)) {
-        newText += heresyCharacters[character][Math.floor(Math.random() * heresyCharacters[character].length)];
+        newText +=
+          heresyCharacters[character][
+            Math.floor(Math.random() * heresyCharacters[character].length)
+          ];
       } else {
         newText += character;
       }
@@ -81,26 +84,26 @@ function AprilTranslate() {
   };
 
   const clipboard = async () => {
-    try{
-      await navigator.clipboard.writeText(heresyText)
+    try {
+      await navigator.clipboard.writeText(heresyText);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   return (
     <Container css={{ paddingBottom: 24 }} maxWidth="md">
       <Typography variant="h5" css={overHeaderStyle}>
-        <BolbEmoji/>
+        <BolbEmoji />
         We are currently running April Fools 2022!
-        <BolbEmoji/>
+        <BolbEmoji />
       </Typography>
       <Typography css={subHeaderStyle}>
         As part of this event, some characters are just too expensive to render.
       </Typography>
       <Typography css={subSubHeaderStyle}>
-        As such, we are running a translation service to translate the 💰 characters
-        into more affordable ones
+        As such, we are running a translation service to translate the 💰
+        characters into more affordable ones
       </Typography>
       <TextField
         name="Type in your heresy blob text"
@@ -115,7 +118,7 @@ function AprilTranslate() {
           "aria-label": "Type in your heresy blob text",
         }}
       />
-      <Divider css={dividerStyle}/>
+      <Divider css={dividerStyle} />
       <TextField
         name="Your translated heresy blob text"
         type="text"
@@ -130,14 +133,14 @@ function AprilTranslate() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end" onClick={clipboard}>
-              <ClipboardBlobEmoji/>
+              <ClipboardBlobEmoji />
             </InputAdornment>
           ),
         }}
         disabled
       />
     </Container>
-  )
+  );
 }
 
 export default AprilTranslate;
