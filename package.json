@@ -43,20 +43,13 @@
   },
   "browserslist": {
     "production": [
-      ">0.5%",
-      "not dead",
-      "last 2 versions",
-      "Firefox ESR",
-      "not IE > 0",
-      "not IE_mob > 0",
-      "not bb > 0",
-      "not op_mob > 0",
-      "not op_mini all",
-      "not ios_saf < 13"
+      "defaults and supports es6-module",
+      "not ios_saf < 13",
+      "not op_mob > 0"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version"
+      "last 1 Chrome version",
+      "last 1 Firefox version"
     ]
   }
 }
