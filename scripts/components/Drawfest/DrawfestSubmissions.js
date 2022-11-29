@@ -11,20 +11,6 @@ import TableBody from "@mui/material/TableBody";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
-const mappings = {
-  0: "Coffee Nightmare",
-  1: "Cute Cheese",
-  2: "Chaos Duck",
-  3: "Cyberpunk Owl",
-  4: "Ring Collector",
-  5: "Turtle Chase",
-  6: "Angel Light",
-  7: "Potion Trouble",
-  8: "Suspicious Doll",
-  9: "Broken Dragon",
-  10: "Collage",
-};
-
 function DrawfestSubmissionsHead() {
   return (
     <TableHead>
