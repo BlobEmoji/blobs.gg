@@ -27,6 +27,9 @@ function ApprovedCell({ approvedSubmissions, promptData }) {
   return (
     <TableCell>
       {approvedSubmissions.map((submission) => {
+        function onClick() {
+          return window.open(submission.image_url, "_blank");
+        }
         return (
           <Tooltip
             title={promptData[submission.prompt_id]}
@@ -37,6 +40,7 @@ function ApprovedCell({ approvedSubmissions, promptData }) {
               label={submission.prompt_id + 1}
               css={{ marginRight: 1 }}
               clickable
+              onClick={onClick}
             />
           </Tooltip>
         );
