@@ -37,13 +37,13 @@ function DrawfestSubmissionsHead() {
   );
 }
 
-function ApprovedCell({ approvedSubmissions }) {
+function ApprovedCell({ approvedSubmissions, promptData }) {
   return (
     <TableCell>
       {approvedSubmissions.map((submission) => {
         return (
           <Tooltip
-            title={mappings[submission.prompt_id]}
+            title={promptData[submission.prompt_id]}
             key={submission.prompt_id}
             arrow
           >
@@ -66,9 +66,10 @@ ApprovedCell.propTypes = {
       image_url: PropTypes.string,
     })
   ).isRequired,
+  promptData: PropTypes.array.isRequired
 };
 
-function DrawfestSubmissionsBody({ submissions }) {
+function DrawfestSubmissionsBody({ submissions, promptData }) {
   return (
     <TableBody>
       {submissions.map((row) => (
@@ -81,7 +82,7 @@ function DrawfestSubmissionsBody({ submissions }) {
             />
           </TableCell>
           <TableCell>{`${row.username}#${row.discriminator}`}</TableCell>
-          <ApprovedCell approvedSubmissions={row.submissions} />
+          <ApprovedCell approvedSubmissions={row.submissions} promptData={promptData} />
         </TableRow>
       ))}
     </TableBody>
@@ -98,9 +99,10 @@ DrawfestSubmissionsBody.propTypes = {
       avatar: PropTypes.string,
     })
   ).isRequired,
+  promptData: PropTypes.array.isRequired
 };
 
-function DrawfestSubmissions({ submissions }) {
+function DrawfestSubmissions({ submissions, promptData }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="Drawfest Submissions">
@@ -108,7 +110,7 @@ function DrawfestSubmissions({ submissions }) {
         {submissions.length === 0 ? (
           <SkeletonSubmissions />
         ) : (
-          <DrawfestSubmissionsBody submissions={submissions} />
+          <DrawfestSubmissionsBody submissions={submissions} promptData={promptData} />
         )}
       </Table>
     </TableContainer>
@@ -117,6 +119,7 @@ function DrawfestSubmissions({ submissions }) {
 
 DrawfestSubmissions.propTypes = {
   submissions: PropTypes.array.isRequired,
+  promptData: PropTypes.array.isRequired,
 };
 
 export default DrawfestSubmissions;

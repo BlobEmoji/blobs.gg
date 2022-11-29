@@ -93,7 +93,7 @@ function DrawfestPage() {
       <Typography css={subHeaderStyle}>
         You may view how many approved submissions you have here.
       </Typography>
-      <DrawfestSubmissions submissions={apiData} />
+      <DrawfestSubmissions submissions={apiData} promptData={promptData} />
     </Container>
   );
 }
