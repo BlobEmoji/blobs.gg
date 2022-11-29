@@ -178,7 +178,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/changes" element={<Changepage />} />
-            <Route path="/drawfest" element={<Drawfest />} />
+            <Route path="/drawfest/:year" element={<Drawfest />} />
             <Route path="/message_cheapifier" element={<MessageCheapifier />} />
             <Route path="/*" element={<Navigate to="/" replace />} />
           </Routes>

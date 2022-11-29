@@ -42,8 +42,8 @@ function ApprovedCell({ approvedSubmissions }) {
     <TableCell>
       {approvedSubmissions.map((submission) => {
         return (
-          <Tooltip title={mappings[submission]} key={submission} arrow>
-            <Chip label={submission + 1} css={{ marginRight: 1 }} clickable />
+          <Tooltip title={mappings[submission.prompt_id]} key={submission.prompt_id} arrow>
+            <Chip label={submission.prompt_id + 1} css={{ marginRight: 1 }} clickable />
           </Tooltip>
         );
       })}
@@ -52,7 +52,7 @@ function ApprovedCell({ approvedSubmissions }) {
 }
 
 ApprovedCell.propTypes = {
-  approvedSubmissions: PropTypes.arrayOf(PropTypes.number).isRequired,
+  approvedSubmissions: PropTypes.arrayOf(PropTypes.shape({ prompt_id: PropTypes.number, image_url: PropTypes.string })).isRequired,
 };
 
 function DrawfestSubmissionsBody({ submissions }) {
@@ -62,13 +62,13 @@ function DrawfestSubmissionsBody({ submissions }) {
         <TableRow key={row.id}>
           <TableCell>
             <Avatar
-              alt={row.name}
+              alt={row.username}
               src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.webp?size=64`}
               css={{ width: 64, height: 64 }}
             />
           </TableCell>
-          <TableCell>{`${row.name}#${row.discriminator}`}</TableCell>
-          <ApprovedCell approvedSubmissions={row.approved_submissions} />
+          <TableCell>{`${row.username}#${row.discriminator}`}</TableCell>
+          <ApprovedCell approvedSubmissions={row.submissions} />
         </TableRow>
       ))}
     </TableBody>
@@ -78,7 +78,7 @@ function DrawfestSubmissionsBody({ submissions }) {
 DrawfestSubmissionsBody.propTypes = {
   submissions: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
+      username: PropTypes.string,
       discriminator: PropTypes.string,
       approved_submissions: PropTypes.arrayOf(PropTypes.number),
       id: PropTypes.string,
