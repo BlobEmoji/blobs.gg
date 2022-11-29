@@ -57,12 +57,12 @@ function DrawfestPage() {
       return;
     }
     const fetchData = async () => {
+      setApiDataFetched(true);
       const resp = await fetch(
         DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "digest")
       );
       const data = await resp.json();
       setApiData(data);
-      setApiDataFetched(true);
     };
     fetchData();
   }, [apiData, apiDataFetched]);
@@ -73,12 +73,12 @@ function DrawfestPage() {
     }
 
     const fetchData = async () => {
+      setPromptDataFetched(true);
       const resp = await fetch(
         DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "prompts")
       );
       const data = await resp.json();
       setPromptData(data);
-      setPromptDataFetched(true);
     };
     fetchData();
   }, [promptData, promptDataFetched]);
