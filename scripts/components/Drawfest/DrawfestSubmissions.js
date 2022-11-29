@@ -56,7 +56,7 @@ ApprovedCell.propTypes = {
       image_url: PropTypes.string,
     })
   ).isRequired,
-  promptData: PropTypes.array.isRequired
+  promptData: PropTypes.array.isRequired,
 };
 
 function DrawfestSubmissionsBody({ submissions, promptData }) {
@@ -72,7 +72,10 @@ function DrawfestSubmissionsBody({ submissions, promptData }) {
             />
           </TableCell>
           <TableCell>{`${row.username}#${row.discriminator}`}</TableCell>
-          <ApprovedCell approvedSubmissions={row.submissions} promptData={promptData} />
+          <ApprovedCell
+            approvedSubmissions={row.submissions}
+            promptData={promptData}
+          />
         </TableRow>
       ))}
     </TableBody>
@@ -89,7 +92,7 @@ DrawfestSubmissionsBody.propTypes = {
       avatar: PropTypes.string,
     })
   ).isRequired,
-  promptData: PropTypes.array.isRequired
+  promptData: PropTypes.array.isRequired,
 };
 
 function DrawfestSubmissions({ submissions, promptData }) {
@@ -100,7 +103,10 @@ function DrawfestSubmissions({ submissions, promptData }) {
         {submissions.length === 0 ? (
           <SkeletonSubmissions />
         ) : (
-          <DrawfestSubmissionsBody submissions={submissions} promptData={promptData} />
+          <DrawfestSubmissionsBody
+            submissions={submissions}
+            promptData={promptData}
+          />
         )}
       </Table>
     </TableContainer>
