@@ -5,16 +5,17 @@ import DrawfestSubmissions from "../components/Drawfest/DrawfestSubmissions";
 import Emoji from "../components/Emoji";
 import { useParams } from "react-router-dom";
 
-const DRAWFEST_ENDPOINT = "https://api.blobs.gg/v1/events/drawfest/{year}/{type}";
+const DRAWFEST_ENDPOINT =
+  "https://api.blobs.gg/v1/events/drawfest/{year}/{type}";
 
 const overHeaderStyle = {
   textAlign: "center",
-  margin: "2em 0 0.125em 0"
+  margin: "2em 0 0.125em 0",
 };
 
 const subHeaderStyle = {
   textAlign: "center",
-  marginBottom: "2em"
+  marginBottom: "2em",
 };
 
 function PumpkinBlobEmoji() {
@@ -24,7 +25,7 @@ function PumpkinBlobEmoji() {
       name="ablobpumpkin"
       animated
       externalContainerStyle={{
-        margin: "0 0.25rem"
+        margin: "0 0.25rem",
       }}
       disableTooltip
     />
@@ -33,7 +34,13 @@ function PumpkinBlobEmoji() {
 
 function SantaBlobEmoji() {
   return (
-    <Emoji id="661861326888370186" name="blobsanta" externalContainerStyle={{ margin: "0 0.25rem" }} disableTooltip animated={false} />
+    <Emoji
+      id="661861326888370186"
+      name="blobsanta"
+      externalContainerStyle={{ margin: "0 0.25rem" }}
+      disableTooltip
+      animated={false}
+    />
   );
 }
 
@@ -50,7 +57,9 @@ function DrawfestPage() {
       return;
     }
     const fetchData = async () => {
-      const resp = await fetch(DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "digest"));
+      const resp = await fetch(
+        DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "digest")
+      );
       const data = await resp.json();
       setApiData(data);
       setApiDataFetched(true);
@@ -64,7 +73,9 @@ function DrawfestPage() {
     }
 
     const fetchData = async () => {
-      const resp = await fetch(DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "prompts"));
+      const resp = await fetch(
+        DRAWFEST_ENDPOINT.replace("{year}", year).replace("{type}", "prompts")
+      );
       const data = await resp.json();
       setPromptData(data);
       setPromptDataFetched(true);

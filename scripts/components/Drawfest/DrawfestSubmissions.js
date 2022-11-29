@@ -42,8 +42,16 @@ function ApprovedCell({ approvedSubmissions }) {
     <TableCell>
       {approvedSubmissions.map((submission) => {
         return (
-          <Tooltip title={mappings[submission.prompt_id]} key={submission.prompt_id} arrow>
-            <Chip label={submission.prompt_id + 1} css={{ marginRight: 1 }} clickable />
+          <Tooltip
+            title={mappings[submission.prompt_id]}
+            key={submission.prompt_id}
+            arrow
+          >
+            <Chip
+              label={submission.prompt_id + 1}
+              css={{ marginRight: 1 }}
+              clickable
+            />
           </Tooltip>
         );
       })}
@@ -52,7 +60,12 @@ function ApprovedCell({ approvedSubmissions }) {
 }
 
 ApprovedCell.propTypes = {
-  approvedSubmissions: PropTypes.arrayOf(PropTypes.shape({ prompt_id: PropTypes.number, image_url: PropTypes.string })).isRequired,
+  approvedSubmissions: PropTypes.arrayOf(
+    PropTypes.shape({
+      prompt_id: PropTypes.number,
+      image_url: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 function DrawfestSubmissionsBody({ submissions }) {
