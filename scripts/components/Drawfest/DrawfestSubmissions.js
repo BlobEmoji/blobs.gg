@@ -28,7 +28,9 @@ function ApprovedCell({ approvedSubmissions, promptData }) {
     <TableCell>
       {approvedSubmissions.map((submission) => {
         function onClick() {
-          if(!submission.image_url) {return;}
+          if (!submission.image_url) {
+            return;
+          }
           window.open(submission.image_url, "_blank");
         }
         return (
