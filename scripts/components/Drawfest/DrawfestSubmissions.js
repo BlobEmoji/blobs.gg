@@ -11,20 +11,6 @@ import TableBody from "@mui/material/TableBody";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
-const mappings = {
-  0: "Coffee Nightmare",
-  1: "Cute Cheese",
-  2: "Chaos Duck",
-  3: "Cyberpunk Owl",
-  4: "Ring Collector",
-  5: "Turtle Chase",
-  6: "Angel Light",
-  7: "Potion Trouble",
-  8: "Suspicious Doll",
-  9: "Broken Dragon",
-  10: "Collage",
-};
-
 function DrawfestSubmissionsHead() {
   return (
     <TableHead>
@@ -37,13 +23,28 @@ function DrawfestSubmissionsHead() {
   );
 }
 
-function ApprovedCell({ approvedSubmissions }) {
+function ApprovedCell({ approvedSubmissions, promptData }) {
   return (
     <TableCell>
       {approvedSubmissions.map((submission) => {
+        function onClick() {
+          if (!submission.image_url) {
+            return;
+          }
+          window.open(submission.image_url, "_blank");
+        }
         return (
-          <Tooltip title={mappings[submission]} key={submission} arrow>
-            <Chip label={submission + 1} css={{ marginRight: 1 }} clickable />
+          <Tooltip
+            title={promptData[submission.prompt_id]}
+            key={submission.prompt_id}
+            arrow
+          >
+            <Chip
+              label={submission.prompt_id + 1}
+              css={{ marginRight: 1 }}
+              clickable
+              onClick={onClick}
+            />
           </Tooltip>
         );
       })}
@@ -52,23 +53,32 @@ function ApprovedCell({ approvedSubmissions }) {
 }
 
 ApprovedCell.propTypes = {
-  approvedSubmissions: PropTypes.arrayOf(PropTypes.number).isRequired,
+  approvedSubmissions: PropTypes.arrayOf(
+    PropTypes.shape({
+      prompt_id: PropTypes.number,
+      image_url: PropTypes.string,
+    })
+  ).isRequired,
+  promptData: PropTypes.array.isRequired,
 };
 
-function DrawfestSubmissionsBody({ submissions }) {
+function DrawfestSubmissionsBody({ submissions, promptData }) {
   return (
     <TableBody>
       {submissions.map((row) => (
         <TableRow key={row.id}>
           <TableCell>
             <Avatar
-              alt={row.name}
+              alt={row.username}
               src={`https://cdn.discordapp.com/avatars/${row.id}/${row.avatar}.webp?size=64`}
               css={{ width: 64, height: 64 }}
             />
           </TableCell>
-          <TableCell>{`${row.name}#${row.discriminator}`}</TableCell>
-          <ApprovedCell approvedSubmissions={row.approved_submissions} />
+          <TableCell>{`${row.username}#${row.discriminator}`}</TableCell>
+          <ApprovedCell
+            approvedSubmissions={row.submissions}
+            promptData={promptData}
+          />
         </TableRow>
       ))}
     </TableBody>
@@ -78,16 +88,17 @@ function DrawfestSubmissionsBody({ submissions }) {
 DrawfestSubmissionsBody.propTypes = {
   submissions: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
+      username: PropTypes.string,
       discriminator: PropTypes.string,
       approved_submissions: PropTypes.arrayOf(PropTypes.number),
       id: PropTypes.string,
       avatar: PropTypes.string,
     })
   ).isRequired,
+  promptData: PropTypes.array.isRequired,
 };
 
-function DrawfestSubmissions({ submissions }) {
+function DrawfestSubmissions({ submissions, promptData }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="Drawfest Submissions">
@@ -95,7 +106,10 @@ function DrawfestSubmissions({ submissions }) {
         {submissions.length === 0 ? (
           <SkeletonSubmissions />
         ) : (
-          <DrawfestSubmissionsBody submissions={submissions} />
+          <DrawfestSubmissionsBody
+            submissions={submissions}
+            promptData={promptData}
+          />
         )}
       </Table>
     </TableContainer>
@@ -104,6 +118,7 @@ function DrawfestSubmissions({ submissions }) {
 
 DrawfestSubmissions.propTypes = {
   submissions: PropTypes.array.isRequired,
+  promptData: PropTypes.array.isRequired,
 };
 
 export default DrawfestSubmissions;
