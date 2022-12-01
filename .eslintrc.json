@@ -3,9 +3,10 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
-        "plugin:jsx-a11y/recommended"
+        "plugin:jsx-a11y/recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "plugins": ["@emotion"],
+    "plugins": ["@emotion", "@typescript-eslint"],
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -70,7 +71,11 @@
         "no-useless-computed-key": "warn",
         "react/display-name": "off",
         "react/react-in-jsx-scope": "off",
-        "react/prop-types": "warn",
+        "react/prop-types": "off",
+        "react/no-unknown-property": [
+            "error", { "ignore": [
+                "css"
+            ] }],
         "react/jsx-no-target-blank": ["warn", { "allowReferrer": true }],
         "react/no-children-prop": "off"
     }

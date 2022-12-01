@@ -33,6 +33,7 @@
     "@parcel/reporter-bundle-analyzer": "^2.3.2",
     "@parcel/transformer-svg-react": "^2.3.2",
     "@parcel/transformer-xml": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@welldone-software/why-did-you-render": "^6.2.3",
     "eslint": "^8.28.0",
     "eslint-plugin-jsdoc": "^39.6.4",

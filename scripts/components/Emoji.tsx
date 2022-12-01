@@ -1,37 +1,30 @@
-import { forwardRef } from "react";
-import PropTypes from "prop-types";
+import { forwardRef, MutableRefObject } from "react";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
+import { ConditionalLinkProps, EmojiProps } from "./Emoji.types";
 
 function emojiUrl(id, extension, size) {
   const sizeParam = size == null ? "" : `?size=${size}`;
   return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`;
 }
 
-const ConditionalLink = forwardRef(function ConditionalLink(props, ref) {
-  return props.link ? props.wrapper(props.children, ref) : props.children;
+const ConditionalLink = forwardRef(function ConditionalLink({ link, wrapper, children }: ConditionalLinkProps, ref: ((instance: (unknown | null)) => void) | MutableRefObject<unknown | null>) {
+  return link ? wrapper(children, ref) : children;
 });
 
-ConditionalLink.propTypes = {
-  link: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-  wrapper: PropTypes.any.isRequired,
-};
-
-function Emoji(props) {
-  const {
-    id,
-    animated,
-    name,
-    guild,
-    baseSize,
-    showGuild,
-    invite,
-    externalContainerStyle,
-    enlarge,
-    disableTooltip,
-  } = props;
+function Emoji({
+  id,
+  animated,
+  name,
+  guild,
+  baseSize,
+  showGuild,
+  invite,
+  externalContainerStyle,
+  enlarge,
+  disableTooltip,
+}: EmojiProps) {
   const extension = animated ? "gif" : "png";
   let alt = `:${name}:`;
 
@@ -85,19 +78,6 @@ function Emoji(props) {
     </div>
   );
 }
-
-Emoji.propTypes = {
-  id: PropTypes.string.isRequired,
-  animated: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  guild: PropTypes.object,
-  baseSize: PropTypes.number,
-  showGuild: PropTypes.bool,
-  invite: PropTypes.bool,
-  externalContainerStyle: PropTypes.object,
-  enlarge: PropTypes.bool,
-  disableTooltip: PropTypes.bool,
-};
 
 Emoji.defaultProps = {
   invite: false,
