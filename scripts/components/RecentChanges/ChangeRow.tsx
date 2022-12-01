@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
 import { getDateTimeFormatter, titleCase } from "../../utils";
 import Emoji from "../Emoji";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
+import { ChangeRowProps } from "./ChangeRow.types";
 
 const RowDiv = styled.div({
   display: "flex",
@@ -30,7 +30,7 @@ const TextDiv = styled.div({
   textOverflow: "ellipsis",
 });
 
-function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
+function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }: ChangeRowProps) {
   return (
     <RowDiv>
       <EventDiv>
@@ -65,13 +65,5 @@ function ChangeRow({ eventIcon, eventName, emoji, afterEmoji, changedAt }) {
     </RowDiv>
   );
 }
-
-ChangeRow.propTypes = {
-  eventIcon: PropTypes.object.isRequired,
-  eventName: PropTypes.string.isRequired,
-  emoji: PropTypes.object.isRequired,
-  afterEmoji: PropTypes.object,
-  changedAt: PropTypes.string.isRequired,
-};
 
 export default ChangeRow;

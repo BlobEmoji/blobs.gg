@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Server1 from "react:../../assets/server_icons/server1.svg";
 import { memo } from "react";
 import AppBar from "@mui/material/AppBar";
@@ -9,14 +11,13 @@ import ListIcon from "@mui/icons-material/List";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import { css } from "@emotion/react";
 
-const Header = memo(function Header(props) {
+const Header = memo(function Header({ handleOpen: handleOpenProps }: {handleOpen: (bool: boolean) => void}) {
   function handleOpen() {
-    props.handleOpen(true);
+    handleOpenProps(true);
   }
 
   return (
@@ -72,9 +73,5 @@ const Header = memo(function Header(props) {
     </AppBar>
   );
 });
-
-Header.propTypes = {
-  handleOpen: PropTypes.func.isRequired,
-};
 
 export default Header;

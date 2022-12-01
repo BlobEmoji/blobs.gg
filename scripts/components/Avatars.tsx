@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import red from "@mui/material/colors/red";
@@ -8,8 +7,9 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import lightBlue from "@mui/material/colors/lightBlue";
 import BrushIcon from "@mui/icons-material/Brush";
 import Tooltip from "@mui/material/Tooltip";
+import { GuildAvatarProps } from "./GuildAvatarProps.types";
 
-export function GuildAvatar(props) {
+export function GuildAvatar(props: GuildAvatarProps) {
   const { name, src } = props;
   const { id, icon } = src;
 
@@ -22,11 +22,11 @@ export function GuildAvatar(props) {
     </Tooltip>
   );
 }
-
-GuildAvatar.propTypes = {
-  name: PropTypes.string.isRequired,
-  src: PropTypes.object.isRequired,
-};
+//
+// GuildAvatar.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   src: PropTypes.object.isRequired,
+// };
 
 const changelogAvatarStyle = {
   verticalAlign: "middle",
