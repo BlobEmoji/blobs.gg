@@ -6,7 +6,7 @@ export interface EmojiProps {
   id: string;
   animated: boolean;
   name: string;
-  guild: Guild;
+  guild?: Guild;
   baseSize?: number;
   showGuild?: boolean;
   invite?: string;

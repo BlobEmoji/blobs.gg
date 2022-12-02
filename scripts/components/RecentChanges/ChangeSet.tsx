@@ -1,5 +1,4 @@
 import { Component } from "react";
-import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import {
@@ -17,8 +16,9 @@ import { getDateTimeFormatter } from "../../utils";
 import ChangeRow from "./ChangeRow";
 import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
+import { ChangeEvent, ChangeSetProps, ChangeSetWrapperClassProps } from "./ChangeSet.types";
 
-const emojiAction = {
+export const emojiAction = {
   EMOJI_REMOVE: <RemoveAvatar />,
   EMOJI_CREATE: <CreateAvatar />,
   EMOJI_RENAME: <RenameAvatar />,
@@ -35,20 +35,31 @@ const StyledAccordionDetails = styled(AccordionDetails)({
 
 const DEFAULT_MAXIMUM = 10;
 
-function ChangeSet({ changeSet }) {
+function ChangeSet({ changeSet }: ChangeSetProps) {
   const date = new Date(changeSet[0].changed_at);
-  let guild = changeSet[0].guild;
+  const guild = changeSet[0].guild;
   guild.id = guild.id.toString();
 
   let hasMore = false;
   let collapsedChangeSet = [];
   let collapsedRows = null;
 
-  function rows(change, index) {
+  function rows(change: ChangeEvent, index: number) {
     const EventIcon = emojiAction[change.event];
 
-    const emoji = change.emoji || change.before;
-    const afterEmoji = change.after || null;
+    let emoji;
+    let afterEmoji = null;
+    switch (change.event) {
+      case "EMOJI_CREATE":
+      case "EMOJI_REMOVE":
+        emoji = change.emoji;
+        break;
+      case "EMOJI_RENAME":
+      case "EMOJI_UPDATE":
+        emoji = change.before;
+        afterEmoji = change.after;
+        break;
+    }
 
     return (
       <ChangeRow
@@ -96,23 +107,16 @@ function ChangeSet({ changeSet }) {
   );
 }
 
-ChangeSet.propTypes = {
-  changeSet: PropTypes.array.isRequired,
-};
-
 ChangeSet.whyDidYouRender = true;
 
-class ChangeSetWrapper extends Component {
-  // eslint-disable-next-line no-unused-vars
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+class ChangeSetWrapper extends Component<ChangeSetWrapperClassProps> {
+  shouldComponentUpdate(nextProps: ChangeSetProps, nextState: ChangeSetProps) {
     return nextProps.changeSet.length !== this.props.changeSet.length;
   }
 
   render() {
-    return <ChangeSet {...this.props} />;
+    return <ChangeSet changeSet={this.props.changeSet} />;
   }
 }
-
-ChangeSetWrapper.propTypes = ChangeSet.propTypes;
 
 export default ChangeSetWrapper;

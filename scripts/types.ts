@@ -7,3 +7,11 @@ export interface Guild {
   invite: string;
   name: string;
  }
+
+export interface RawGuild {
+  added_at: string;
+  emoji: EmojiProps[];
+  icon: string;
+  invite: string;
+  name: string;
+ }

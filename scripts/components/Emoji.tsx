@@ -1,14 +1,16 @@
-import { forwardRef, MutableRefObject } from "react";
+import { forwardRef, MutableRefObject, ReactNode } from "react";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
 import { ConditionalLinkProps, EmojiProps } from "./Emoji.types";
 
-function emojiUrl(id, extension, size) {
+function emojiUrl(id: string, extension: string, size: number | null) {
   const sizeParam = size == null ? "" : `?size=${size}`;
   return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const ConditionalLink = forwardRef(function ConditionalLink({ link, wrapper, children }: ConditionalLinkProps, ref: ((instance: (unknown | null)) => void) | MutableRefObject<unknown | null>) {
   return link ? wrapper(children, ref) : children;
 });
@@ -18,7 +20,7 @@ function Emoji({
   animated,
   name,
   guild,
-  baseSize,
+  baseSize = 64,
   showGuild,
   invite,
   externalContainerStyle,
@@ -37,9 +39,9 @@ function Emoji({
     ${emojiUrl(id, extension, baseSize * 2)} 2x
   `;
 
-  function wrapper(children) {
+  function wrapper(children: ReactNode) {
     return (
-      <Link href={guild.invite} target="_blank" rel="noopener">
+      <Link href={guild?.invite as string} target="_blank" rel="noopener">
         {children}
       </Link>
     );
@@ -58,6 +60,8 @@ function Emoji({
         externalContainerStyle,
       ]}
     >
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/*@ts-ignore*/}
       <ConditionalLink link={invite} wrapper={wrapper}>
         <Tooltip title={disableTooltip ? "" : alt} arrow>
           <Avatar
@@ -81,7 +85,6 @@ function Emoji({
 
 Emoji.defaultProps = {
   invite: false,
-  baseSize: 64,
   showGuild: false,
   enlarge: false,
   disableTooltip: false,

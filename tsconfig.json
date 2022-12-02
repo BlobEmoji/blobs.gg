@@ -2,6 +2,10 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "types": ["@emotion/react/types/css-prop"]
+    "jsxImportSource": "@emotion/react",
+    "types": ["@emotion/react/types/css-prop"],
+    "target": "ES5",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "downlevelIteration": true,
   }
 }

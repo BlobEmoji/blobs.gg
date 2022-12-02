@@ -2,7 +2,7 @@ import { EmojiProps } from "../Emoji.types";
 import { ReactNode } from "react";
 
 export interface ChangeRowProps {
-    afterEmoji: EmojiProps;
+    afterEmoji: EmojiProps | null;
     changedAt: string;
     emoji: EmojiProps;
     eventIcon: ReactNode;

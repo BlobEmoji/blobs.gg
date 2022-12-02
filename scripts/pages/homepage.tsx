@@ -7,6 +7,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Search from "../components/Home/Search";
 import Link from "@mui/material/Link";
+import { RawApiData } from "./homepage.types";
+import { RawGuild } from "../types";
 
 const INITIAL_EMOJI_COUNT = 4800;
 const BLOBS_ENDPOINT = "https://api.mousey.app/v3/emoji/blobs+community-blobs";
@@ -22,7 +24,8 @@ const subHeaderStyle = {
 };
 
 function Homepage() {
-  const [apiData, setApiData] = useState({});
+  const [apiData, setApiData] = useState({ blobs: [], "community-blobs": [] } as RawApiData);
+  const [fetched, setFetched] = useState(false);
   const [emojis, setEmojis] = useState({
     groups: { blobs: { guilds: [] }, "community-blobs": { guilds: [] } },
   });
@@ -31,20 +34,21 @@ function Homepage() {
   );
 
   useEffect(() => {
-    if (apiData.hasOwnProperty("blobs")) {
+    if (fetched) {
       return;
     }
 
     const fetchData = async () => {
+      setFetched(true);
       const resp = await fetch(BLOBS_ENDPOINT);
-      const data = await resp.json();
+      const data: RawApiData = await resp.json();
       setApiData(data);
     };
     fetchData();
   }, [apiData]);
 
   useEffect(() => {
-    if (!apiData.hasOwnProperty("blobs")) {
+    if (apiData.blobs.length === 0) {
       return;
     }
 
@@ -61,7 +65,7 @@ function Homepage() {
 
   const communityRender = useCallback(function communityRender() {
     setWaiting(false);
-  }, []);
+  }, [apiData]);
 
   const officialEmojis = emojis.groups.blobs;
   const communityEmojis = emojis.groups["community-blobs"];
