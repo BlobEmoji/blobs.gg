@@ -1,11 +1,12 @@
 import { PureComponent } from "react";
-import nitro from "../../../assets/discord/nitro.png";
 import PropTypes from "prop-types";
 import { shuffleArray } from "../../utils";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
 import { css } from "@emotion/react";
+
+const nitro = new URL("../../../assets/discord/nitro.png", import.meta.url);
 
 const inlineIconStyle = (theme) =>
   css({
@@ -65,7 +66,7 @@ class CommunityServers extends PureComponent {
             active
             <img
               css={inlineIconStyle}
-              src={nitro}
+              src={nitro.href}
               alt="Discord Nitro icon"
               height={11}
               width={16}
