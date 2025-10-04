@@ -17,7 +17,7 @@ export function GuildAvatar(props) {
     <Tooltip title={name} arrow>
       <Avatar
         alt={name}
-        src={`https://cdn.discordapp.com/icons/${id}/${icon}.png?size=64`}
+        src={`https://cdn.discordapp.com/icons/${id}/${icon}.webp?size=64`}
       />
     </Tooltip>
   );
