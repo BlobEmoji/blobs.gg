@@ -39,7 +39,8 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.11",
     "parcel": "^2.3.2",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "svgo": "^3.3.2"
   },
   "browserslist": {
     "production": [
