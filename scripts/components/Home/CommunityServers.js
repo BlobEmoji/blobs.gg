@@ -6,7 +6,7 @@ import Link from "@mui/material/Link";
 import GuildsWrapper from "./Guilds";
 import { css } from "@emotion/react";
 
-const nitro = new URL("../../../assets/discord/nitro.png", import.meta.url);
+const nitro = new URL("../../../assets/discord/nitro.png?as=webp", import.meta.url);
 
 const inlineIconStyle = (theme) =>
   css({
