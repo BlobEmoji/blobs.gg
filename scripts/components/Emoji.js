@@ -4,9 +4,9 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "@mui/material/Link";
 
-function emojiUrl(id, extension, size) {
-  const sizeParam = size == null ? "" : `?size=${size}`;
-  return `https://cdn.discordapp.com/emojis/${id}.${extension}${sizeParam}`;
+function emojiUrl(id, animated, size) {
+  const sizeParam = size == null ? "" : `&size=${size}`;
+  return `https://cdn.discordapp.com/emojis/${id}.webp?animated=${animated}${sizeParam}`;
 }
 
 const ConditionalLink = forwardRef(function ConditionalLink(props, ref) {
@@ -32,7 +32,6 @@ function Emoji(props) {
     enlarge,
     disableTooltip,
   } = props;
-  const extension = animated ? "gif" : "png";
   let alt = `:${name}:`;
 
   if (guild != null && showGuild) {
@@ -40,8 +39,8 @@ function Emoji(props) {
   }
 
   const srcSet = `
-    ${emojiUrl(id, extension, baseSize)},
-    ${emojiUrl(id, extension, baseSize * 2)} 2x
+    ${emojiUrl(id, animated, baseSize)},
+    ${emojiUrl(id, animated, baseSize * 2)} 2x
   `;
 
   function wrapper(children) {
@@ -77,7 +76,7 @@ function Emoji(props) {
               },
             }}
             srcSet={srcSet}
-            src={emojiUrl(id, extension, baseSize)}
+            src={emojiUrl(id, animated, baseSize)}
             variant="square"
           />
         </Tooltip>
