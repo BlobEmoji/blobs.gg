@@ -74,7 +74,7 @@ function DrawfestSubmissionsBody({ submissions, promptData }) {
               css={{ width: 64, height: 64 }}
             />
           </TableCell>
-          <TableCell>{`${row.username}#${row.discriminator}`}</TableCell>
+          <TableCell>{row.username}</TableCell>
           <ApprovedCell
             approvedSubmissions={row.submissions}
             promptData={promptData}
@@ -89,7 +89,6 @@ DrawfestSubmissionsBody.propTypes = {
   submissions: PropTypes.arrayOf(
     PropTypes.shape({
       username: PropTypes.string,
-      discriminator: PropTypes.string,
       approved_submissions: PropTypes.arrayOf(PropTypes.number),
       id: PropTypes.string,
       avatar: PropTypes.string,
